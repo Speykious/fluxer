@@ -778,6 +778,28 @@ class Messages {
 	}
 
 	@action
+	handlePollVote(action: {
+		type: 'MESSAGE_POLE_VOTE_ADD' | 'MESSAGE_POLE_VOTE_REMOVE';
+		channelId: string;
+		messageId: string;
+		userId: string;
+		answerId: number;
+		optimistic?: boolean;
+	}): boolean {
+		const existing = ChannelMessages.get(action.channelId);
+		if (!existing) return false;
+		const currentUser = Users.getCurrentUser();
+		const isCurrentUser = currentUser?.id === action.userId;
+		if (action.optimistic && !isCurrentUser) return false;
+		const updated = existing.update(action.messageId, (message) => {
+			return message.withPollVote(action.answerId, action.type === 'MESSAGE_POLE_VOTE_ADD', isCurrentUser);
+		});
+		this.commitMessages(updated);
+		this.notifyChange();
+		return true;
+	}
+
+	@action
 	handleMessagePreload(action: {messages: Record<ChannelId, WireMessage>}): boolean {
 		let hasChanges = false;
 		for (const [channelId, messageData] of Object.entries(action.messages)) {

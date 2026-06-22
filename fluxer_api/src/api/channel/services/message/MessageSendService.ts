@@ -911,6 +911,7 @@ export class MessageSendService {
 			});
 			suppressDmRecipientDelivery = spamDecision.shouldSuppressRecipientDelivery;
 		}
+		const millisPerHour = 60 * 60 * 1000;
 		const {message, enqueueDeferredEmbeds} = await this.deps.persistenceService.createMessage({
 			messageId,
 			channelId,
@@ -919,6 +920,36 @@ export class MessageSendService {
 			content: data.content,
 			flags: this.deps.validationService.calculateMessageFlags(data),
 			embeds: data.embeds,
+			poll: data.poll ? {
+				question: data.poll.question ? {
+					text: data.poll.question.text ?? null,
+					emoji: data.poll.question.emoji ? {
+						id: data.poll.question.emoji.id ?? null,
+						name: data.poll.question.emoji.name ?? null,
+					} : null,
+				} : null,
+				answers: data.poll.answers ? data.poll.answers.map((answer) => ({
+					answer_id: answer.answer_id ?? null,
+					poll_media: answer.poll_media ? {
+						emoji: answer.poll_media.emoji ? {
+							id: answer.poll_media.emoji.id ?? null,
+							name: answer.poll_media.emoji.name ?? null,
+						} : null,
+						text: answer.poll_media.text ?? null,
+					} : null,
+				})) : null,
+				expiry: data.poll.duration ? new Date(Date.now() + data.poll.duration * millisPerHour).toISOString() : null,
+				allow_multiselect: data.poll.allow_multiselect ?? null,
+				layout_type: data.poll.layout_type ?? null,
+				results: data.poll.results ? {
+					answer_counts: data.poll.results.answer_counts ? data.poll.results.answer_counts.map((answer_count) => ({
+						id: answer_count.id ?? null,
+						count: answer_count.count ?? null,
+						me_voted: answer_count.me_voted ?? null,
+					})) : null,
+					is_finalized: data.poll.results.is_finalized ?? null,
+				} : null,
+			} : undefined,
 			attachments: attachmentsToProcess,
 			processedAttachments: favoriteMemeAttachment ? [favoriteMemeAttachment] : undefined,
 			stickerIds: data.sticker_ids ? data.sticker_ids.flatMap((stickerId) => createStickerID(stickerId)) : undefined,

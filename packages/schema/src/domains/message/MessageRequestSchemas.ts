@@ -21,6 +21,7 @@ import {
 } from '@fluxer/schema/src/primitives/SchemaPrimitives';
 import {AttachmentURLType, URLType} from '@fluxer/schema/src/primitives/UrlValidators';
 import {z} from 'zod';
+import {MessagePollRequest} from './PollSchemas';
 
 function omitEmbedObjectWithoutRequiredField(value: unknown, requiredField: string): unknown {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
@@ -309,6 +310,7 @@ export const MessageRequestSchema = z
 	.object({
 		content: MessageContentRequest.nullish(),
 		embeds: z.array(RichEmbedRequest).describe('Array of embed objects to include in the message'),
+		poll: MessagePollRequest.nullish(),
 		attachments: z
 			.array(z.union([ClientUploadedAttachmentRequest, ClientAttachmentRequest]))
 			.describe('Array of attachment objects'),

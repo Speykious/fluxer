@@ -60,6 +60,7 @@ export class MessageValidationService {
 		const isUpdate = options?.isUpdate ?? false;
 		const hasContent = data.content != null && hasVisibleContent(data.content);
 		const hasEmbeds = Boolean(data.embeds && data.embeds.length > 0);
+		const hasPoll = Boolean('poll' in data && data.poll);
 		const hasAttachments = Boolean(data.attachments && data.attachments.length > 0);
 		const hasFavoriteMeme = Boolean('favorite_meme_id' in data && data.favorite_meme_id != null);
 		const hasStickers = Boolean('sticker_ids' in data && data.sticker_ids != null && data.sticker_ids.length > 0);
@@ -71,13 +72,22 @@ export class MessageValidationService {
 				data,
 				hasContent,
 				hasEmbeds,
+				hasPoll,
 				hasStickers,
 				hasFavoriteMeme,
 				user,
 				guildFeatures,
 			);
 		}
-		if (!hasContent && !hasEmbeds && !hasAttachments && !hasFavoriteMeme && !hasStickers && (!isUpdate || !hasFlags)) {
+		if (
+			!hasContent &&
+			!hasEmbeds &&
+			!hasAttachments &&
+			!hasFavoriteMeme &&
+			!hasStickers &&
+			(!isUpdate || !hasFlags) &&
+			!hasPoll
+		) {
 			throw new CannotSendEmptyMessageError();
 		}
 		this.validateContentLength(data.content, user, guildFeatures, options?.messageAuthorType);
@@ -89,6 +99,13 @@ export class MessageValidationService {
 			surface: 'message_content' as const,
 		};
 		contentModerationService.scanText(data.content, modCtx);
+		if ('poll' in data && data.poll) {
+			contentModerationService.scanText(data.poll.question?.text ?? null, modCtx);
+			if (data.poll.answers) {
+				for (const answer of data.poll.answers)
+					contentModerationService.scanText(answer.poll_media?.text ?? null, modCtx);
+			}
+		}
 		if (data.embeds) {
 			for (const embed of data.embeds) {
 				contentModerationService.scanText(embed.title ?? null, modCtx);
@@ -261,6 +278,7 @@ export class MessageValidationService {
 		data: MessageRequest,
 		hasContent: boolean,
 		hasEmbeds: boolean,
+		hasPoll: boolean,
 		hasStickers: boolean,
 		hasFavoriteMeme: boolean,
 		user: User | null,
@@ -271,6 +289,9 @@ export class MessageValidationService {
 		}
 		if (hasEmbeds) {
 			throw InputValidationError.fromCode('embeds', ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_EMBEDS);
+		}
+		if (hasPoll) {
+			throw InputValidationError.fromCode('poll', ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_A_POLL);
 		}
 		if (hasFavoriteMeme) {
 			throw InputValidationError.fromCode(

@@ -21,6 +21,7 @@ import type {
 	MessageEmbed,
 	MessageReference,
 	MessageStickerItem,
+	MessagePoll,
 } from '../../../database/types/MessageTypes';
 import type {IGuildRepositoryAggregate} from '../../../guild/repositories/IGuildRepositoryAggregate';
 import type {EmbedService} from '../../../infrastructure/EmbedService';
@@ -86,6 +87,7 @@ interface CreateMessageParams {
 	attachments?: Array<AttachmentToProcess>;
 	processedAttachments?: Array<MessageAttachment>;
 	stickerIds?: Array<StickerID>;
+	poll?: MessagePoll;
 	messageReference?: MessageReference;
 	messageSnapshots?: Array<MessageSnapshot>;
 	guildId: GuildID | null;
@@ -241,6 +243,7 @@ export class MessagePersistenceService {
 			mention_channels: mentionData.mentionChannelIds.length > 0 ? new Set(mentionData.mentionChannelIds) : null,
 			attachments: messageAttachments.length > 0 ? messageAttachments : null,
 			embeds: allowEmbeds ? initialEmbeds : null,
+			poll: params.poll || null,
 			sticker_items: processedStickers.length > 0 ? processedStickers : null,
 			message_reference: params.messageReference || null,
 			message_snapshots:

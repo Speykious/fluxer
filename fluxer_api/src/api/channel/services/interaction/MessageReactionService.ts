@@ -549,6 +549,48 @@ export class MessageReactionService extends MessageInteractionBase {
 		});
 	}
 
+	private async dispatchMessagePollVoteAdd(params: {
+		channel: Channel;
+		messageId: MessageID;
+		userId: UserID;
+		answerId: number;
+		sessionId?: string;
+	}): Promise<void> {
+		await dispatchChannelEvent({
+			gatewayService: this.gatewayService,
+			channel: params.channel,
+			event: 'MESSAGE_POLL_VOTE_ADD',
+			data: {
+				channel_id: params.channel.id.toString(),
+				message_id: params.messageId.toString(),
+				user_id: params.userId.toString(),
+				answer_id: params.answerId,
+				session_id: params.sessionId,
+			},
+		});
+	}
+
+	private async dispatchMessagePollVoteRemove(params: {
+		channel: Channel;
+		messageId: MessageID;
+		userId: UserID;
+		answerId: number;
+		sessionId?: string;
+	}): Promise<void> {
+		await dispatchChannelEvent({
+			gatewayService: this.gatewayService,
+			channel: params.channel,
+			event: 'MESSAGE_POLL_VOTE_REMOVE',
+			data: {
+				channel_id: params.channel.id.toString(),
+				message_id: params.messageId.toString(),
+				user_id: params.userId.toString(),
+				answer_id: params.answerId,
+				session_id: params.sessionId,
+			},
+		});
+	}
+
 	private isNSFWContentAllowedForReaction(params: {
 		channel: Channel;
 		guild: GuildResponse | null;

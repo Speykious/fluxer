@@ -13,6 +13,7 @@ import {type UserPartial, UserPartialResponse} from '@fluxer/schema/src/domains/
 import {MessageReferenceTypeSchema, MessageTypeSchema} from '@fluxer/schema/src/primitives/MessageValidators';
 import {createBitflagInt32Type, Int32Type, SnowflakeStringType} from '@fluxer/schema/src/primitives/SchemaPrimitives';
 import {z} from 'zod';
+import {type MessagePoll, MessagePollResponse} from './PollSchemas';
 
 export const MessageAttachmentResponse = z.object({
 	id: SnowflakeStringType.describe('The unique identifier for this attachment'),
@@ -143,6 +144,7 @@ const MessageBaseResponseSchema = z.object({
 			'Users referenced from non-notifying content, embed, and snapshot text, included for client-side resolution',
 		),
 	embeds: z.array(MessageEmbedResponse).nullish().describe('The embeds attached to the message'),
+	poll: MessagePollResponse.nullish().describe('The poll attached to the message'),
 	attachments: z.array(MessageAttachmentResponse).nullish().describe('The files attached to the message'),
 	stickers: z.array(MessageStickerResponse).nullish().describe('The stickers sent with the message'),
 	nsfw_emojis: z
@@ -345,6 +347,7 @@ export interface Message {
 	readonly mention_channels?: ReadonlyArray<ChannelMention>;
 	readonly users?: ReadonlyArray<UserPartial>;
 	readonly embeds?: ReadonlyArray<MessageEmbed>;
+	readonly poll?: MessagePoll | null;
 	readonly attachments?: ReadonlyArray<MessageAttachment>;
 	readonly stickers?: ReadonlyArray<MessageStickerItem>;
 	readonly nsfw_emojis?: ReadonlyArray<string>;

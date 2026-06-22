@@ -58,6 +58,7 @@ import {clsx} from 'clsx';
 import {autorun} from 'mobx';
 import {observer} from 'mobx-react-lite';
 import {type MouseEvent, useCallback, useEffect, useMemo, useState} from 'react';
+import { Poll } from './Poll';
 
 const JUMP_TO_MESSAGE_FROM_SENT_DESCRIPTOR = msg({
 	message: 'Jump to message from {displayName}, sent {formattedDate}',
@@ -772,6 +773,7 @@ export const UserMessage = observer(() => {
 						)}
 					</AuthorHeading>
 				)}
+				{message.poll ? (<Poll poll={message.poll} />) : undefined}
 				<MessageAttachments data-flx="channel.user-message.message-attachments--3" />
 				{renderFailedFooter()}
 			</div>

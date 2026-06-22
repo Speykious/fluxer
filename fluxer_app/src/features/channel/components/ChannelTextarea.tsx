@@ -6,10 +6,6 @@ import {useContextMenuHoverState} from '@app/features/app/hooks/useContextMenuHo
 import RuntimeConfig from '@app/features/app/state/RuntimeConfig';
 import {Limits} from '@app/features/app/utils/UserLimits';
 import {Autocomplete} from '@app/features/channel/components/Autocomplete';
-import {ChannelAttachmentArea} from '@app/features/channel/components/ChannelAttachmentArea';
-import {EditBar} from '@app/features/channel/components/ChannelEditBar';
-import {ReplyBar} from '@app/features/channel/components/ChannelReplyBar';
-import {ChannelStickersArea} from '@app/features/channel/components/ChannelStickersArea';
 import {
 	CHANNEL_DESCRIPTOR,
 	MESSAGE_2_DESCRIPTOR,
@@ -20,6 +16,10 @@ import {
 	UPDATE_DESCRIPTOR,
 	YOU_DO_NOT_HAVE_PERMISSION_TO_SEND_MESSAGES_DESCRIPTOR,
 } from '@app/features/channel/components/channel_textarea/shared';
+import {ChannelAttachmentArea} from '@app/features/channel/components/ChannelAttachmentArea';
+import {EditBar} from '@app/features/channel/components/ChannelEditBar';
+import {ReplyBar} from '@app/features/channel/components/ChannelReplyBar';
+import {ChannelStickersArea} from '@app/features/channel/components/ChannelStickersArea';
 import {
 	getMentionDescription,
 	getMentionTitle,
@@ -47,6 +47,7 @@ import * as DraftCommands from '@app/features/messaging/commands/DraftCommands';
 import * as MessageCommands from '@app/features/messaging/commands/MessageCommands';
 import * as ScheduledMessageCommands from '@app/features/messaging/commands/ScheduledMessageCommands';
 import {TooManyAttachmentsModal} from '@app/features/messaging/components/alerts/TooManyAttachmentsModal';
+import {CreatePollModal, type PollForm} from '@app/features/messaging/components/modals/poll_modal/CreatePollModal';
 import {ScheduleMessageModal} from '@app/features/messaging/components/modals/ScheduleMessageModal';
 import {useTextareaAttachments} from '@app/features/messaging/hooks/useCloudUpload';
 import {useMarkdownFormattingShortcut, useMarkdownKeybinds} from '@app/features/messaging/hooks/useMarkdownKeybinds';
@@ -109,6 +110,7 @@ import {
 	MAX_MESSAGE_LENGTH_NON_PREMIUM,
 	MAX_MESSAGE_LENGTH_PREMIUM,
 } from '@fluxer/constants/src/LimitConstants';
+import type {MessageCreatePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
 import {useLingui} from '@lingui/react/macro';
 import {PlusCircleIcon} from '@phosphor-icons/react';
 import {clsx} from 'clsx';
@@ -126,6 +128,7 @@ const ChannelTextareaContent = observer(
 		disabled,
 		inputSuppressed = false,
 		canAttachFiles,
+		canSendPolls,
 		canSendFavoriteMemeId,
 	}: {
 		channel: Channel;
@@ -134,6 +137,7 @@ const ChannelTextareaContent = observer(
 		disabled: boolean;
 		inputSuppressed?: boolean;
 		canAttachFiles: boolean;
+		canSendPolls: boolean;
 		canSendFavoriteMemeId: boolean;
 	}) => {
 		const {i18n} = useLingui();
@@ -600,6 +604,36 @@ const ChannelTextareaContent = observer(
 			setValue('');
 			DraftCommands.deleteDraft(channel.id);
 		}, [textareaInputDisabled, canAttachFiles, value, channel.id, uploadAttachments.length, maxAttachments]);
+		const handleSendPoll = useCallback(async () => {
+			if (textareaInputDisabled || !canSendPolls) return;
+
+			ModalCommands.push(
+				modal(() => (
+					<CreatePollModal
+						onSubmit={(pollForm: PollForm) => {
+							const messagePoll: MessageCreatePoll = {
+								question: {
+									text: pollForm.question,
+								},
+								answers: pollForm.answers.map((answer) => ({
+									answer_id: answer.id,
+									poll_media: {
+										emoji: answer.emoji,
+										text: answer.text,
+									},
+								})),
+								duration: 24,
+								allow_multiselect: pollForm.allowMultipleAnswers,
+								layout_type: 1,
+							};
+							handleSendMessage('', false, messagePoll);
+						}}
+						channelId={channel.id}
+						data-flx="channel.channel-textarea.handle-send-poll"
+					/>
+				)),
+			);
+		}, [textareaInputDisabled, canSendPolls]);
 		useTextareaExpressionHandlers({
 			setValue,
 			textareaRef,
@@ -898,7 +932,9 @@ const ChannelTextareaContent = observer(
 						<TextareaPlusMenu
 							onUploadFile={handleFileButtonClick}
 							onSchedule={handleOpenScheduleModal}
+							onSendPoll={handleSendPoll}
 							canSchedule={canScheduleMessage}
+							canSendPolls={canSendPolls}
 							canAttachFiles={canAttachFiles}
 							canSendMessages={!textareaInputDisabled}
 							textareaValue={value}
@@ -1291,6 +1327,7 @@ export const ChannelTextarea = observer(
 		const canAttachFiles = channel.isPrivate()
 			? !forceNoAttachFiles
 			: !forceNoAttachFiles && Permission.can(Permissions.ATTACH_FILES, channel);
+		const canSendPolls = channel.isPrivate() ? true : Permission.can(Permissions.SEND_POLLS, channel);
 		const canEmbedLinks = channel.isPrivate() ? true : Permission.can(Permissions.EMBED_LINKS, channel);
 		const canSendFavoriteMemeId = canAttachFiles && canEmbedLinks;
 		return (
@@ -1300,6 +1337,7 @@ export const ChannelTextarea = observer(
 				disabled={disabled}
 				inputSuppressed={inputSuppressed}
 				canAttachFiles={canAttachFiles}
+				canSendPolls={canSendPolls}
 				canSendFavoriteMemeId={canSendFavoriteMemeId}
 				draft={draft}
 				draftSegments={draftSegments}

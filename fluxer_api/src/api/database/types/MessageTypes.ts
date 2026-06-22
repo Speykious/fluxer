@@ -92,6 +92,40 @@ export interface MessageEmbed extends MessageEmbedBase {
 	children?: Nullish<Array<MessageEmbedChild>>;
 }
 
+export interface MessagePollEmoji {
+    id: Nullish<string>;
+    name: Nullish<string>;
+}
+export interface MessagePollMedia {
+    emoji: Nullish<MessagePollEmoji>;
+    text: Nullish<string>;
+}
+
+export interface MessagePollAnswer {
+    answer_id: Nullish<number>;
+    poll_media: Nullish<MessagePollMedia>;
+}
+
+export interface MessagePollAnswerCount {
+    id: Nullish<number>;
+    count: Nullish<number>;
+    me_voted: Nullish<boolean>;
+}
+
+export interface MessagePollResults {
+    answer_counts: Nullish<Array<MessagePollAnswerCount>>;
+    is_finalized: Nullish<boolean>;
+}
+
+export interface MessagePoll {
+    question: Nullish<MessagePollMedia>;
+    answers: Nullish<Array<MessagePollAnswer>>;
+    expiry: Nullish<string>;
+    allow_multiselect: Nullish<boolean>;
+    layout_type: Nullish<number>;
+    results: Nullish<MessagePollResults>;
+}
+
 export interface MessageStickerItem {
 	sticker_id: StickerID;
 	name: string;
@@ -115,6 +149,7 @@ export interface MessageSnapshot {
 	mention_channels: Nullish<Set<ChannelID>>;
 	attachments: Nullish<Array<MessageAttachment>>;
 	embeds: Nullish<Array<MessageEmbed>>;
+	poll: Nullish<MessagePoll>;
 	sticker_items: Nullish<Array<MessageStickerItem>>;
 	type: number;
 	flags: number;
@@ -144,6 +179,7 @@ export interface MessageRow {
 	mention_channels: Nullish<Set<ChannelID>>;
 	attachments: Nullish<Array<MessageAttachment>>;
 	embeds: Nullish<Array<MessageEmbed>>;
+	poll: Nullish<MessagePoll>;
 	sticker_items: Nullish<Array<MessageStickerItem>>;
 	message_reference: Nullish<MessageReference>;
 	message_snapshots: Nullish<Array<MessageSnapshot>>;
@@ -172,6 +208,7 @@ export const MESSAGE_COLUMNS = [
 	'mention_channels',
 	'attachments',
 	'embeds',
+	'poll',
 	'sticker_items',
 	'message_reference',
 	'message_snapshots',

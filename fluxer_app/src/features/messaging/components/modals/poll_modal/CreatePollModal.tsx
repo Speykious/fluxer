@@ -1,0 +1,296 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+import * as Modal from '@app/features/app/components/dialogs/Modal';
+import selectorStyles from '@app/features/app/components/dialogs/shared/SelectorModalStyles.module.css';
+import type { FlatEmoji } from '@app/features/emoji/types/EmojiTypes';
+import styles from '@app/features/messaging/components/modals/poll_modal/CreatePollModal.module.css';
+import { Button } from '@app/features/ui/button/Button';
+import { Checkbox } from '@app/features/ui/checkbox/Checkbox';
+import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
+import { Combobox, type ComboboxOption } from '@app/features/ui/components/form/FormCombobox';
+import { FieldSet, Textarea } from '@app/features/ui/components/form/FormInput';
+import { Scroller } from '@app/features/ui/components/Scroller';
+import type { ModalProps } from '@app/features/ui/utils/ModalUtils';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { PlusIcon } from '@phosphor-icons/react';
+import { observer } from 'mobx-react-lite';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { useTextareaSegments } from '../../../hooks/useTextareaSegments';
+import { PollAnswerInput } from './PollAnswerInput';
+
+export const CREATE_A_POLL_DESCRIPTOR = msg({
+	message: 'Create a Poll',
+	comment: 'Title of the poll creation modal.',
+});
+export const POLL_QUESTION_DESCRIPTOR = msg({
+	message: 'Question',
+	comment: 'Label for the question input.',
+});
+export const POLL_QUESTION_PLACEHOLDER_DESCRIPTOR = msg({
+	message: 'The question you want to ask',
+	comment: 'Placeholder text for the question input.',
+});
+export const POLL_ANSWERS_DESCRIPTOR = msg({
+	message: 'Answers',
+	comment: 'Label for the answers fieldset.',
+});
+export const POLL_ADD_ANSWER_DESCRIPTOR = msg({
+	message: 'Add Answer',
+	comment: 'Label for the button that adds a new answer to the poll.',
+});
+export const POLL_DURATION_DESCRIPTOR = msg({
+	message: 'Duration',
+	comment: 'Label for the duration input.',
+});
+export const POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR = msg({
+	message: 'Allow Multiple Answers',
+	comment: 'Label for the checkbox that allows users of the poll to select multiple answers.',
+});
+export const POLL_SUBMIT_DESCRIPTOR = msg({
+	message: 'Submit',
+	comment: 'Label for the poll submit button.',
+});
+export const POLL_ERROR_YOU_FORGOT_TO_ENTER_A_QUESTION = msg({
+	message: 'You forgot to enter a question.',
+	comment: 'Error message for when no question has been entered in the poll.',
+});
+export const POLL_ERROR_YOU_SHOULD_ENTER_AT_LEAST_ONE_ANSWER = msg({
+	message: 'You should enter at least one answer.',
+	comment: 'Error message for when no answer has been entered in the poll.',
+});
+
+export interface IdlessPollAnswerItem {
+	emoji?: FlatEmoji;
+	text: string;
+}
+
+export interface PollAnswerItem {
+	id: number;
+	emoji?: FlatEmoji;
+	text: string;
+}
+
+export interface PollForm {
+	question: string;
+	answers: Array<PollAnswerItem>;
+	duration: string;
+	allowMultipleAnswers: boolean;
+}
+
+interface CreatePollModalProps {
+	size?: ModalProps['size'];
+	hideCloseButton?: boolean;
+	onSubmit: (pollForm: PollForm) => Promise<void> | void;
+	disableAutoDismiss?: boolean;
+	channelId: string;
+}
+
+type DurationChoice = 'hour1' | 'hour2' | 'hour4' | 'hour8' | 'hour12' | 'hour24' | 'day2' | 'day3' | 'day5' | 'week1' | 'week2';
+
+// TODO: localize labels
+const durationOptions: ReadonlyArray<ComboboxOption<DurationChoice>> = [
+	{value: 'hour1', label: '1 hour'},
+	{value: 'hour2', label: '2 hours'},
+	{value: 'hour4', label: '4 hours'},
+	{value: 'hour8', label: '8 hours'},
+	{value: 'hour12', label: '12 hours'},
+	{value: 'hour24', label: '24 hours'},
+	{value: 'day2', label: '2 days'},
+	{value: 'day3', label: '3 days'},
+	{value: 'day5', label: '5 days'},
+	{value: 'week1', label: '1 weeks'},
+	{value: 'week2', label: '2 weeks'},
+];
+
+export const CreatePollModal = observer(
+	({size = 'small', hideCloseButton, onSubmit, disableAutoDismiss, channelId}: CreatePollModalProps) => {
+		const {i18n} = useLingui();
+		const initialFocusRef = useRef<HTMLTextAreaElement | null>(null);
+		const {previousValueRef, displayToActual, handleTextChange} = useTextareaSegments();
+		const [submitting, setSubmitting] = useState(false);
+
+		const [question, setQuestion] = useState('');
+		const [forgotToEnterQuestion, setForgotToEnterQuestion] = useState(false);
+		const actualQuestion = useMemo(() => displayToActual(question), [question, displayToActual]);
+		const maxQuestionActualLength = 500; // TODO: make it a limit in the admin panel
+		const questionDisplayMaxLength = Math.max(0, question.length + (maxQuestionActualLength - actualQuestion.length));
+
+		const [duration, setDuration] = useState<DurationChoice>('hour24');
+		const [forgotToEnterAnswer, setForgotToEnterAnswer] = useState(false);
+		const [allowMultipleAnswers, setAllowMultipleAnswers] = useState(false);
+		const [answers, setAnswers] = useState<Array<IdlessPollAnswerItem>>([
+			{
+				text: '',
+			},
+			{
+				text: '',
+			},
+		]);
+
+		const handleSubmit = useCallback(async () => {
+			const selfKey = ModalCommands.getTopModalKey();
+			setSubmitting(true);
+			try {
+				let hasError = false;
+				if (question.length === 0) {
+					setForgotToEnterQuestion(true);
+					hasError = true;
+				}
+				if (answers.find((answer) => answer.text.length > 0) === undefined) {
+					setForgotToEnterAnswer(true);
+					hasError = true;
+				}
+				if (hasError) return;
+
+				await onSubmit({
+					question,
+					answers: answers.map((answer, index) => ({id: index + 1, ...answer})),
+					duration,
+					allowMultipleAnswers,
+				});
+				if (!disableAutoDismiss) {
+					if (selfKey != null) ModalCommands.popWithKey(selfKey);
+					else ModalCommands.pop();
+				}
+			} finally {
+				setSubmitting(false);
+			}
+		}, [onSubmit, disableAutoDismiss, question, answers, duration, allowMultipleAnswers]);
+
+		return (
+			<Modal.Root
+				size={size}
+				initialFocusRef={initialFocusRef}
+				centered
+				data-flx="messaging.create-poll-modal.modal-root"
+			>
+				<Modal.Header
+					title={i18n._(CREATE_A_POLL_DESCRIPTOR)}
+					hideCloseButton={hideCloseButton}
+					data-flx="messaging.create-poll-modal.modal-header"
+				/>
+				<Modal.Content className={selectorStyles.selectorContent} data-flx="messaging.create-poll-modal.modal-content">
+					<div className={selectorStyles.listContainer} data-flx="messaging.create-poll-modal.div">
+						<Scroller
+							className={selectorStyles.scroller}
+							key="create-poll-modal-channel-list-scroller"
+							fade={false}
+							data-flx="messaging.create-poll-modal.scroller"
+						>
+							<div className={styles.pollForm} data-flx="messaging.create-poll-modal.div--2">
+								<Textarea
+									name="question"
+									ref={initialFocusRef}
+									label={i18n._(POLL_QUESTION_DESCRIPTOR)}
+									value={question}
+									placeholder={i18n._(POLL_QUESTION_PLACEHOLDER_DESCRIPTOR)}
+									maxLength={questionDisplayMaxLength}
+									minRows={1}
+									maxRows={4}
+									showCharacterCount={true}
+									error={forgotToEnterQuestion ? i18n._(POLL_ERROR_YOU_FORGOT_TO_ENTER_A_QUESTION) : undefined}
+									onChange={(e) => {
+										const nativeEvent = e.nativeEvent as InputEvent;
+										const newValue = e.target.value;
+										const inputType = typeof nativeEvent.inputType === 'string' ? nativeEvent.inputType : undefined;
+										setForgotToEnterQuestion(false);
+										handleTextChange(newValue, previousValueRef.current, inputType);
+										setQuestion(newValue);
+									}}
+									data-flx="messaging.create-poll-modal.textarea.question"
+								/>
+								<FieldSet
+									label={i18n._(POLL_ANSWERS_DESCRIPTOR)}
+									className={styles.answers}
+									data-flx="messaging.create-poll-modal.field-set.answers"
+								>
+									{answers.map((answer, index) => (
+										<PollAnswerInput
+											textValue={answer.text}
+											onTextChange={(text) => {
+												if (index === 0) setForgotToEnterAnswer(false);
+												setAnswers((prevAnswers) =>
+													prevAnswers.map((prevAnswer, prevIndex) =>
+														prevIndex === index ? {...prevAnswer, text: text} : prevAnswer,
+													),
+												);
+											}}
+											emojiValue={answer.emoji}
+											onEmojiSelect={(emoji) =>
+												setAnswers((prevAnswers) =>
+													prevAnswers.map((prevAnswer, prevIndex) =>
+														prevIndex === index ? {...prevAnswer, emoji} : prevAnswer,
+													),
+												)
+											}
+											onDelete={() => {
+												if (answers.length <= 1) return;
+												setAnswers((prevAnswers) =>
+													prevAnswers.filter((_prevAnswer, prevIndex) => prevIndex !== index),
+												);
+											}}
+											error={
+												index === 0 && forgotToEnterAnswer
+													? i18n._(POLL_ERROR_YOU_SHOULD_ENTER_AT_LEAST_ONE_ANSWER)
+													: undefined
+											}
+											showDelete={answers.length > 1}
+											channelId={channelId}
+										/>
+									))}
+
+									<Button
+										leftIcon={<PlusIcon weight="bold" />}
+										variant="secondary"
+										onClick={() => {
+											setAnswers((prevAnswers) => {
+												const newId = prevAnswers.length + 1;
+												return [
+													...prevAnswers,
+													{
+														id: newId,
+														text: '',
+													},
+												];
+											});
+										}}
+									>
+										Add Answer
+									</Button>
+								</FieldSet>
+								<Combobox<DurationChoice>
+									label={i18n._(POLL_DURATION_DESCRIPTOR)}
+									value={duration}
+									options={durationOptions}
+									onChange={setDuration}
+									isSearchable={false}
+									density="compact"
+									aria-label={i18n._(POLL_DURATION_DESCRIPTOR)}
+									data-flx="messaging.create-poll-modal.combobox.duration"
+								/>
+							</div>
+						</Scroller>
+					</div>
+				</Modal.Content>
+				<Modal.Footer className={styles.modalFooter} data-flx="messaging.create-poll-modal.modal-footer">
+					<Checkbox
+						checked={allowMultipleAnswers}
+						onChange={(e) => setAllowMultipleAnswers(e.valueOf())}
+						data-flx="messaging.create-poll-modal.checkbox.allow-multiple-answers"
+					>
+						{i18n._(POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR)}
+					</Checkbox>
+					<Button
+						onClick={handleSubmit}
+						submitting={submitting}
+						variant="primary"
+						data-flx="messaging.confirm-modal.button.primary-click"
+					>
+						{i18n._(POLL_SUBMIT_DESCRIPTOR)}
+					</Button>
+				</Modal.Footer>
+			</Modal.Root>
+		);
+	},
+);

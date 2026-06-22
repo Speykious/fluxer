@@ -20,7 +20,7 @@ msgstr "... dense mode चालू करें। बढ़िया!"
 
 #. Button or menu action label in the channel and chat user message. Keep it concise.
 #: src/features/channel/components/MessageAttachments.tsx:362
-#: src/features/channel/components/UserMessage.tsx:67
+#: src/features/channel/components/UserMessage.tsx:68
 msgid "(edited)"
 msgstr "(संपादित)"
 
@@ -1985,6 +1985,11 @@ msgstr "एक नया सत्यापन कोड भेजा गया 
 msgid "a poll"
 msgstr "एक पोल"
 
+#. Placeholder text for each answer input.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:20
+msgid "A possible answer"
+msgstr ""
+
 #. OAuth authorize page error shown when the bot scope requires a redirect_uri that is missing. Technical message; keep "redirect_uri" and "bot" untranslated.
 #: src/features/auth/components/pages/oauth_authorize_page/state/useAuthorizeFlow.ts:53
 msgid "A redirect_uri is required when the bot scope is not the only scope."
@@ -2502,6 +2507,11 @@ msgstr "एक और कस्टम शॉर्टकट जोड़ें"
 #: src/features/channel/components/MessageActionBottomSheet.tsx:32
 msgid "Add another reaction"
 msgstr "एक और रिएक्शन जोड़ें"
+
+#. Label for the button that adds a new answer to the poll.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:38
+msgid "Add Answer"
+msgstr ""
 
 #. Setup wizard body for Bluesky integration credentials.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:922
@@ -3155,6 +3165,11 @@ msgstr "इस भूमिका के लिए उल्लेखों क�
 msgid "Allow microphone"
 msgstr "माइक ऐक्सेस दें"
 
+#. Label for the checkbox that allows users of the poll to select multiple answers.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:46
+msgid "Allow Multiple Answers"
+msgstr ""
+
 #: src/features/guild/components/modals/guild_tabs/CloneAllowedToggle.tsx:56
 msgid "Allow others to clone your emojis"
 msgstr "दूसरों को अपने इमोजी क्लोन करने दें"
@@ -3253,7 +3268,7 @@ msgid "Already set to cancel"
 msgstr "पहले से रद्द करने के लिए सेट है"
 
 #. Toggle-switch label in the moderator delete-message confirmation dialog. When enabled, the message is reported (category: other) before being deleted. {productName} is the product name (e.g., Fluxer).
-#: src/features/messaging/commands/MessageCommands.tsx:75
+#: src/features/messaging/commands/MessageCommands.tsx:76
 msgid "Also report this message to the {productName} Safety Team"
 msgstr "इस मैसेज को {productName} सुरक्षा टीम को भी रिपोर्ट करें"
 
@@ -3656,6 +3671,11 @@ msgstr "एक और राउंड चेकबॉक्स"
 #: src/features/input/state/input_keybind/shared.ts:213
 msgid "Answer the incoming call"
 msgstr "इनकमिंग कॉल का जवाब दें"
+
+#. Label for the answers fieldset.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:34
+msgid "Answers"
+msgstr ""
 
 #: src/features/input/components/modals/KeyboardShortcutsCheatsheetModal.tsx:100
 #: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutChipList.tsx:28
@@ -9369,7 +9389,7 @@ msgid "Couldn't ring this person"
 msgstr "इस व्यक्ति को कॉल नहीं किया जा सका"
 
 #. Error message in the use textarea submit hook. Preserve {detail}; it is inserted by code.
-#: src/features/messaging/hooks/useTextareaSubmit.ts:40
+#: src/features/messaging/hooks/useTextareaSubmit.ts:41
 msgid "Couldn't run that command: {detail}"
 msgstr "वह कमांड नहीं चल सका: {detail}"
 
@@ -9596,6 +9616,11 @@ msgstr "एक नई कम्युनिटी बनाएँ या कि�
 msgid "Create a new group with {userName}"
 msgstr "{userName} के साथ एक नया ग्रुप बनाएं"
 
+#. Title of the poll creation modal.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:22
+msgid "Create a Poll"
+msgstr ""
+
 #. Generic authentication action label for starting or submitting account creation.
 #: src/features/auth/components/pages/RegisterPage.tsx:42
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:82
@@ -9726,6 +9751,11 @@ msgstr "नया लिंक बनाएं"
 #: src/features/input/state/input_keybind/shared.ts:121
 msgid "Create or join a community"
 msgstr "कम्युनिटी बनाएँ या उसमें शामिल हों"
+
+#. Plus menu item that opens a form to create a poll.
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:31
+msgid "Create poll"
+msgstr ""
 
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/MobileRoleList.tsx:45
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:171
@@ -10217,7 +10247,7 @@ msgid "Customer portal"
 msgstr "ग्राहक पोर्टल"
 
 #. Plus menu submenu label for visibility toggles on textarea adornment buttons.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:47
 msgid "Customize"
 msgstr "पसंद के मुताबिक बनाएं"
 
@@ -10663,7 +10693,7 @@ msgstr "बैटरी लाइफ़ और डेटा बचाने क�
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:203
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:215
 #: src/features/emoji/components/stickers/StickerGridItem.tsx:34
-#: src/features/messaging/commands/MessageCommands.tsx:71
+#: src/features/messaging/commands/MessageCommands.tsx:72
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:135
 #: src/features/theme_studio/sections/LibrarySection.tsx:514
 #: src/features/user/components/modals/tabs/account_security_tab/SecurityTab.tsx:399
@@ -10728,6 +10758,11 @@ msgstr "कार्रवाई मिटाएं."
 #: src/features/user/components/settings_utils/section_registry/PrivacySafetySections.ts:244
 msgid "Delete all messages"
 msgstr "सभी मैसेज मिटाएँ"
+
+#. Tooltip text for the button that deletes an answer from the poll.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:28
+msgid "Delete Answer"
+msgstr ""
 
 #. Button or menu action label in the application detail. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/ApplicationDetail.tsx:49
@@ -10908,7 +10943,7 @@ msgid "Delete this message"
 msgstr "यह मैसेज मिटाएँ"
 
 #. Error message in the messaging commands. Keep the tone plain and specific.
-#: src/features/messaging/commands/MessageCommands.tsx:67
+#: src/features/messaging/commands/MessageCommands.tsx:68
 msgid "Delete this message? Can't be undone."
 msgstr "यह मैसेज डिलीट करें? इसे अनडू नहीं किया जा सकता."
 
@@ -12315,6 +12350,11 @@ msgstr "डुप्लिकेट करें"
 #: src/features/ui/action_menu/items/ChannelMenuData.tsx:136
 msgid "Duplicate channel"
 msgstr "चैनल डुप्लीकेट करें"
+
+#. Label for the duration input.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:42
+msgid "Duration"
+msgstr ""
 
 #. Inline validation error on the custom duration input of the timeout-member modal when the value is zero or negative.
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:53
@@ -14342,12 +14382,12 @@ msgid "Failed to send code. Try again."
 msgstr "कोड भेजने में विफल। फिर से कोशिश करें।"
 
 #. Error message in the channel and chat user message.
-#: src/features/channel/components/UserMessage.tsx:75
+#: src/features/channel/components/UserMessage.tsx:76
 msgid "Failed to send message."
 msgstr "मैसेज भेजा नहीं जा सका."
 
 #. Error message in the channel and chat user message.
-#: src/features/channel/components/UserMessage.tsx:71
+#: src/features/channel/components/UserMessage.tsx:72
 msgid "Failed to send message. Hold for options."
 msgstr "मैसेज भेजा नहीं जा सका. विकल्पों के लिए दबाकर रखें."
 
@@ -15793,6 +15833,11 @@ msgstr "वापस जाएँ"
 #: src/features/moderation/components/pages/ReportPage.tsx:84
 msgid "Go back and enter a valid email."
 msgstr "वापस जाएं और एक मान्य ईमेल दर्ज करें।"
+
+#. Label of the button to go back to vote when the user is looking at poll results.
+#: src/features/channel/components/Poll.tsx:22
+msgid "Go back to vote"
+msgstr ""
 
 #. CTA label that opens the premium settings tab from gift inventory.
 #: src/features/user/components/modals/tabs/GiftInventoryTab.tsx:94
@@ -18291,7 +18336,7 @@ msgid "Jump to message"
 msgstr "मैसेज पर जाएं"
 
 #. Label in the channel and chat user message. Preserve {displayName}, {formattedDate}; they are inserted by code.
-#: src/features/channel/components/UserMessage.tsx:62
+#: src/features/channel/components/UserMessage.tsx:63
 msgid "Jump to message from {displayName}, sent {formattedDate}"
 msgstr "{displayName} के मैसेज पर जाएं, भेजा गया {formattedDate}"
 
@@ -22777,7 +22822,7 @@ msgstr "सिर्फ़ चुने हुए"
 msgid "Only Visionary members can join this community. Your access may have changed since this screen was opened."
 msgstr "केवल विज़नरी सदस्य ही इस समुदाय में शामिल हो सकते हैं। यह स्क्रीन खुलने के बाद आपकी पहुंच बदल गई होगी।"
 
-#: src/features/channel/components/UserMessage.tsx:484
+#: src/features/channel/components/UserMessage.tsx:485
 msgid "Only you can see this message. <0>Dismiss</0>"
 msgstr "यह मैसेज सिर्फ़ आप देख सकते हैं। <0>खारिज करें</0>"
 
@@ -25174,6 +25219,11 @@ msgctxt "adaptive-screen-share"
 msgid "quality limited"
 msgstr "गुणवत्ता सीमित"
 
+#. Label for the question input.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:26
+msgid "Question"
+msgstr ""
+
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the theme studio. Keep it concise.
 #: src/features/theme_studio/ThemeStudio.tsx:49
@@ -26087,6 +26137,11 @@ msgstr "टाइमआउट हटाएँ"
 #: src/features/user/components/modals/tabs/chat_settings_tab/SearchEnginesTab.tsx:105
 msgid "Remove translator"
 msgstr "अनुवादक हटाएँ"
+
+#. Label of the button to remove the user's vote.
+#: src/features/channel/components/Poll.tsx:26
+msgid "Remove vote"
+msgstr ""
 
 #. Button or menu action label in the premium badge settings. Keep it concise. Preserve {premiumProductName}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/my_profile_tab/PremiumBadgeSettings.tsx:31
@@ -28213,6 +28268,11 @@ msgstr "जारी रखने के लिए कोई खाता चु
 msgid "Select an option from the radio group"
 msgstr "विकल्प चुनें"
 
+#. Tooltip text for the emoji selection button on an answer.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:24
+msgid "Select emoji"
+msgstr ""
+
 #. Button or menu action label in the add friends to group modal. Keep it concise.
 #. Button or menu action label in the create dm bottom sheet. Keep it concise.
 #. Button or menu action label in the create dm modal. Keep it concise.
@@ -28241,6 +28301,16 @@ msgstr "लिंक से एम्बेड किए गए कॉन्ट�
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabMediaTab.tsx:34
 msgid "Select media size for uploaded attachments"
 msgstr "अपलोड किए गए अटैचमेंट के लिए मीडिया का साइज़ चुनें"
+
+#. Small explanatory text instructing the user to select one answer on the poll.
+#: src/features/channel/components/Poll.tsx:14
+msgid "Select one answer"
+msgstr ""
+
+#. Small explanatory text instructing the user to select one or multiple answers on the poll.
+#: src/features/channel/components/Poll.tsx:18
+msgid "Select one or multiple answers"
+msgstr ""
 
 #. Button or menu action label in the o auth builder section. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/application_detail/OAuthBuilderSection.tsx:38
@@ -28458,7 +28528,7 @@ msgstr "GIF भेजें {title}"
 #. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that opens the gift purchase flow.
 #: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:21
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:31
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
 #: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:33
 msgid "Send gift"
 msgstr "गिफ्ट भेजें"
@@ -28546,7 +28616,7 @@ msgstr "पुष्टि कोड भेजें"
 #. Accessible label and tooltip for the send button after recording a voice message.
 #. Keyboard shortcut action label that opens the desktop voice message composer.
 #. Plus menu item that opens the desktop voice message composer to record and send a voice clip.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:35
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:43
 #: src/features/channel/components/VoiceMessageRecorder.tsx:66
 #: src/features/input/state/input_keybind/shared.ts:285
 msgid "Send voice message"
@@ -29298,7 +29368,7 @@ msgstr "एम्बेड और वेबसाइट लिंक का प�
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:55
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:63
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:116
 msgid "Show emoji button"
 msgstr "इमोजी बटन दिखाएं"
@@ -29342,7 +29412,7 @@ msgstr "GIF इंडिकेटर दिखाएं"
 
 #. Plus menu submenu toggle that shows the GIFs button next to the textarea.
 #. Short label for an advanced message input preference.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:43
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:51
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:100
 msgid "Show GIFs button"
 msgstr "GIF बटन दिखाएं"
@@ -29391,7 +29461,7 @@ msgstr "अधिकतम 5 दिखाएं (+5 बैज)"
 
 #. Plus menu submenu toggle that shows the saved media (memes) button next to the textarea.
 #. Short label for an advanced message input preference.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:47
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:55
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:104
 msgid "Show media button"
 msgstr "मीडिया बटन दिखाएं"
@@ -29530,6 +29600,11 @@ msgstr "क्विक रिएक्शन दिखाएं"
 msgid "Show recent instances"
 msgstr "हाल के इंस्टेंस दिखाएं"
 
+#. Label of the button to show poll answer results.
+#: src/features/channel/components/Poll.tsx:34
+msgid "Show results"
+msgstr ""
+
 #. Description for the YouTube enrichment service toggle in the setup wizard.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:289
 msgid "Show rich previews for YouTube links."
@@ -29542,7 +29617,7 @@ msgstr "एक्सप्रेशन ऑटो-कम्प्लीट मे
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:59
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:67
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:120
 msgid "Show send button"
 msgstr "भेजें बटन दिखाएं"
@@ -29554,7 +29629,7 @@ msgstr "क्लिक करने पर स्पॉइलर कॉन्�
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:51
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:59
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:112
 msgid "Show stickers button"
 msgstr "स्टिकर बटन दिखाएं"
@@ -31278,6 +31353,11 @@ msgstr "स्टाइल"
 msgid "Submenu"
 msgstr "सबमेनू"
 
+#. Label for the poll submit button.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:50
+msgid "Submit"
+msgstr ""
+
 #: src/features/user/components/modals/tabs/component_gallery_tab/ComponentGalleryTabButtonsTab.tsx:409
 msgid "Submitting"
 msgstr "सबमिट किया जा रहा है"
@@ -32196,6 +32276,11 @@ msgstr "दिया गया redirect_uri इस ऐप्लिकेशन �
 #: src/features/auth/components/pages/oauth_authorize_page/state/useAuthorizeFlow.ts:49
 msgid "The provided redirect_uri must use HTTP or HTTPS."
 msgstr "दिया गया redirect_uri HTTP या HTTPS का उपयोग करना चाहिए।"
+
+#. Placeholder text for the question input.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:30
+msgid "The question you want to ask"
+msgstr ""
 
 #. Body of a modal shown when a browser screen share track ends outside the app, for example from the browser sharing controls.
 #: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:116
@@ -33153,7 +33238,7 @@ msgid "This voice channel is no longer available."
 msgstr "यह वॉइस चैनल अब उपलब्ध नहीं है।"
 
 #. Description text in the channel and chat user message. Preserve {silentMention}; it is inserted by code.
-#: src/features/channel/components/UserMessage.tsx:79
+#: src/features/channel/components/UserMessage.tsx:80
 msgid "This was a {silentMention} message."
 msgstr "यह एक {silentMention} मैसेज था।"
 
@@ -35264,7 +35349,7 @@ msgstr "{displayName} पर अपलोड करें"
 #. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that uploads the current textarea content as a .txt file when it exceeds the size limit.
 #: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:17
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:27
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:35
 msgid "Upload your message as a file"
 msgstr "अपने मैसेज को फ़ाइल के तौर पर अपलोड करें"
 
@@ -36995,6 +37080,11 @@ msgstr "वॉल्यूम कंट्रोल"
 msgid "Volume sliders"
 msgstr "वॉल्यूम स्लाइडर"
 
+#. Label of the vote button.
+#: src/features/channel/components/Poll.tsx:30
+msgid "Vote"
+msgstr ""
+
 #. Description text in the message delete too quick modal. Keep the tone plain and specific.
 #: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:13
 msgid "Wait a moment before deleting more messages."
@@ -38008,6 +38098,11 @@ msgstr "आप खुद को दोस्त नहीं बना सकत
 msgid "You can't change your nickname here"
 msgstr "आप अपना उपनाम यहां नहीं बदल सकते"
 
+#. Tooltip on the disabled create poll item when the user lacks Create Poll permission. Calm, factual tone.
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:27
+msgid "You can't create polls in this channel."
+msgstr ""
+
 #. Title of the error modal shown when the user lacks permission to delete a channel or category.
 #: src/features/app/components/alerts/ChannelDeleteFailedModal.tsx:18
 msgid "You can't delete this"
@@ -38240,6 +38335,11 @@ msgstr "आपके पास इस वॉइस चैनल से जुड
 msgid "You don't have permission to rename this emoji. The name was reverted to what it was before."
 msgstr "आपके पास इस इमोजी का नाम बदलने की अनुमति नहीं है। नाम को पहले जैसा कर दिया गया है।"
 
+#. Error message for when no question has been entered in the poll.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:54
+msgid "You forgot to enter a question."
+msgstr ""
+
 #. Body of the error modal shown when the user is banned from a discovery community.
 #: src/features/discovery/discovery/DiscoveryGuildCard.tsx:60
 msgid "You have been banned from this community."
@@ -38443,6 +38543,11 @@ msgstr "इस कम्युनिटी में मैसेज भेज�
 #: src/features/app/components/alerts/DmActionErrorModal.tsx:60
 msgid "You or someone you're adding already has the maximum number of group DMs open. Leave one and try again."
 msgstr "आप या आपके द्वारा जोड़ा जा रहा कोई व्यक्ति पहले से ही अधिकतम ग्रुप DM खोल चुका है। एक छोड़कर फिर से कोशिश करें।"
+
+#. Error message for when no answer has been entered in the poll.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:58
+msgid "You should enter at least one answer."
+msgstr ""
 
 #. Voice chat status tooltip for the current user. A moderator deafened them so they cannot hear voice chat.
 #: src/features/voice/utils/VoiceMessageDescriptors.ts:61
@@ -38942,27 +39047,27 @@ msgid "Your last purchase is outside the refund window. Contact support for bill
 msgstr "आपकी पिछली खरीदारी वापसी की अवधि से बाहर है। बिलिंग संबंधी समस्याओं के लिए सहायता से संपर्क करें।"
 
 #. Label in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:82
+#: src/features/messaging/state/MessageQueue.tsx:83
 msgid "Your message could not be delivered because it contains mature emoji or stickers that are not allowed in this context."
 msgstr "आपका संदेश डिलीवर नहीं किया जा सका क्योंकि इसमें ऐसे मैच्योर इमोजी या स्टिकर हैं जिनकी इस संदर्भ में अनुमति नहीं है।"
 
 #. Label in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:77
+#: src/features/messaging/state/MessageQueue.tsx:78
 msgid "Your message could not be delivered because it was flagged by our safety systems. If you believe this is a mistake, please contact support."
 msgstr "आपका मैसेज डिलीवर नहीं हो सका क्योंकि इसे हमारे सुरक्षा सिस्टम ने फ़्लैग किया था। अगर आपको लगता है कि यह गलती से हुआ है, तो कृपया सहायता टीम से संपर्क करें।"
 
 #. Label in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:64
+#: src/features/messaging/state/MessageQueue.tsx:65
 msgid "Your message could not be delivered. This is usually because you don't share a community with the recipient or the recipient is only accepting direct messages from friends. You may also need to adjust your own direct message privacy settings in {directMessagePrivacySettingsPath}."
 msgstr "आपका मैसेज डिलीवर नहीं हो सका. ऐसा आमतौर पर इसलिए होता है, क्योंकि आप और मैसेज पाने वाला व्यक्ति एक ही कम्युनिटी में नहीं हैं या मैसेज पाने वाला व्यक्ति सिर्फ़ दोस्तों से डायरेक्ट मैसेज स्वीकार कर रहा है. आपको {directMessagePrivacySettingsPath} में अपनी डायरेक्ट मैसेज प्राइवसी सेटिंग्स भी एडजस्ट करनी पड़ सकती हैं."
 
 #. Description text in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:69
+#: src/features/messaging/state/MessageQueue.tsx:70
 msgid "Your message could not be delivered. You need to claim your account to send direct messages."
 msgstr "आपका मैसेज डिलीवर नहीं हो पाया. सीधे मैसेज भेजने के लिए आपको अपना अकाउंट क्लेम करना होगा."
 
 #. Description text in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:73
+#: src/features/messaging/state/MessageQueue.tsx:74
 msgid "Your message could not be delivered. You need to claim your account to send messages."
 msgstr "आपका मैसेज डिलीवर नहीं हो पाया. मैसेज भेजने के लिए आपको अपना अकाउंट क्लेम करना होगा."
 

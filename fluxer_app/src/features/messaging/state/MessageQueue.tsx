@@ -57,6 +57,7 @@ import type {
 	MessageReference,
 	MessageStickerItem,
 } from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
+import type {MessagePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
 import type {I18n} from '@lingui/core';
 import {msg} from '@lingui/core/macro';
 import {reaction} from 'mobx';
@@ -109,6 +110,7 @@ interface SendMessagePayload extends BaseMessagePayload {
 	flags?: number;
 	favoriteMemeId?: string;
 	stickers?: Array<MessageStickerItem>;
+	poll?: MessagePoll;
 	tts?: boolean;
 }
 
@@ -852,6 +854,7 @@ export class MessageQueue extends Queue<MessageQueuePayload, RestResponse<Messag
 			flags: payload.flags,
 			favoriteMemeId: payload.favoriteMemeId,
 			stickers: payload.stickers,
+			poll: payload.poll,
 			tts: payload.tts,
 		});
 		logger.debug(`Sending message to channel ${channelId}`);

@@ -20,7 +20,7 @@ msgstr "... compacte modus inschakelen. Mooi!"
 
 #. Button or menu action label in the channel and chat user message. Keep it concise.
 #: src/features/channel/components/MessageAttachments.tsx:362
-#: src/features/channel/components/UserMessage.tsx:67
+#: src/features/channel/components/UserMessage.tsx:68
 msgid "(edited)"
 msgstr "(bewerkt)"
 
@@ -1985,6 +1985,11 @@ msgstr "Er is een nieuwe verificatiecode verzonden."
 msgid "a poll"
 msgstr "een peiling"
 
+#. Placeholder text for each answer input.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:20
+msgid "A possible answer"
+msgstr ""
+
 #. OAuth authorize page error shown when the bot scope requires a redirect_uri that is missing. Technical message; keep "redirect_uri" and "bot" untranslated.
 #: src/features/auth/components/pages/oauth_authorize_page/state/useAuthorizeFlow.ts:53
 msgid "A redirect_uri is required when the bot scope is not the only scope."
@@ -2502,6 +2507,11 @@ msgstr "Aangepaste sneltoets toevoegen"
 #: src/features/channel/components/MessageActionBottomSheet.tsx:32
 msgid "Add another reaction"
 msgstr "Nog een reactie toevoegen"
+
+#. Label for the button that adds a new answer to the poll.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:38
+msgid "Add Answer"
+msgstr ""
 
 #. Setup wizard body for Bluesky integration credentials.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:922
@@ -3155,6 +3165,11 @@ msgstr "Vermeldingen voor deze rol toestaan"
 msgid "Allow microphone"
 msgstr "Microfoon toestaan"
 
+#. Label for the checkbox that allows users of the poll to select multiple answers.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:46
+msgid "Allow Multiple Answers"
+msgstr ""
+
 #: src/features/guild/components/modals/guild_tabs/CloneAllowedToggle.tsx:56
 msgid "Allow others to clone your emojis"
 msgstr "Anderen toestaan je emoji's te klonen"
@@ -3253,7 +3268,7 @@ msgid "Already set to cancel"
 msgstr "Annulering al gepland"
 
 #. Toggle-switch label in the moderator delete-message confirmation dialog. When enabled, the message is reported (category: other) before being deleted. {productName} is the product name (e.g., Fluxer).
-#: src/features/messaging/commands/MessageCommands.tsx:75
+#: src/features/messaging/commands/MessageCommands.tsx:76
 msgid "Also report this message to the {productName} Safety Team"
 msgstr "Meld dit bericht ook bij het veiligheidsteam van {productName}"
 
@@ -3656,6 +3671,11 @@ msgstr "Nog een rond selectievakje"
 #: src/features/input/state/input_keybind/shared.ts:213
 msgid "Answer the incoming call"
 msgstr "Inkomende oproep beantwoorden"
+
+#. Label for the answers fieldset.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:34
+msgid "Answers"
+msgstr ""
 
 #: src/features/input/components/modals/KeyboardShortcutsCheatsheetModal.tsx:100
 #: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutChipList.tsx:28
@@ -9369,7 +9389,7 @@ msgid "Couldn't ring this person"
 msgstr "Deze persoon kon niet worden gebeld"
 
 #. Error message in the use textarea submit hook. Preserve {detail}; it is inserted by code.
-#: src/features/messaging/hooks/useTextareaSubmit.ts:40
+#: src/features/messaging/hooks/useTextareaSubmit.ts:41
 msgid "Couldn't run that command: {detail}"
 msgstr "Kon die opdracht niet uitvoeren: {detail}"
 
@@ -9596,6 +9616,11 @@ msgstr "Maak een nieuwe community of word lid van een bestaande."
 msgid "Create a new group with {userName}"
 msgstr "Nieuwe groep maken met {userName}"
 
+#. Title of the poll creation modal.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:22
+msgid "Create a Poll"
+msgstr ""
+
 #. Generic authentication action label for starting or submitting account creation.
 #: src/features/auth/components/pages/RegisterPage.tsx:42
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:82
@@ -9726,6 +9751,11 @@ msgstr "Nieuwe link aanmaken"
 #: src/features/input/state/input_keybind/shared.ts:121
 msgid "Create or join a community"
 msgstr "Community maken of eraan deelnemen"
+
+#. Plus menu item that opens a form to create a poll.
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:31
+msgid "Create poll"
+msgstr ""
 
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/MobileRoleList.tsx:45
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:171
@@ -10217,7 +10247,7 @@ msgid "Customer portal"
 msgstr "Klantenportaal"
 
 #. Plus menu submenu label for visibility toggles on textarea adornment buttons.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:47
 msgid "Customize"
 msgstr "Aanpassen"
 
@@ -10663,7 +10693,7 @@ msgstr "Standaard uitgeschakeld op mobiel om batterij en data te besparen."
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:203
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:215
 #: src/features/emoji/components/stickers/StickerGridItem.tsx:34
-#: src/features/messaging/commands/MessageCommands.tsx:71
+#: src/features/messaging/commands/MessageCommands.tsx:72
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:135
 #: src/features/theme_studio/sections/LibrarySection.tsx:514
 #: src/features/user/components/modals/tabs/account_security_tab/SecurityTab.tsx:399
@@ -10728,6 +10758,11 @@ msgstr "Actie verwijderen."
 #: src/features/user/components/settings_utils/section_registry/PrivacySafetySections.ts:244
 msgid "Delete all messages"
 msgstr "Verwijder alle berichten"
+
+#. Tooltip text for the button that deletes an answer from the poll.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:28
+msgid "Delete Answer"
+msgstr ""
 
 #. Button or menu action label in the application detail. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/ApplicationDetail.tsx:49
@@ -10908,7 +10943,7 @@ msgid "Delete this message"
 msgstr "Dit bericht verwijderen"
 
 #. Error message in the messaging commands. Keep the tone plain and specific.
-#: src/features/messaging/commands/MessageCommands.tsx:67
+#: src/features/messaging/commands/MessageCommands.tsx:68
 msgid "Delete this message? Can't be undone."
 msgstr "Dit bericht verwijderen? Kan niet ongedaan worden gemaakt."
 
@@ -12315,6 +12350,11 @@ msgstr "Dupliceren"
 #: src/features/ui/action_menu/items/ChannelMenuData.tsx:136
 msgid "Duplicate channel"
 msgstr "Kanaal dupliceren"
+
+#. Label for the duration input.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:42
+msgid "Duration"
+msgstr ""
 
 #. Inline validation error on the custom duration input of the timeout-member modal when the value is zero or negative.
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:53
@@ -14342,12 +14382,12 @@ msgid "Failed to send code. Try again."
 msgstr "Verzenden van code mislukt. Probeer het opnieuw."
 
 #. Error message in the channel and chat user message.
-#: src/features/channel/components/UserMessage.tsx:75
+#: src/features/channel/components/UserMessage.tsx:76
 msgid "Failed to send message."
 msgstr "Bericht niet verzonden."
 
 #. Error message in the channel and chat user message.
-#: src/features/channel/components/UserMessage.tsx:71
+#: src/features/channel/components/UserMessage.tsx:72
 msgid "Failed to send message. Hold for options."
 msgstr "Verzenden mislukt. Houd ingedrukt voor opties."
 
@@ -15793,6 +15833,11 @@ msgstr "Terug"
 #: src/features/moderation/components/pages/ReportPage.tsx:84
 msgid "Go back and enter a valid email."
 msgstr "Ga terug en voer een geldig e-mailadres in."
+
+#. Label of the button to go back to vote when the user is looking at poll results.
+#: src/features/channel/components/Poll.tsx:22
+msgid "Go back to vote"
+msgstr ""
 
 #. CTA label that opens the premium settings tab from gift inventory.
 #: src/features/user/components/modals/tabs/GiftInventoryTab.tsx:94
@@ -18291,7 +18336,7 @@ msgid "Jump to message"
 msgstr "Ga naar bericht"
 
 #. Label in the channel and chat user message. Preserve {displayName}, {formattedDate}; they are inserted by code.
-#: src/features/channel/components/UserMessage.tsx:62
+#: src/features/channel/components/UserMessage.tsx:63
 msgid "Jump to message from {displayName}, sent {formattedDate}"
 msgstr "Ga naar bericht van {displayName}, verzonden op {formattedDate}"
 
@@ -22777,7 +22822,7 @@ msgstr "Alleen de geselecteerde"
 msgid "Only Visionary members can join this community. Your access may have changed since this screen was opened."
 msgstr "Alleen Visionary-leden kunnen lid worden van deze community. Je toegang is mogelijk gewijzigd sinds dit scherm werd geopend."
 
-#: src/features/channel/components/UserMessage.tsx:484
+#: src/features/channel/components/UserMessage.tsx:485
 msgid "Only you can see this message. <0>Dismiss</0>"
 msgstr "Alleen jij kunt dit bericht zien. <0>Verbergen</0>"
 
@@ -25174,6 +25219,11 @@ msgctxt "adaptive-screen-share"
 msgid "quality limited"
 msgstr "kwaliteit beperkt"
 
+#. Label for the question input.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:26
+msgid "Question"
+msgstr ""
+
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the theme studio. Keep it concise.
 #: src/features/theme_studio/ThemeStudio.tsx:49
@@ -26087,6 +26137,11 @@ msgstr "Time-out opheffen"
 #: src/features/user/components/modals/tabs/chat_settings_tab/SearchEnginesTab.tsx:105
 msgid "Remove translator"
 msgstr "Vertaler verwijderen"
+
+#. Label of the button to remove the user's vote.
+#: src/features/channel/components/Poll.tsx:26
+msgid "Remove vote"
+msgstr ""
 
 #. Button or menu action label in the premium badge settings. Keep it concise. Preserve {premiumProductName}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/my_profile_tab/PremiumBadgeSettings.tsx:31
@@ -28213,6 +28268,11 @@ msgstr "Selecteer een account om door te gaan, of voeg een andere toe."
 msgid "Select an option from the radio group"
 msgstr "Kies een optie uit de keuzelijst"
 
+#. Tooltip text for the emoji selection button on an answer.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:24
+msgid "Select emoji"
+msgstr ""
+
 #. Button or menu action label in the add friends to group modal. Keep it concise.
 #. Button or menu action label in the create dm bottom sheet. Keep it concise.
 #. Button or menu action label in the create dm modal. Keep it concise.
@@ -28241,6 +28301,16 @@ msgstr "Kies de mediagrootte voor ingesloten content van links"
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabMediaTab.tsx:34
 msgid "Select media size for uploaded attachments"
 msgstr "Selecteer mediagrootte voor geüploade bijlagen"
+
+#. Small explanatory text instructing the user to select one answer on the poll.
+#: src/features/channel/components/Poll.tsx:14
+msgid "Select one answer"
+msgstr ""
+
+#. Small explanatory text instructing the user to select one or multiple answers on the poll.
+#: src/features/channel/components/Poll.tsx:18
+msgid "Select one or multiple answers"
+msgstr ""
 
 #. Button or menu action label in the o auth builder section. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/application_detail/OAuthBuilderSection.tsx:38
@@ -28458,7 +28528,7 @@ msgstr "Gif {title} verzenden"
 #. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that opens the gift purchase flow.
 #: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:21
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:31
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
 #: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:33
 msgid "Send gift"
 msgstr "Cadeau versturen"
@@ -28546,7 +28616,7 @@ msgstr "Verificatiecode verzenden"
 #. Accessible label and tooltip for the send button after recording a voice message.
 #. Keyboard shortcut action label that opens the desktop voice message composer.
 #. Plus menu item that opens the desktop voice message composer to record and send a voice clip.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:35
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:43
 #: src/features/channel/components/VoiceMessageRecorder.tsx:66
 #: src/features/input/state/input_keybind/shared.ts:285
 msgid "Send voice message"
@@ -29298,7 +29368,7 @@ msgstr "Toon embeds en voorvertoningen van weblinks"
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:55
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:63
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:116
 msgid "Show emoji button"
 msgstr "Toon emoji-knop"
@@ -29342,7 +29412,7 @@ msgstr "GIF-indicator tonen"
 
 #. Plus menu submenu toggle that shows the GIFs button next to the textarea.
 #. Short label for an advanced message input preference.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:43
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:51
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:100
 msgid "Show GIFs button"
 msgstr "GIF-knop weergeven"
@@ -29391,7 +29461,7 @@ msgstr "Max. 5 weergeven (+5 badge)"
 
 #. Plus menu submenu toggle that shows the saved media (memes) button next to the textarea.
 #. Short label for an advanced message input preference.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:47
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:55
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:104
 msgid "Show media button"
 msgstr "Mediatoets weergeven"
@@ -29530,6 +29600,11 @@ msgstr "Snelle reacties tonen"
 msgid "Show recent instances"
 msgstr "Recente instanties weergeven"
 
+#. Label of the button to show poll answer results.
+#: src/features/channel/components/Poll.tsx:34
+msgid "Show results"
+msgstr ""
+
 #. Description for the YouTube enrichment service toggle in the setup wizard.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:289
 msgid "Show rich previews for YouTube links."
@@ -29542,7 +29617,7 @@ msgstr "Opgeslagen media tonen in autocomplete voor expressies"
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:59
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:67
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:120
 msgid "Show send button"
 msgstr "Verzendknop tonen"
@@ -29554,7 +29629,7 @@ msgstr "Toon spoilerinhoud na klikken"
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:51
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:59
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:112
 msgid "Show stickers button"
 msgstr "Stickerknop weergeven"
@@ -31278,6 +31353,11 @@ msgstr "Vormgeving"
 msgid "Submenu"
 msgstr "Submenu"
 
+#. Label for the poll submit button.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:50
+msgid "Submit"
+msgstr ""
+
 #: src/features/user/components/modals/tabs/component_gallery_tab/ComponentGalleryTabButtonsTab.tsx:409
 msgid "Submitting"
 msgstr "Verzenden"
@@ -32196,6 +32276,11 @@ msgstr "De opgegeven redirect_uri is niet geregistreerd voor deze applicatie."
 #: src/features/auth/components/pages/oauth_authorize_page/state/useAuthorizeFlow.ts:49
 msgid "The provided redirect_uri must use HTTP or HTTPS."
 msgstr "De opgegeven redirect_uri moet HTTP of HTTPS gebruiken."
+
+#. Placeholder text for the question input.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:30
+msgid "The question you want to ask"
+msgstr ""
 
 #. Body of a modal shown when a browser screen share track ends outside the app, for example from the browser sharing controls.
 #: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:116
@@ -33153,7 +33238,7 @@ msgid "This voice channel is no longer available."
 msgstr "Dit spraakkanaal is niet langer beschikbaar."
 
 #. Description text in the channel and chat user message. Preserve {silentMention}; it is inserted by code.
-#: src/features/channel/components/UserMessage.tsx:79
+#: src/features/channel/components/UserMessage.tsx:80
 msgid "This was a {silentMention} message."
 msgstr "Dit was een {silentMention} bericht."
 
@@ -35264,7 +35349,7 @@ msgstr "Uploaden naar {displayName}"
 #. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that uploads the current textarea content as a .txt file when it exceeds the size limit.
 #: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:17
-#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:27
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:35
 msgid "Upload your message as a file"
 msgstr "Je bericht uploaden als bestand"
 
@@ -36995,6 +37080,11 @@ msgstr "Volumeregeling"
 msgid "Volume sliders"
 msgstr "Volumeregelaars"
 
+#. Label of the vote button.
+#: src/features/channel/components/Poll.tsx:30
+msgid "Vote"
+msgstr ""
+
 #. Description text in the message delete too quick modal. Keep the tone plain and specific.
 #: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:13
 msgid "Wait a moment before deleting more messages."
@@ -38008,6 +38098,11 @@ msgstr "Je kunt jezelf geen vriendschapsverzoek sturen"
 msgid "You can't change your nickname here"
 msgstr "Je kunt je bijnaam hier niet wijzigen"
 
+#. Tooltip on the disabled create poll item when the user lacks Create Poll permission. Calm, factual tone.
+#: src/features/channel/components/textarea/TextareaPlusMenu.tsx:27
+msgid "You can't create polls in this channel."
+msgstr ""
+
 #. Title of the error modal shown when the user lacks permission to delete a channel or category.
 #: src/features/app/components/alerts/ChannelDeleteFailedModal.tsx:18
 msgid "You can't delete this"
@@ -38240,6 +38335,11 @@ msgstr "Je hebt geen toestemming om deel te nemen aan dit spraakkanaal"
 msgid "You don't have permission to rename this emoji. The name was reverted to what it was before."
 msgstr "Je hebt geen toestemming om deze emoji te hernoemen. De naam is teruggezet naar de vorige naam."
 
+#. Error message for when no question has been entered in the poll.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:54
+msgid "You forgot to enter a question."
+msgstr ""
+
 #. Body of the error modal shown when the user is banned from a discovery community.
 #: src/features/discovery/discovery/DiscoveryGuildCard.tsx:60
 msgid "You have been banned from this community."
@@ -38443,6 +38543,11 @@ msgstr "Je moet je e-mailadres verifiëren om berichten te kunnen versturen in d
 #: src/features/app/components/alerts/DmActionErrorModal.tsx:60
 msgid "You or someone you're adding already has the maximum number of group DMs open. Leave one and try again."
 msgstr "Jij of iemand die je toevoegt heeft al het maximale aantal groeps-DM's openstaan. Verlaat er een en probeer het opnieuw."
+
+#. Error message for when no answer has been entered in the poll.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:58
+msgid "You should enter at least one answer."
+msgstr ""
 
 #. Voice chat status tooltip for the current user. A moderator deafened them so they cannot hear voice chat.
 #: src/features/voice/utils/VoiceMessageDescriptors.ts:61
@@ -38942,27 +39047,27 @@ msgid "Your last purchase is outside the refund window. Contact support for bill
 msgstr "Je laatste aankoop valt buiten de restitutieperiode. Neem contact op met de ondersteuning voor factureringsproblemen."
 
 #. Label in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:82
+#: src/features/messaging/state/MessageQueue.tsx:83
 msgid "Your message could not be delivered because it contains mature emoji or stickers that are not allowed in this context."
 msgstr "Je bericht kon niet worden bezorgd omdat het emoji's of stickers voor volwassenen bevat die in deze context niet zijn toegestaan."
 
 #. Label in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:77
+#: src/features/messaging/state/MessageQueue.tsx:78
 msgid "Your message could not be delivered because it was flagged by our safety systems. If you believe this is a mistake, please contact support."
 msgstr "Je bericht kon niet worden bezorgd omdat het is gemarkeerd door onze veiligheidssystemen. Als je denkt dat dit een fout is, neem dan contact op met de ondersteuning."
 
 #. Label in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:64
+#: src/features/messaging/state/MessageQueue.tsx:65
 msgid "Your message could not be delivered. This is usually because you don't share a community with the recipient or the recipient is only accepting direct messages from friends. You may also need to adjust your own direct message privacy settings in {directMessagePrivacySettingsPath}."
 msgstr "Je bericht kon niet worden bezorgd. Dit komt meestal doordat je geen community deelt met de ontvanger of doordat de ontvanger alleen directe berichten van vrienden accepteert. Mogelijk moet je ook je eigen privacyinstellingen voor directe berichten aanpassen via {directMessagePrivacySettingsPath}."
 
 #. Description text in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:69
+#: src/features/messaging/state/MessageQueue.tsx:70
 msgid "Your message could not be delivered. You need to claim your account to send direct messages."
 msgstr "Je bericht kon niet worden bezorgd. Je moet je account claimen om directe berichten te kunnen versturen."
 
 #. Description text in the message queue state.
-#: src/features/messaging/state/MessageQueue.tsx:73
+#: src/features/messaging/state/MessageQueue.tsx:74
 msgid "Your message could not be delivered. You need to claim your account to send messages."
 msgstr "Je bericht kon niet worden bezorgd. Je moet je account claimen om berichten te kunnen versturen."
 
