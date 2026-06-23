@@ -52,9 +52,13 @@ export const Poll = observer((props: PollProps) => {
 	const poll = props.poll;
 	const {i18n} = useLingui();
 
+	const hasVoted = (props.poll.results?.answer_counts ?? []).find((answerCount) => answerCount.me_voted) !== undefined;
+
 	const [selectedAnswers, setSelectedAnswers] = useState<Array<number>>([]);
-	const [isVoting, setIsVoting] = useState(false);
+	const [isVoting, setIsVoting] = useState(!hasVoted);
 	const [isViewingResults, setIsViewingResults] = useState(false);
+
+	const [now, setNow] = useState(Date.now());
 
 	const totalVoteCount = useMemo(() => {
 		let acc = 0;
@@ -62,8 +66,37 @@ export const Poll = observer((props: PollProps) => {
 		return acc;
 	}, [poll.results]);
 
+	const secondsLeft = useMemo(() => {
+		if (!poll.expiry) return 0;
+
+		const expiryUts = Date.parse(poll.expiry) / 1000;
+		const nowUts = now / 1000;
+
+		return expiryUts - nowUts;
+	}, [poll.expiry, now]);
+
+	const isFinalized = useMemo(() => poll.results?.is_finalized, [poll]);
+
+	if (secondsLeft > 0 && !isFinalized) {
+		setTimeout(
+			() => setNow(Date.now()),
+			secondsLeft < 3600 ? 60_000 : secondsLeft < 86400 ? 3600_000 : 86400_000,
+		);
+	}
+
+	function timeLeft(secondsLeft: number): string {
+		// TODO: localize
+		if (secondsLeft < 60) return `<1m left`;
+		if (secondsLeft < 3600) return `${Math.round(secondsLeft / 60)}m left`;
+		if (secondsLeft < 86400) return `${Math.round(secondsLeft / 3600)}h left`;
+		return `${Math.floor(secondsLeft / 86400)}d left`;
+	}
+
 	const answers = useMemo(() => {
 		const answerCountById: Array<number> = [];
+		for (const answerCount of poll.results?.answer_counts ?? []) {
+			answerCountById[answerCount.id ?? 0] = answerCount.count ?? 0;
+		}
 
 		return (poll.answers ?? []).map((answer) => {
 			const votes = answerCountById[answer.answer_id ?? 0] ?? 0;
@@ -92,7 +125,7 @@ export const Poll = observer((props: PollProps) => {
 						key={answer.id}
 						className={styles.answerButton}
 						onClick={() => {
-							if (!(isVoting && !isViewingResults)) return;
+							if (!(isVoting && !isViewingResults && !isFinalized)) return;
 							setSelectedAnswers((prevSelectedAnswers) =>
 								poll.allow_multiselect
 									? prevSelectedAnswers.find((prevId) => prevId === answer.id) !== undefined
@@ -101,11 +134,11 @@ export const Poll = observer((props: PollProps) => {
 									: [answer.id],
 							);
 						}}
-						data-voting={isVoting && !isViewingResults}
+						data-voting={isVoting && !isViewingResults && !isFinalized}
 						data-checked={selectedAnswers.find((id) => id === answer.id) !== undefined}
 						data-flx="poll.answer.button"
 					>
-						{isVoting && !isViewingResults ? (
+						{isVoting && !isViewingResults && !isFinalized ? (
 							<Checkbox
 								className={styles.answerCheckbox}
 								type={poll.allow_multiselect ? 'box' : 'round'}
@@ -118,7 +151,7 @@ export const Poll = observer((props: PollProps) => {
 							{renderPollEmoji(answer.emoji)}
 							<p data-flx="poll.answer.text">{answer.text}</p>
 						</section>
-						{isVoting && !isViewingResults ? undefined : (
+						{isVoting && !isViewingResults && !isFinalized ? undefined : (
 							<section data-flx="poll.answer.section.votes">
 								<p className={styles.answerVotes} data-flx="poll.answer.vote-count">
 									{answer.votes} votes
@@ -132,28 +165,33 @@ export const Poll = observer((props: PollProps) => {
 				</FocusRing>
 			))}
 			<footer data-flx="poll.footer">
-				<Button
-					variant={isVoting ? 'primary' : 'secondary'}
-					disabled={isViewingResults || (isVoting && selectedAnswers.length === 0)}
-					onClick={() => {
-						setIsVoting((prevIsVoting) => !prevIsVoting);
-						if (!isVoting && props.onVote) props.onVote(selectedAnswers);
-					}}
-					data-flx="poll.footer.vote.button"
-				>
-					{i18n._(isVoting ? VOTE_DESCRIPTOR : REMOVE_VOTE_DESCRIPTOR)}
-				</Button>
+				{isFinalized ? undefined : (
+					<Button
+						variant={isVoting ? 'primary' : 'secondary'}
+						disabled={isViewingResults || (isVoting && selectedAnswers.length === 0)}
+						onClick={() => {
+							setIsVoting((prevIsVoting) => !prevIsVoting);
+							if (!isVoting && props.onVote) props.onVote(selectedAnswers);
+						}}
+						data-flx="poll.footer.vote.button"
+					>
+						{i18n._(isVoting ? VOTE_DESCRIPTOR : REMOVE_VOTE_DESCRIPTOR)}
+					</Button>
+				)}
 				<section>
 					<p className={styles.answerVotes} data-flx="poll.footer.vote-count">
+						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : '(Expiry missing??)'} ·{' '}
 						{totalVoteCount} votes
 					</p>
-					<Button
-						variant="secondary"
-						onClick={() => setIsViewingResults((prevIsViewingResults) => !prevIsViewingResults)}
-						data-flx="poll.footer.show-results.button"
-					>
-						{i18n._(isViewingResults ? GO_BACK_TO_VOTE_DESCRIPTOR : SHOW_RESULTS_DESCRIPTOR)}
-					</Button>
+					{isFinalized ? undefined : (
+						<Button
+							variant="secondary"
+							onClick={() => setIsViewingResults((prevIsViewingResults) => !prevIsViewingResults)}
+							data-flx="poll.footer.show-results.button"
+						>
+							{i18n._(isViewingResults ? GO_BACK_TO_VOTE_DESCRIPTOR : SHOW_RESULTS_DESCRIPTOR)}
+						</Button>
+					)}
 				</section>
 			</footer>
 		</div>

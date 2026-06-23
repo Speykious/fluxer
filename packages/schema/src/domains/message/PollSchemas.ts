@@ -36,7 +36,7 @@ export type MessagePollResultsSchema = z.infer<typeof MessagePollResultsSchema>;
 export const MessagePollResponse = z.object({
     question: MessagePollMediaSchema.nullish().describe('The question of the poll'),
     answers: z.array(MessagePollAnswerSchema).nullish().describe('The possible answers of the poll'),
-    expiry: z.string().nullish().describe('Expiration date of the poll as an ISO date'),
+    expiry: z.iso.datetime().nullish().describe('Expiration date of the poll as an ISO date'),
     allow_multiselect: z.boolean().nullish().describe('Whether the poll allows multiple answers'),
     layout_type: z.int32().nullish().describe('The layout type of the poll'),
     results: MessagePollResultsSchema.nullish().describe('The results of the poll'),
@@ -91,7 +91,7 @@ export interface MessageCreatePoll {
 export interface MessagePoll {
     question?: MessagePollMedia;
     answers?: Array<MessagePollAnswer>;
-    expiry?: Date;
+    expiry?: string;
     allow_multiselect?: boolean;
     layout_type?: number;
     results?: MessagePollResults;

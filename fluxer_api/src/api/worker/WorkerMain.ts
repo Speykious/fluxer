@@ -49,6 +49,7 @@ function registerCronJobs(cron: CronScheduler): void {
 	cron.upsert('processExpiredPremiumSweep', 'processExpiredPremiumSweep', {}, '0 0 * * * *');
 	cron.upsert('processInactivityDeletions', 'processInactivityDeletions', {}, '0 0 */6 * * *');
 	cron.upsert('expireAttachments', 'expireAttachments', {}, '0 0 */12 * * *');
+	cron.upsert('finalizePolls', 'finalizePolls', {}, '*/10 * * * * *');
 	cron.upsert('prunePostgresKvTtl', 'prunePostgresKvTtl', {}, '0 */5 * * * *');
 	cron.upsert('syncDiscoveryIndex', 'syncDiscoveryIndex', {}, '0 */15 * * * *');
 	cron.upsert('syncDisposableEmailDomains', 'syncDisposableEmailDomains', {}, '0 */30 * * * *');

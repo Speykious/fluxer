@@ -17,6 +17,7 @@ import enqueueGifFeaturedCategoriesRefresh from './tasks/EnqueueGifFeaturedCateg
 import expireAttachments from './tasks/ExpireAttachments';
 import extractEmbeds from './tasks/ExtractEmbeds';
 import finalizeNcmecAttachmentReport from './tasks/FinalizeNcmecAttachmentReport';
+import finalizePolls from './tasks/FinalizePolls';
 import flushUserActivityBuffer from './tasks/FlushUserActivityBuffer';
 import handleMentionChunk from './tasks/HandleMentionChunk';
 import handleMentions from './tasks/HandleMentions';
@@ -64,6 +65,7 @@ export const workerTasks: Record<WorkerTaskName, WorkerTaskHandler> = {
 	expireAttachments,
 	extractEmbeds,
 	finalizeNcmecAttachmentReport,
+	finalizePolls,
 	handleMentions,
 	handleMentionChunk,
 	harvestGuildData,

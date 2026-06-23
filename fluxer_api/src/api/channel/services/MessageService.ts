@@ -33,6 +33,7 @@ import {MessageSearchService} from './message/MessageSearchService';
 import {MessageSendService} from './message/MessageSendService';
 import {MessageSystemService} from './message/MessageSystemService';
 import {MessageValidationService} from './message/MessageValidationService';
+import {PollMessageExpiryRepository} from '../repositories/PollMessageExpiryRepository';
 
 export class MessageService {
 	public readonly validation: MessageValidationService;
@@ -125,6 +126,7 @@ export class MessageService {
 			processingService: this.processing,
 			dispatchService: this.dispatch,
 			embedAttachmentResolver: this.persistence.getEmbedAttachmentResolver(),
+			pollMessageExpiryRepository: new PollMessageExpiryRepository(),
 			operationsHelpers,
 			limitConfigService,
 			directMessageSpamMitigationService,

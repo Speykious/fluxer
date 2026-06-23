@@ -622,7 +622,7 @@ const ChannelTextareaContent = observer(
 										text: answer.text,
 									},
 								})),
-								duration: 24,
+								duration: pollForm.duration,
 								allow_multiselect: pollForm.allowMultipleAnswers,
 								layout_type: 1,
 							};

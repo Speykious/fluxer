@@ -26,7 +26,7 @@ export class Poll {
 		return {
 			question: this.question?.toMessagePollMedia() ?? null,
 			answers: this.answers.length > 0 ? this.answers.map((answer) => answer.toMessagePollAnswer()) : null,
-			expiry: this.expiry,
+			expiry: this.expiry ?? null,
 			allow_multiselect: this.allow_multiselect,
 			layout_type: this.layout_type,
 			results: this.results?.toMessagePollResults() ?? null,

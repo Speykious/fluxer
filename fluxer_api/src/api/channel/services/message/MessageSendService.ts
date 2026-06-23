@@ -70,6 +70,7 @@ import type {MessagePersistenceService} from './MessagePersistenceService';
 import type {MessageProcessingService} from './MessageProcessingService';
 import type {MessageSearchService} from './MessageSearchService';
 import type {MessageValidationService} from './MessageValidationService';
+import {getExpiryBucket, type PollMessageExpiryRepository} from '../../repositories/PollMessageExpiryRepository';
 
 interface MessageSendServiceDeps {
 	channelRepository: IChannelRepositoryAggregate;
@@ -88,6 +89,7 @@ interface MessageSendServiceDeps {
 	dispatchService: MessageDispatchService;
 	operationsHelpers: MessageOperationsHelpers;
 	embedAttachmentResolver: MessageEmbedAttachmentResolver;
+	pollMessageExpiryRepository: PollMessageExpiryRepository;
 	limitConfigService: LimitConfigService;
 	directMessageSpamMitigationService: DirectMessageSpamMitigationService;
 }
@@ -235,16 +237,20 @@ export class MessageSendService {
 		canMentionEveryone: boolean;
 		canAttachFiles: boolean;
 	}> {
-		const [canEmbedLinks, canMentionEveryone, canAttachFiles] = await Promise.all([
+		const [canEmbedLinks, canMentionEveryone, canAttachFiles, canSendPolls] = await Promise.all([
 			hasPermission(Permissions.EMBED_LINKS),
 			hasPermission(Permissions.MENTION_EVERYONE),
 			hasPermission(Permissions.ATTACH_FILES),
+			hasPermission(Permissions.SEND_POLLS),
 		]);
-		const hasFavoriteMeme = data.favorite_meme_id != null;
 		if (data.embeds && data.embeds.length > 0 && !canEmbedLinks) {
 			throw new MissingPermissionsError();
 		}
+		const hasFavoriteMeme = data.favorite_meme_id != null;
 		if (hasFavoriteMeme && (!canEmbedLinks || !canAttachFiles)) {
+			throw new MissingPermissionsError();
+		}
+		if (data.poll && !canSendPolls) {
 			throw new MissingPermissionsError();
 		}
 		if (guild) {
@@ -911,7 +917,16 @@ export class MessageSendService {
 			});
 			suppressDmRecipientDelivery = spamDecision.shouldSuppressRecipientDelivery;
 		}
-		const millisPerHour = 60 * 60 * 1000;
+		const millisPerHour = 3600 * 1000;
+		const pollExpiry = data.poll?.duration ? new Date(Date.now() + data.poll.duration * millisPerHour) : null;
+		if (pollExpiry) {
+			this.deps.pollMessageExpiryRepository.upsert({
+				message_id: messageId,
+				channel_id: channelId,
+				expires_at: pollExpiry,
+				expiry_bucket: getExpiryBucket(pollExpiry),
+			});
+		}
 		const {message, enqueueDeferredEmbeds} = await this.deps.persistenceService.createMessage({
 			messageId,
 			channelId,
@@ -920,36 +935,52 @@ export class MessageSendService {
 			content: data.content,
 			flags: this.deps.validationService.calculateMessageFlags(data),
 			embeds: data.embeds,
-			poll: data.poll ? {
-				question: data.poll.question ? {
-					text: data.poll.question.text ?? null,
-					emoji: data.poll.question.emoji ? {
-						id: data.poll.question.emoji.id ?? null,
-						name: data.poll.question.emoji.name ?? null,
-					} : null,
-				} : null,
-				answers: data.poll.answers ? data.poll.answers.map((answer) => ({
-					answer_id: answer.answer_id ?? null,
-					poll_media: answer.poll_media ? {
-						emoji: answer.poll_media.emoji ? {
-							id: answer.poll_media.emoji.id ?? null,
-							name: answer.poll_media.emoji.name ?? null,
-						} : null,
-						text: answer.poll_media.text ?? null,
-					} : null,
-				})) : null,
-				expiry: data.poll.duration ? new Date(Date.now() + data.poll.duration * millisPerHour).toISOString() : null,
-				allow_multiselect: data.poll.allow_multiselect ?? null,
-				layout_type: data.poll.layout_type ?? null,
-				results: data.poll.results ? {
-					answer_counts: data.poll.results.answer_counts ? data.poll.results.answer_counts.map((answer_count) => ({
-						id: answer_count.id ?? null,
-						count: answer_count.count ?? null,
-						me_voted: answer_count.me_voted ?? null,
-					})) : null,
-					is_finalized: data.poll.results.is_finalized ?? null,
-				} : null,
-			} : undefined,
+			poll: data.poll
+				? {
+						question: data.poll.question
+							? {
+									text: data.poll.question.text ?? null,
+									emoji: data.poll.question.emoji
+										? {
+												id: data.poll.question.emoji.id ?? null,
+												name: data.poll.question.emoji.name ?? null,
+											}
+										: null,
+								}
+							: null,
+						answers: data.poll.answers
+							? data.poll.answers.map((answer) => ({
+									answer_id: answer.answer_id ?? null,
+									poll_media: answer.poll_media
+										? {
+												emoji: answer.poll_media.emoji
+													? {
+															id: answer.poll_media.emoji.id ?? null,
+															name: answer.poll_media.emoji.name ?? null,
+														}
+													: null,
+												text: answer.poll_media.text ?? null,
+											}
+										: null,
+								}))
+							: null,
+						expiry: pollExpiry?.toISOString() ?? null,
+						allow_multiselect: data.poll.allow_multiselect ?? null,
+						layout_type: data.poll.layout_type ?? null,
+						results: data.poll.results
+							? {
+									answer_counts: data.poll.results.answer_counts
+										? data.poll.results.answer_counts.map((answer_count) => ({
+												id: answer_count.id ?? null,
+												count: answer_count.count ?? null,
+												me_voted: answer_count.me_voted ?? null,
+											}))
+										: null,
+									is_finalized: data.poll.results.is_finalized ?? null,
+								}
+							: null,
+					}
+				: undefined,
 			attachments: attachmentsToProcess,
 			processedAttachments: favoriteMemeAttachment ? [favoriteMemeAttachment] : undefined,
 			stickerIds: data.sticker_ids ? data.sticker_ids.flatMap((stickerId) => createStickerID(stickerId)) : undefined,

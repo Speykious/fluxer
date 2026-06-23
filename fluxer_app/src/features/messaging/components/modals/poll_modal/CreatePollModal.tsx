@@ -2,22 +2,22 @@
 
 import * as Modal from '@app/features/app/components/dialogs/Modal';
 import selectorStyles from '@app/features/app/components/dialogs/shared/SelectorModalStyles.module.css';
-import type { FlatEmoji } from '@app/features/emoji/types/EmojiTypes';
+import type {FlatEmoji} from '@app/features/emoji/types/EmojiTypes';
 import styles from '@app/features/messaging/components/modals/poll_modal/CreatePollModal.module.css';
-import { Button } from '@app/features/ui/button/Button';
-import { Checkbox } from '@app/features/ui/checkbox/Checkbox';
+import {Button} from '@app/features/ui/button/Button';
+import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
 import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
-import { Combobox, type ComboboxOption } from '@app/features/ui/components/form/FormCombobox';
-import { FieldSet, Textarea } from '@app/features/ui/components/form/FormInput';
-import { Scroller } from '@app/features/ui/components/Scroller';
-import type { ModalProps } from '@app/features/ui/utils/ModalUtils';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { PlusIcon } from '@phosphor-icons/react';
-import { observer } from 'mobx-react-lite';
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { useTextareaSegments } from '../../../hooks/useTextareaSegments';
-import { PollAnswerInput } from './PollAnswerInput';
+import {Combobox, type ComboboxOption} from '@app/features/ui/components/form/FormCombobox';
+import {FieldSet, Textarea} from '@app/features/ui/components/form/FormInput';
+import {Scroller} from '@app/features/ui/components/Scroller';
+import type {ModalProps} from '@app/features/ui/utils/ModalUtils';
+import {msg} from '@lingui/core/macro';
+import {useLingui} from '@lingui/react';
+import {PlusIcon} from '@phosphor-icons/react';
+import {observer} from 'mobx-react-lite';
+import {useCallback, useMemo, useRef, useState} from 'react';
+import {useTextareaSegments} from '../../../hooks/useTextareaSegments';
+import {PollAnswerInput} from './PollAnswerInput';
 
 export const CREATE_A_POLL_DESCRIPTOR = msg({
 	message: 'Create a Poll',
@@ -74,7 +74,7 @@ export interface PollAnswerItem {
 export interface PollForm {
 	question: string;
 	answers: Array<PollAnswerItem>;
-	duration: string;
+	duration: number;
 	allowMultipleAnswers: boolean;
 }
 
@@ -86,21 +86,19 @@ interface CreatePollModalProps {
 	channelId: string;
 }
 
-type DurationChoice = 'hour1' | 'hour2' | 'hour4' | 'hour8' | 'hour12' | 'hour24' | 'day2' | 'day3' | 'day5' | 'week1' | 'week2';
-
 // TODO: localize labels
-const durationOptions: ReadonlyArray<ComboboxOption<DurationChoice>> = [
-	{value: 'hour1', label: '1 hour'},
-	{value: 'hour2', label: '2 hours'},
-	{value: 'hour4', label: '4 hours'},
-	{value: 'hour8', label: '8 hours'},
-	{value: 'hour12', label: '12 hours'},
-	{value: 'hour24', label: '24 hours'},
-	{value: 'day2', label: '2 days'},
-	{value: 'day3', label: '3 days'},
-	{value: 'day5', label: '5 days'},
-	{value: 'week1', label: '1 weeks'},
-	{value: 'week2', label: '2 weeks'},
+const durationOptions: ReadonlyArray<ComboboxOption<number>> = [
+	{value: 1, label: '1 hour'},
+	{value: 2, label: '2 hours'},
+	{value: 4, label: '4 hours'},
+	{value: 8, label: '8 hours'},
+	{value: 12, label: '12 hours'},
+	{value: 24, label: '24 hours'},
+	{value: 48, label: '2 days'},
+	{value: 72, label: '3 days'},
+	{value: 120, label: '5 days'},
+	{value: 168, label: '1 weeks'},
+	{value: 336, label: '2 weeks'},
 ];
 
 export const CreatePollModal = observer(
@@ -116,7 +114,7 @@ export const CreatePollModal = observer(
 		const maxQuestionActualLength = 500; // TODO: make it a limit in the admin panel
 		const questionDisplayMaxLength = Math.max(0, question.length + (maxQuestionActualLength - actualQuestion.length));
 
-		const [duration, setDuration] = useState<DurationChoice>('hour24');
+		const [duration, setDuration] = useState<number>(24);
 		const [forgotToEnterAnswer, setForgotToEnterAnswer] = useState(false);
 		const [allowMultipleAnswers, setAllowMultipleAnswers] = useState(false);
 		const [answers, setAnswers] = useState<Array<IdlessPollAnswerItem>>([
@@ -145,7 +143,9 @@ export const CreatePollModal = observer(
 
 				await onSubmit({
 					question,
-					answers: answers.map((answer, index) => ({id: index + 1, ...answer})),
+					answers: answers
+						.filter((answer) => answer.text.length > 0)
+						.map((answer, index) => ({id: index + 1, ...answer})),
 					duration,
 					allowMultipleAnswers,
 				});
@@ -259,7 +259,7 @@ export const CreatePollModal = observer(
 										Add Answer
 									</Button>
 								</FieldSet>
-								<Combobox<DurationChoice>
+								<Combobox<number>
 									label={i18n._(POLL_DURATION_DESCRIPTOR)}
 									value={duration}
 									options={durationOptions}
