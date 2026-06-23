@@ -9,8 +9,15 @@
 	background-color: var(--background-secondary);
 	border: 0.0625rem solid var(--background-modifier-accent);
 	border-radius: var(--radius-lg);
+	box-shadow: 0 0 0 var(--brand-primary);
+	transition: var(--message-transition-highlight);
 	max-width: 30rem;
 	width: 100%;
+
+	&[data-open='true'] {
+		border-color: var(--brand-primary);
+		box-shadow: 0 0 5px var(--brand-primary);
+	}
 
 	footer {
 		display: flex;

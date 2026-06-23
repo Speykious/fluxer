@@ -111,7 +111,7 @@ export const Poll = observer((props: PollProps) => {
 	}, [poll]);
 
 	return (
-		<div data-flx="poll" className={styles.pollContainer}>
+		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized}>
 			<h2 data-flx="poll.question">{poll.question?.text ?? ''}</h2>
 			<p data-flx="poll.description">
 				<small>
