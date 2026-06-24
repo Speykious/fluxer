@@ -51,6 +51,7 @@ export const PollAnswerInput = observer(
 		showDelete,
 		channelId,
 		error,
+		maxLength,
 	}: PollAnswerInputProps & InputProps) => {
 		const textareaRef = useRef<HTMLInputElement>(null);
 		const expressionPickerTriggerRef = useRef<HTMLButtonElement>(null);
@@ -103,6 +104,7 @@ export const PollAnswerInput = observer(
 				placeholder={i18n._(POLL_ANSWER_PLACEHOLDER_DESCRIPTOR)}
 				value={textValue}
 				error={error}
+				maxLength={maxLength}
 				onChange={(e) => onTextChange(e.target.value)}
 				leftElement={
 					emojiValue ? (

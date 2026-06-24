@@ -2,6 +2,7 @@
 
 import * as Modal from '@app/features/app/components/dialogs/Modal';
 import selectorStyles from '@app/features/app/components/dialogs/shared/SelectorModalStyles.module.css';
+import {Limits} from '@app/features/app/utils/UserLimits';
 import type {FlatEmoji} from '@app/features/emoji/types/EmojiTypes';
 import styles from '@app/features/messaging/components/modals/poll_modal/CreatePollModal.module.css';
 import {Button} from '@app/features/ui/button/Button';
@@ -111,7 +112,9 @@ export const CreatePollModal = observer(
 		const [question, setQuestion] = useState('');
 		const [forgotToEnterQuestion, setForgotToEnterQuestion] = useState(false);
 		const actualQuestion = useMemo(() => displayToActual(question), [question, displayToActual]);
-		const maxQuestionActualLength = 500; // TODO: make it a limit in the admin panel
+		const maxAnswerCount = Limits.getMaxPollAnswers();
+		const maxAnswerLength = Limits.getMaxPollAnswerLength();
+		const maxQuestionActualLength = Limits.getMaxPollQuestionLength();
 		const questionDisplayMaxLength = Math.max(0, question.length + (maxQuestionActualLength - actualQuestion.length));
 
 		const [duration, setDuration] = useState<number>(24);
@@ -208,6 +211,7 @@ export const CreatePollModal = observer(
 									{answers.map((answer, index) => (
 										<PollAnswerInput
 											textValue={answer.text}
+											maxLength={maxAnswerLength}
 											onTextChange={(text) => {
 												if (index === 0) setForgotToEnterAnswer(false);
 												setAnswers((prevAnswers) =>
@@ -243,6 +247,7 @@ export const CreatePollModal = observer(
 									<Button
 										leftIcon={<PlusIcon weight="bold" />}
 										variant="secondary"
+										hidden={answers.length >= maxAnswerCount}
 										onClick={() => {
 											setAnswers((prevAnswers) => {
 												const newId = prevAnswers.length + 1;
