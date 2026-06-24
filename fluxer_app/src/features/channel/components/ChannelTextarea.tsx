@@ -964,6 +964,7 @@ const ChannelTextareaContent = observer(
 			},
 			[
 				canAttachFiles,
+				canSendPolls,
 				canScheduleMessage,
 				channel.id,
 				handleFileButtonClick,

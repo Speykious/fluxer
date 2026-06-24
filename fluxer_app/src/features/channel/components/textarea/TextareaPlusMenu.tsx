@@ -110,11 +110,7 @@ export const TextareaPlusMenu = observer(
 		} else if (!canAttachFiles) {
 			uploadActionHint = cannotUploadFilesHint;
 		}
-		const createPollHint = !canSendMessages
-			? cannotSendMessagesHint
-			: !canSendPolls
-				? cannotCreatePollHint
-				: undefined;
+		const createPollHint = !canSendMessages ? cannotSendMessagesHint : !canSendPolls ? cannotCreatePollHint : undefined;
 		const sendGiftHint = !canSendMessages ? cannotSendMessagesHint : undefined;
 		const sendVoiceMessageDisabledHint = !canSendMessages
 			? cannotSendMessagesHint
