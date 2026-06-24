@@ -5,7 +5,11 @@ import Emoji from '@app/features/emoji/state/Emoji';
 import {Button} from '@app/features/ui/button/Button';
 import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
 import FocusRing from '@app/features/ui/focus_ring/FocusRing';
-import type {MessagePoll, MessagePollEmoji} from '@fluxer/schema/src/domains/message/PollSchemas';
+import type {
+	MessagePoll,
+	MessagePollAnswerCount,
+	MessagePollEmoji,
+} from '@fluxer/schema/src/domains/message/PollSchemas';
 import {msg} from '@lingui/core/macro';
 import {useLingui} from '@lingui/react';
 import {observer} from 'mobx-react-lite';
@@ -76,12 +80,13 @@ export const Poll = observer((props: PollProps) => {
 	}, [poll.expiry, now]);
 
 	const isFinalized = useMemo(() => poll.results?.is_finalized, [poll]);
+	const inVoteScreen = useMemo(
+		() => isVoting && !isViewingResults && !isFinalized,
+		[isVoting, isViewingResults, isFinalized],
+	);
 
 	if (secondsLeft > 0 && !isFinalized) {
-		setTimeout(
-			() => setNow(Date.now()),
-			secondsLeft < 3600 ? 60_000 : secondsLeft < 86400 ? 3600_000 : 86400_000,
-		);
+		setTimeout(() => setNow(Date.now()), secondsLeft < 3600 ? 60_000 : secondsLeft < 86400 ? 3600_000 : 86400_000);
 	}
 
 	function timeLeft(secondsLeft: number): string {
@@ -93,21 +98,36 @@ export const Poll = observer((props: PollProps) => {
 	}
 
 	const answers = useMemo(() => {
-		const answerCountById: Array<number> = [];
+		const answerCountById: Array<MessagePollAnswerCount> = [];
 		for (const answerCount of poll.results?.answer_counts ?? []) {
-			answerCountById[answerCount.id ?? 0] = answerCount.count ?? 0;
+			if (answerCount) answerCountById[answerCount.id ?? 0] = answerCount;
 		}
 
-		return (poll.answers ?? []).map((answer) => {
+		const answers = (poll.answers ?? []).map((answer) => {
 			const votes = answerCountById[answer.answer_id ?? 0] ?? 0;
 			return {
 				id: answer.answer_id ?? 0,
 				emoji: answer.poll_media?.emoji,
 				text: answer.poll_media?.text ?? '',
-				votes,
-				percentage: totalVoteCount > 0 ? (votes * 100.0) / totalVoteCount : 0,
+				me: votes.me_voted ?? false,
+				votes: votes.count ?? 0,
+				percentage: totalVoteCount > 0 ? ((votes.count ?? 0) * 100.0) / totalVoteCount : 0,
+				winner: false,
 			};
 		});
+
+		if (isFinalized) {
+			let maxPercentage = 0;
+			for (const answer of answers) maxPercentage = Math.max(maxPercentage, answer.percentage);
+
+			if (maxPercentage > 0) {
+				for (const answer of answers) {
+					if (answer.percentage === maxPercentage) answer.winner = true;
+				}
+			}
+		}
+
+		return answers;
 	}, [poll]);
 
 	return (
@@ -119,13 +139,13 @@ export const Poll = observer((props: PollProps) => {
 				</small>
 			</p>
 			{answers.map((answer) => (
-				<FocusRing offset={-2} data-flx="poll.answer.focus-ring">
+				<FocusRing offset={-2} enabled={inVoteScreen} data-flx="poll.answer.focus-ring">
 					<button
 						type="button"
 						key={answer.id}
 						className={styles.answerButton}
 						onClick={() => {
-							if (!(isVoting && !isViewingResults && !isFinalized)) return;
+							if (!inVoteScreen) return;
 							setSelectedAnswers((prevSelectedAnswers) =>
 								poll.allow_multiselect
 									? prevSelectedAnswers.find((prevId) => prevId === answer.id) !== undefined
@@ -134,33 +154,45 @@ export const Poll = observer((props: PollProps) => {
 									: [answer.id],
 							);
 						}}
-						data-voting={isVoting && !isViewingResults && !isFinalized}
+						data-variant={answer.winner ? 'winner' : answer.me ? 'me' : undefined}
+						data-voting={inVoteScreen}
 						data-checked={selectedAnswers.find((id) => id === answer.id) !== undefined}
 						data-flx="poll.answer.button"
 					>
-						{isVoting && !isViewingResults && !isFinalized ? (
-							<Checkbox
-								className={styles.answerCheckbox}
-								type={poll.allow_multiselect ? 'box' : 'round'}
-								checked={selectedAnswers.find((id) => id === answer.id) !== undefined}
-								aria-hidden={true}
-								data-flx="poll.answer.checkbox"
+						{inVoteScreen ? undefined : (
+							<div
+								className={styles.answerPercentageBar}
+								style={{
+									width: `${Math.round(answer.percentage)}%`,
+								}}
+								data-flx="poll.answer.bar"
 							/>
-						) : undefined}
-						<section className={styles.answerText} data-flx="poll.answer.section.text">
-							{renderPollEmoji(answer.emoji)}
-							<p data-flx="poll.answer.text">{answer.text}</p>
-						</section>
-						{isVoting && !isViewingResults && !isFinalized ? undefined : (
-							<section data-flx="poll.answer.section.votes">
-								<p className={styles.answerVotes} data-flx="poll.answer.vote-count">
-									{answer.votes} votes
-								</p>
-								<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
-									{Math.round(answer.percentage)}%
-								</h2>
-							</section>
 						)}
+						<div className={styles.answerLayout}>
+							{inVoteScreen ? (
+								<Checkbox
+									className={styles.answerCheckbox}
+									type={poll.allow_multiselect ? 'box' : 'round'}
+									checked={selectedAnswers.find((id) => id === answer.id) !== undefined}
+									aria-hidden={true}
+									data-flx="poll.answer.checkbox"
+								/>
+							) : undefined}
+							<section className={styles.answerText} data-flx="poll.answer.section.text">
+								{renderPollEmoji(answer.emoji)}
+								<p data-flx="poll.answer.text">{answer.text}</p>
+							</section>
+							{inVoteScreen ? undefined : (
+								<section data-flx="poll.answer.section.votes">
+									<p className={styles.answerVotes} data-flx="poll.answer.vote-count">
+										{answer.votes} votes
+									</p>
+									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
+										{Math.round(answer.percentage)}%
+									</h2>
+								</section>
+							)}
+						</div>
 					</button>
 				</FocusRing>
 			))}

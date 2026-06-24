@@ -39,22 +39,35 @@
 
 .answerButton {
 	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: var(--spacing-4);
 	position: relative;
-	padding: var(--spacing-3);
 	background-color: var(--background-tertiary);
 	border: 0.0625rem solid var(--background-modifier-accent);
 	border-radius: var(--radius-lg);
 	user-select: auto;
+	overflow: hidden;
 	transition: var(--message-transition-highlight);
 
-	section {
+	.answerPercentageBar {
+		position: absolute;
+		height: 100%;
+		background: color-mix(in srgb, var(--background-modifier-accent), transparent 30%);
+	}
+
+	.answerLayout {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		gap: var(--spacing-2);
+		flex-grow: 1;
+		gap: var(--spacing-4);
+		padding: var(--spacing-3);
+		z-index: 0;
+
+		section {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: var(--spacing-2);
+		}
 	}
 
 	.answerCheckbox {
@@ -84,6 +97,22 @@
 					var(--text-primary) 11%
 				);
 			}
+		}
+	}
+
+	&[data-variant='me'] {
+		border-color: var(--poll-answer-bar-accent);
+
+		.answerPercentageBar {
+			background: color-mix(in srgb, var(--poll-answer-bar-accent), transparent 70%);
+		}
+	}
+
+	&[data-variant='winner'] {
+		border-color: var(--accent-success);
+
+		.answerPercentageBar {
+			background: color-mix(in srgb, var(--accent-success), transparent 70%);
 		}
 	}
 }
