@@ -86,7 +86,7 @@ export const Poll = observer((props: PollProps) => {
 	);
 
 	if (secondsLeft > 0 && !isFinalized) {
-		setTimeout(() => setNow(Date.now()), secondsLeft < 3600 ? 60_000 : secondsLeft < 86400 ? 3600_000 : 86400_000);
+		setTimeout(() => setNow(Date.now()), secondsLeft < 1.5 * 3600 ? 60_000 : secondsLeft < 1.5 * 86400 ? 3600_000 : 86400_000);
 	}
 
 	function timeLeft(secondsLeft: number): string {
