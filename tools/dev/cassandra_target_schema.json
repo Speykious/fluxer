@@ -506,7 +506,7 @@
 				},
 				{
 					"name": "expiry",
-					"type": "text"
+					"type": "timestamp"
 				},
 				{
 					"name": "allow_multiselect",
