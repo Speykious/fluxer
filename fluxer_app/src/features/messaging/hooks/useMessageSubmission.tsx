@@ -117,6 +117,7 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 					referencedMessage,
 					replyMentioning: replyingMessage?.mentioning,
 					favoriteMemeId,
+					poll,
 				},
 				uploadingAttachments,
 			);

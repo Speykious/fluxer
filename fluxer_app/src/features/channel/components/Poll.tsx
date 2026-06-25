@@ -49,6 +49,7 @@ function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
 
 interface PollProps {
 	poll: MessagePoll;
+	messageState: string;
 	onVote?: (selectedAnswers: Array<number>) => void;
 }
 
@@ -56,6 +57,7 @@ export const Poll = observer((props: PollProps) => {
 	const poll = props.poll;
 	const {i18n} = useLingui();
 
+	const isSent = props.messageState === 'SENT';
 	const hasVoted = (props.poll.results?.answer_counts ?? []).find((answerCount) => answerCount.me_voted) !== undefined;
 
 	const [selectedAnswers, setSelectedAnswers] = useState<Array<number>>([]);
@@ -86,7 +88,10 @@ export const Poll = observer((props: PollProps) => {
 	);
 
 	if (secondsLeft > 0 && !isFinalized) {
-		setTimeout(() => setNow(Date.now()), secondsLeft < 1.5 * 3600 ? 60_000 : secondsLeft < 1.5 * 86400 ? 3600_000 : 86400_000);
+		setTimeout(
+			() => setNow(Date.now()),
+			secondsLeft < 1.5 * 3600 ? 60_000 : secondsLeft < 1.5 * 86400 ? 3600_000 : 86400_000,
+		);
 	}
 
 	function timeLeft(secondsLeft: number): string {
@@ -131,7 +136,7 @@ export const Poll = observer((props: PollProps) => {
 	}, [poll]);
 
 	return (
-		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized}>
+		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized} data-state={props.messageState}>
 			<h2 data-flx="poll.question">{poll.question?.text ?? ''}</h2>
 			<p data-flx="poll.description">
 				<small>
@@ -144,6 +149,7 @@ export const Poll = observer((props: PollProps) => {
 						type="button"
 						key={answer.id}
 						className={styles.answerButton}
+						disabled={!isSent}
 						onClick={() => {
 							if (!inVoteScreen) return;
 							setSelectedAnswers((prevSelectedAnswers) =>
@@ -200,7 +206,7 @@ export const Poll = observer((props: PollProps) => {
 				{isFinalized ? undefined : (
 					<Button
 						variant={isVoting ? 'primary' : 'secondary'}
-						disabled={isViewingResults || (isVoting && selectedAnswers.length === 0)}
+						disabled={isViewingResults || (isVoting && selectedAnswers.length === 0) || !isSent}
 						onClick={() => {
 							setIsVoting((prevIsVoting) => !prevIsVoting);
 							if (!isVoting && props.onVote) props.onVote(selectedAnswers);
@@ -212,12 +218,13 @@ export const Poll = observer((props: PollProps) => {
 				)}
 				<section>
 					<p className={styles.answerVotes} data-flx="poll.footer.vote-count">
-						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : '(Expiry missing??)'} ·{' '}
+						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} ·{' '}
 						{totalVoteCount} votes
 					</p>
 					{isFinalized ? undefined : (
 						<Button
 							variant="secondary"
+							disabled={!isSent}
 							onClick={() => setIsViewingResults((prevIsViewingResults) => !prevIsViewingResults)}
 							data-flx="poll.footer.show-results.button"
 						>

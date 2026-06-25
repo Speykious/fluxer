@@ -19,6 +19,18 @@
 		box-shadow: 0 0 5px var(--brand-primary);
 	}
 
+	&[data-state='SENDING'] {
+		opacity: 60%;
+		border-color: var(--background-modifier-accent);
+		box-shadow: 0 0 0 var(--brand-primary);
+	}
+
+	&[data-state='FAILED'] {
+		opacity: 60%;
+		border-color: var(--accent-danger);
+		box-shadow: 0 0 0 var(--brand-primary);
+	}
+
 	footer {
 		display: flex;
 		flex-direction: row;
@@ -71,6 +83,7 @@
 	}
 
 	.answerCheckbox {
+		pointer-events: none;
 		--checkbox-border-color: var(--background-modifier-accent);
 	}
 
@@ -78,7 +91,7 @@
 		background-color: color-mix(in srgb, var(--background-tertiary), var(--brand-primary) 33%);
 	}
 
-	&[data-voting='true'] {
+	&[data-voting='true']:not(:disabled) {
 		cursor: pointer;
 
 		&:hover {

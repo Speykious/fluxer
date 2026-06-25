@@ -14,6 +14,7 @@ import type {
 	MessageAttachment,
 	MessageReference,
 } from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
+import type {MessagePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
 
 interface MessageSubmitData {
 	content: string;
@@ -23,6 +24,7 @@ interface MessageSubmitData {
 	referencedMessage?: Message | null;
 	replyMentioning?: boolean;
 	favoriteMemeId?: string;
+	poll?: MessagePoll;
 }
 
 export function createUploadingAttachments(
@@ -58,6 +60,7 @@ export function createOptimisticMessage(data: MessageSubmitData, attachments: Ar
 		state: MessageStates.SENDING,
 		nonce: data.nonce,
 		attachments,
+		poll: data.poll,
 		_allowedMentions: data.referencedMessage ? {replied_user: data.replyMentioning ?? true} : undefined,
 	});
 }

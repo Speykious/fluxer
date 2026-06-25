@@ -5,7 +5,6 @@ import Authentication from '@app/features/auth/state/Authentication';
 import Channels from '@app/features/channel/state/Channels';
 import * as GiftCodeUtils from '@app/features/gift/utils/GiftCodeUtils';
 import Guilds from '@app/features/guild/state/Guilds';
-import {message} from '@app/features/invite/components/DisableInvitesButton.module.css';
 import * as InviteUtils from '@app/features/invite/utils/InviteUtils';
 import GuildMembers from '@app/features/member/state/GuildMembers';
 import MessageReactions from '@app/features/messaging/state/MessageReactions';
