@@ -14,6 +14,9 @@ import {
 	MAX_EMBEDS_PER_MESSAGE,
 	MAX_MESSAGE_LENGTH_NON_PREMIUM,
 	MAX_MESSAGE_LENGTH_PREMIUM,
+	MAX_POLL_ANSWER_LENGTH,
+	MAX_POLL_ANSWERS,
+	MAX_POLL_QUESTION_LENGTH,
 	MAX_VOICE_MESSAGE_DURATION,
 } from '@fluxer/constants/src/LimitConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
@@ -23,6 +26,7 @@ import {CannotSendMessageToNonTextChannelError} from '@fluxer/errors/src/domains
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import {InputValidationError} from '@fluxer/errors/src/domains/core/InputValidationError';
 import type {GuildResponse} from '@fluxer/schema/src/domains/guild/GuildResponseSchemas';
+import type {MessagePollRequest} from '@fluxer/schema/src/domains/message/PollSchemas';
 import type {ICacheService} from '@pkgs/cache/src/ICacheService';
 import {type ChannelID, createChannelID, type MessageID, type UserID} from '../../../BrandedTypes';
 import {contentModerationService} from '../../../infrastructure/ContentModerationService';
@@ -91,6 +95,7 @@ export class MessageValidationService {
 			throw new CannotSendEmptyMessageError();
 		}
 		this.validateContentLength(data.content, user, guildFeatures, options?.messageAuthorType);
+		if ('poll' in data && data.poll) this.validatePollContentLength(data.poll, user, guildFeatures);
 		const modCtx = {
 			userId: user ? user.id : null,
 			guildId: null,
@@ -167,6 +172,56 @@ export class MessageValidationService {
 			throw InputValidationError.fromCode('content', ValidationErrorCodes.CONTENT_EXCEEDS_MAX_LENGTH, {
 				maxLength,
 			});
+		}
+	}
+
+	validatePollContentLength(
+		poll: MessagePollRequest,
+		user: User | null,
+		guildFeatures?: Iterable<string> | null,
+	): void {
+		const ctx = createLimitMatchContext({user, guildFeatures});
+		const evaluationContext = guildFeatures ? 'guild' : 'user';
+		const configSnapshot = this.limitConfigService.getConfigSnapshot();
+
+		const maxQuestionLength = Math.floor(
+			resolveLimitSafe(configSnapshot, ctx, 'max_poll_question_length', MAX_POLL_QUESTION_LENGTH, evaluationContext),
+		);
+		const maxPollAnswers = Math.floor(
+			resolveLimitSafe(configSnapshot, ctx, 'max_poll_answers', MAX_POLL_ANSWERS, evaluationContext),
+		);
+		const maxPollAnswerLength = Math.floor(
+			resolveLimitSafe(configSnapshot, ctx, 'max_poll_answer_length', MAX_POLL_ANSWER_LENGTH, evaluationContext),
+		);
+
+		const questionLength = poll.question?.text?.length ?? 0;
+		if (questionLength === 0) throw new CannotSendEmptyMessageError();
+		if (questionLength > maxQuestionLength) {
+			throw InputValidationError.fromCode('poll.question.text', ValidationErrorCodes.CONTENT_EXCEEDS_MAX_LENGTH, {
+				maxLength: maxQuestionLength,
+			});
+		}
+
+		const answers = poll.answers ?? [];
+		if (answers.length === 0) throw new CannotSendEmptyMessageError();
+		if (answers.length > maxPollAnswers) {
+			throw InputValidationError.fromCode('poll.answers', ValidationErrorCodes.TOO_MANY_POLL_ANSWERS, {
+				maxPollAnswers,
+			});
+		}
+
+		for (let i = 0; i < answers.length; i++) {
+			const answerTextLength = answers[i].poll_media?.text?.length ?? 0;
+			if (answerTextLength === 0) throw new CannotSendEmptyMessageError();
+			if (answerTextLength > maxPollAnswerLength) {
+				throw InputValidationError.fromCode(
+					`poll.answers[${i}].poll_media.text`,
+					ValidationErrorCodes.CONTENT_EXCEEDS_MAX_LENGTH,
+					{
+						maxLength: maxPollAnswerLength,
+					},
+				);
+			}
 		}
 	}
 

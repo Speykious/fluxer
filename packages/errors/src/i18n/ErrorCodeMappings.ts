@@ -381,6 +381,7 @@ export const ErrorCodeToI18nKey = {
 	[ValidationErrorCodes.VOICE_MESSAGES_ATTACHMENT_WAVEFORM_REQUIRED]: 'calls_and_voice.voice_message_waveform_required',
 	[ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_CONTENT]: 'messages.voice_messages_cannot_have_content',
 	[ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_EMBEDS]: 'messages.voice_messages_cannot_have_embeds',
+	[ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_A_POLL]: 'messages.voice_messages_cannot_have_a_poll',
 	[ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_FAVORITE_MEMES]:
 		'messages.voice_messages_cannot_have_favorite_memes',
 	[ValidationErrorCodes.VOICE_MESSAGES_CANNOT_HAVE_STICKERS]: 'messages.voice_messages_cannot_have_stickers',
@@ -435,6 +436,7 @@ export const ErrorCodeToI18nKey = {
 	[ValidationErrorCodes.PAYLOAD_JSON_REQUIRED_FOR_MULTIPART]:
 		'attachments_and_uploads.payload_json_required_for_multipart',
 	[ValidationErrorCodes.SIZE_BYTES_MUST_BE_VALID_INTEGER]: 'attachments_and_uploads.size_bytes_must_be_valid_integer',
+	[ValidationErrorCodes.TOO_MANY_POLL_ANSWERS]: 'polls.too_many_poll_answers',
 	[ValidationErrorCodes.TOO_MANY_FILES]: 'attachments_and_uploads.too_many_files',
 	[ValidationErrorCodes.UNKNOWN_IMAGE_FORMAT]: 'attachments_and_uploads.unknown_image_format',
 	[ValidationErrorCodes.UNRESOLVED_ATTACHMENT_URL]: 'attachments_and_uploads.unresolved_attachment_url',
