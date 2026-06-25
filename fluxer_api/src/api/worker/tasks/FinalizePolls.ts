@@ -1,20 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import {PollMessageExpiryRepository, getExpiryBucket} from '@app/api/channel/repositories/PollMessageExpiryRepository';
+import {getExpiryBucket} from '@app/api/channel/repositories/PollMessageExpiryRepository';
 import type {WorkerTaskHandler} from '@pkgs/worker/src/contracts/WorkerTask';
 import {Logger} from '../../Logger';
 import {getWorkerDependencies} from '../WorkerContext';
-import {Message} from '@app/api/models/Message';
 
 const BUCKET_LOOKBACK_DAYS = 3;
 const FETCH_LIMIT = 200;
 
 export async function processFinalizedPolls(now = new Date()): Promise<void> {
-	const {channelRepository, channelService} = getWorkerDependencies();
-	const messageRepository = channelRepository.messages;
-	const messageDispatchService = channelService.messages.dispatch;
+	const {channelService, channelRepository} = getWorkerDependencies();
+	const pollService = channelService.messages.poll;
 
-	const repo = new PollMessageExpiryRepository();
+	const repo = pollService.expiry;
 	let totalQueued = 0;
 	let totalDeletedRows = 0;
 	for (let offset = 0; offset <= BUCKET_LOOKBACK_DAYS; offset++) {
@@ -26,69 +24,35 @@ export async function processFinalizedPolls(now = new Date()): Promise<void> {
 			for (const row of expired) {
 				const metadata = await repo.fetchById(row.message_id);
 				if (!metadata) {
-					await repo.deleteRecords({
-						expiry_bucket: row.expiry_bucket,
-						expires_at: row.expires_at,
-						message_id: row.message_id,
-					});
+					await repo.deleteRecords(row);
 					totalDeletedRows++;
 					continue;
 				}
 				if (metadata.expires_at > row.expires_at) {
-					await repo.deleteRecords({
-						expiry_bucket: row.expiry_bucket,
-						expires_at: row.expires_at,
-						message_id: row.message_id,
-					});
+					await repo.deleteRecords(row);
 					totalDeletedRows++;
 					continue;
 				}
 
-				const message = await messageRepository.getMessage(row.channel_id, row.message_id);
-				if (message) {
-					const oldMessageRow = message.toRow();
-					const newMessageRow = message.toRow();
-					const poll = newMessageRow.poll;
-					if (poll) {
-						// poll.question = {
-						// 	emoji: null,
-						// 	text: "THIS POLL WAS FINALIZED AND YOU'LL NEVER KNOW WHAT THE QUESTION WAS",
-						// };
-
-						if (poll.results) {
-							poll.results.is_finalized = true;
-							poll.results.answer_counts =
-								poll.results.answer_counts?.map((answerCount) => {
-									if (answerCount.count) answerCount.count += 4;
-									return answerCount;
-								}) ?? null;
-						} else {
-							poll.results = {
-								is_finalized: true,
-								answer_counts: (poll.answers ?? []).map((answer) => ({
-									id: answer.answer_id,
-									count: 99,
-									me_voted: false,
-								})),
-							};
-						}
-					}
-
-					await messageRepository.upsertMessage(newMessageRow, oldMessageRow);
-
-					const channel = await channelRepository.channelData.findUnique(row.channel_id);
-					if (channel) {
-						await messageDispatchService.dispatchMessageUpdate({
-							channel,
-							message: new Message(newMessageRow),
-						});
-					}
+				const channel = await channelRepository.findUnique(row.channel_id);
+				if (!channel) {
+					await repo.deleteRecords(row);
+					totalDeletedRows++;
+					continue;
 				}
 
-				await repo.deleteRecords({
-					expiry_bucket: row.expiry_bucket,
-					expires_at: row.expires_at,
-					message_id: row.message_id,
+				const message = await channelRepository.messages.getMessage(channel.id, row.message_id);
+				if (!message) {
+					await repo.deleteRecords(row);
+					totalDeletedRows++;
+					continue;
+				}
+
+				await pollService.endPollSkipAuth({
+					channel,
+					message,
+					expiryRow: row,
+					skipGuildAuditLog: true,
 				});
 				totalQueued++;
 				totalDeletedRows++;

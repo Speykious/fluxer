@@ -18,6 +18,7 @@ import type {IUserRepository} from '../../user/IUserRepository';
 import type {DirectMessageSpamMitigationService} from '../../user/services/DirectMessageSpamMitigationService';
 import type {WorkerTaskName} from '../../worker/WorkerLaneConfig';
 import type {IChannelRepositoryAggregate} from '../repositories/IChannelRepositoryAggregate';
+import {PollMessageExpiryRepository} from '../repositories/PollMessageExpiryRepository';
 import {MessageAnonymizationService} from './message/MessageAnonymizationService';
 import {MessageChannelAuthService} from './message/MessageChannelAuthService';
 import {MessageDeleteService} from './message/MessageDeleteService';
@@ -26,6 +27,7 @@ import {MessageEditService} from './message/MessageEditService';
 import {MessageMentionService} from './message/MessageMentionService';
 import {MessageOperationsHelpers} from './message/MessageOperationsHelpers';
 import type {MessagePersistenceService} from './message/MessagePersistenceService';
+import {MessagePollService} from './message/MessagePollService';
 import {MessageProcessingService} from './message/MessageProcessingService';
 import {createMessageResponseDataService} from './message/MessageResponseDataService';
 import {MessageRetrievalService} from './message/MessageRetrievalService';
@@ -33,7 +35,6 @@ import {MessageSearchService} from './message/MessageSearchService';
 import {MessageSendService} from './message/MessageSendService';
 import {MessageSystemService} from './message/MessageSystemService';
 import {MessageValidationService} from './message/MessageValidationService';
-import {PollMessageExpiryRepository} from '../repositories/PollMessageExpiryRepository';
 
 export class MessageService {
 	public readonly validation: MessageValidationService;
@@ -46,6 +47,7 @@ export class MessageService {
 	public readonly system: MessageSystemService;
 	public readonly send: MessageSendService;
 	public readonly edit: MessageEditService;
+	public readonly poll: MessagePollService;
 	public readonly deletion: MessageDeleteService;
 	public readonly retrieval: MessageRetrievalService;
 	public readonly anonymization: MessageAnonymizationService;
@@ -143,6 +145,12 @@ export class MessageService {
 			searchService: this.search,
 			embedAttachmentResolver: this.persistence.getEmbedAttachmentResolver(),
 			mentionService: this.mention,
+		});
+		this.poll = new MessagePollService({
+			channelAuthService: this.channelAuth,
+			channelRepository,
+			dispatchService: this.dispatch,
+			pollExpiryRepository: new PollMessageExpiryRepository(),
 		});
 		this.deletion = new MessageDeleteService({
 			channelRepository,

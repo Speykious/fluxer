@@ -25,6 +25,7 @@ import {
 	CheckCircleIcon,
 	CircleNotchIcon,
 	ClipboardTextIcon,
+	ClockCountdownIcon,
 	ClockCounterClockwiseIcon,
 	ClockIcon,
 	CopySimpleIcon,
@@ -334,6 +335,13 @@ export const CopyMessageTextIcon: React.FC<IconProps> = observer(({size = 16}) =
 		size={size}
 		weight="fill"
 		data-flx="ui.action-menu.context-menu-icons.copy-message-text-icon.phosphor-copy-icon"
+	/>
+));
+export const EndPollNowIcon: React.FC<IconProps> = observer(({size = 16}) => (
+	<ClockCountdownIcon
+		size={size}
+		weight="fill"
+		data-flx="ui.action-menu.context-menu-icons.copy-message-text-icon.clock-countdown-icon"
 	/>
 ));
 export const DebugMessageIcon: React.FC<IconProps> = observer(({size = 16}) => (

@@ -291,6 +291,7 @@ export interface MessageActionHandlers {
 	handleCopyMessageId: () => void;
 	handleCopyMessage: () => void;
 	handleCopyMessageLink: () => void;
+	handleEndPollNow: () => void;
 	handleSaveMessage: (isSaved: boolean) => (event?: React.MouseEvent | React.KeyboardEvent) => void;
 	handleToggleSuppressEmbeds: () => void;
 	handleReply: (event?: React.MouseEvent | React.KeyboardEvent) => void;
@@ -334,6 +335,10 @@ export function createMessageActionHandlers(
 		requestCopyMessageLink(message, i18n, sourceChannel);
 		onClose?.();
 	};
+	const handleEndPollNow = () => {
+		MessageCommands.showEndPollConfirmation(i18n, {message});
+		onClose?.();
+	}
 	const handleSaveMessage = (isSaved: boolean) => () => {
 		if (isClientSystemMessage(message)) {
 			onClose?.();
@@ -400,6 +405,7 @@ export function createMessageActionHandlers(
 		handleCopyMessageId,
 		handleCopyMessage,
 		handleCopyMessageLink,
+		handleEndPollNow,
 		handleSaveMessage,
 		handleToggleSuppressEmbeds,
 		handleReply,
