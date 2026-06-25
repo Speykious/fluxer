@@ -283,7 +283,7 @@ export const useMessageActionMenuData = (
 					),
 				});
 			}
-			if (message.isUserMessage() && supportsInteractiveActions && permissions?.canForwardMessage) {
+			if (message.isUserMessage() && supportsInteractiveActions && permissions?.canForwardMessage && !message.poll) {
 				interactionActions.push({
 					id: messageActionMenuItemIds.forward,
 					icon: <ForwardIcon size={20} data-flx="channel.message-action-menu.groups.forward-icon" />,
@@ -294,7 +294,7 @@ export const useMessageActionMenuData = (
 					),
 				});
 			}
-			if (message.isCurrentUserAuthor() && message.isUserMessage() && !message.messageSnapshots) {
+			if (message.isCurrentUserAuthor() && message.isUserMessage() && !message.messageSnapshots && !message.poll) {
 				interactionActions.push({
 					id: messageActionMenuItemIds.edit,
 					icon: <EditMessageIcon size={20} data-flx="channel.message-action-menu.groups.edit-message-icon" />,

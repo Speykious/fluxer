@@ -21,6 +21,7 @@ import {
 } from '@fluxer/constants/src/LimitConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
 import {CannotEditSystemMessageError} from '@fluxer/errors/src/domains/channel/CannotEditSystemMessageError';
+import {CannotEditPollError} from '@fluxer/errors/src/domains/channel/CannotEditPollError';
 import {CannotSendEmptyMessageError} from '@fluxer/errors/src/domains/channel/CannotSendEmptyMessageError';
 import {CannotSendMessageToNonTextChannelError} from '@fluxer/errors/src/domains/channel/CannotSendMessageToNonTextChannelError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
@@ -229,6 +230,9 @@ export class MessageValidationService {
 		const editableTypes: ReadonlySet<Message['type']> = new Set([MessageTypes.DEFAULT, MessageTypes.REPLY]);
 		if (!editableTypes.has(message.type)) {
 			throw new CannotEditSystemMessageError();
+		}
+		if (message.poll) {
+			throw new CannotEditPollError();
 		}
 	}
 

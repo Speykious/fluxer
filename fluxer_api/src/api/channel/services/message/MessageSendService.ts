@@ -11,6 +11,7 @@ import {
 import {GuildNSFWLevel, GuildOperations} from '@fluxer/constants/src/GuildConstants';
 import {RelationshipTypes, SensitiveMediaFilterLevel, UserFlags} from '@fluxer/constants/src/UserConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
+import {CannotForwardPollError} from '@fluxer/errors/src/domains/channel/CannotForwardPollError';
 import {UnknownChannelError} from '@fluxer/errors/src/domains/channel/UnknownChannelError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import {CannotExecuteOnDmError} from '@fluxer/errors/src/domains/core/CannotExecuteOnDmError';
@@ -318,6 +319,9 @@ export class MessageSendService {
 			isForwardMessage,
 			user,
 		});
+		if (isForwardMessage && referencedMessage && referencedMessage.poll) {
+			throw new CannotForwardPollError();
+		}
 		if (isForwardMessage && referencedMessage && guild) {
 			const hasEmbeds =
 				(referencedMessage.flags & MessageFlags.SUPPRESS_EMBEDS) === 0 && referencedMessage.embeds.length > 0;
@@ -405,6 +409,9 @@ export class MessageSendService {
 			isForwardMessage,
 			user,
 		});
+		if (isForwardMessage && referencedMessage && referencedMessage.poll) {
+			throw new CannotForwardPollError();
+		}
 		if (data.message_reference && referencedMessage && !isForwardMessage) {
 			const replyableTypes: ReadonlySet<Message['type']> = new Set([MessageTypes.DEFAULT, MessageTypes.REPLY]);
 			if (!replyableTypes.has(referencedMessage.type)) {
@@ -802,6 +809,9 @@ export class MessageSendService {
 			user,
 		});
 		const {referencedMessage, referencedChannelGuildId, messageSnapshots} = referenceContext;
+		if (isForwardMessage && referencedMessage && referencedMessage.poll) {
+			throw new CannotForwardPollError();
+		}
 		if (isForwardMessage && messageSnapshots && guild) {
 			const snapshotHasEmbeds = messageSnapshots.some((s) => s.embeds.length > 0);
 			const snapshotHasAttachments = messageSnapshots.some((s) => s.attachments.length > 0);
@@ -1326,6 +1336,9 @@ export class MessageSendService {
 			isForwardMessage,
 			user,
 		});
+		if (isForwardMessage && referencedMessage && referencedMessage.poll) {
+			throw new CannotForwardPollError();
+		}
 		this.ensureForwardGuildMatches({data, referencedChannelGuildId});
 		await this.ensureAttachmentsExist({
 			attachments: data.attachments,

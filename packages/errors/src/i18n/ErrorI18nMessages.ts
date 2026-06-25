@@ -422,6 +422,8 @@ export const ERROR_I18N_MESSAGES = {
 	'messages.cannot_delete_more_than_100':
 		"You can't delete more than {max, plural, one {# message} other {# messages}} at once.",
 	'messages.cannot_edit_others_message': "You can't edit another user's message.",
+	'messages.cannot_forward_poll': "You can't forward a message containing a poll.",
+	'messages.cannot_modify_poll': "You can't edit a message containing a poll.",
 	'messages.cannot_preload_more_than_100_channels':
 		"You can't preload more than {max, plural, one {# channel} other {# channels}} at once.",
 	'messages.cannot_reply_to_system_message': "You can't reply to a system message.",

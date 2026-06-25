@@ -47,6 +47,8 @@ export const ErrorCodeToI18nKey = {
 	[APIErrorCodes.CANNOT_EDIT_OTHER_USER_MESSAGE]: 'messages.cannot_edit_others_message',
 	[APIErrorCodes.CANNOT_EXECUTE_ON_DM]: 'channels_and_guilds.cannot_execute_on_dm',
 	[APIErrorCodes.CANNOT_BLOCK_SYSTEM_USER]: 'friends_and_dms.cannot_block_system_user',
+	[APIErrorCodes.CANNOT_FORWARD_POLL]: 'messages.cannot_forward_poll',
+	[APIErrorCodes.CANNOT_MODIFY_POLL]: 'messages.cannot_modify_poll',
 	[APIErrorCodes.CANNOT_MODIFY_SYSTEM_WEBHOOK]: 'webhooks.cannot_modify_system_webhook',
 	[APIErrorCodes.CANNOT_MODIFY_VOICE_STATE]: 'calls_and_voice.cannot_modify_voice_state',
 	[APIErrorCodes.CANNOT_REDEEM_PLUTONIUM_WITH_VISIONARY]: 'premium_and_plans.cannot_redeem_plutonium_with_visionary',
