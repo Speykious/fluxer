@@ -738,6 +738,7 @@ class Messages {
 		emoji: ReactionEmoji;
 		optimistic?: boolean;
 		skipReactionStore?: boolean;
+		reactionType?: number;
 	}): boolean {
 		const existing = ChannelMessages.get(action.channelId);
 		if (!existing) return false;
@@ -748,9 +749,10 @@ class Messages {
 			if (action.skipReactionStore) {
 				return message.withUpdates({});
 			}
-			return action.type === 'MESSAGE_REACTION_ADD'
-				? message.withReaction(action.emoji, true, isCurrentUser)
-				: message.withReaction(action.emoji, false, isCurrentUser);
+			const add = action.type === 'MESSAGE_REACTION_ADD';
+			return action.reactionType === 2
+				? message.withPollVote(Number(action.emoji.id), add, isCurrentUser)
+				: message.withReaction(action.emoji, add, isCurrentUser);
 		});
 		this.commitMessages(updated);
 		this.notifyChange();

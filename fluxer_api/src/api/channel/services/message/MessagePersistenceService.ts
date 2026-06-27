@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import type {MessagePoll} from '@app/api/database/types/PollTypes';
 import {MessageFlags, Permissions, SENDABLE_MESSAGE_FLAGS} from '@fluxer/constants/src/ChannelConstants';
 import {UserFlags} from '@fluxer/constants/src/UserConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
@@ -21,7 +22,6 @@ import type {
 	MessageEmbed,
 	MessageReference,
 	MessageStickerItem,
-	MessagePoll,
 } from '../../../database/types/MessageTypes';
 import type {IGuildRepositoryAggregate} from '../../../guild/repositories/IGuildRepositoryAggregate';
 import type {EmbedService} from '../../../infrastructure/EmbedService';

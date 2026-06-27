@@ -35,6 +35,7 @@ import {MessageSearchService} from './message/MessageSearchService';
 import {MessageSendService} from './message/MessageSendService';
 import {MessageSystemService} from './message/MessageSystemService';
 import {MessageValidationService} from './message/MessageValidationService';
+import type { MessageReactionService } from './interaction/MessageReactionService';
 
 export class MessageService {
 	public readonly validation: MessageValidationService;
@@ -71,6 +72,7 @@ export class MessageService {
 		persistenceService: MessagePersistenceService,
 		limitConfigService: LimitConfigService,
 		directMessageSpamMitigationService: DirectMessageSpamMitigationService,
+		messageReactionService: MessageReactionService,
 	) {
 		this.validation = new MessageValidationService(cacheService, limitConfigService);
 		this.mention = new MessageMentionService(
@@ -151,6 +153,7 @@ export class MessageService {
 			channelRepository,
 			dispatchService: this.dispatch,
 			pollExpiryRepository: new PollMessageExpiryRepository(),
+			messageReactionService,
 		});
 		this.deletion = new MessageDeleteService({
 			channelRepository,

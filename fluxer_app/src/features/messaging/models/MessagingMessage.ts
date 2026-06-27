@@ -31,11 +31,7 @@ import type {
 	ReactionEmoji,
 	Message as WireMessage,
 } from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
-import type {
-	MessagePoll,
-	MessagePollAnswer,
-	MessagePollAnswerCount,
-} from '@fluxer/schema/src/domains/message/PollSchemas';
+import type {MessagePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
 
 type MessageInput = Omit<WireMessage, 'mentions' | 'mention_roles' | 'tts'> &
 	Partial<Pick<WireMessage, 'mentions' | 'mention_roles' | 'tts'>>;
@@ -316,6 +312,21 @@ export class Message {
 		if ('reactions' in updates) {
 			MessageReactions.replaceMessageReactions(this.id, updates.reactions ?? []);
 		}
+		if (updates.poll) {
+			if (updates.poll.results) {
+				// Preserve `me_voted` values in poll results through a message update
+				const meVotedByAnswerId: Array<boolean> = [];
+				for (const answerCount of this.poll?.results?.answer_counts ?? [])
+					meVotedByAnswerId[answerCount.id ?? 0] = answerCount.me_voted ?? false;
+
+				updates.poll.results.answer_counts = (updates.poll.results.answer_counts ?? []).map((answerCount) => ({
+					...answerCount,
+					me_voted: meVotedByAnswerId[answerCount.id ?? 0] ?? false,
+				}));
+			} else {
+				updates.poll.results = this.poll?.results;
+			}
+		}
 		return new Message(
 			{
 				id: this.id,
@@ -384,56 +395,35 @@ export class Message {
 	withPollVote(answerId: number, add = true, me = false): Message {
 		if (!this.poll) return this.withUpdates({});
 		const newPoll: MessagePoll = JSON.parse(JSON.stringify(this.poll));
-		if (add) {
-			function answerToCount(answer: MessagePollAnswer): MessagePollAnswerCount {
-				return {
+		if (!newPoll.results) {
+			newPoll.results = {
+				answer_counts: (newPoll.answers ?? []).map((answer) => ({
 					id: answer.answer_id,
-					count: answer.answer_id === answerId ? 1 : 0,
-					me_voted: me && (answer.answer_id === answerId),
-				};
-			}
-
-			if (newPoll.results) {
-				if (newPoll.results.answer_counts) {
-					newPoll.results.answer_counts = newPoll.results.answer_counts.map((answerCount) => ({
-						...answerCount,
-						count: (answerCount.count ?? 0) + (answerCount.id === answerId ? 1 : 0),
-						me_voted: answerCount.me_voted || (me && (answerCount.id === answerId)),
-					}));
-				} else {
-					newPoll.results.answer_counts = (newPoll.answers ?? []).map(answerToCount);
-				}
-			} else {
-				newPoll.results = {
-					answer_counts: (newPoll.answers ?? []).map(answerToCount),
-					is_finalized: false,
-				};
-			}
+					count: 0,
+					me_voted: false,
+				})),
+				is_finalized: false,
+			};
+		}
+		if (!newPoll.results.answer_counts) {
+			newPoll.results.answer_counts = (newPoll.answers ?? []).map((answer) => ({
+				id: answer.answer_id,
+				count: 0,
+				me_voted: false,
+			}));
+		}
+		if (add) {
+			newPoll.results.answer_counts = newPoll.results.answer_counts.map((answerCount) => ({
+				...answerCount,
+				count: (answerCount.count ?? 0) + (answerCount.id === answerId ? 1 : 0),
+				me_voted: answerCount.me_voted || (me && answerCount.id === answerId),
+			}));
 		} else {
-			if (newPoll.results) {
-				if (newPoll.results.answer_counts) {
-					newPoll.results.answer_counts = newPoll.results.answer_counts.map((answerCount) => ({
-						...answerCount,
-						count: Math.max(0, (answerCount.count ?? 0) - (answerCount.id === answerId ? 1 : 0)),
-						me_voted: answerCount.me_voted && !(me && (answerCount.id === answerId)),
-					}));
-				} else {
-					newPoll.results.answer_counts = (newPoll.answers ?? []).map((answer) => ({
-						id: answer.answer_id,
-						count: 0,
-						me_voted: false,
-					}));
-				}
-			} else {
-				newPoll.results = {
-					answer_counts: (newPoll.answers ?? []).map((answer) => ({
-						id: answer.answer_id,
-						count: 0,
-						me_voted: false,
-					})),
-					is_finalized: false,
-				};
-			}
+			newPoll.results.answer_counts = newPoll.results.answer_counts.map((answerCount) => ({
+				...answerCount,
+				count: Math.max(0, (answerCount.count ?? 0) - (answerCount.id === answerId ? 1 : 0)),
+				me_voted: answerCount.me_voted && !(me && answerCount.id === answerId),
+			}));
 		}
 		return this.withUpdates({poll: newPoll});
 	}

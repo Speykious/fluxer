@@ -10,12 +10,15 @@ import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
 import type {Channel} from '@app/api/models/Channel';
 import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
+import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
+import type { MessageReactionService } from '../interaction/MessageReactionService';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
 	channelRepository: IChannelRepositoryAggregate;
 	dispatchService: MessageDispatchService;
 	pollExpiryRepository: PollMessageExpiryRepository;
+	messageReactionService: MessageReactionService;
 	// guildAuditLogService: GuildAuditLogService;
 }
 
@@ -44,12 +47,7 @@ export class MessagePollService {
 			channelId,
 		});
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
-		console.log('TRYING TO END POLL IN MESSAGE', message?.id, '...');
-		if (message?.authorId !== userId) {
-			console.log('CANNOT EDIT OTHER USER MESSAGE');
-			throw new CannotEditOtherUserMessageError();
-		}
-		console.log('CONTINUING TO END POLL...');
+		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
 
 		return await this.endPollSkipAuth({channel, message, expiryRow, skipGuildAuditLog});
 	}
@@ -80,18 +78,19 @@ export class MessagePollService {
 					answer_counts: (poll.answers ?? []).map((answer) => ({
 						id: answer.answer_id,
 						count: 0,
-						me_voted: false, // TODO: remove me_voted from db
 					})),
 				};
 			}
 		}
 
 		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
+
+		if (newMessageRow.poll) newMessageRow.poll.results = null;
 		await this.deps.dispatchService.dispatchMessageUpdate({
 			channel,
 			message: new Message(newMessageRow),
 		});
-		// TODO: send poll results embed
+		// TODO(speykious): send poll results embed
 
 		const row = expiryRow ? expiryRow : await this.deps.pollExpiryRepository.fetchById(message.id);
 		if (row) {
@@ -101,5 +100,71 @@ export class MessagePollService {
 				message_id: message.id,
 			});
 		}
+	}
+
+	async vote({
+		userId,
+		channelId,
+		messageId,
+		answerIds,
+	}: {
+		userId: UserID;
+		channelId: ChannelID;
+		messageId: MessageID;
+		answerIds: Array<number>;
+	}): Promise<void> {
+		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
+			userId,
+			channelId,
+		});
+		const {channel} = authChannel;
+		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
+		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
+
+		const oldMessageRow = message.toRow();
+		const newMessageRow = message.toRow();
+		const poll = newMessageRow.poll;
+		if (!poll) throw new CannotVoteOnNonPollError();
+
+		if (!poll.results) {
+			poll.results = {
+				is_finalized: false,
+				answer_counts: (poll.answers ?? []).map((answer) => ({
+					id: answer.answer_id,
+					count: 0,
+				})),
+			};
+		}
+
+		// TODO(speykious): vote for real
+		
+		if (answerIds.length === 0) {
+			this.deps.messageReactionService.removeReaction({
+				authChannel,
+				messageId,
+				actorId: userId,
+				targetId: userId,
+				emoji: '0:0',
+				reactionType: 2,
+			});
+		} else {
+			for (const answerId of answerIds) {
+				this.deps.messageReactionService.addReaction({
+					authChannel,
+					messageId,
+					userId,
+					emoji: `${answerId}:${answerId}`,
+					reactionType: 2,
+				});
+			}
+		}
+
+		for (const answerCount of poll.results?.answer_counts ?? []) {
+			if (!answerCount.count) answerCount.count = 0;
+			if ((answerCount.id ?? 0) in answerIds) answerCount.count++;
+		}
+		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
+
+		// TODO
 	}
 }

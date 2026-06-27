@@ -13,6 +13,7 @@ import GuildVerification from '@app/features/guild/state/GuildVerification';
 import {UNPIN_MESSAGE_DESCRIPTOR} from '@app/features/i18n/utils/CommonMessageDescriptors';
 import GuildMembers from '@app/features/member/state/GuildMembers';
 import * as MessageCommands from '@app/features/messaging/commands/MessageCommands';
+import * as PollCommands from '@app/features/messaging/commands/PollCommands';
 import * as ReactionCommands from '@app/features/messaging/commands/ReactionCommands';
 import * as SavedMessageCommands from '@app/features/messaging/commands/SavedMessageCommands';
 import {ForwardModal, type ForwardModalSuccess} from '@app/features/messaging/components/modals/ForwardModal';
@@ -336,7 +337,7 @@ export function createMessageActionHandlers(
 		onClose?.();
 	};
 	const handleEndPollNow = () => {
-		MessageCommands.showEndPollConfirmation(i18n, {message});
+		PollCommands.showEndPollConfirmation(i18n, {message});
 		onClose?.();
 	}
 	const handleSaveMessage = (isSaved: boolean) => () => {

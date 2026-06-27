@@ -380,6 +380,12 @@ export const MessagesQuery = z.object({
 
 export type MessagesQuery = z.infer<typeof MessagesQuery>;
 
+export const PollVoteRequestSchema = z.object({
+	answerIds: z.array(z.string()),
+});
+
+export type PollVoteRequestSchemaType = z.infer<typeof PollVoteRequestSchema>;
+
 const BulkMessageFetchEntryRequest = z.object({
 	channel_id: SnowflakeType.describe('The ID of the channel to fetch messages from'),
 	limit: z.number().int().min(1).max(25).describe('Number of messages to return for this channel (1-25)'),

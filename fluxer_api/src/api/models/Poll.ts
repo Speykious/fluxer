@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type { MessagePoll } from "../database/types/MessageTypes";
-import { PollAnswer } from "./PollAnswer";
-import { PollMedia } from "./PollMedia";
-import { PollResults } from "./PollResults";
+import type {MessagePoll} from '../database/types/PollTypes';
+import {PollAnswer} from './PollAnswer';
+import {PollMedia} from './PollMedia';
+import {PollResults} from './PollResults';
 
 export class Poll {
 	readonly question: PollMedia | null;
@@ -30,6 +30,6 @@ export class Poll {
 			allow_multiselect: this.allow_multiselect,
 			layout_type: this.layout_type,
 			results: this.results?.toMessagePollResults() ?? null,
-		}
+		};
 	}
 }

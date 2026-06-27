@@ -64,6 +64,7 @@ export const Endpoints = {
 	CHANNEL_MESSAGE_ATTACHMENT: (channelId: string, messageId: string, attachmentId: string) =>
 		`/channels/${channelId}/messages/${messageId}/attachments/${attachmentId}`,
 	CHANNEL_MESSAGE_ACK: (channelId: string, messageId: string) => `/channels/${channelId}/messages/${messageId}/ack`,
+	CHANNEL_POLL_ANSWERS: (channelId: string, messageId: string, userId: string) => `/channels/${channelId}/polls/${messageId}/answers/${userId}`,
 	CHANNEL_POLL_EXPIRE: (channelId: string, messageId: string) => `/channels/${channelId}/polls/${messageId}/expire`,
 	CHANNEL_MESSAGE_REACTION: (channelId: string, messageId: string, emoji: string) =>
 		`/channels/${channelId}/messages/${messageId}/reactions/${emoji}`,

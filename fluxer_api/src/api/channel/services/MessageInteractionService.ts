@@ -27,7 +27,7 @@ export class MessageInteractionService {
 	readonly authService: MessageInteractionAuthService;
 	private readStateService: MessageReadStateService;
 	private pinService: MessagePinService;
-	private reactionService: MessageReactionService;
+	readonly reactionService: MessageReactionService;
 
 	constructor(
 		channelRepository: IChannelRepository,

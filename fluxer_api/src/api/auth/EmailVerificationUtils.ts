@@ -20,6 +20,7 @@ export type EmailVerificationRequiredReason =
 	| 'mfa'
 	| 'profile'
 	| 'reaction'
+	| 'vote'
 	| 'report';
 
 const ErrorByReason = {
@@ -30,6 +31,7 @@ const ErrorByReason = {
 	mfa: MfaEmailVerificationRequiredError,
 	profile: ProfileEmailVerificationRequiredError,
 	reaction: ReactionEmailVerificationRequiredError,
+	vote: ReactionEmailVerificationRequiredError,
 	report: ReportEmailVerificationRequiredError,
 } satisfies Record<EmailVerificationRequiredReason, new () => EmailVerificationRequiredError>;
 

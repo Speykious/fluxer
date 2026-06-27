@@ -68,6 +68,7 @@ export const ErrorCodeToI18nKey = {
 	[APIErrorCodes.CANNOT_SEND_MESSAGES_IN_NON_TEXT_CHANNEL]: 'misc.cannot_send_messages_in_non_text_channel',
 	[APIErrorCodes.CANNOT_SEND_MESSAGES_TO_USER]: 'friends_and_dms.cannot_send_messages_to_user',
 	[APIErrorCodes.CANNOT_TRANSFER_OWNERSHIP_TO_BOT]: 'channels_and_guilds.cannot_transfer_ownership_to_bot',
+	[APIErrorCodes.CANNOT_VOTE_ON_NON_POLL_ERROR]: 'messages.cannot_vote_on_non_poll_error',
 	[APIErrorCodes.CANNOT_SHRINK_RESERVED_SLOTS]: 'limits.cannot_shrink_reserved_slots',
 	[APIErrorCodes.CAPTCHA_REQUIRED]: 'captcha.required',
 	[APIErrorCodes.CHANNEL_INDEXING]: 'admin_and_system.channel_indexing',

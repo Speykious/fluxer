@@ -27,6 +27,7 @@ import Guilds from '@app/features/guild/state/Guilds';
 import {TRY_AGAIN_DESCRIPTOR} from '@app/features/i18n/utils/CommonMessageDescriptors';
 import GuildMembers from '@app/features/member/state/GuildMembers';
 import * as MessageCommands from '@app/features/messaging/commands/MessageCommands';
+import * as PollCommands from '@app/features/messaging/commands/PollCommands';
 import {SafeMarkdown} from '@app/features/messaging/components/markdown';
 import {parse} from '@app/features/messaging/components/markdown/renderers';
 import {MarkdownContext} from '@app/features/messaging/components/markdown/renderers/RendererTypes';
@@ -276,7 +277,18 @@ export const UserMessage = observer(() => {
 		},
 		[message],
 	);
+	const handlePollVote = useCallback(
+		(add: boolean, selectedAnswers: Array<number>) => {
+			if (add) {
+				PollCommands.addVote(i18n, message.channelId, message.id, selectedAnswers);
+			} else {
+				PollCommands.removeVote(i18n, message.channelId, message.id);
+			}
+		},
+		[message],
+	);
 	const shouldShowEditingInput = isEditing && !previewContext && !mobileLayout.enabled;
+
 	const compactAuthorPrefix = (
 		<CompactAuthorPrefix
 			message={message}
@@ -596,7 +608,7 @@ export const UserMessage = observer(() => {
 					}
 				</CompactMessageLayout>
 				<div className={styles.container} data-flx="channel.user-message.container--2">
-					{message.poll ? <Poll poll={message.poll} messageState={message.state} /> : undefined}
+					{message.poll ? <Poll poll={message.poll} messageState={message.state} onVote={handlePollVote} /> : undefined}
 					<MessageAttachments data-flx="channel.user-message.message-attachments--2" />
 					{renderFailedFooter()}
 				</div>
@@ -774,7 +786,7 @@ export const UserMessage = observer(() => {
 						)}
 					</AuthorHeading>
 				)}
-				{message.poll ? <Poll poll={message.poll} messageState={message.state} /> : undefined}
+				{message.poll ? <Poll poll={message.poll} messageState={message.state} onVote={handlePollVote} /> : undefined}
 				<MessageAttachments data-flx="channel.user-message.message-attachments--3" />
 				{renderFailedFooter()}
 			</div>

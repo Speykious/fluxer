@@ -50,7 +50,7 @@ function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
 interface PollProps {
 	poll: MessagePoll;
 	messageState: string;
-	onVote?: (selectedAnswers: Array<number>) => void;
+	onVote?: (add: boolean, selectedAnswers: Array<number>) => void;
 }
 
 export const Poll = observer((props: PollProps) => {
@@ -209,7 +209,7 @@ export const Poll = observer((props: PollProps) => {
 						disabled={isViewingResults || (isVoting && selectedAnswers.length === 0) || !isSent}
 						onClick={() => {
 							setIsVoting((prevIsVoting) => !prevIsVoting);
-							if (!isVoting && props.onVote) props.onVote(selectedAnswers);
+							if (props.onVote) props.onVote(isVoting, selectedAnswers);
 						}}
 						data-flx="poll.footer.vote.button"
 					>
