@@ -63,6 +63,7 @@
 		position: absolute;
 		height: 100%;
 		background: color-mix(in srgb, var(--background-modifier-accent), transparent 30%);
+		transition: 500ms ease-out;
 	}
 
 	.answerLayout {

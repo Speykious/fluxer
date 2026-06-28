@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import type {Channel} from '@app/api/models/Channel';
 import {Message} from '@app/api/models/Message';
 import type {PollMessageExpiryRow} from '@app/api/Tables';
+import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
+import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import type {ChannelID, MessageID, UserID} from '../../../BrandedTypes';
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
 import type {PollMessageExpiryRepository} from '../../repositories/PollMessageExpiryRepository';
+import type {MessageReactionService} from '../interaction/MessageReactionService';
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
-import type {Channel} from '@app/api/models/Channel';
-import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
-import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
-import type { MessageReactionService } from '../interaction/MessageReactionService';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -137,7 +137,6 @@ export class MessagePollService {
 		}
 
 		// TODO(speykious): vote for real
-		
 		if (answerIds.length === 0) {
 			this.deps.messageReactionService.removeReaction({
 				authChannel,
@@ -161,7 +160,7 @@ export class MessagePollService {
 
 		for (const answerCount of poll.results?.answer_counts ?? []) {
 			if (!answerCount.count) answerCount.count = 0;
-			if ((answerCount.id ?? 0) in answerIds) answerCount.count++;
+			if (answerIds.includes(answerCount.id ?? 0)) answerCount.count++;
 		}
 		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
 

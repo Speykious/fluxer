@@ -746,13 +746,15 @@ class Messages {
 		const isCurrentUser = currentUser?.id === action.userId;
 		if (action.optimistic && !isCurrentUser) return false;
 		const updated = existing.update(action.messageId, (message) => {
-			if (action.skipReactionStore) {
-				return message.withUpdates({});
-			}
 			const add = action.type === 'MESSAGE_REACTION_ADD';
-			return action.reactionType === 2
-				? message.withPollVote(Number(action.emoji.id), add, isCurrentUser)
-				: message.withReaction(action.emoji, add, isCurrentUser);
+			if (action.reactionType === 2) {
+				return message.withPollVote(Number(action.emoji.id), add, isCurrentUser);
+			} else {
+				if (action.skipReactionStore) {
+					return message.withUpdates({});
+				}
+				return message.withReaction(action.emoji, add, isCurrentUser);
+			}
 		});
 		this.commitMessages(updated);
 		this.notifyChange();
