@@ -167,9 +167,9 @@ export const Poll = observer((props: PollProps) => {
 									: [answer.id],
 							);
 						}}
-						data-variant={answer.winner ? 'winner' : answer.me ? 'me' : undefined}
+						data-variant={answer.winner ? 'winner' : answer.me ? (isFinalized ? 'me-finalized' : 'me') : undefined}
 						data-voting={inVoteScreen}
-						data-checked={selectedAnswers.find((id) => id === answer.id) !== undefined}
+						data-checked={answer.me}
 						data-flx="poll.answer.button"
 					>
 						{inVoteScreen ? undefined : (
@@ -203,7 +203,7 @@ export const Poll = observer((props: PollProps) => {
 									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
 										{Math.round(answer.percentage)}%
 									</h2>
-									{isFinalized && answer.me ? <CheckCircleIcon weight="fill" className={styles.answerMeSuccess} data-flx="poll.answer.me-check" /> : undefined}
+									{answer.me ? <CheckCircleIcon weight="fill" className={styles.answerMeSuccess} data-flx="poll.answer.me-check" /> : undefined}
 								</section>
 							)}
 						</div>

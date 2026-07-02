@@ -118,14 +118,39 @@
 		border-color: var(--poll-answer-bar-accent);
 		background-color: var(--background-tertiary);
 
+		.answerMeSuccess {
+			color: var(--poll-answer-bar-accent);
+			background: white;
+			background: radial-gradient(circle, white 0%, white 50%, transparent 50%, transparent 100%);
+		}
+
 		.answerPercentageBar {
 			background: color-mix(in srgb, var(--poll-answer-bar-accent), transparent 70%);
+		}
+	}
+
+	&[data-variant='me-finalized'] {
+		border-color: var(--background-modifier-accent);
+		background-color: var(--background-tertiary);
+
+		.answerMeSuccess {
+			color: var(--text-primary);
+		}
+
+		.answerPercentageBar {
+			background: color-mix(in srgb, var(--background-modifier-accent), transparent 30%);
 		}
 	}
 
 	&[data-variant='winner'] {
 		border-color: var(--accent-success);
 		background-color: var(--background-tertiary);
+
+		.answerMeSuccess {
+			color: var(--accent-success);
+			background: white;
+			background: radial-gradient(circle, white 0%, white 50%, transparent 50%, transparent 100%);
+		}
 
 		.answerPercentageBar {
 			background: color-mix(in srgb, var(--accent-success), transparent 70%);
@@ -151,5 +176,4 @@
 .answerMeSuccess {
 	width: 1.5em;
 	height: 1.5em;
-	color: var(--accent-success);
 }
