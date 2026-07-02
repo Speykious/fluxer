@@ -486,6 +486,7 @@ export const ERROR_I18N_MESSAGES = {
 	'misc_limits.max_invites_reached': "You've reached the maximum of {count, plural, one {# invite} other {# invites}}.",
 	'misc_limits.max_pins_per_channel_reached':
 		"You've reached the maximum of {count, plural, one {# pin} other {# pins}} per channel.",
+	'misc_limits.max_poll_votes': "You've reached the maximum of {count, plural, one {# vote} other {# votes}} per answer.",
 	'moderation_and_reports.cannot_report_own_message': "You can't report your own message.",
 	'moderation_and_reports.cannot_report_yourself': "You can't report yourself.",
 	'moderation_and_reports.invalid_dsa_report_target': 'Invalid DSA report target.',
@@ -601,6 +602,7 @@ export const ERROR_I18N_MESSAGES = {
 	'unknown_entities.unknown_member': "Member wasn't found in this community.",
 	'unknown_entities.unknown_message': "Message wasn't found.",
 	'unknown_entities.unknown_pack': "Pack wasn't found.",
+	'unknown_entities.unknown_poll_answer': "Poll answer wasn't found.",
 	'unknown_entities.unknown_role': "Role wasn't found.",
 	'unknown_entities.unknown_user': "User wasn't found.",
 	'unknown_entities.unknown_user_flag': "The specified user flag isn't recognized.",

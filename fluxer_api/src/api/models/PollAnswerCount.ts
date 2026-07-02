@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type { MessagePollAnswerCount } from "../database/types/MessageTypes";
+import type {MessagePollAnswerCount} from '../database/types/PollTypes';
 
 export class PollAnswerCount {
 	readonly id: number | null;
@@ -18,6 +18,6 @@ export class PollAnswerCount {
 			id: this.id,
 			count: this.count,
 			me_voted: this.me_voted,
-		}
+		};
 	}
 }

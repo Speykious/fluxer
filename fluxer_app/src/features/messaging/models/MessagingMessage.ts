@@ -312,21 +312,6 @@ export class Message {
 		if ('reactions' in updates) {
 			MessageReactions.replaceMessageReactions(this.id, updates.reactions ?? []);
 		}
-		if (updates.poll) {
-			if (updates.poll.results) {
-				// Preserve `me_voted` values in poll results through a message update
-				const meVotedByAnswerId: Array<boolean> = [];
-				for (const answerCount of this.poll?.results?.answer_counts ?? [])
-					meVotedByAnswerId[answerCount.id ?? 0] = answerCount.me_voted ?? false;
-
-				updates.poll.results.answer_counts = (updates.poll.results.answer_counts ?? []).map((answerCount) => ({
-					...answerCount,
-					me_voted: meVotedByAnswerId[answerCount.id ?? 0] ?? false,
-				}));
-			} else {
-				updates.poll.results = this.poll?.results;
-			}
-		}
 		return new Message(
 			{
 				id: this.id,
@@ -395,13 +380,12 @@ export class Message {
 	withPollVote(answerId: number, add = true, me = false): Message {
 		if (!this.poll) return this.withUpdates({});
 		const newPoll: MessagePoll = JSON.parse(JSON.stringify(this.poll));
+		for (const answer of newPoll.answers ?? []) {
+			answer.answer_id = Number(answer.answer_id);
+		}
 		if (!newPoll.results) {
 			newPoll.results = {
-				answer_counts: (newPoll.answers ?? []).map((answer) => ({
-					id: answer.answer_id,
-					count: 0,
-					me_voted: false,
-				})),
+				answer_counts: undefined,
 				is_finalized: false,
 			};
 		}
@@ -412,20 +396,20 @@ export class Message {
 				me_voted: false,
 			}));
 		}
-		if (add) {
-			newPoll.results.answer_counts = newPoll.results.answer_counts.map((answerCount) => ({
-				...answerCount,
-				count: (answerCount.count ?? 0) + (answerCount.id === answerId ? 1 : 0),
-				me_voted: answerCount.me_voted || (me && answerCount.id === answerId),
-			}));
-		} else {
-			newPoll.results.answer_counts = newPoll.results.answer_counts.map((answerCount) => ({
-				...answerCount,
-				count: Math.max(0, (answerCount.count ?? 0) - (answerCount.id === answerId ? 1 : 0)),
-				me_voted: answerCount.me_voted && !(me && answerCount.id === answerId),
-			}));
+		for (const answerCount of newPoll.results.answer_counts) {
+			if (answerCount.id === answerId) {
+				if (!answerCount.count) answerCount.count = 0;
+				if (add) {
+					answerCount.count++;
+					if (me) answerCount.me_voted = true;
+				} else {
+					answerCount.count--;
+					if (me) answerCount.me_voted = false;
+				}
+			}
 		}
-		return this.withUpdates({poll: newPoll});
+		const newMessage = this.withUpdates({poll: newPoll});
+		return newMessage;
 	}
 
 	withoutReactionEmoji(emoji: ReactionEmoji): Message {

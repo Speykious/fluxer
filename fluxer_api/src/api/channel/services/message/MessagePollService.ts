@@ -119,7 +119,7 @@ export class MessagePollService {
 		});
 		const {channel} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
-		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
+		if (!message) throw new UnknownMessageError();
 
 		const oldMessageRow = message.toRow();
 		const newMessageRow = message.toRow();
@@ -129,25 +129,37 @@ export class MessagePollService {
 		if (!poll.results) {
 			poll.results = {
 				is_finalized: false,
-				answer_counts: (poll.answers ?? []).map((answer) => ({
-					id: answer.answer_id,
-					count: 0,
-				})),
+				answer_counts: null,
 			};
 		}
+		if (!poll.results.answer_counts) {
+			poll.results.answer_counts = (poll.answers ?? []).map((answer) => ({
+				id: answer.answer_id,
+				count: 0,
+			}));
+		}
 
-		// TODO(speykious): vote for real
+		const existingAnswers = await this.deps.channelRepository.messageInteractions.getVoteAnswers(
+			channelId,
+			messageId,
+			userId,
+		);
+		const existingAnswerIds = existingAnswers.map((answer) => answer.id);
+
 		if (answerIds.length === 0) {
-			this.deps.messageReactionService.removeReaction({
-				authChannel,
-				messageId,
-				actorId: userId,
-				targetId: userId,
-				emoji: '0:0',
-				reactionType: 2,
-			});
+			for (const answerId of existingAnswerIds) {
+				this.deps.messageReactionService.removeReaction({
+					authChannel,
+					messageId,
+					actorId: userId,
+					targetId: userId,
+					emoji: `${answerId}:${answerId}`,
+					reactionType: 2,
+				});
+			}
 		} else {
 			for (const answerId of answerIds) {
+				if (existingAnswerIds.includes(answerId)) continue;
 				this.deps.messageReactionService.addReaction({
 					authChannel,
 					messageId,
@@ -156,14 +168,27 @@ export class MessagePollService {
 					reactionType: 2,
 				});
 			}
+			for (const existingAnswerId of existingAnswerIds) {
+				if (answerIds.includes(existingAnswerId)) continue;
+				this.deps.messageReactionService.removeReaction({
+					authChannel,
+					messageId,
+					actorId: userId,
+					targetId: userId,
+					emoji: `${existingAnswerId}:${existingAnswerId}`,
+					reactionType: 2,
+				});
+			}
 		}
 
-		for (const answerCount of poll.results?.answer_counts ?? []) {
+		for (const answerCount of poll.results.answer_counts) {
+			const currentlyExists = existingAnswerIds.includes(answerCount.id ?? 0);
+			const willExist = answerIds.includes(answerCount.id ?? 0);
 			if (!answerCount.count) answerCount.count = 0;
-			if (answerIds.includes(answerCount.id ?? 0)) answerCount.count++;
+			if (currentlyExists && !willExist) answerCount.count--;
+			if (!currentlyExists && willExist) answerCount.count++;
 		}
-		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
 
-		// TODO
+		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
 	}
 }

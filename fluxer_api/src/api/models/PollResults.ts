@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type { MessagePollResults } from "../database/types/MessageTypes";
-import { PollAnswerCount } from "./PollAnswerCount";
+import type {MessagePollResults} from '../database/types/PollTypes';
+import {PollAnswerCount} from './PollAnswerCount';
 
 export class PollResults {
 	readonly answer_counts: Array<PollAnswerCount>;
@@ -14,8 +14,11 @@ export class PollResults {
 
 	toMessagePollResults(): MessagePollResults {
 		return {
-			answer_counts: this.answer_counts.length > 0 ? this.answer_counts.map((answer_count) => answer_count.toMessagePollAnswerCount()) : null,
+			answer_counts:
+				this.answer_counts.length > 0
+					? this.answer_counts.map((answer_count) => answer_count.toMessagePollAnswerCount())
+					: null,
 			is_finalized: this.is_finalized,
-		}
+		};
 	}
 }

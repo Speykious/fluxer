@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import type {MessagePollSelectedAnswer, MessagePollVoteRow} from '@app/api/database/types/PollTypes';
 import * as BucketUtils from '@fluxer/snowflake/src/SnowflakeBuckets';
 import type {ChannelID, EmojiID, MessageID, UserID} from '../../BrandedTypes';
 import {createEmojiID} from '../../BrandedTypes';
@@ -8,7 +9,7 @@ import {Db} from '../../database/CassandraTypes';
 import type {ChannelPinRow, MessageReactionRow} from '../../database/types/MessageTypes';
 import type {Message} from '../../models/Message';
 import {MessageReaction} from '../../models/MessageReaction';
-import {ChannelPins, MessageReactions, Messages} from '../../Tables';
+import {ChannelPins, MessagePollVotes, MessageReactions, Messages} from '../../Tables';
 import {IMessageInteractionRepository} from './IMessageInteractionRepository';
 import type {MessageRepository} from './MessageRepository';
 
@@ -62,6 +63,16 @@ const CHECK_USER_REACTION_EXISTS_QUERY = MessageReactions.selectCql({
 		MessageReactions.where.eq('user_id'),
 		MessageReactions.where.eq('emoji_id'),
 		MessageReactions.where.eq('emoji_name'),
+	],
+	limit: 1,
+});
+const CHECK_USER_VOTE_EXISTS_QUERY = MessagePollVotes.select({
+	columns: ['answers'],
+	where: [
+		MessagePollVotes.where.eq('bucket'),
+		MessagePollVotes.where.eq('channel_id'),
+		MessagePollVotes.where.eq('message_id'),
+		MessagePollVotes.where.eq('user_id'),
 	],
 	limit: 1,
 });
@@ -209,6 +220,62 @@ export class MessageInteractionRepository extends IMessageInteractionRepository 
 		);
 		const hasReactions = await this.messageHasAnyReactions(channelId, messageId);
 		await this.setHasReaction(channelId, messageId, hasReactions);
+	}
+
+	async getVoteAnswers(
+		channelId: ChannelID,
+		messageId: MessageID,
+		userId: UserID,
+	): Promise<Array<MessagePollSelectedAnswer>> {
+		const bucket = BucketUtils.makeBucket(messageId);
+		const row = await fetchOne<Pick<MessagePollVoteRow, 'answers'>>(
+			CHECK_USER_VOTE_EXISTS_QUERY.bind({
+				channel_id: channelId,
+				bucket,
+				message_id: messageId,
+				user_id: userId,
+			}),
+		);
+		return row?.answers ?? [];
+	}
+
+	async addVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void> {
+		const answers = await this.getVoteAnswers(channelId, messageId, userId);
+		answers.push({id: answerId});
+		const voteData: MessagePollVoteRow = {
+			channel_id: channelId,
+			bucket: BucketUtils.makeBucket(messageId),
+			message_id: messageId,
+			user_id: userId,
+			answers,
+		};
+		await upsertOne(MessagePollVotes.upsertAll(voteData));
+	}
+
+	async removeVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void> {
+		const bucket = BucketUtils.makeBucket(messageId);
+		const answers = (await this.getVoteAnswers(channelId, messageId, userId)).filter(
+			(answer) => answer.id !== answerId,
+		);
+		if (answers.length === 0) {
+			await deleteOneOrMany(
+				MessagePollVotes.deleteByPk({
+					channel_id: channelId,
+					bucket,
+					message_id: messageId,
+					user_id: userId,
+				}),
+			);
+		} else {
+			const voteData: MessagePollVoteRow = {
+				channel_id: channelId,
+				bucket,
+				message_id: messageId,
+				user_id: userId,
+				answers,
+			};
+			await upsertOne(MessagePollVotes.upsertAll(voteData));
+		}
 	}
 
 	async removeAllReactions(channelId: ChannelID, messageId: MessageID): Promise<void> {

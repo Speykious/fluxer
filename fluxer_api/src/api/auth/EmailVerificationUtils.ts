@@ -7,6 +7,7 @@ import {
 	GuildCreationEmailVerificationRequiredError,
 	GuildEmailVerificationRequiredError,
 	MfaEmailVerificationRequiredError,
+	PollVoteVerificationRequiredError,
 	ProfileEmailVerificationRequiredError,
 	ReactionEmailVerificationRequiredError,
 	ReportEmailVerificationRequiredError,
@@ -31,7 +32,7 @@ const ErrorByReason = {
 	mfa: MfaEmailVerificationRequiredError,
 	profile: ProfileEmailVerificationRequiredError,
 	reaction: ReactionEmailVerificationRequiredError,
-	vote: ReactionEmailVerificationRequiredError,
+	vote: PollVoteVerificationRequiredError,
 	report: ReportEmailVerificationRequiredError,
 } satisfies Record<EmailVerificationRequiredReason, new () => EmailVerificationRequiredError>;
 

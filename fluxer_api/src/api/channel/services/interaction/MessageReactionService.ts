@@ -9,11 +9,17 @@ import {
 	GuildOperations,
 } from '@fluxer/constants/src/GuildConstants';
 import type {LimitKey} from '@fluxer/constants/src/LimitConfigMetadata';
-import {MAX_POLL_VOTES_PER_ANSWER, MAX_REACTIONS_PER_MESSAGE, MAX_USERS_PER_MESSAGE_REACTION} from '@fluxer/constants/src/LimitConstants';
+import {
+	MAX_POLL_VOTES_PER_ANSWER,
+	MAX_REACTIONS_PER_MESSAGE,
+	MAX_USERS_PER_MESSAGE_REACTION,
+} from '@fluxer/constants/src/LimitConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
+import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {MaxReactionsPerMessageError} from '@fluxer/errors/src/domains/channel/MaxReactionsPerMessageError';
 import {MaxUsersPerMessageReactionError} from '@fluxer/errors/src/domains/channel/MaxUsersPerMessageReactionError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
+import {UnknownPollAnswerError} from '@fluxer/errors/src/domains/channel/UnknownPollAnswerError';
 import {FeatureTemporarilyDisabledError} from '@fluxer/errors/src/domains/core/FeatureTemporarilyDisabledError';
 import {InputValidationError} from '@fluxer/errors/src/domains/core/InputValidationError';
 import {MissingPermissionsError} from '@fluxer/errors/src/domains/core/MissingPermissionsError';
@@ -41,7 +47,7 @@ import {assertGuildMemberCanCommunicate} from '../../../utils/GuildCommunication
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
 import type {AuthenticatedChannel} from '../AuthenticatedChannel';
 import {MessageInteractionBase, type ParsedEmoji} from './MessageInteractionBase';
-import { CannotVoteOnNonPollError } from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
+import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 
 const REACTION_CUSTOM_EMOJI_REGEX = /^(.+):(\d+)$/;
 
@@ -181,17 +187,15 @@ export class MessageReactionService extends MessageInteractionBase {
 		const message = await this.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) throw new UnknownMessageError();
 		const requestingUser = await this.userRepository.findUnique(userId);
-		if (requestingUser) {
-			requireEmailVerified(requestingUser, reactionType === 2 ? 'vote' : 'reaction');
-		}
+		if (requestingUser) requireEmailVerified(requestingUser, reactionType === 2 ? 'vote' : 'reaction');
 
 		const parsedEmojiBasic = this.parseEmojiWithoutValidation(emoji);
 		const guildFeatures = guild?.features ?? null;
 		if (reactionType === 2) {
 			if (!message.poll) throw new CannotVoteOnNonPollError();
 			const answerId = Number(parsedEmojiBasic.id);
-			if (message.poll.answers.find((answer) => answer.answer_id === answerId) === undefined)
-				throw new UnknownMessageError(); // TODO: UnknownPollAnswerError()
+			if (message.poll.answers.find((answer) => Number(answer.answer_id) === answerId) === undefined)
+				throw new UnknownPollAnswerError();
 
 			const maxVotesPerAnswer = this.resolveLimitForUser({
 				user: requestingUser ?? null,
@@ -201,14 +205,8 @@ export class MessageReactionService extends MessageInteractionBase {
 			});
 			const answerCount = message.poll.results?.answer_counts.find((answerCount) => answerCount.id === answerId);
 			if ((answerCount?.count ?? 0) >= maxVotesPerAnswer) throw new MaxUsersPerMessageReactionError(maxVotesPerAnswer);
-			await this.dispatchMessageReactionAdd({
-				channel,
-				messageId,
-				emoji: parsedEmojiBasic,
-				userId,
-				sessionId,
-				reactionType,
-			});
+
+			await this.channelRepository.messageInteractions.addVote(channel.id, messageId, userId, answerId);
 		} else {
 			const emojiId = parsedEmojiBasic.id ? createEmojiID(BigInt(parsedEmojiBasic.id)) : undefined;
 			const maxUsersPerReaction = this.resolveLimitForUser({
@@ -288,15 +286,15 @@ export class MessageReactionService extends MessageInteractionBase {
 				emojiId,
 				parsedEmoji.animated ?? false,
 			);
-			await this.dispatchMessageReactionAdd({
-				channel,
-				messageId,
-				emoji: parsedEmoji,
-				userId,
-				sessionId,
-				reactionType,
-			});
 		}
+		await this.dispatchMessageReactionAdd({
+			channel,
+			messageId,
+			emoji: parsedEmojiBasic,
+			userId,
+			sessionId,
+			reactionType,
+		});
 	}
 
 	async removeReaction({
@@ -327,17 +325,27 @@ export class MessageReactionService extends MessageInteractionBase {
 		const message = await this.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) return;
 		const isRemovingOwnReaction = targetId === actorId;
-		if (!isRemovingOwnReaction) {
-			await this.assertCanModerateMessageReactions({channel, message, actorId, hasPermission});
+		if (reactionType === 2) {
+			if (!message.poll) throw new CannotVoteOnNonPollError();
+			if (!isRemovingOwnReaction) throw new CannotEditOtherUserMessageError();
+			const answerId = Number(parsedEmoji.id);
+			if (message.poll.answers.find((answer) => answer.answer_id === answerId) === undefined)
+				throw new UnknownPollAnswerError();
+
+			await this.channelRepository.messageInteractions.removeVote(channel.id, messageId, targetId, answerId);
+		} else {
+			if (!isRemovingOwnReaction) {
+				await this.assertCanModerateMessageReactions({channel, message, actorId, hasPermission});
+			}
+			const emojiId = parsedEmoji.id ? createEmojiID(BigInt(parsedEmoji.id)) : undefined;
+			await this.channelRepository.messageInteractions.removeReaction(
+				channel.id,
+				messageId,
+				targetId,
+				parsedEmoji.name,
+				emojiId,
+			);
 		}
-		const emojiId = parsedEmoji.id ? createEmojiID(BigInt(parsedEmoji.id)) : undefined;
-		await this.channelRepository.messageInteractions.removeReaction(
-			channel.id,
-			messageId,
-			targetId,
-			parsedEmoji.name,
-			emojiId,
-		);
 		await this.dispatchMessageReactionRemove({
 			channel,
 			messageId,
