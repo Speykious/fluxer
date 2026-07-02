@@ -526,7 +526,6 @@ const InstancePolicyResponse = z.object({
 	}),
 });
 
-const GifProviderSchema = z.enum(['tenor', 'klipy']);
 const CaptchaProviderSchema = z.enum(['hcaptcha', 'turnstile', 'none']);
 const EmailProviderSchema = z.enum(['smtp', 'none']);
 
@@ -559,9 +558,6 @@ const InstanceMediaResponse = z.object({
 
 const InstanceIntegrationsResponse = z.object({
 	gif: z.object({
-		provider: GifProviderSchema.nullable(),
-		effective_provider: GifProviderSchema,
-		tenor_api_key_set: z.boolean(),
 		klipy_api_key_set: z.boolean(),
 		effective_available: z.boolean(),
 	}),
@@ -592,6 +588,8 @@ const InstanceIntegrationsResponse = z.object({
 			password_set: z.boolean(),
 			secure: z.boolean().nullable(),
 		}),
+		disable_new_ip_authorization: z.boolean(),
+		effective_disable_new_ip_authorization: z.boolean(),
 	}),
 	bluesky: z.object({
 		enabled: z.boolean().nullable(),
@@ -648,8 +646,6 @@ export const InstanceConfigUpdateRequest = z.object({
 		.object({
 			gif: z
 				.object({
-					provider: GifProviderSchema.nullish(),
-					tenor_api_key: z.string().trim().max(4096).nullish(),
 					klipy_api_key: z.string().trim().max(4096).nullish(),
 				})
 				.nullish(),
@@ -682,6 +678,7 @@ export const InstanceConfigUpdateRequest = z.object({
 							secure: z.boolean().nullish(),
 						})
 						.nullish(),
+					disable_new_ip_authorization: z.boolean().nullish(),
 				})
 				.nullish(),
 			bluesky: z
@@ -1428,7 +1425,7 @@ export const LimitConfigGetResponse = z.object({
 	}),
 	limit_config_json: z.string(),
 	self_hosted: z.boolean(),
-	defaults: z.record(z.string(), z.record(LimitKeySchema, z.number().optional())),
+	defaults: z.record(z.string(), z.partialRecord(LimitKeySchema, z.number())),
 	metadata: z.record(LimitKeySchema, LimitKeyMetadataSchema),
 	categories: z.record(z.string(), z.string()),
 	limit_keys: z.array(z.string()),

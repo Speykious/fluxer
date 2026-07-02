@@ -12197,7 +12197,9 @@
 						"description": "Custom content warning text shown before entry",
 						"nullable": true,
 						"type": "string"
-					}
+					},
+					"approximate_member_count": {"$ref": "#/components/schemas/Int32Type"},
+					"approximate_presence_count": {"$ref": "#/components/schemas/Int32Type"}
 				},
 				"required": [
 					"id",
@@ -12592,20 +12594,8 @@
 						"properties": {
 							"gif": {
 								"type": "object",
-								"properties": {
-									"provider": {"nullable": true, "enum": ["tenor", "klipy"], "type": "string"},
-									"effective_provider": {"enum": ["tenor", "klipy"], "type": "string"},
-									"tenor_api_key_set": {"type": "boolean"},
-									"klipy_api_key_set": {"type": "boolean"},
-									"effective_available": {"type": "boolean"}
-								},
-								"required": [
-									"provider",
-									"effective_provider",
-									"tenor_api_key_set",
-									"klipy_api_key_set",
-									"effective_available"
-								]
+								"properties": {"klipy_api_key_set": {"type": "boolean"}, "effective_available": {"type": "boolean"}},
+								"required": ["klipy_api_key_set", "effective_available"]
 							},
 							"youtube": {
 								"type": "object",
@@ -12652,7 +12642,9 @@
 											"secure": {"nullable": true, "type": "boolean"}
 										},
 										"required": ["host", "port", "username", "password_set", "secure"]
-									}
+									},
+									"disable_new_ip_authorization": {"type": "boolean"},
+									"effective_disable_new_ip_authorization": {"type": "boolean"}
 								},
 								"required": [
 									"enabled",
@@ -12661,7 +12653,9 @@
 									"effective_provider",
 									"from_email",
 									"from_name",
-									"smtp"
+									"smtp",
+									"disable_new_ip_authorization",
+									"effective_disable_new_ip_authorization"
 								]
 							},
 							"bluesky": {
@@ -12988,11 +12982,7 @@
 							"gif": {
 								"nullable": true,
 								"type": "object",
-								"properties": {
-									"provider": {"nullable": true, "enum": ["tenor", "klipy"], "type": "string"},
-									"tenor_api_key": {"nullable": true, "type": "string", "maxLength": 4096},
-									"klipy_api_key": {"nullable": true, "type": "string", "maxLength": 4096}
-								}
+								"properties": {"klipy_api_key": {"nullable": true, "type": "string", "maxLength": 4096}}
 							},
 							"youtube": {
 								"nullable": true,
@@ -13028,7 +13018,8 @@
 											"password": {"nullable": true, "type": "string", "maxLength": 4096},
 											"secure": {"nullable": true, "type": "boolean"}
 										}
-									}
+									},
+									"disable_new_ip_authorization": {"nullable": true, "type": "boolean"}
 								}
 							},
 							"bluesky": {
@@ -14222,8 +14213,7 @@
 					"me": {
 						"description": "Whether the current user has reacted with this emoji",
 						"nullable": true,
-						"type": "boolean",
-						"enum": [true]
+						"type": "boolean"
 					}
 				},
 				"required": ["emoji", "count"]
@@ -15027,11 +15017,12 @@
 				"properties": {
 					"user_id": {"$ref": "#/components/schemas/SnowflakeType"},
 					"username": {"$ref": "#/components/schemas/UsernameType"},
-					"discriminator": {"$ref": "#/components/schemas/Int32Type"}
+					"discriminator": {"$ref": "#/components/schemas/DiscriminatorType"}
 				},
 				"required": ["user_id", "username"]
 			},
 			"UsernameType": {"type": "string", "minLength": 1, "maxLength": 32, "pattern": "^[a-zA-Z0-9_]+$"},
+			"DiscriminatorType": {"type": "string", "pattern": "^\\d{1,4}$"},
 			"ClearUserFieldsRequest": {
 				"type": "object",
 				"properties": {

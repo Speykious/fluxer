@@ -20,7 +20,7 @@ msgstr "... turn dense mode on. Nice!"
 
 #. Button or menu action label in the channel and chat user message. Keep it concise.
 #: src/features/channel/components/MessageAttachments.tsx:362
-#: src/features/channel/components/UserMessage.tsx:68
+#: src/features/channel/components/UserMessage.tsx:69
 msgid "(edited)"
 msgstr "(edited)"
 
@@ -345,8 +345,8 @@ msgstr "{count, plural, one {# attachment} other {# attachments}}"
 msgid "{count, plural, one {# blocked message} other {# blocked messages}}"
 msgstr "{count, plural, one {# blocked message} other {# blocked messages}}"
 
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:50
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:83
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:51
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:76
 msgid "{count, plural, one {# bookmark} other {# bookmarks}}"
 msgstr "{count, plural, one {# bookmark} other {# bookmarks}}"
 
@@ -420,8 +420,8 @@ msgstr "{count, plural, one {# reaction} other {# reactions}}"
 msgid "{count, plural, one {# reactor} other {# reactors}}"
 msgstr "{count, plural, one {# reactor} other {# reactors}}"
 
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:44
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:82
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:45
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:79
 msgid "{count, plural, one {# saved media item} other {# saved media items}}"
 msgstr "{count, plural, one {# saved media item} other {# saved media items}}"
 
@@ -500,7 +500,7 @@ msgstr "{count, plural, one {Sign out # device} other {Sign out # devices}}"
 msgid "{count, plural, one {Used # time.} other {Used # times.}}"
 msgstr "{count, plural, one {Used # time.} other {Used # times.}}"
 
-#: src/features/messaging/components/alerts/TooManyAttachmentsModal.tsx:21
+#: src/features/messaging/components/alerts/TooManyAttachmentsModal.tsx:20
 msgid "{count, plural, one {You can only upload # file at a time. Try again with fewer files.} other {You can only upload # files at a time. Try again with fewer files.}}"
 msgstr "{count, plural, one {You can only upload # file at a time. Try again with fewer files.} other {You can only upload # files at a time. Try again with fewer files.}}"
 
@@ -525,7 +525,7 @@ msgstr "{count, plural, one {You're already connected to this voice channel from
 msgid "{count, plural, one {You're already using the one allowed connection for this voice channel. Switch to this device or cancel.} other {You're already using all # allowed connections for this voice channel. Switch to this device or cancel.}}"
 msgstr "{count, plural, one {You're already using the one allowed connection for this voice channel. Switch to this device or cancel.} other {You're already using all # allowed connections for this voice channel. Switch to this device or cancel.}}"
 
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:65
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:62
 msgid "{count, plural, one {You're at the cap of # saved media item. Remove one to add another.} other {You're at the cap of # saved media items. Remove one to add another.}}"
 msgstr "{count, plural, one {You're at the cap of # saved media item. Remove one to add another.} other {You're at the cap of # saved media items. Remove one to add another.}}"
 
@@ -545,7 +545,7 @@ msgstr "{count, plural, one {You're at the limit of # installed sticker pack. Re
 msgid "{count, plural, one {You're at the limit of # sticker pack. Delete one to create another.} other {You're at the limit of # sticker packs. Delete one to create another.}}"
 msgstr "{count, plural, one {You're at the limit of # sticker pack. Delete one to create another.} other {You're at the limit of # sticker packs. Delete one to create another.}}"
 
-#: src/features/guild/components/alerts/MaxGuildsModal.tsx:25
+#: src/features/guild/components/alerts/MaxGuildsModal.tsx:24
 msgid "{count, plural, one {You've reached the maximum number of communities you can join (# community). Leave a community before joining another one.} other {You've reached the maximum number of communities you can join (# communities). Leave a community before joining another one.}}"
 msgstr "{count, plural, one {You've reached the maximum number of communities you can join (# community). Leave a community before joining another one.} other {You've reached the maximum number of communities you can join (# communities). Leave a community before joining another one.}}"
 
@@ -901,7 +901,7 @@ msgid "{memberCount} {rawMemberCount, plural, one {member} other {members}}"
 msgstr "{memberCount} {rawMemberCount, plural, one {member} other {members}}"
 
 #. Generic aria-label for an unread-mentions badge. Preserve {mentionCount}.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:799
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:803
 msgid "{mentionCount} mentions"
 msgstr "{mentionCount} mentions"
 
@@ -1124,22 +1124,22 @@ msgid "{productName} member since"
 msgstr "{productName} member since"
 
 #. Body of the camera-permission-denied modal on web. {productName} is Fluxer.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:40
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:39
 msgid "{productName} needs access to your camera to enable video chat. Grant camera permission in your browser settings and try again."
 msgstr "{productName} needs access to your camera to enable video chat. Grant camera permission in your browser settings and try again."
 
 #. Body of the camera-permission-denied modal on Windows and Linux. {productName} is Fluxer.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:35
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:34
 msgid "{productName} needs access to your camera. Allow camera access in your operating system privacy settings and restart the app."
 msgstr "{productName} needs access to your camera. Allow camera access in your operating system privacy settings and restart the app."
 
 #. Body of the microphone-permission-denied modal on web. {productName} is Fluxer.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:30
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:29
 msgid "{productName} needs access to your microphone to enable voice chat. Grant microphone permission in your browser settings and try again."
 msgstr "{productName} needs access to your microphone to enable voice chat. Grant microphone permission in your browser settings and try again."
 
 #. Body of the microphone-permission-denied modal on Windows and Linux. {productName} is Fluxer.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:25
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:24
 msgid "{productName} needs access to your microphone. Allow microphone access in your operating system privacy settings and restart the app."
 msgstr "{productName} needs access to your microphone. Allow microphone access in your operating system privacy settings and restart the app."
 
@@ -1154,7 +1154,7 @@ msgid "{productName} needs microphone access to list your devices."
 msgstr "{productName} needs microphone access to list your devices."
 
 #. Body of the screen-permission-denied modal on non-mac desktop platforms. {productName} is Fluxer.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:45
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:44
 msgid "{productName} needs screen recording access. Allow screen recording in your operating system privacy settings and restart the app."
 msgstr "{productName} needs screen recording access. Allow screen recording in your operating system privacy settings and restart the app."
 
@@ -1179,7 +1179,7 @@ msgid "{productName} spellcheck settings…"
 msgstr "{productName} spellcheck settings…"
 
 #. Label in the invites disabled modal.
-#: src/features/invite/components/alerts/InvitesDisabledModal.tsx:14
+#: src/features/invite/components/alerts/InvitesDisabledModal.tsx:13
 msgid "{productName} spotted a possible raid here. Invites are paused — try again later."
 msgstr "{productName} spotted a possible raid here. Invites are paused — try again later."
 
@@ -2252,7 +2252,7 @@ msgid "Action"
 msgstr "Action"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:283
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:307
 msgid "Action bar"
 msgstr "Action bar"
 
@@ -2320,7 +2320,7 @@ msgstr "Active monthly subscriber (cancellation scheduled)"
 #. Short label in the appearance tab. Keep it concise.
 #. Short label in the inline. Keep it concise.
 #. Status label indicating a user is currently active.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:743
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:747
 #: src/features/user/components/modals/tabs/appearance_tab/AppearanceTabInline.tsx:43
 #: src/features/user/components/modals/tabs/AppearanceTab.tsx:51
 #: src/features/user/components/settings_utils/section_registry/AppearanceSections.ts:430
@@ -2509,7 +2509,7 @@ msgid "Add another reaction"
 msgstr "Add another reaction"
 
 #. Label for the button that adds a new answer to the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:38
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:39
 msgid "Add Answer"
 msgstr ""
 
@@ -2524,7 +2524,7 @@ msgid "Add bot to a destination"
 msgstr "Add bot to a destination"
 
 #. Generic action label that opens the create-channel flow from inside a category or sidebar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:510
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:514
 msgid "Add channel"
 msgstr "Add channel"
 
@@ -2615,13 +2615,13 @@ msgstr "Add passkey"
 
 #. Generic action label that opens the reaction picker for a message.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:522
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:526
 #: src/features/input/state/input_keybind/shared.ts:17
 msgid "Add reaction"
 msgstr "Add reaction"
 
 #. Permission name: allows adding reactions to messages.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:245
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:249
 msgid "Add reactions"
 msgstr "Add reactions"
 
@@ -2770,7 +2770,7 @@ msgid "Added to favorite GIFs"
 msgstr "Added to favourite GIFs"
 
 #. Toast confirming an item was added to the favorites list.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:615
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:619
 msgid "Added to favorites"
 msgstr "Added to favourites"
 
@@ -2854,7 +2854,7 @@ msgid "Administrator"
 msgstr "Administrator"
 
 #. Error message in the invites disabled modal.
-#: src/features/invite/components/alerts/InvitesDisabledModal.tsx:18
+#: src/features/invite/components/alerts/InvitesDisabledModal.tsx:17
 msgid "Admins paused invites — you can't join right now."
 msgstr "Admins paused invites — you can't join right now."
 
@@ -3166,7 +3166,7 @@ msgid "Allow microphone"
 msgstr "Allow microphone"
 
 #. Label for the checkbox that allows users of the poll to select multiple answers.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:46
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:47
 msgid "Allow Multiple Answers"
 msgstr ""
 
@@ -3268,7 +3268,7 @@ msgid "Already set to cancel"
 msgstr "Already set to cancel"
 
 #. Toggle-switch label in the moderator delete-message confirmation dialog. When enabled, the message is reported (category: other) before being deleted. {productName} is the product name (e.g., Fluxer).
-#: src/features/messaging/commands/MessageCommands.tsx:76
+#: src/features/messaging/commands/MessageCommands.tsx:77
 msgid "Also report this message to the {productName} Safety Team"
 msgstr "Also report this message to the {productName} Safety Team"
 
@@ -3438,12 +3438,12 @@ msgstr "And 1 other call"
 msgid "Animate on interaction"
 msgstr "Animate on interaction"
 
-#: src/features/expressions/utils/AnimatedAvifModalUtils.tsx:27
+#: src/features/expressions/utils/AnimatedAvifModalUtils.tsx:26
 msgid "Animated {AVIF_FORMAT_LABEL} files aren't supported. Upload a static {AVIF_FORMAT_LABEL} file instead."
 msgstr "Animated {AVIF_FORMAT_LABEL} files aren't supported. Upload a static {AVIF_FORMAT_LABEL} file instead."
 
 #. Modal title shown when an animated AVIF upload is rejected by the client.
-#: src/features/expressions/utils/AnimatedAvifModalUtils.tsx:12
+#: src/features/expressions/utils/AnimatedAvifModalUtils.tsx:11
 msgid "Animated {avifFormatLabel} not supported"
 msgstr "Animated {avifFormatLabel} not supported"
 
@@ -3491,7 +3491,7 @@ msgid "Animated emoji"
 msgstr "Animated emoji"
 
 #. Section heading for animated emoji in community emoji settings.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:104
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:105
 msgid "Animated emoji ({emojiCount})"
 msgstr "Animated emoji ({emojiCount})"
 
@@ -3673,7 +3673,7 @@ msgid "Answer the incoming call"
 msgstr "Answer the incoming call"
 
 #. Label for the answers fieldset.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:34
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:35
 msgid "Answers"
 msgstr ""
 
@@ -3772,7 +3772,7 @@ msgid "App zoom"
 msgstr "App zoom"
 
 #. Setting label for the global UI zoom level.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:775
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:779
 msgid "App zoom level"
 msgstr "App zoom level"
 
@@ -3881,7 +3881,7 @@ msgid "Apply theme"
 msgstr "Apply theme"
 
 #. Short confirmation button label in advanced settings.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:140
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:144
 msgid "Apply to all communities"
 msgstr "Apply to all communities"
 
@@ -4039,7 +4039,7 @@ msgid "asc or desc"
 msgstr "asc or desc"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:351
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:375
 msgid "ASCII smileys"
 msgstr "ASCII smileys"
 
@@ -4139,7 +4139,7 @@ msgid "Attachment upload"
 msgstr "Attachment upload"
 
 #. Short label in the attachment upload connectivity modal. Keep it concise.
-#: src/features/messaging/components/alerts/AttachmentUploadConnectivityModal.tsx:13
+#: src/features/messaging/components/alerts/AttachmentUploadConnectivityModal.tsx:12
 msgid "Attachment upload unavailable"
 msgstr "Attachment upload unavailable"
 
@@ -4639,7 +4639,7 @@ msgid "Automatically remove tracking parameters (like utm_source, fbclid, gclid)
 msgstr "Automatically remove tracking parameters (like utm_source, fbclid, gclid) from URLs in messages you send. Cleans the link before it reaches anyone else."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:167
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:191
 msgid "Automatically remove tracking parameters from URLs in messages you send"
 msgstr "Automatically remove tracking parameters from URLs in messages you send"
 
@@ -4705,8 +4705,8 @@ msgstr "Available in the desktop app."
 #. Form label for a webhook avatar image.
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
 #: src/features/ui/components/BaseAvatar.tsx:17
-#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:374
-#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:422
+#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:372
+#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:420
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:13
 #: src/features/webhook/components/WebhookListItem.tsx:251
 msgid "Avatar"
@@ -5293,14 +5293,14 @@ msgid "Bookmark"
 msgstr "Bookmark"
 
 #. Short label in the max bookmarks modal.
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:15
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:16
 msgid "Bookmark limit reached"
 msgstr "Bookmark limit reached"
 
 #. Generic action label that saves a message to the bookmarks list.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:526
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:530
 #: src/features/input/state/input_keybind/shared.ts:265
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:66
 msgid "Bookmark message"
@@ -5660,7 +5660,7 @@ msgid "Bypass mention suppression"
 msgstr "Bypass mention suppression"
 
 #. Permission name: allows ignoring per-channel message rate limits.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:249
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:253
 msgid "Bypass slowmode"
 msgstr "Bypass slow mode"
 
@@ -5725,7 +5725,7 @@ msgstr "Calls"
 #. Generic voice/video setting label for the active camera device.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the video tab. Keep it concise.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:719
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:723
 #: src/features/user/components/modals/tabs/UserVideoTab.tsx:69
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:157
 #: src/features/voice/utils/SettingsDeviceOptions.ts:23
@@ -5775,13 +5775,13 @@ msgstr "Camera off"
 
 #. Generic action label that enables the local camera.
 #. Notification sound setting label. Sound played when the user turns their camera on in a call.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:723
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:727
 #: src/features/notification/utils/SoundLabels.ts:52
 msgid "Camera on"
 msgstr "Camera on"
 
 #. Title of the modal shown when camera permission is denied. Keep tone plain.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:17
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:16
 msgid "Camera permission required"
 msgstr "Camera permission required"
 
@@ -5825,12 +5825,12 @@ msgid "Can't access that email?"
 msgstr "Can't access that email?"
 
 #. Error message in the attachment permission denied modal. Keep the tone plain and specific.
-#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:12
+#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:9
 msgid "Can't paste image here"
 msgstr "Can't paste image here"
 
 #. Error message in the attachment permission denied modal. Keep the tone plain and specific.
-#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:16
+#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:13
 msgid "Can't upload files here"
 msgstr "Can't upload files here"
 
@@ -5892,7 +5892,7 @@ msgstr "Canary tester CTA nagbar"
 #: src/features/user/components/modals/EmailChangeModal.tsx:289
 #: src/features/user/components/modals/EmailChangeModal.tsx:311
 #: src/features/user/components/modals/EmailChangeModal.tsx:326
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:389
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:394
 #: src/features/user/components/modals/PasswordChangeModal.tsx:226
 #: src/features/user/components/modals/PasswordChangeModal.tsx:237
 #: src/features/user/components/modals/PasswordChangeModal.tsx:255
@@ -5919,7 +5919,7 @@ msgstr "Cancel editing scheduled message"
 msgid "Cancel friend request"
 msgstr "Cancel friend request"
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:144
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:145
 msgid "Cancel if you want to choose a different username instead."
 msgstr "Cancel if you want to choose a different username."
 
@@ -6162,8 +6162,8 @@ msgstr "Centred"
 
 #. Title of the modal where the user picks an avatar source (file upload or GIF provider). Keep it concise.
 #: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:110
-#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:396
-#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:432
+#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:394
+#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:430
 msgid "Change avatar"
 msgstr "Change avatar"
 
@@ -6198,7 +6198,7 @@ msgid "Change emoji"
 msgstr "Change emoji"
 
 #. Generic action label that opens the friend-nickname edit flow.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:538
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:542
 msgid "Change friend nickname"
 msgstr "Change friend's nickname"
 
@@ -6242,7 +6242,7 @@ msgid "Change my group nickname"
 msgstr "Change my group nickname"
 
 #. Action label for changing a user nickname in a community.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:470
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:474
 msgid "Change nickname"
 msgstr "Change nickname"
 
@@ -6309,7 +6309,7 @@ msgid "Change username"
 msgstr "Change username"
 
 #. Short label in the FluxerTag change modal. Keep it concise.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:47
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:48
 msgid "Change username form"
 msgstr "Change username form"
 
@@ -6359,7 +6359,7 @@ msgstr "Change your profile picture"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
 #. Short label in the FluxerTag change modal. Keep it concise.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:51
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:52
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:77
 msgid "Change your username"
 msgstr "Change your username"
@@ -6430,7 +6430,7 @@ msgid "Channel actions"
 msgstr "Channel actions"
 
 #. Toast confirming a channel was added to the favorites list.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:791
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:795
 msgid "Channel added to favorites"
 msgstr "Channel added to favourites"
 
@@ -6451,14 +6451,14 @@ msgid "Channel created"
 msgstr "Channel created"
 
 #. Title of the developer-mode channel debug modal (distinct from the action label that opens it).
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:546
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:550
 msgid "Channel debug"
 msgstr "Channel debug"
 
 #. Audit log entry label. Past-tense action describing that a channel was deleted.
 #. Toast confirming a channel was successfully deleted.
 #: src/features/app/config/AuditLogConstants.ts:20
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:759
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:763
 msgid "Channel deleted"
 msgstr "Channel deleted"
 
@@ -6563,7 +6563,7 @@ msgid "Channel record"
 msgstr "Channel record"
 
 #. Toast confirming a channel was removed from the favorites list.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:787
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:791
 msgid "Channel removed from favorites"
 msgstr "Channel removed from favourites"
 
@@ -6871,7 +6871,7 @@ msgid "Choose hCaptcha or Cloudflare Turnstile for signup challenges."
 msgstr "Choose hCaptcha or Cloudflare Turnstile for signup challenges."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:403
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:427
 msgid "Choose how chat moves after you send a message"
 msgstr "Choose how chat scrolls after you send a message"
 
@@ -7159,7 +7159,7 @@ msgid "Claiming to be another person, brand, or organization."
 msgstr "Claiming to be another person, brand, or organisation."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:151
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:175
 msgid "Clean link"
 msgstr "Clean link"
 
@@ -7216,7 +7216,7 @@ msgid "Clear custom status"
 msgstr "Clear custom status"
 
 #. Body of the confirmation alert shown when clearing every reaction on a message.
-#: src/features/channel/components/MessageActionUtils.tsx:72
+#: src/features/channel/components/MessageActionUtils.tsx:73
 msgid "Clear every reaction from this message?"
 msgstr "Clear every reaction from this message?"
 
@@ -7249,7 +7249,7 @@ msgid "Clear quick CSS?"
 msgstr "Clear quick CSS?"
 
 #. Generic short button / icon label that clears the active search query.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:514
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:518
 #: src/features/theme_studio/sections/TokensSection.tsx:199
 msgid "Clear search"
 msgstr "Clear search"
@@ -7707,7 +7707,7 @@ msgstr "Colon"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:323
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:347
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:154
 msgid "Colon autocomplete"
 msgstr "Colon autocomplete"
@@ -7849,7 +7849,7 @@ msgid "Community"
 msgstr "Community"
 
 #. Short label in the guild at capacity modal. Keep it concise.
-#: src/features/guild/components/alerts/GuildAtCapacityModal.tsx:9
+#: src/features/guild/components/alerts/GuildAtCapacityModal.tsx:8
 msgid "Community at capacity"
 msgstr "Community at capacity"
 
@@ -7882,7 +7882,7 @@ msgid "Community debug"
 msgstr "Community debug"
 
 #. Notification level option indicating the channel inherits the community default.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:763
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:767
 msgid "Community default"
 msgstr "Community default"
 
@@ -8062,7 +8062,7 @@ msgid "Community-wide"
 msgstr "Community-wide"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:276
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:271
 #: src/features/user/components/settings_utils/section_registry/AppearanceSections.ts:242
 msgid "Compact"
 msgstr "Compact"
@@ -8146,7 +8146,7 @@ msgstr "Composer button"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:371
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:395
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:190
 msgid "Composer buttons"
 msgstr "Composer buttons"
@@ -8158,7 +8158,7 @@ msgstr "Composer focus"
 
 #. Button label that opens a dedicated advanced settings modal for configuring screen-share encoder controls.
 #. Button label that opens a dedicated advanced settings modal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:156
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:160
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:162
 msgid "Configure"
 msgstr "Configure"
@@ -8199,7 +8199,7 @@ msgid "Configure role settings and permissions"
 msgstr "Configure role settings and permissions"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:239
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:263
 msgid "Configure search engines used from selected text"
 msgstr "Configure search engines used from selected text"
 
@@ -8209,7 +8209,7 @@ msgid "Configure spellcheck, dictionaries, and personal words"
 msgstr "Configure spellcheck, dictionaries, and personal words"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:271
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:295
 msgid "Configure translator providers used from selected text"
 msgstr "Configure translator providers used from selected text"
 
@@ -8232,7 +8232,7 @@ msgstr "Configure your profile badge"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/channel/components/MentionEveryonePopout.tsx:180
 #: src/features/user/components/modals/EmailChangeModal.tsx:340
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:419
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:443
 msgid "Confirm"
 msgstr "Confirm"
 
@@ -8284,7 +8284,7 @@ msgid "Confirm voice join"
 msgstr "Confirm voice join"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:415
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:439
 msgid "Confirmation"
 msgstr "Confirmation"
 
@@ -8308,7 +8308,7 @@ msgstr "Connect a camera or virtual capture device, then try again."
 
 #. Permission name: allows joining voice channels.
 #. Primary CTA in the mobile voice-channel lobby bottom sheet. Joins the voice channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:265
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:269
 #: src/features/voice/components/bottomsheets/VoiceLobbyBottomSheet.tsx:56
 msgid "Connect to voice"
 msgstr "Connect to voice"
@@ -8469,7 +8469,7 @@ msgid "Contact support"
 msgstr "Contact support"
 
 #. Short label in the authentication content blocked handler. Keep the tone plain and specific.
-#: src/features/auth/components/ContentBlockedHandler.tsx:11
+#: src/features/auth/components/ContentBlockedHandler.tsx:10
 msgid "Content blocked"
 msgstr "Content blocked"
 
@@ -8534,8 +8534,8 @@ msgstr "Context menus can be opened with a left-click (on buttons) or a right-cl
 #: src/features/auth/components/pages/oauth_authorize_page/OAuthAccountStep.tsx:33
 #: src/features/auth/flow/HandoffApprovalFlow.tsx:118
 #: src/features/connection/components/modals/AddConnectionModal.tsx:383
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:711
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:392
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:715
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:397
 #: src/features/user/components/modals/tabs/AuthorizedAppsTab.tsx:181
 msgid "Continue"
 msgstr "Continue"
@@ -8745,7 +8745,7 @@ msgid "Copy code"
 msgstr "Copy code"
 
 #. Developer-mode action that copies a community snowflake/ID to the clipboard.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:727
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:731
 msgid "Copy community ID"
 msgstr "Copy community ID"
 
@@ -8843,7 +8843,7 @@ msgid "Copy invite URL"
 msgstr "Copy invite URL"
 
 #. Generic action label that copies a URL to the clipboard.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:739
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:743
 #: src/features/user/components/modals/tabs/component_gallery_tab/ComponentGalleryTabButtonsTab.tsx:310
 #: src/features/user/components/modals/tabs/component_gallery_tab/index.tsx:146
 msgid "Copy link"
@@ -8870,13 +8870,13 @@ msgid "Copy media to clipboard"
 msgstr "Copy media to clipboard"
 
 #. Message context menu item that copies the message text content to the clipboard.
-#: src/features/channel/components/MessageActionMenu.tsx:91
+#: src/features/channel/components/MessageActionMenu.tsx:92
 msgid "Copy message"
 msgstr "Copy message"
 
 #. Developer-mode action that copies a message snowflake/ID to the clipboard.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:731
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:735
 #: src/features/input/state/input_keybind/shared.ts:277
 msgid "Copy message ID"
 msgstr "Copy message ID"
@@ -8884,7 +8884,7 @@ msgstr "Copy message ID"
 #. Generic action label that copies a permalink to the selected message.
 #. IAR modal: quick-action card title.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:518
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:522
 #: src/features/input/state/input_keybind/shared.ts:273
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:415
 msgid "Copy message link"
@@ -8952,7 +8952,7 @@ msgid "Copy user ID"
 msgstr "Copy user ID"
 
 #. Action that copies a user username (handle) to the clipboard.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:735
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:739
 msgid "Copy username"
 msgstr "Copy username"
 
@@ -9020,7 +9020,7 @@ msgid "Could not load this page"
 msgstr "Could not load this page"
 
 #. Body of the modal shown when a screen share attempt fails. Advises the user to try sharing the full screen.
-#: src/features/voice/components/alerts/ScreenShareFailedModal.tsx:13
+#: src/features/voice/components/alerts/ScreenShareFailedModal.tsx:12
 msgid "Could not start the screen share. The selected source may no longer be available or may have blocked capture. Try sharing your entire screen or monitor instead of a specific window."
 msgstr "Could not start the screen share. The selected source may no longer be available or may have blocked capture. Try sharing your entire screen or monitor instead of a specific window."
 
@@ -9409,7 +9409,7 @@ msgid "Couldn't send invite"
 msgstr "Couldn't send invite"
 
 #. Toast shown when sending an invite (group DM or community) fails.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:703
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:707
 msgid "Couldn't send invite. Try again."
 msgstr "Couldn't send invite. Try again."
 
@@ -9578,7 +9578,7 @@ msgid "Cover"
 msgstr "Cover"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:267
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:262
 #: src/features/user/components/settings_utils/section_registry/AppearanceSections.ts:246
 msgid "Cozy"
 msgstr "Cosy"
@@ -9617,7 +9617,7 @@ msgid "Create a new group with {userName}"
 msgstr "Create a new group with {userName}"
 
 #. Title of the poll creation modal.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:22
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:23
 msgid "Create a Poll"
 msgstr ""
 
@@ -9671,7 +9671,7 @@ msgid "Create category"
 msgstr "Create category"
 
 #. Action label that opens the create-channel flow.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:474
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:478
 msgid "Create channel"
 msgstr "Create channel"
 
@@ -9755,6 +9755,11 @@ msgstr "Create or join a community"
 #. Plus menu item that opens a form to create a poll.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:31
 msgid "Create poll"
+msgstr ""
+
+#. Permission name: allows creating polls.
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:233
+msgid "Create polls"
 msgstr ""
 
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/MobileRoleList.tsx:45
@@ -10064,7 +10069,7 @@ msgid "Custom date range"
 msgstr "Custom date range"
 
 #. Error message in the FluxerTag change modal.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:64
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:65
 msgid "Custom discriminators are not available on this instance"
 msgstr "Custom discriminators aren't available on this instance"
 
@@ -10129,7 +10134,7 @@ msgid "Custom ringtone"
 msgstr "Custom ringtone"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:219
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:243
 msgid "Custom search engine"
 msgstr "Custom search engine"
 
@@ -10198,7 +10203,7 @@ msgid "Custom title bar"
 msgstr "Custom title bar"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:235
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:259
 msgid "Custom translator"
 msgstr "Custom translator"
 
@@ -10235,7 +10240,7 @@ msgid "Custom warning text"
 msgstr "Custom warning text"
 
 #. Last "Custom…" option in dropdown menus that opens a custom-value picker.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:767
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:771
 msgid "Custom…"
 msgstr "Custom…"
 
@@ -10257,7 +10262,7 @@ msgid "Customize interface elements and behaviors."
 msgstr "Customise interface elements and behaviours."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:315
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:339
 msgid "Customize the action bar that appears when hovering over messages"
 msgstr "Customise the action bar that appears when hovering over messages"
 
@@ -10281,7 +10286,7 @@ msgstr "Customise your profile banner"
 msgid "Customize your tag ({discriminatorLabel}) to your liking with {premiumProductName}"
 msgstr "Customise your tag ({discriminatorLabel}) to your liking with {premiumProductName}"
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:381
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:386
 msgid "Customize your tag or keep it when changing your username"
 msgstr "Customise your tag or keep it when changing your username"
 
@@ -10481,7 +10486,7 @@ msgid "Deafen device"
 msgstr "Deafen device"
 
 #. Permission name: allows moderators to deafen other voice participants.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:290
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:294
 msgid "Deafen members"
 msgstr "Deafen members"
 
@@ -10535,7 +10540,7 @@ msgstr "Debug member"
 #. Developer-mode item in the message action bar overflow menu. Opens the message debug modal.
 #. Developer-mode message context menu item that opens an internal debug view for the message.
 #: src/features/channel/components/MessageActionBar.tsx:92
-#: src/features/channel/components/MessageActionMenu.tsx:103
+#: src/features/channel/components/MessageActionMenu.tsx:108
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:66
 msgid "Debug message"
 msgstr "Debug message"
@@ -10543,7 +10548,7 @@ msgstr "Debug message"
 #. Channel details bottom sheet label or action (channel type, settings, toast, confirmation, or notification option).
 #. Developer-mode action that opens a user debug panel.
 #: src/features/channel/components/bottomsheets/channel_details_bottom_sheet/ChannelDetailsBottomSheetShared.ts:167
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:542
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:546
 msgid "Debug user"
 msgstr "Debug user"
 
@@ -10693,7 +10698,7 @@ msgstr "Defaults to off on mobile to preserve battery life and data usage."
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:203
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:215
 #: src/features/emoji/components/stickers/StickerGridItem.tsx:34
-#: src/features/messaging/commands/MessageCommands.tsx:72
+#: src/features/messaging/commands/MessageCommands.tsx:73
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:135
 #: src/features/theme_studio/sections/LibrarySection.tsx:514
 #: src/features/user/components/modals/tabs/account_security_tab/SecurityTab.tsx:399
@@ -10771,7 +10776,7 @@ msgid "Delete application"
 msgstr "Delete application"
 
 #. Generic action label that removes an attachment from the upload tray / message.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:747
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:751
 msgid "Delete attachment"
 msgstr "Delete attachment"
 
@@ -10943,7 +10948,7 @@ msgid "Delete this message"
 msgstr "Delete this message"
 
 #. Error message in the messaging commands. Keep the tone plain and specific.
-#: src/features/messaging/commands/MessageCommands.tsx:68
+#: src/features/messaging/commands/MessageCommands.tsx:69
 msgid "Delete this message? Can't be undone."
 msgstr "Delete this message? This can't be undone."
 
@@ -11075,7 +11080,7 @@ msgstr "Describe what your community is about"
 #. Generic form-field label for a free-form description.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/guild/components/modals/guild_tabs/GuildDiscoveryTab.tsx:402
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:498
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:502
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:137
 msgid "Description"
 msgstr "Description"
@@ -11391,7 +11396,7 @@ msgstr "Direct input"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/channel/components/bottomsheets/channel_details_bottom_sheet/ChannelDetailsBottomSheetShared.ts:14
 #: src/features/channel/components/channel_header_components/developer_tools/MockingMenu.tsx:397
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:562
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:566
 #: src/features/user/components/settings_utils/section_registry/SharedDescriptors.ts:85
 msgid "Direct message"
 msgstr "Direct message"
@@ -11878,7 +11883,7 @@ msgstr "DM & friend request settings"
 #. Channel details bottom sheet label or action (channel type, settings, toast, confirmation, or notification option).
 #. Generic success-toast label confirming that a DM channel was closed.
 #: src/features/channel/components/bottomsheets/channel_details_bottom_sheet/ChannelDetailsBottomSheetShared.ts:87
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:558
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:562
 msgid "DM closed"
 msgstr "DM closed"
 
@@ -12003,7 +12008,7 @@ msgstr "Doesn't block. You can reopen later."
 
 #. Generic form-field / table-column label for an internet domain.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:771
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:775
 #: src/features/user/components/settings_utils/search_index/LinkedAccountsIndex.ts:28
 msgid "Domain"
 msgstr "Domain"
@@ -12232,7 +12237,7 @@ msgstr "Draft"
 msgid "Drag and drop"
 msgstr "Drag and drop"
 
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:295
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:290
 msgid "Drag and drop a sticker file here (one at a time)"
 msgstr "Drag and drop a sticker file here (one at a time)"
 
@@ -12241,7 +12246,7 @@ msgstr "Drag and drop a sticker file here (one at a time)"
 msgid "Drag and drop area for file upload"
 msgstr "Drag and drop area for file upload"
 
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:471
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:470
 msgid "Drag and drop emoji files here"
 msgstr "Drag and drop emoji files here"
 
@@ -12352,7 +12357,7 @@ msgid "Duplicate channel"
 msgstr "Duplicate channel"
 
 #. Label for the duration input.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:42
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:43
 msgid "Duration"
 msgstr ""
 
@@ -12500,7 +12505,7 @@ msgstr "Edit global settings like name, description, and icon."
 
 #. Action label for editing a group DM (name, icon, members).
 #: src/features/channel/components/direct_message/GroupDMWelcomeSection.tsx:102
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:466
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:470
 msgid "Edit group"
 msgstr "Edit group"
 
@@ -12531,7 +12536,7 @@ msgstr "Edit media"
 
 #. Generic action label that opens the message edit composer.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:707
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:711
 #: src/features/input/state/input_keybind/shared.ts:9
 msgid "Edit message"
 msgstr "Edit message"
@@ -12811,12 +12816,12 @@ msgid "Embeds"
 msgstr "Embeds"
 
 #. Toast confirmation after hiding link previews and embeds on a message.
-#: src/features/channel/components/MessageActionUtils.tsx:84
+#: src/features/channel/components/MessageActionUtils.tsx:85
 msgid "Embeds suppressed"
 msgstr "Embeds suppressed"
 
 #. Toast confirmation after re-enabling link previews and embeds on a message.
-#: src/features/channel/components/MessageActionUtils.tsx:80
+#: src/features/channel/components/MessageActionUtils.tsx:81
 msgid "Embeds unsuppressed"
 msgstr "Embeds unsuppressed"
 
@@ -12848,12 +12853,12 @@ msgid "Emoji & sticker packs"
 msgstr "Emoji & sticker packs"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:327
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:351
 msgid "Emoji autocomplete"
 msgstr "Emoji autocomplete"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:379
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:403
 msgid "Emoji button"
 msgstr "Emoji button"
 
@@ -12888,7 +12893,7 @@ msgid "Emoji name must be at most 32 characters long"
 msgstr "Emoji name must be at most 32 characters long"
 
 #. Description in the community emoji upload section. {maxSize} is the formatted size limit.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:95
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:96
 msgid "Emoji names need at least 2 characters and can use letters, numbers, and underscores. Emojis must be under {maxSize}. Static images are resized to 128x128 pixels and compressed automatically. Animated emojis and SVGs must already fit the limit."
 msgstr "Emoji names need at least 2 characters and can use letters, numbers, and underscores. Emojis must be under {maxSize}. Static images are resized to 128x128 pixels and compressed automatically. Animated emojis and SVGs must already fit the limit."
 
@@ -12936,7 +12941,7 @@ msgstr "Emoji packs"
 msgid "Emoji picker"
 msgstr "Emoji picker"
 
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:451
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:450
 msgid "Emoji slots"
 msgstr "Emoji slots"
 
@@ -12961,13 +12966,13 @@ msgid "Emojis"
 msgstr "Emojis"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:347
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:371
 msgid "Emoticon"
 msgstr "Emoticon"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:343
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:367
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:142
 msgid "Emoticons"
 msgstr "Emoticons"
@@ -13136,7 +13141,7 @@ msgstr "Enable mobile push notifications"
 
 #. Generic action label / toggle that turns on push or desktop notifications.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:779
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:783
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:127
 msgid "Enable notifications"
 msgstr "Enable notifications"
@@ -13317,6 +13322,13 @@ msgstr "End grace period"
 msgid "End grace period now?"
 msgstr "End grace period now?"
 
+#. Action label for ending a poll now.
+#. Message context menu item that ends the poll now. Only displayed on poll messages.
+#: src/features/channel/components/MessageActionMenu.tsx:96
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:466
+msgid "End poll now"
+msgstr ""
+
 #. Button label that stops the current screen share.
 #. Voice control menu action to stop sharing the screen.
 #: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:52
@@ -13365,7 +13377,7 @@ msgstr "English (US)"
 #. Noise suppression option label (mobile voice settings). Enhanced engine (DeepFilterNet3).
 #. Noise suppression option label in the voice tab (neural filter). Keep it concise.
 #. Noise suppression option using the enhanced neural filter (DeepFilterNet3). Keep it concise.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:783
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:787
 #: src/features/user/components/modals/tabs/UserVoiceTab.tsx:86
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:51
 #: src/features/voice/components/voice_connection_status/AudioProcessingModal.tsx:47
@@ -13377,6 +13389,11 @@ msgstr "Enhanced"
 msgctxt "noise-suppression-option"
 msgid "Enhanced"
 msgstr "Enhanced"
+
+#. Settings search entry description. One-line summary of what the settings search entry controls.
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:147
+msgid "Ensures file messages appear in the order you sent them"
+msgstr "Ensures file messages appear in the order you sent them"
 
 #. Keyboard key label for confirming a mass-mention warning.
 #. Keyboard shortcut keycap label for Enter. Keep it short.
@@ -13856,7 +13873,7 @@ msgid "Expand"
 msgstr "Expand"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:303
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:327
 msgid "Expand action bar"
 msgstr "Expand action bar"
 
@@ -14059,7 +14076,7 @@ msgstr "Expose the staff-only timezone section in profile settings."
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:319
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:343
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:158
 msgid "Expression autocomplete"
 msgstr "Expression autocomplete"
@@ -14082,7 +14099,7 @@ msgid "Expression packs are not enabled on this instance. Contact your instance 
 msgstr "Expression packs aren't enabled on this instance. Contact your instance administrator for more information."
 
 #. Aria label for the expression picker category nav.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:751
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:755
 msgid "Expression picker categories"
 msgstr "Expression picker categories"
 
@@ -14113,7 +14130,7 @@ msgstr "External"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Warning text in the external link warning modal. Keep the tone plain and specific.
 #: src/features/messaging/components/modals/ExternalLinkWarningModal.tsx:17
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:191
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:215
 msgid "External link warning"
 msgstr "External link warning"
 
@@ -14259,7 +14276,7 @@ msgstr "Failed to load"
 msgid "Failed to load authorized applications"
 msgstr "Failed to load authorised applications"
 
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:444
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:443
 msgid "Failed to load emojis. Try again later."
 msgstr "Failed to load emojis. Try again later."
 
@@ -14283,7 +14300,7 @@ msgid "Failed to load shareable sources."
 msgstr "Failed to load shareable sources."
 
 #. Error message in the guild stickers tab.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:74
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:71
 msgid "Failed to load stickers"
 msgstr "Failed to load stickers"
 
@@ -14333,7 +14350,7 @@ msgid "Failed to pin message"
 msgstr "Failed to pin message"
 
 #. Error message in the guild emoji tab.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:54
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:55
 msgid "Failed to prepare emojis"
 msgstr "Failed to prepare emojis"
 
@@ -14382,12 +14399,12 @@ msgid "Failed to send code. Try again."
 msgstr "Failed to send code. Try again."
 
 #. Error message in the channel and chat user message.
-#: src/features/channel/components/UserMessage.tsx:76
+#: src/features/channel/components/UserMessage.tsx:77
 msgid "Failed to send message."
 msgstr "Failed to send message."
 
 #. Error message in the channel and chat user message.
-#: src/features/channel/components/UserMessage.tsx:72
+#: src/features/channel/components/UserMessage.tsx:73
 msgid "Failed to send message. Hold for options."
 msgstr "Failed to send message. Hold for options."
 
@@ -14479,12 +14496,12 @@ msgid "Failed to upload custom sound"
 msgstr "Failed to upload custom sound"
 
 #. Error message in the emoji upload failure modal. startLabel is a chunk label like "#1"; errorMsg is the server error.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:62
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:63
 msgid "Failed to upload emojis starting at {startLabel}: {errorMsg}"
 msgstr "Failed to upload emojis starting at {startLabel}: {errorMsg}"
 
 #. Error message in the guild emoji tab.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:58
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:59
 msgid "Failed to upload emojis. Try again."
 msgstr "Failed to upload emojis. Please try again."
 
@@ -14578,7 +14595,7 @@ msgid "Feature"
 msgstr "Feature"
 
 #. Short label in the feature temporarily disabled modal.
-#: src/features/app/components/alerts/FeatureTemporarilyDisabledModal.tsx:9
+#: src/features/app/components/alerts/FeatureTemporarilyDisabledModal.tsx:8
 msgid "Feature temporarily disabled"
 msgstr "Feature temporarily disabled"
 
@@ -14620,13 +14637,18 @@ msgstr "File is too large. Maximum size is {maxSize}."
 msgid "File options"
 msgstr "File options"
 
+#. Settings search synonym. Used to match this term when the user types it in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:135
+msgid "File ordering"
+msgstr "File ordering"
+
 #. Title of the file-too-large alert variant that offers a Plutonium upsell.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:38
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:35
 msgid "File size limit exceeded"
 msgstr "File size limit exceeded"
 
 #. Title of the file-too-large alert.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:34
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:31
 msgid "File size too large"
 msgstr "File size too large"
 
@@ -15148,7 +15170,7 @@ msgstr "forward"
 #. Message context menu item that opens the forward-to-channel picker.
 #. Tooltip on the forward button in the inline message hover action bar.
 #: src/features/channel/components/MessageActionBar.tsx:100
-#: src/features/channel/components/MessageActionMenu.tsx:83
+#: src/features/channel/components/MessageActionMenu.tsx:84
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:54
 msgid "Forward"
 msgstr "Forward"
@@ -15476,7 +15498,7 @@ msgid "Gap"
 msgstr "Gap"
 
 #. Short label in the temporary invite requires presence modal.
-#: src/features/app/components/alerts/TemporaryInviteRequiresPresenceModal.tsx:9
+#: src/features/app/components/alerts/TemporaryInviteRequiresPresenceModal.tsx:8
 msgid "Gateway connection required"
 msgstr "Gateway connection required"
 
@@ -15537,7 +15559,7 @@ msgid "Germany"
 msgstr "Germany"
 
 #. Generic upsell CTA button to start the Plutonium purchase flow. Preserve {premiumProductName}.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:795
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:799
 msgid "Get {premiumProductName}"
 msgstr "Get {premiumProductName}"
 
@@ -15552,7 +15574,7 @@ msgid "Get {premiumProductName} to customize your tag"
 msgstr "Get {premiumProductName} to customise your tag"
 
 #. Description text in the FluxerTag change modal. Preserve {premiumProductName}; it is inserted by code. Keep the tone plain and specific.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:55
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:56
 msgid "Get {premiumProductName} to customize your tag or keep it when changing your username"
 msgstr "Get {premiumProductName} to customise your tag or keep it when changing your username"
 
@@ -15590,7 +15612,7 @@ msgid "GIF"
 msgstr "GIF"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:375
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:399
 msgid "GIF button"
 msgstr "GIF button"
 
@@ -15793,7 +15815,7 @@ msgid "Give everyone on this instance the highest premium limits."
 msgstr "Give everyone on this instance the highest premium limits."
 
 #. Modal body shown when the role-edit form is submitted with an empty role name.
-#: src/features/app/components/alerts/RoleNameBlankModal.tsx:13
+#: src/features/app/components/alerts/RoleNameBlankModal.tsx:12
 msgid "Give the role a name before saving."
 msgstr "Give the role a name before saving."
 
@@ -15835,7 +15857,7 @@ msgid "Go back and enter a valid email."
 msgstr "Go back and enter a valid email."
 
 #. Label of the button to go back to vote when the user is looking at poll results.
-#: src/features/channel/components/Poll.tsx:22
+#: src/features/channel/components/Poll.tsx:27
 msgid "Go back to vote"
 msgstr ""
 
@@ -15929,7 +15951,7 @@ msgid "Go to third community"
 msgstr "Go to third community"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:263
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:287
 msgid "Google lens"
 msgstr "Google Lens"
 
@@ -16440,7 +16462,7 @@ msgid "Hide avatars"
 msgstr "Hide avatars"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:455
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:479
 msgid "Hide channels you've muted from community sidebars"
 msgstr "Hide channels you've muted from community sidebars"
 
@@ -16466,7 +16488,7 @@ msgid "Hide expiry footnotes"
 msgstr "Hide expiry footnotes"
 
 #. Toggle / action label that collapses or hides the favorites section.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:695
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:699
 msgid "Hide favorites"
 msgstr "Hide favourites"
 
@@ -16492,7 +16514,7 @@ msgid "Hide members"
 msgstr "Hide members"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:447
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:471
 msgid "Hide muted"
 msgstr "Hide muted chats"
 
@@ -16503,13 +16525,13 @@ msgstr "Hide muted channels"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Short label for an advanced sidebar preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:132
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:435
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:136
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:459
 msgid "Hide muted channels by default"
 msgstr "Hide muted channels by default"
 
 #. Confirmation prompt in advanced settings.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:136
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:140
 msgid "Hide muted channels by default?"
 msgstr "Hide muted channels by default?"
 
@@ -16682,7 +16704,7 @@ msgid "Hours"
 msgstr "Hours"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:291
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:315
 msgid "Hover buttons"
 msgstr "Hover buttons"
 
@@ -16852,7 +16874,7 @@ msgstr "Identity"
 
 #. Generic presence-status label indicating the user is idle / AFK.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:639
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:643
 #: src/features/user/components/settings_utils/search_index/NotificationsIndex.ts:46
 msgid "Idle"
 msgstr "Idle"
@@ -16955,11 +16977,11 @@ msgstr "If you pay with a card in PLN, it still needs to be issued in Poland for
 msgid "If you prefer, you can switch to standard USD pricing instead."
 msgstr "If you prefer, you can switch to standard USD pricing instead."
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:349
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:354
 msgid "If you save this username, your tag will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires on <0>{premiumExpiresAtLabel}</0>, unless it renews."
 msgstr "If you save this username, your tag will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires on <0>{premiumExpiresAtLabel}</0>, unless it renews."
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:356
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:361
 msgid "If you save this username, your tag will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires, unless it renews."
 msgstr "If you save this username, your tag will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires, unless it renews."
 
@@ -17090,7 +17112,7 @@ msgid "Image dimensions must be between {min}x{min2} and {max}x{max2} pixels."
 msgstr "Image dimensions must be between {min}x{min2} and {max}x{max2} pixels."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:259
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:283
 msgid "Image lookup"
 msgstr "Image lookup"
 
@@ -17105,12 +17127,12 @@ msgid "Image preview"
 msgstr "Image preview"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:251
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:275
 msgid "Image search"
 msgstr "Image search"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:267
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:291
 msgid "Image search provider"
 msgstr "Image search provider"
 
@@ -17133,7 +17155,7 @@ msgstr "Image upload"
 msgid "Images"
 msgstr "Images"
 
-#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:38
+#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:35
 msgid "Images pasted from your clipboard are sent as attachments, and you don't have permission to attach files in this channel."
 msgstr "Images pasted from your clipboard are sent as attachments, and you don't have permission to attach files in this channel."
 
@@ -17334,7 +17356,7 @@ msgstr "Inappropriate profile"
 
 #. Generic header / tab label for the unread / mentions / bookmarks inbox.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:486
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:490
 #: src/features/user/components/settings_utils/search_index/SharedDescriptors.ts:21
 msgid "Inbox"
 msgstr "Inbox"
@@ -17387,7 +17409,7 @@ msgstr "Include the community ID."
 #. Generic label for an incoming voice or video call.
 #. Notification sound setting label. Ringtone for an incoming DM or group DM call.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:502
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:506
 #: src/features/notification/utils/SoundLabels.ts:48
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:171
 msgid "Incoming call"
@@ -18003,7 +18025,7 @@ msgstr "Inviter:"
 #. Generic section / tab label for the invites list.
 #: src/features/channel/components/modals/channel_tabs/ChannelInvitesTab.tsx:191
 #: src/features/guild/components/modals/guild_tabs/GuildInvitesTab.tsx:53
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:683
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:687
 msgid "Invites"
 msgstr "Invites"
 
@@ -18059,7 +18081,7 @@ msgstr "Invites disabled nagbar"
 
 #. Button or menu action label in the invite accept modal. Keep it concise.
 #. Button or menu action label in the invites disabled modal. Keep it concise.
-#: src/features/invite/components/alerts/InvitesDisabledModal.tsx:10
+#: src/features/invite/components/alerts/InvitesDisabledModal.tsx:9
 #: src/features/invite/components/modals/InviteAcceptModal.tsx:49
 msgid "Invites paused"
 msgstr "Invites paused"
@@ -18204,7 +18226,7 @@ msgid "Join call"
 msgstr "Join call"
 
 #. Generic action label that accepts a community invite / joins a community.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:679
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:683
 msgid "Join community"
 msgstr "Join community"
 
@@ -18291,7 +18313,7 @@ msgid "Joined {productName}"
 msgstr "Joined {productName}"
 
 #. Generic short action label that scrolls/navigates to a specific message.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:494
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:498
 #: src/features/messaging/components/popouts/RecentMentionsContent.tsx:204
 msgid "Jump"
 msgstr "Jump"
@@ -18336,7 +18358,7 @@ msgid "Jump to message"
 msgstr "Jump to message"
 
 #. Label in the channel and chat user message. Preserve {displayName}, {formattedDate}; they are inserted by code.
-#: src/features/channel/components/UserMessage.tsx:63
+#: src/features/channel/components/UserMessage.tsx:64
 msgid "Jump to message from {displayName}, sent {formattedDate}"
 msgstr "Jump to message from {displayName}, sent {formattedDate}"
 
@@ -18529,7 +18551,7 @@ msgid "Kick a member from this community."
 msgstr "Remove a member from this community."
 
 #. Moderation action label that removes a member from a community without banning.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:675
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:679
 msgid "Kick member"
 msgstr "Kick member"
 
@@ -18687,7 +18709,7 @@ msgid "Leave call"
 msgstr "Leave call"
 
 #. Destructive action label that removes the current user from a community.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:671
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:675
 msgid "Leave community"
 msgstr "Leave community"
 
@@ -18999,7 +19021,7 @@ msgid "Link underline"
 msgstr "Link underline"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:195
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:219
 msgid "Link warnings"
 msgstr "Link warnings"
 
@@ -19462,7 +19484,7 @@ msgid "Manage blocked users"
 msgstr "Manage blocked users"
 
 #. Channel-scoped permission name: allows editing this channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:302
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:306
 msgid "Manage channel"
 msgstr "Manage channel"
 
@@ -19515,7 +19537,7 @@ msgid "Manage payment methods"
 msgstr "Manage payment methods"
 
 #. Channel-scoped permission name: allows editing permission overwrites.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:306
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:310
 msgid "Manage permissions"
 msgstr "Manage permissions"
 
@@ -19556,7 +19578,7 @@ msgstr "Manual desktop update"
 #. Action label in the inbox popout overflow menu. Marks every inbox channel as read.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/messaging/components/popouts/InboxPopout.tsx:42
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:411
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:435
 msgid "Mark all as read"
 msgstr "Mark all as read"
 
@@ -19578,7 +19600,7 @@ msgid "Mark all inbox channels as read"
 msgstr "Mark all inbox channels as read"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:431
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:455
 msgid "Mark all unread inbox channels as read immediately, without asking to confirm"
 msgstr "Mark all unread inbox channels as read immediately, without asking to confirm"
 
@@ -19603,7 +19625,7 @@ msgstr "Mark as spoiler"
 
 #. Generic action label that flips a channel back to unread.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:667
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:671
 #: src/features/input/state/input_keybind/shared.ts:33
 msgid "Mark as unread"
 msgstr "Mark as unread"
@@ -19679,7 +19701,7 @@ msgid "Markers below slider"
 msgstr "Markers below slider"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:143
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:167
 msgid "Marketing parameters"
 msgstr "Marketing parameters"
 
@@ -19786,7 +19808,7 @@ msgid "Mature content media gate"
 msgstr "Mature content media gate"
 
 #. Error message in the mature content rejected modal.
-#: src/features/moderation/components/alerts/MatureContentRejectedModal.tsx:9
+#: src/features/moderation/components/alerts/MatureContentRejectedModal.tsx:8
 msgid "Mature content not allowed"
 msgstr "Mature content not allowed"
 
@@ -19882,7 +19904,7 @@ msgid "Maximum screen share bitrate"
 msgstr "Maximum screen share bitrate"
 
 #. Short label in the max favorite memes modal.
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:33
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:34
 #: src/features/expressions/components/modals/GiftAcceptModal.tsx:220
 #: src/features/expressions/components/modals/GiftAcceptModal.tsx:277
 msgid "Maybe later"
@@ -20084,7 +20106,7 @@ msgstr "members"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/app/components/dialogs/shared/AddOverridePopout.tsx:285
 #: src/features/channel/components/bottomsheets/ChannelDetailsBottomSheet.tsx:591
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:490
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:494
 #: src/features/user/components/settings_utils/section_registry/AppearanceSections.ts:346
 msgid "Members"
 msgstr "Members"
@@ -20197,7 +20219,7 @@ msgstr "mentioned role"
 #. Generic section / tab label for the mentions inbox.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/guild/components/modals/GuildNotificationSettingsModal.tsx:135
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:643
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:647
 #: src/features/user/components/settings_utils/section_registry/SharedDescriptors.ts:166
 msgid "Mentions"
 msgstr "Mentions"
@@ -20266,7 +20288,7 @@ msgid "Message @"
 msgstr "Message @"
 
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:279
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:303
 msgid "Message action bar"
 msgstr "Message action bar"
 
@@ -20288,7 +20310,7 @@ msgid "Message badge"
 msgstr "Message badge"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:311
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:335
 msgid "Message buttons"
 msgstr "Message buttons"
 
@@ -20311,7 +20333,7 @@ msgstr "Message contains attached media"
 #. Title of the developer-mode message debug modal opened from the message context menu.
 #. Title of the developer-mode message debug modal.
 #: src/features/channel/components/MessageActionBar.tsx:84
-#: src/features/channel/components/MessageActionMenu.tsx:71
+#: src/features/channel/components/MessageActionMenu.tsx:72
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:62
 msgid "Message debug"
 msgstr "Message debug"
@@ -20364,7 +20386,7 @@ msgid "Message history threshold updated"
 msgstr "Message history threshold updated"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:287
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:311
 msgid "Message hover"
 msgstr "Message hover"
 
@@ -20377,7 +20399,7 @@ msgstr "Message input"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:367
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:391
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:194
 msgid "Message input buttons"
 msgstr "Message input buttons"
@@ -20578,7 +20600,7 @@ msgid "Microphone gain"
 msgstr "Microphone gain"
 
 #. Title of the modal shown when microphone permission is denied. Keep tone plain.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:13
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:12
 msgid "Microphone permission required"
 msgstr "Microphone permission required"
 
@@ -20866,7 +20888,7 @@ msgid "More actions for {displayName}"
 msgstr "More actions for {displayName}"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:307
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:331
 msgid "More button"
 msgstr "More button"
 
@@ -20977,7 +20999,7 @@ msgid "Move item up"
 msgstr "Move item up"
 
 #. Permission name: allows moving members between voice channels.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:294
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:298
 msgid "Move members"
 msgstr "Move members"
 
@@ -21113,7 +21135,7 @@ msgid "Mute calls"
 msgstr "Mute calls"
 
 #. Action label that mutes notifications for a channel category.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:575
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:579
 msgid "Mute category"
 msgstr "Mute category"
 
@@ -21128,7 +21150,7 @@ msgid "Mute communities"
 msgstr "Mute communities"
 
 #. Generic action label that mutes notifications for an entire community.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:550
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:554
 msgid "Mute community"
 msgstr "Mute community"
 
@@ -21158,12 +21180,12 @@ msgid "Mute entrance sound"
 msgstr "Mute entrance sound"
 
 #. Action label that mutes notifications for the favourites pseudo-guild.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:687
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:691
 msgid "Mute favourites"
 msgstr "Mute favourites"
 
 #. Permission name: allows moderators to mute other voice participants.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:286
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:290
 msgid "Mute members"
 msgstr "Mute members"
 
@@ -21215,7 +21237,7 @@ msgstr "Muted"
 #: src/features/app/components/layout/sidebar_nav/GuildListItem.tsx:80
 #: src/features/app/components/layout/VoiceStateIcons.tsx:19
 #: src/features/ui/avatars/AvatarWithPresence.tsx:15
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:439
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:463
 #: src/features/user/components/settings_utils/section_registry/SharedDescriptors.ts:73
 #: src/features/voice/components/voice_participant_tile/shared.ts:75
 #: src/lib/overlay/OverlayContextMenu.tsx:24
@@ -21229,7 +21251,7 @@ msgstr "Muted by moderators"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:443
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:467
 #: src/features/user/components/settings_utils/section_registry/SharedDescriptors.ts:69
 msgid "Muted channels"
 msgstr "Muted channels"
@@ -21552,7 +21574,7 @@ msgid "Neutral (inherit)"
 msgstr "Neutral (inherit)"
 
 #. Generic short option label for "never" in time / frequency dropdowns.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:647
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:651
 msgid "Never"
 msgstr "Never"
 
@@ -21584,7 +21606,7 @@ msgid "NEW"
 msgstr "NEW"
 
 #. Description text in the new account guild limit modal.
-#: src/features/guild/components/alerts/NewAccountGuildLimitModal.tsx:13
+#: src/features/guild/components/alerts/NewAccountGuildLimitModal.tsx:12
 msgid "New accounts can join up to 10 communities in the first 24 hours. Try again later."
 msgstr "New accounts can join up to 10 communities in the first 24 hours. Please try again later."
 
@@ -21601,20 +21623,20 @@ msgid "New category"
 msgstr "New category"
 
 #. Short confirmation button label in advanced settings.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:144
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:148
 msgid "New communities only"
 msgstr "New communities only"
 
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:618
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:635
 msgid "New communities you join will automatically have muted channels hidden. Would you also like to apply this setting to all your existing communities?"
 msgstr "New communities you join will automatically have muted channels hidden. Would you also like to apply this setting to all your existing communities?"
 
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:649
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:666
 msgid "New communities you join will no longer have muted channels hidden automatically. Would you also like to show muted channels in all your existing communities?"
 msgstr "New communities you join will no longer have muted channels hidden automatically. Would you also like to show muted channels in all your existing communities?"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:451
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:475
 msgid "New community muted"
 msgstr "New community muted"
 
@@ -21710,7 +21732,7 @@ msgstr "Newest first"
 #. Primary button in the required-action modal. Moves to the next carousel step.
 #: src/features/app/components/setup/SelfHostedSetupWizardGate.tsx:79
 #: src/features/auth/components/modals/required_action/RequiredActionDescriptors.ts:154
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:715
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:719
 msgid "Next"
 msgstr "Next"
 
@@ -21924,7 +21946,7 @@ msgid "No custom shortcuts yet."
 msgstr "No custom shortcuts yet."
 
 #. Generic short empty-state body shown when an entity has no description set.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:651
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:655
 msgid "No description provided."
 msgstr "No description provided."
 
@@ -21947,11 +21969,11 @@ msgid "No embeds returned"
 msgstr "No embeds returned"
 
 #. Empty-state text in the guild emoji tab.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:46
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:47
 msgid "No emoji slots available"
 msgstr "No emoji slots available"
 
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:479
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:478
 msgid "No emojis found matching your search."
 msgstr "No emojis found matching your search."
 
@@ -22202,7 +22224,7 @@ msgid "No scheduled messages"
 msgstr "No scheduled messages"
 
 #. Body of the screen-share-unsupported modal shown when xdg-desktop-portal returns no capturable sources.
-#: src/features/voice/components/alerts/ScreenShareUnsupportedModal.tsx:19
+#: src/features/voice/components/alerts/ScreenShareUnsupportedModal.tsx:18
 msgid "No screens or windows were returned by the Linux screen sharing portal. Try again after checking that your desktop environment allows screen capture."
 msgstr "No screens or windows were returned by the Linux screen sharing portal. Try again after checking that your desktop environment allows screen capture."
 
@@ -22230,17 +22252,17 @@ msgid "No specific scopes requested."
 msgstr "No specific scopes requested."
 
 #. Empty-state text in the guild stickers tab.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:61
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:58
 msgid "No sticker slots available"
 msgstr "No sticker slots available"
 
 #. Empty-state text in the guild stickers tab.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:57
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:54
 msgid "No stickers found"
 msgstr "No stickers found"
 
 #. Empty-state text in the guild stickers tab.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:70
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:67
 msgid "No stickers found matching your search."
 msgstr "No stickers found matching your search."
 
@@ -22367,7 +22389,7 @@ msgid "Noise suppression: {noiseSuppressionLabel}"
 msgstr "Noise suppression: {noiseSuppressionLabel}"
 
 #. Section heading for static emoji in community emoji settings.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:100
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:101
 msgid "Non-animated emoji ({emojiCount})"
 msgstr "Non-animated emoji ({emojiCount})"
 
@@ -22532,7 +22554,7 @@ msgstr "Notification volume"
 #. Generic section header / tab label for the notifications area.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/app/components/layout/MobileBottomNav.tsx:131
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:699
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:703
 #: src/features/notification/components/pages/NotificationsPage.tsx:43
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedSettingsCategories.ts:18
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:30
@@ -22621,7 +22643,7 @@ msgid "Off"
 msgstr "Off"
 
 #. Generic presence-status label indicating the user is offline.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:635
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:639
 msgid "Offline"
 msgstr "Offline"
 
@@ -22685,7 +22707,7 @@ msgid "One or more attachments couldn't be read or uploaded. The file may have b
 msgstr "One or more attachments couldn't be read or uploaded. The file may have been moved or deleted. Add it again and retry."
 
 #. Body of the file-too-large alert for ambiguous count (single or multiple) over the per-file size limit.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:30
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:27
 msgid "One or more files you're trying to upload exceed the maximum size limit of {maxSizeFormatted} per file."
 msgstr "One or more files you're trying to upload exceed the maximum size limit of {maxSizeFormatted} per file."
 
@@ -22822,7 +22844,7 @@ msgstr "Only the selected ones"
 msgid "Only Visionary members can join this community. Your access may have changed since this screen was opened."
 msgstr "Only Visionary members can join this community. Your access may have changed since this screen was opened."
 
-#: src/features/channel/components/UserMessage.tsx:485
+#: src/features/channel/components/UserMessage.tsx:497
 msgid "Only you can see this message. <0>Dismiss</0>"
 msgstr "Only you can see this message. <0>Dismiss</0>"
 
@@ -23417,6 +23439,11 @@ msgstr "or send the gift link to a friend:"
 #: src/features/user/components/modals/tabs/component_gallery_tab/MarkdownTab.tsx:41
 msgid "Ordered"
 msgstr "Ordered"
+
+#. Settings search synonym. Used to match this term when the user types it in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:139
+msgid "Ordered upload"
+msgstr "Ordered upload"
 
 #. Error message in the channel and chat reply preview.
 #: src/features/channel/components/ReplyPreview.tsx:29
@@ -24123,12 +24150,12 @@ msgid "Pick the rule to review."
 msgstr "Pick the rule to review."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:335
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:359
 msgid "Pick what appears when you type a colon in the message input"
 msgstr "Pick what appears when you type a colon in the message input"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:387
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:411
 msgid "Pick which buttons show in the message input"
 msgstr "Choose which buttons appear in the message input"
 
@@ -24149,7 +24176,7 @@ msgstr "Picture-in-picture"
 
 #. Confirm button label on the pin message alert.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/channel/components/MessageActionUtils.tsx:64
+#: src/features/channel/components/MessageActionUtils.tsx:65
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:70
 msgid "Pin"
 msgstr "Pin"
@@ -24167,8 +24194,8 @@ msgstr "Pin group DM"
 #. Generic action label that pins a message to the channel pins.
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
 #. Title of the confirmation alert shown when pinning a message.
-#: src/features/channel/components/MessageActionUtils.tsx:56
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:534
+#: src/features/channel/components/MessageActionUtils.tsx:57
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:538
 #: src/features/input/state/input_keybind/shared.ts:13
 msgid "Pin message"
 msgstr "Pin message"
@@ -24184,7 +24211,7 @@ msgid "Pin messages here for everyone to see."
 msgstr "Pin messages here for everyone to see."
 
 #. Body of the confirmation alert shown when pinning a message.
-#: src/features/channel/components/MessageActionUtils.tsx:60
+#: src/features/channel/components/MessageActionUtils.tsx:61
 msgid "Pin this message to the channel for everyone to see."
 msgstr "Pin this message to the channel for everyone to see."
 
@@ -24218,7 +24245,7 @@ msgid "pinned"
 msgstr "Pinned"
 
 #. Generic short toast / status label confirming a DM was pinned.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:655
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:659
 msgid "Pinned DM"
 msgstr "Pinned DM"
 
@@ -24745,7 +24772,7 @@ msgid "Prioritize speakers"
 msgstr "Prioritise speakers"
 
 #. Permission name: allows a voice participant to be heard over others.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:282
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:286
 msgid "Priority speaker"
 msgstr "Priority speaker"
 
@@ -24769,7 +24796,7 @@ msgid "Privacy policy"
 msgstr "Privacy policy"
 
 #. Generic section heading / button label for the privacy settings area.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:663
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:667
 msgid "Privacy settings"
 msgstr "Privacy settings"
 
@@ -24966,7 +24993,7 @@ msgid "Promotion or instructions encouraging self-harm or eating disorders."
 msgstr "Promotion or instructions encouraging self-harm or eating disorders."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:423
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:447
 msgid "Prompt"
 msgstr "Prompt"
 
@@ -25220,7 +25247,7 @@ msgid "quality limited"
 msgstr "quality limited"
 
 #. Label for the question input.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:26
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:27
 msgid "Question"
 msgstr ""
 
@@ -25247,7 +25274,7 @@ msgid "Quick CSS replaced from {fileName}."
 msgstr "Quick CSS replaced from {fileName}."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:295
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:319
 msgid "Quick reactions"
 msgstr "Quick reactions"
 
@@ -25365,7 +25392,7 @@ msgstr "React with {emojiShortcode}"
 
 #. Generic short section / tab / aria label for emoji reactions.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:659
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:663
 #: src/features/messaging/components/modals/MessageReactionsModal.tsx:144
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:10
 msgid "Reactions"
@@ -25398,7 +25425,7 @@ msgid "Read message aloud"
 msgstr "Read message aloud"
 
 #. Permission name: allows seeing earlier messages in a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:233
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:237
 msgid "Read message history"
 msgstr "Read message history"
 
@@ -25671,7 +25698,7 @@ msgid "Reference copied."
 msgstr "Reference copied."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:147
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:171
 msgid "Referral parameters"
 msgstr "Referral parameters"
 
@@ -25940,7 +25967,7 @@ msgid "Remove {userName} from your friends?"
 msgstr "Remove {userName} from your friends?"
 
 #. Confirm button label on the remove-all-reactions alert. Destructive.
-#: src/features/channel/components/MessageActionUtils.tsx:76
+#: src/features/channel/components/MessageActionUtils.tsx:77
 msgid "Remove all"
 msgstr "Remove all"
 
@@ -25952,8 +25979,8 @@ msgstr "Remove all {emojiNameWithColons} reactions from this message?"
 #. Destructive message context menu item for moderators that clears every reaction on a message.
 #. Message action that removes every reaction from the selected message.
 #. Title of the confirmation alert shown when clearing every reaction on a message.
-#: src/features/channel/components/MessageActionMenu.tsx:79
-#: src/features/channel/components/MessageActionUtils.tsx:68
+#: src/features/channel/components/MessageActionMenu.tsx:80
+#: src/features/channel/components/MessageActionUtils.tsx:69
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:70
 msgid "Remove all reactions"
 msgstr "Remove all reactions"
@@ -25968,8 +25995,8 @@ msgstr "Remove attachment"
 msgid "Remove authenticator app"
 msgstr "Remove authenticator app"
 
-#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:406
-#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:442
+#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:404
+#: src/features/user/components/modals/tabs/my_profile_tab/AvatarUploader.tsx:440
 msgid "Remove avatar"
 msgstr "Remove avatar"
 
@@ -25984,7 +26011,7 @@ msgid "Remove banner"
 msgstr "Remove banner"
 
 #. Action label that removes a saved bookmark.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:478
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:482
 msgid "Remove bookmark"
 msgstr "Remove bookmark"
 
@@ -26139,7 +26166,7 @@ msgid "Remove translator"
 msgstr "Remove translator"
 
 #. Label of the button to remove the user's vote.
-#: src/features/channel/components/Poll.tsx:26
+#: src/features/channel/components/Poll.tsx:31
 msgid "Remove vote"
 msgstr ""
 
@@ -26186,7 +26213,7 @@ msgid "Removed from favorite GIFs"
 msgstr "Removed from favourite GIFs"
 
 #. Toast confirming an item was removed from the favorites list.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:611
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:615
 msgid "Removed from favorites"
 msgstr "Removed from favourites"
 
@@ -26368,7 +26395,7 @@ msgstr "Replies"
 
 #. Generic action label that opens the reply composer for a message.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:607
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:611
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:71
 msgid "Reply"
 msgstr "Reply"
@@ -26463,7 +26490,7 @@ msgstr "Report issue"
 
 #. Generic action label that opens the report flow targeting a specific message.
 #. Modal title for the IAR flow when reporting a specific message.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:530
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:534
 #: src/features/moderation/components/report_modal/IARModalContext.ts:22
 msgid "Report message"
 msgstr "Report message"
@@ -26993,14 +27020,14 @@ msgid "Reverify your phone number to continue using {productName}."
 msgstr "Re-verify your phone number to continue using {productName}."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:247
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:271
 msgid "Reverse image"
 msgstr "Reverse image"
 
 #. Generic action label that runs a reverse-image search on the selected media.
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:603
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:243
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:607
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:267
 msgid "Reverse image search"
 msgstr "Reverse image search"
 
@@ -27010,7 +27037,7 @@ msgid "Reverse image search provider"
 msgstr "Reverse image search provider"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:275
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:299
 msgid "Reverse image search providers"
 msgstr "Reverse image search providers"
 
@@ -27075,7 +27102,7 @@ msgid "Review the permissions {productName} uses for voice, video, screen sharin
 msgstr "Review the permissions {productName} uses for voice, video, screen sharing, and shortcuts."
 
 #. Intro text in the error modal shown after some emoji uploads fail.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:71
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:72
 msgid "Review these files and try again with smaller or simpler images."
 msgstr "Review these files and try again with smaller or simpler images."
 
@@ -27246,7 +27273,7 @@ msgid "Role name"
 msgstr "Role name"
 
 #. Validation modal title when the role-edit form is submitted with an empty role name.
-#: src/features/app/components/alerts/RoleNameBlankModal.tsx:9
+#: src/features/app/components/alerts/RoleNameBlankModal.tsx:8
 msgid "Role name is required"
 msgstr "Role name is required"
 
@@ -27355,7 +27382,7 @@ msgid "Same time as you"
 msgstr "Same time as you"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:155
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:179
 msgid "Sanitize link"
 msgstr "Sanitise link"
 
@@ -27476,7 +27503,7 @@ msgid "Saved media autocomplete"
 msgstr "Saved media autocomplete"
 
 #. Short label in the max favorite memes modal.
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:15
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:16
 msgid "Saved media limit reached"
 msgstr "Saved media limit reached"
 
@@ -27565,7 +27592,7 @@ msgstr "Screen"
 
 #. Section heading for screen-reader related accessibility settings.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:599
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:603
 #: src/features/user/components/settings_utils/section_registry/AccessibilitySections.ts:51
 msgid "Screen reader"
 msgstr "Screen reader"
@@ -27583,7 +27610,7 @@ msgstr "Screen reader announcements"
 
 #. Heading in the screen-share picker when macOS screen recording permission is missing.
 #. Title of the modal shown when screen recording permission is denied. Keep tone plain.
-#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:21
+#: src/features/permissions/system/components/MediaPermissionBlockedModal.tsx:20
 #: src/features/voice/components/modals/screen_share_picker_modal/ScreenSharePickerDisplayPermissionPrompt.tsx:18
 msgid "Screen recording permission required"
 msgstr "Screen recording permission required"
@@ -27616,7 +27643,7 @@ msgid "Screen share encoder controls"
 msgstr "Screen share encoder controls"
 
 #. Title of a modal shown when an active screen share stops unexpectedly.
-#: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:111
+#: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:110
 msgctxt "screen-share"
 msgid "Screen share ended"
 msgstr "Screen share ended"
@@ -27703,17 +27730,17 @@ msgid "Screen sharing codec"
 msgstr "Screen sharing codec"
 
 #. Title of the modal shown when a screen share attempt fails due to a video source error.
-#: src/features/voice/components/alerts/ScreenShareFailedModal.tsx:9
+#: src/features/voice/components/alerts/ScreenShareFailedModal.tsx:8
 msgid "Screen sharing failed"
 msgstr "Screen sharing failed"
 
 #. Body of the screen-share-unsupported modal. Mentions specific browsers and OSes; keep all proper nouns intact.
-#: src/features/voice/components/alerts/ScreenShareUnsupportedModal.tsx:13
+#: src/features/voice/components/alerts/ScreenShareUnsupportedModal.tsx:12
 msgid "Screen sharing is not supported on this device or browser. This feature requires a desktop browser that supports screen sharing, such as Chrome, Firefox, or Edge on Windows, macOS, or Linux."
 msgstr "Screen sharing isn't supported on this device or browser. This feature requires a desktop browser that supports screen sharing, such as Chrome, Firefox, or Edge on Windows, macOS, or Linux."
 
 #. Title of the modal shown when screen sharing is not supported on the current device / browser.
-#: src/features/voice/components/alerts/ScreenShareUnsupportedModal.tsx:9
+#: src/features/voice/components/alerts/ScreenShareUnsupportedModal.tsx:8
 msgid "Screen sharing not supported"
 msgstr "Screen sharing not supported"
 
@@ -27753,15 +27780,15 @@ msgstr "Scroll down to view all the perks included with {premiumProductName}"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the whats new modal.
 #: src/features/app/components/whats_new/WhatsNewModal.tsx:28
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:395
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:419
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:178
 msgid "Scroll to bottom"
 msgstr "Scroll to bottom"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Short label for an advanced message input preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:124
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:391
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:128
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:415
 msgid "Scroll to bottom when sending a message"
 msgstr "Scroll to bottom when sending a message"
 
@@ -27813,7 +27840,7 @@ msgid "Search bans"
 msgstr "Search bans"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:255
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:279
 msgid "Search by image"
 msgstr "Search by image"
 
@@ -27850,17 +27877,17 @@ msgid "Search countries…"
 msgstr "Search countries…"
 
 #. Button or menu action label in the guild emoji tab. Keep it concise.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:91
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:92
 msgid "Search emojis"
 msgstr "Search emojis"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:207
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:231
 msgid "Search engine"
 msgstr "Search engine"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:203
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:227
 msgid "Search engines"
 msgstr "Search engines"
 
@@ -27990,7 +28017,7 @@ msgid "Search scope: {label}"
 msgstr "Search scope: {label}"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:215
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:239
 msgid "Search selected text"
 msgstr "Search selected text"
 
@@ -28015,7 +28042,7 @@ msgid "Search shortcuts…"
 msgstr "Search shortcuts…"
 
 #. Button or menu action label in the guild stickers tab. Keep it concise.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:49
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:46
 msgid "Search stickers"
 msgstr "Search stickers"
 
@@ -28303,12 +28330,12 @@ msgid "Select media size for uploaded attachments"
 msgstr "Select media size for uploaded attachments"
 
 #. Small explanatory text instructing the user to select one answer on the poll.
-#: src/features/channel/components/Poll.tsx:14
+#: src/features/channel/components/Poll.tsx:19
 msgid "Select one answer"
 msgstr ""
 
 #. Small explanatory text instructing the user to select one or multiple answers on the poll.
-#: src/features/channel/components/Poll.tsx:18
+#: src/features/channel/components/Poll.tsx:23
 msgid "Select one or multiple answers"
 msgstr ""
 
@@ -28493,7 +28520,7 @@ msgstr "Send another report"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:383
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:407
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:170
 msgid "Send button"
 msgstr "Send button"
@@ -28508,6 +28535,13 @@ msgstr "Send code"
 #: src/features/moderation/components/report/ReportStepDetails.tsx:302
 msgid "Send DSA report"
 msgstr "Send DSA report"
+
+#. Settings search entry label. Names the settings search entry in the settings UI.
+#. Short label for an advanced message input preference.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:112
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:127
+msgid "Send file messages in order"
+msgstr "Send file messages in order"
 
 #. Button or menu action label in the user profile mobile sheet. Keep it concise.
 #. Button or menu action label in the user profile modal. Keep it concise.
@@ -28675,7 +28709,7 @@ msgid "Sensitive media"
 msgstr "Sensitive media"
 
 #. Generic short status label confirming an item (invite, gift, theme link) was sent.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:803
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:807
 msgid "Sent"
 msgstr "Sent"
 
@@ -28701,10 +28735,20 @@ msgstr "sent an embed"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:399
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:423
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:182
 msgid "Sent messages"
 msgstr "Sent messages"
+
+#. Settings search synonym. Used to match this term when the user types it in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:131
+msgid "Sequential send"
+msgstr "Sequential send"
+
+#. Settings search synonym. Used to match this term when the user types it in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:143
+msgid "Serial send"
+msgstr "Serial send"
 
 #: src/features/connection/components/modals/AddConnectionModal.tsx:326
 msgid "Serve the token file"
@@ -28953,7 +28997,7 @@ msgid "Set verification level to <0>none</0>."
 msgstr "Set verification level to <0>none</0>."
 
 #. Permission name: allows changing the voice service region.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:298
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:302
 msgid "Set voice region"
 msgstr "Set voice region"
 
@@ -29168,7 +29212,7 @@ msgid "Shift"
 msgstr "Shift"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:299
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:323
 msgid "Shift expand"
 msgstr "Shift expand"
 
@@ -29369,7 +29413,7 @@ msgstr "Show embeds and preview website links"
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:63
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:116
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:120
 msgid "Show emoji button"
 msgstr "Show emoji button"
 
@@ -29423,7 +29467,7 @@ msgid "Show icon when collapsed"
 msgstr "Show icon when collapsed"
 
 #. Short confirmation button label in advanced settings.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:152
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:156
 msgid "Show in all communities"
 msgstr "Show in all communities"
 
@@ -29601,7 +29645,7 @@ msgid "Show recent instances"
 msgstr "Show recent instances"
 
 #. Label of the button to show poll answer results.
-#: src/features/channel/components/Poll.tsx:34
+#: src/features/channel/components/Poll.tsx:39
 msgid "Show results"
 msgstr ""
 
@@ -29618,7 +29662,7 @@ msgstr "Show saved media in expression autocomplete"
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:67
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:120
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:124
 msgid "Show send button"
 msgstr "Show send button"
 
@@ -29630,7 +29674,7 @@ msgstr "Show spoiler content when clicked"
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:59
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:112
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:116
 msgid "Show stickers button"
 msgstr "Show stickers button"
 
@@ -29752,7 +29796,7 @@ msgstr "Sign in with your organisation's single sign-on provider."
 #: src/features/auth/utils/AccountSwitcherModalUtils.tsx:204
 #: src/features/auth/utils/AccountSwitcherModalUtils.tsx:265
 #: src/features/auth/utils/AccountSwitcherModalUtils.tsx:322
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:595
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:599
 #: src/features/user/components/settings_utils/search_index/DevicesIndex.ts:47
 msgid "Sign out"
 msgstr "Sign out"
@@ -29935,14 +29979,14 @@ msgid "Size selection"
 msgstr "Size selection"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:427
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:451
 msgid "Skip"
 msgstr "Skip"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Short label for an advanced inbox preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:128
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:407
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:132
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:431
 msgid "Skip \"Mark all as read\" confirmation"
 msgstr "Skip \"Mark all as read\" confirmation"
 
@@ -29956,7 +30000,7 @@ msgid "Skip external link warnings. Less secure."
 msgstr "Skip external link warnings. Less secure."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:199
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:223
 msgid "Skip the external link warning for all domains"
 msgstr "Skip the external link warning for all domains"
 
@@ -30029,7 +30073,7 @@ msgid "Slow attachment upload"
 msgstr "Slow attachment upload"
 
 #. Short label in the new account guild limit modal. Keep it concise.
-#: src/features/guild/components/alerts/NewAccountGuildLimitModal.tsx:9
+#: src/features/guild/components/alerts/NewAccountGuildLimitModal.tsx:8
 msgid "Slow down"
 msgstr "Slow down"
 
@@ -30079,7 +30123,7 @@ msgstr "Slow mode · wait {remaining}"
 #. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
 #. Short label in the slowmode rate limited modal. Keep it concise.
 #: src/features/channel/components/channel_header_components/developer_tools/DeveloperOptionLabels.ts:249
-#: src/features/slowmode/components/alerts/SlowmodeRateLimitedModal.tsx:14
+#: src/features/slowmode/components/alerts/SlowmodeRateLimitedModal.tsx:13
 msgid "Slowmode active"
 msgstr "Slow mode active"
 
@@ -30094,7 +30138,7 @@ msgid "Slowmode is enabled, but you are immune."
 msgstr "Slow mode is on, but you're immune."
 
 #. Modal body shown when slowmode blocks sending a message. {duration} is a localized short duration such as "2 minutes".
-#: src/features/slowmode/components/alerts/SlowmodeRateLimitedModal.tsx:18
+#: src/features/slowmode/components/alerts/SlowmodeRateLimitedModal.tsx:17
 msgid "Slowmode is on — wait {duration} before sending another."
 msgstr "Slow mode is on – wait {duration} before sending another."
 
@@ -30162,7 +30206,7 @@ msgid "Smaller media size"
 msgstr "Smaller media size"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:355
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:379
 msgid "Smiley face"
 msgstr "Smiley face"
 
@@ -30225,12 +30269,12 @@ msgid "Sold out"
 msgstr "Sold out"
 
 #. Title of the error modal shown after some emoji uploads fail.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:67
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:68
 msgid "Some emojis couldn't be added"
 msgstr "Some emojis couldn't be added"
 
 #. Body of the file-too-large alert when multiple files exceed the per-file size limit. maxSizeFormatted is the limit formatted with units.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:21
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:18
 msgid "Some files you're trying to upload exceed the maximum size limit of {maxSizeFormatted} per file."
 msgstr "Some files you're trying to upload are bigger than the maximum size limit of {maxSizeFormatted} per file."
 
@@ -30440,7 +30484,7 @@ msgstr "Sound volume"
 
 #. Section heading / tab label for the notification-sounds area.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:807
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:811
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:135
 msgid "Sounds"
 msgstr "Sounds"
@@ -30547,7 +30591,7 @@ msgid "Spatial and temporal layers"
 msgstr "Spatial and temporal layers"
 
 #. Permission name: allows speaking in voice channels.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:269
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:273
 msgctxt "voice-permission"
 msgid "Speak"
 msgstr "Speak"
@@ -30559,7 +30603,7 @@ msgstr "Speak all messages out loud"
 
 #. Message action that has the screen reader read the selected message aloud.
 #. Message context menu item that reads the message aloud via text-to-speech.
-#: src/features/channel/components/MessageActionMenu.tsx:99
+#: src/features/channel/components/MessageActionMenu.tsx:104
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:78
 msgid "Speak message"
 msgstr "Speak message"
@@ -30869,12 +30913,12 @@ msgid "Start searches with <0>{peoplePrefix}</0> <1>{textChannelPrefix}</1> <2>{
 msgstr "Start searches with <0>{peoplePrefix}</0> <1>{textChannelPrefix}</1> <2>{voiceChannelPrefix}</2> <3>{communityPrefix}</3> to narrow down results."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:127
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:151
 msgid "Start uploading attachments as soon as they are added to the message input"
 msgstr "Start uploading attachments as soon as they are added to the message input"
 
 #. Action label that initiates a video call (DM or group DM).
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:591
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:595
 msgid "Start video call"
 msgstr "Start video call"
 
@@ -30998,7 +31042,7 @@ msgid "Sticker attached to the message"
 msgstr "Sticker attached to the message"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:331
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:355
 msgid "Sticker autocomplete"
 msgstr "Sticker autocomplete"
 
@@ -31023,7 +31067,7 @@ msgid "Sticker deleted"
 msgstr "Sticker deleted"
 
 #. Short label in the guild stickers tab. Keep it concise.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:53
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:50
 msgid "Sticker density"
 msgstr "Sticker density"
 
@@ -31071,7 +31115,7 @@ msgstr "Sticker pack limit reached"
 msgid "Sticker packs"
 msgstr "Sticker packs"
 
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:283
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:278
 msgid "Sticker slots"
 msgstr "Sticker slots"
 
@@ -31107,7 +31151,7 @@ msgid "Stickers"
 msgstr "Stickers"
 
 #. Description in the community sticker upload section. {maxSize} is the formatted size limit.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:82
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:79
 msgid "Stickers are saved at 320x320 pixels and must be under {maxSize}. Static images are resized and compressed automatically. Animated stickers and SVGs must already fit the limit."
 msgstr "Stickers are saved at 320x320 pixels and must be under {maxSize}. Static images are resized and compressed automatically. Animated stickers and SVGs must already fit the limit."
 
@@ -31152,7 +31196,7 @@ msgid "Stop"
 msgstr "Stop"
 
 #. Confirmation prompt in advanced settings.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:148
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:152
 msgid "Stop hiding muted channels by default?"
 msgstr "Stop hiding muted channels by default?"
 
@@ -31183,7 +31227,7 @@ msgstr "Stop sharing voice activity with all friends?"
 
 #. Message action that stops the screen reader from speaking the selected message.
 #. Message context menu item that stops the text-to-speech playback in progress.
-#: src/features/channel/components/MessageActionMenu.tsx:95
+#: src/features/channel/components/MessageActionMenu.tsx:100
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:74
 msgid "Stop speaking"
 msgstr "Stop speaking"
@@ -31253,7 +31297,7 @@ msgid "Stream settings"
 msgstr "Stream settings"
 
 #. Permission name: allows video streaming or screen sharing in voice.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:274
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:278
 msgid "Stream video"
 msgstr "Stream video"
 
@@ -31303,19 +31347,19 @@ msgid "Strikethrough"
 msgstr "Strikethrough"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:163
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:187
 msgid "Strip parameters"
 msgstr "Strip parameters"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:159
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:183
 msgid "Strip tracking"
 msgstr "Strip tracking"
 
 #. Label in the links tab.
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabLinksTab.tsx:43
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:131
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:155
 msgid "Strip tracking parameters from URLs"
 msgstr "Strip tracking parameters from URLs"
 
@@ -31354,7 +31398,7 @@ msgid "Submenu"
 msgstr "Submenu"
 
 #. Label for the poll submit button.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:50
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:51
 msgid "Submit"
 msgstr ""
 
@@ -31444,7 +31488,7 @@ msgid "Suppress all role mentions"
 msgstr "Suppress all role mentions"
 
 #. Action label on a message that hides link previews / embeds.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:587
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:591
 msgid "Suppress embeds"
 msgstr "Suppress embeds"
 
@@ -31483,7 +31527,7 @@ msgid "SVC mode"
 msgstr "SVC mode"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:363
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:387
 msgid "Swap common text faces such as :) and <3 for emoji when sending messages"
 msgstr "Swap common text faces such as :) and <3 for emoji when sending messages"
 
@@ -31834,7 +31878,7 @@ msgstr "Tab"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the FluxerTag change modal. Keep it concise.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:60
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:61
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:73
 msgid "Tag"
 msgstr "Tag"
@@ -31942,7 +31986,7 @@ msgid "temporarily unavailable"
 msgstr "temporarily unavailable"
 
 #. Modal body shown when the user tries to accept a temporary invite while the realtime connection is offline.
-#: src/features/app/components/alerts/TemporaryInviteRequiresPresenceModal.tsx:13
+#: src/features/app/components/alerts/TemporaryInviteRequiresPresenceModal.tsx:12
 msgid "Temporary invites need a live connection. Check yours and try again."
 msgstr "Temporary invites need a live connection. Check yours and try again."
 
@@ -32023,7 +32067,7 @@ msgstr "Text formatting"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:359
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:383
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:150
 msgid "Text replacement"
 msgstr "Text replacement"
@@ -32062,12 +32106,12 @@ msgid "Text-to-speech"
 msgstr "Text-to-speech"
 
 #. Body of the TTS-unsupported modal. Mentions specific browsers; keep Chrome, Firefox, Edge, and Brave as literal proper nouns.
-#: src/features/voice/components/alerts/TtsUnsupportedModal.tsx:13
+#: src/features/voice/components/alerts/TtsUnsupportedModal.tsx:12
 msgid "Text-to-speech is not supported by your browser. Some browsers like Brave block this feature for privacy reasons. Try using Chrome, Firefox, or Edge, or adjust your browser's privacy settings."
 msgstr "Text-to-speech isn't supported by your browser. Some browsers, like Brave, block this feature for privacy reasons. Try using Chrome, Firefox, or Edge, or adjust your browser's privacy settings."
 
 #. Title of the modal shown when the browser does not support text-to-speech.
-#: src/features/voice/components/alerts/TtsUnsupportedModal.tsx:9
+#: src/features/voice/components/alerts/TtsUnsupportedModal.tsx:8
 msgid "Text-to-speech not supported"
 msgstr "Text-to-speech not supported"
 
@@ -32170,7 +32214,7 @@ msgid "That's everything in the queue."
 msgstr "That's everything in the queue."
 
 #. Description text in the FluxerTag change modal.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:68
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:69
 msgid "The #0000 tag is reserved for Visionary subscribers. Visionary is no longer available for purchase."
 msgstr "The #0000 tag is reserved for Visionary subscribers. Visionary is no longer available for purchase."
 
@@ -32228,7 +32272,7 @@ msgid "The file contains the verification token we will fetch from <0>{dnsUrl}</
 msgstr "The file contains the verification token we will fetch from <0>{dnsUrl}</0>."
 
 #. Body of the file-too-large alert when a single file exceeds the per-file size limit.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:26
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:23
 msgid "The file you're trying to upload exceeds the maximum size limit of {maxSizeFormatted}."
 msgstr "The file you're trying to upload exceeds the maximum size limit of {maxSizeFormatted}."
 
@@ -32278,12 +32322,12 @@ msgid "The provided redirect_uri must use HTTP or HTTPS."
 msgstr "The redirect_uri provided must use HTTP or HTTPS."
 
 #. Placeholder text for the question input.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:30
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:31
 msgid "The question you want to ask"
 msgstr ""
 
 #. Body of a modal shown when a browser screen share track ends outside the app, for example from the browser sharing controls.
-#: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:116
+#: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:115
 msgctxt "screen-share"
 msgid "The screen share source stopped sending video, so your screen share was stopped."
 msgstr "The screen share source stopped sending video, so your screen share was stopped."
@@ -32310,7 +32354,7 @@ msgstr "The upload service rejected this sticker as larger than {maxSize}. Try a
 msgid "The URL of the {productName} instance you want to sign in to."
 msgstr "The URL of the {productName} instance you want to sign in to."
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:134
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:135
 msgid "The username <0>{fluxerTag}</0> is already taken. Continuing will reroll your tag automatically."
 msgstr "The username <0>{fluxerTag}</0> is already taken. Continuing will automatically re-roll your tag."
 
@@ -32455,7 +32499,7 @@ msgid "There was an error loading the invites. Try again."
 msgstr "There was an error loading the invites. Please try again."
 
 #. Error message in the guild stickers tab.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:78
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:75
 msgid "There was an error loading the stickers. Try again."
 msgstr "There was an error loading the stickers. Please try again."
 
@@ -32601,7 +32645,7 @@ msgid "This channel is marked for mature content and may contain material that m
 msgstr "This channel is marked for mature content and may contain material that may be inappropriate for some users."
 
 #. Label in the mature content rejected modal.
-#: src/features/moderation/components/alerts/MatureContentRejectedModal.tsx:13
+#: src/features/moderation/components/alerts/MatureContentRejectedModal.tsx:12
 msgid "This channel is not marked for mature content. Mature content can only be sent in channels marked for mature content. Ask a moderator to update this channel if appropriate."
 msgstr "This channel isn't marked for mature content. Mature content can only be sent in channels marked for mature content. Ask a moderator to update this channel if appropriate."
 
@@ -32664,7 +32708,7 @@ msgid "This community has paused invites. You can try again later."
 msgstr "This community has paused invites. You can try again later."
 
 #. Description text in the guild at capacity modal.
-#: src/features/guild/components/alerts/GuildAtCapacityModal.tsx:13
+#: src/features/guild/components/alerts/GuildAtCapacityModal.tsx:12
 msgid "This community has reached its maximum member limit and is not accepting new members at this time."
 msgstr "This community has reached its maximum member limit and isn't accepting new members at the moment."
 
@@ -32742,7 +32786,7 @@ msgid "This doesn't look like a valid template response. Make sure you copied th
 msgstr "This doesn't look like a valid template response. Please make sure you copied the entire JSON document."
 
 #. Generic per-file error text shown when preparing an emoji upload fails.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:87
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:88
 msgid "This emoji could not be prepared. Try another file or try again in a moment."
 msgstr "This emoji could not be prepared. Try another file or try again in a moment."
 
@@ -32759,7 +32803,7 @@ msgid "This expression is gone"
 msgstr "This expression is gone"
 
 #. Modal body shown when an instance admin has temporarily disabled a feature. Keep plain.
-#: src/features/app/components/alerts/FeatureTemporarilyDisabledModal.tsx:13
+#: src/features/app/components/alerts/FeatureTemporarilyDisabledModal.tsx:12
 msgid "This feature is paused. Try again later."
 msgstr "This feature is paused. Please try again later."
 
@@ -32769,7 +32813,7 @@ msgid "This field has an error"
 msgstr "This field has an error"
 
 #. Error text for animated emoji or SVG uploads that exceed the file size limit. {fileSize} and {maxSize} are formatted file sizes.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:75
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:76
 msgid "This file is {fileSize}, over the {maxSize} limit. Animated emojis and SVGs must already be small enough to upload. Choose a smaller file or shorten the animation."
 msgstr "This file is {fileSize}, over the {maxSize} limit. Animated emojis and SVGs must already be small enough to upload. Choose a smaller file or shorten the animation."
 
@@ -32918,7 +32962,7 @@ msgid "This is not the community you're looking for."
 msgstr "This isn't the community you're looking for."
 
 #. Description text in the too many reactions modal. Keep the tone plain and specific.
-#: src/features/messaging/components/alerts/TooManyReactionsModal.tsx:13
+#: src/features/messaging/components/alerts/TooManyReactionsModal.tsx:12
 msgid "This is one heavy message. Some reactions need to be removed before you can add more."
 msgstr "This is one heavy message. Some reactions need to be removed before you can add more."
 
@@ -32940,7 +32984,7 @@ msgid "This is the third option description"
 msgstr "This is the third option description"
 
 #. Extra file-too-large alert sentence shown when premium upload-limit upgrades are unavailable.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:42
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:39
 msgid "This limit is configured by your instance administrator."
 msgstr "This limit is configured by your instance administrator."
 
@@ -33238,13 +33282,18 @@ msgid "This voice channel is no longer available."
 msgstr "This voice channel is no longer available."
 
 #. Description text in the channel and chat user message. Preserve {silentMention}; it is inserted by code.
-#: src/features/channel/components/UserMessage.tsx:80
+#: src/features/channel/components/UserMessage.tsx:81
 msgid "This was a {silentMention} message."
 msgstr "This was a {silentMention} message."
 
 #: src/features/voice/components/dialogs/DisableScreenSharePiPConfirmModal.tsx:52
 msgid "This will close the current popout and stop screen share picture-in-picture popouts from opening automatically. You can turn them back on in {audioVideoSettingsPath}."
 msgstr "This will close the current popout and stop screen share picture-in-picture popouts from opening automatically. You can turn them back on in {audioVideoSettingsPath}."
+
+#. Description of the action of ending a poll in a confirmation modal.
+#: src/features/messaging/commands/PollCommands.tsx:21
+msgid "This will close the poll now and show the results."
+msgstr ""
 
 #: src/features/messaging/commands/FavoritesCommands.tsx:30
 msgid "This will hide all favorites-related UI elements including buttons and menu items. Your existing favorites will be preserved and can be re-enabled anytime from <0>{favoritesSettingsPath}</0>."
@@ -33384,7 +33433,7 @@ msgid "Time format selection"
 msgstr "Time format selection"
 
 #. Permission name: allows temporarily restricting members.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:253
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:257
 msgid "Time out members"
 msgstr "Time out members"
 
@@ -33655,7 +33704,7 @@ msgid "Too many attempts. Wait a bit, then try again."
 msgstr "Too many attempts. Wait a bit, then try again."
 
 #. Error message in the max guilds modal.
-#: src/features/guild/components/alerts/MaxGuildsModal.tsx:10
+#: src/features/guild/components/alerts/MaxGuildsModal.tsx:9
 msgid "Too many communities"
 msgstr "Too many communities"
 
@@ -33712,12 +33761,12 @@ msgid "Track moderator actions across the community."
 msgstr "Track moderator actions across the community."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:135
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:159
 msgid "Tracking"
 msgstr "Tracking"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:139
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:163
 msgid "Tracking parameters"
 msgstr "Tracking parameters"
 
@@ -33749,8 +33798,8 @@ msgstr "Transferred ownership to {0}."
 
 #. Generic action label that translates a message body.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:583
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:231
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:587
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:255
 msgid "Translate"
 msgstr "Translate"
 
@@ -33769,12 +33818,12 @@ msgid "Translations are automated. Help improve localization by emailing <0>{I18
 msgstr "Translations are automated. Help improve localisation by emailing <0>{I18N_EMAIL}</0>."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:223
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:247
 msgid "Translator"
 msgstr "Translator"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:227
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:251
 msgid "Translators"
 msgstr "Translators"
 
@@ -33831,14 +33880,14 @@ msgstr "true or false"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the links tab. Keep it concise.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabLinksTab.tsx:27
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:175
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:199
 msgid "Trust all"
 msgstr "Trust all"
 
 #. Label in the links tab.
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabLinksTab.tsx:39
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:171
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:195
 msgid "Trust all external links"
 msgstr "Trust all external links"
 
@@ -33848,17 +33897,17 @@ msgid "Trust all external links?"
 msgstr "Trust all external links?"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:179
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:203
 msgid "Trust all links"
 msgstr "Trust all links"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:187
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:211
 msgid "Trust domain"
 msgstr "Trust domain"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:183
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:207
 msgid "Trusted domains"
 msgstr "Trusted domains"
 
@@ -34032,7 +34081,7 @@ msgid "Turn off anything you're not comfortable with. Some features may stop wor
 msgstr "Turn off anything you're not comfortable with. Some features might stop working."
 
 #. Voice / call action label that disables the local camera.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:506
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:510
 msgid "Turn off camera"
 msgstr "Turn off camera"
 
@@ -34085,7 +34134,7 @@ msgstr "Turn on streaming privacy"
 #. Label in the input tab.
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabInputTab.tsx:10
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:339
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:363
 msgid "Turn text smileys into emoji"
 msgstr "Turn text smileys into emoji"
 
@@ -34284,8 +34333,8 @@ msgstr "Unable to load preview."
 msgid "Unable to load profile banner, badges, and bio."
 msgstr "Unable to load profile banner, badges, and bio."
 
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:272
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:328
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:271
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:327
 msgid "Unable to prepare any emojis for upload. The following errors occurred:"
 msgstr "Couldn't prepare any emojis for upload. The following errors occurred:"
 
@@ -34384,7 +34433,7 @@ msgid "Unblock user"
 msgstr "Unblock user"
 
 #. Generic label for items that do not belong to a category.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:631
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:635
 msgid "Uncategorized"
 msgstr "Uncategorised"
 
@@ -34544,7 +34593,7 @@ msgstr "Universal fallback. Lowest quality, but works everywhere."
 #. Generic fallback label when a more specific value is unavailable.
 #. Short label in the invite list item. Keep it concise.
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:586
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:755
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:759
 #: src/features/invite/components/InviteListItem.tsx:34
 #: src/features/moderation/components/modals/BanDetailsModal.tsx:114
 #: src/features/updater/commands/UpdaterModalCommands.tsx:140
@@ -34623,7 +34672,7 @@ msgid "Unknown message type"
 msgstr "Unknown message type"
 
 #. Fallback label for a permission bit the client does not recognize.
-#: src/features/permissions/utils/PermissionUtils.ts:410
+#: src/features/permissions/utils/PermissionUtils.ts:412
 msgid "Unknown permission"
 msgstr "Unknown permission"
 
@@ -34781,7 +34830,7 @@ msgid "Unmute all devices"
 msgstr "Unmute all devices"
 
 #. Action label that unmutes notifications for a channel category.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:579
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:583
 msgid "Unmute category"
 msgstr "Unmute category"
 
@@ -34796,7 +34845,7 @@ msgid "Unmute communities"
 msgstr "Unmute communities"
 
 #. Generic action label that unmutes notifications for an entire community.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:554
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:558
 msgid "Unmute community"
 msgstr "Unmute community"
 
@@ -34816,7 +34865,7 @@ msgid "Unmute DMs"
 msgstr "Unmute DMs"
 
 #. Action label that unmutes notifications for the favourites pseudo-guild.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:691
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:695
 msgid "Unmute favourites"
 msgstr "Unmute favourites"
 
@@ -34865,7 +34914,7 @@ msgid "Unordered"
 msgstr "Unordered"
 
 #. Confirm button label on the unpin message alert.
-#: src/features/channel/components/MessageActionUtils.tsx:52
+#: src/features/channel/components/MessageActionUtils.tsx:53
 msgid "Unpin"
 msgstr "Unpin"
 
@@ -34890,12 +34939,12 @@ msgid "Unpin message"
 msgstr "Unpin message"
 
 #. Body of the confirmation alert shown when unpinning a message.
-#: src/features/channel/components/MessageActionUtils.tsx:48
+#: src/features/channel/components/MessageActionUtils.tsx:49
 msgid "Unpin this message?"
 msgstr "Unpin this message?"
 
 #. Generic short toast / status label confirming a DM was unpinned.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:627
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:631
 msgid "Unpinned DM"
 msgstr "Unpinned DM"
 
@@ -35017,7 +35066,7 @@ msgid "Unsupported icon format"
 msgstr "Unsupported icon format"
 
 #. Title of the error modal shown when an unsupported sticker file type is selected.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:87
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:84
 msgid "Unsupported sticker file"
 msgstr "Unsupported sticker file"
 
@@ -35025,7 +35074,7 @@ msgstr "Unsupported sticker file"
 #. Message action that re-enables embeds on the selected message.
 #. Message context menu item that re-shows previously hidden link previews and embeds on the message.
 #: src/features/channel/components/MessageActionBar.tsx:96
-#: src/features/channel/components/MessageActionMenu.tsx:87
+#: src/features/channel/components/MessageActionMenu.tsx:88
 #: src/features/ui/action_menu/items/MessageMenuItems.tsx:58
 msgid "Unsuppress embeds"
 msgstr "Unsuppress embeds"
@@ -35220,8 +35269,8 @@ msgstr "Upgrade now"
 
 #. Short label in the max bookmarks modal. Preserve {premiumProductName}; it is inserted by code.
 #. Short label in the max favorite memes modal. Preserve {premiumProductName}; it is inserted by code.
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:35
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:29
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:36
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:30
 msgid "Upgrade to {premiumProductName}"
 msgstr "Upgrade to {premiumProductName}"
 
@@ -35293,7 +35342,7 @@ msgstr "Upload custom sound for {label}"
 msgid "Upload directly to {displayName}"
 msgstr "Upload directly to {displayName}"
 
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:454
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:453
 msgid "Upload emoji"
 msgstr "Upload emoji"
 
@@ -35337,7 +35386,7 @@ msgstr "Upload preview frames for screen shares."
 msgid "Upload sound"
 msgstr "Upload sound"
 
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:286
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:281
 msgid "Upload sticker"
 msgstr "Upload sticker"
 
@@ -35614,12 +35663,12 @@ msgid "Use emoji from other communities."
 msgstr "Use emoji from other communities."
 
 #. Permission name: allows using emoji from other communities.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:237
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:241
 msgid "Use external emoji"
 msgstr "Use external emoji"
 
 #. Permission name: allows using stickers from other communities.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:241
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:245
 msgid "Use external stickers"
 msgstr "Use external stickers"
 
@@ -35786,7 +35835,7 @@ msgid "Use video and camera previews."
 msgstr "Use video and camera previews."
 
 #. Permission name: allows voice activation instead of requiring push-to-talk.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:278
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:282
 msgid "Use voice activity"
 msgstr "Use voice activity"
 
@@ -35858,7 +35907,7 @@ msgid "User controls"
 msgstr "User controls"
 
 #. Title of the developer-mode user debug modal.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:571
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:575
 msgid "User debug"
 msgstr "User debug"
 
@@ -35941,8 +35990,8 @@ msgstr "user, bot, or webhook"
 #. Label for SMTP username input.
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:952
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:567
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:217
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:571
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:218
 #: src/features/user/components/modals/tabs/my_profile_tab/MyProfileTabUsernameSection.tsx:55
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:53
 msgid "Username"
@@ -35954,7 +36003,7 @@ msgid "Username (optional)"
 msgstr "Username (optional)"
 
 #. Short label in the FluxerTag change modal. Keep it concise.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:39
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:40
 msgid "Username already taken"
 msgstr "Username already taken"
 
@@ -35984,11 +36033,11 @@ msgid "Username must be at most 32 characters"
 msgstr "Username must be at most 32 characters"
 
 #. Short label in the FluxerTag change modal. Keep it concise.
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:43
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:44
 msgid "Username updated"
 msgstr "Username updated"
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:210
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:211
 msgid "Usernames can only contain letters (a-z, A-Z), numbers (0-9), and underscores. Usernames are case-insensitive."
 msgstr "Usernames can only contain letters (a-z, A-Z), numbers (0-9), and underscores. Usernames are case-insensitive."
 
@@ -36588,12 +36637,12 @@ msgid "View call controls"
 msgstr "View call controls"
 
 #. Permission name: allows seeing a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:257
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:261
 msgid "View channel"
 msgstr "View channel"
 
 #. Permission name: allows seeing the member list for a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:261
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:265
 msgid "View channel members"
 msgstr "View channel members"
 
@@ -36689,7 +36738,7 @@ msgid "View profile for {displayName}"
 msgstr "View profile for {displayName}"
 
 #. Message context menu item that opens the reactions list sheet for the message.
-#: src/features/channel/components/MessageActionMenu.tsx:75
+#: src/features/channel/components/MessageActionMenu.tsx:76
 msgid "View reactions"
 msgstr "View reactions"
 
@@ -37081,12 +37130,12 @@ msgid "Volume sliders"
 msgstr "Volume sliders"
 
 #. Label of the vote button.
-#: src/features/channel/components/Poll.tsx:30
+#: src/features/channel/components/Poll.tsx:35
 msgid "Vote"
 msgstr ""
 
 #. Description text in the message delete too quick modal. Keep the tone plain and specific.
-#: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:13
+#: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:12
 msgid "Wait a moment before deleting more messages."
 msgstr "Wait a moment before deleting more messages."
 
@@ -37150,7 +37199,7 @@ msgid "Watch"
 msgstr "Watch"
 
 #. Voice action label that starts watching a remote screen share.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:482
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:486
 msgid "Watch stream"
 msgstr "Watch stream"
 
@@ -37238,7 +37287,7 @@ msgstr "We couldn't forward the message at this time."
 msgid "We couldn't import that theme library file."
 msgstr "We couldn't import that theme library file."
 
-#: src/features/messaging/components/alerts/AttachmentUploadConnectivityModal.tsx:24
+#: src/features/messaging/components/alerts/AttachmentUploadConnectivityModal.tsx:23
 msgid "We couldn't reach the attachment upload service. {PRODUCT_NAME} can fall back to the standard upload path for messages up to {fallbackSizeFormatted} total, but these attachments exceed that combined limit and can't be sent until connectivity is restored. Try again later or contact <0>{SUPPORT_EMAIL}</0> if this keeps happening."
 msgstr "We couldn't reach the attachment upload service. {PRODUCT_NAME} can fall back to the standard upload path for messages up to {fallbackSizeFormatted} total, but these attachments exceed that combined limit and can't be sent until connectivity is restored. Try again later or contact <0>{SUPPORT_EMAIL}</0> if this keeps happening."
 
@@ -37281,7 +37330,7 @@ msgid "We recommend saving these codes now so that you don't get locked out of y
 msgstr "We recommend saving these codes now so you don't get locked out of your account."
 
 #. Error text for static emoji uploads that still exceed the file size limit after resizing. {fileSize} and {maxSize} are formatted file sizes.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:81
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:82
 msgid "We resized and compressed this emoji to 128x128 pixels, but it is still {fileSize}. The limit is {maxSize}. Try a simpler image, fewer colors, or a smaller source file."
 msgstr "We resized and compressed this emoji to 128x128 pixels, but it is still {fileSize}. The limit is {maxSize}. Try a simpler image, fewer colours, or a smaller source file."
 
@@ -37401,7 +37450,7 @@ msgid "Web authentication"
 msgstr "Web authentication"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:211
+#: src/features/user/components/settings_utils/search_index/ChatSettingsIndex.ts:235
 msgid "Web search"
 msgstr "Web search"
 
@@ -37747,8 +37796,8 @@ msgstr "Whoa, it's a typing apocalypse"
 
 #. Label in the too many attachments modal.
 #. Label in the too many reactions modal.
-#: src/features/messaging/components/alerts/TooManyAttachmentsModal.tsx:10
-#: src/features/messaging/components/alerts/TooManyReactionsModal.tsx:9
+#: src/features/messaging/components/alerts/TooManyAttachmentsModal.tsx:9
+#: src/features/messaging/components/alerts/TooManyReactionsModal.tsx:8
 msgid "Whoa, this is heavy"
 msgstr "Whoa, that's a lot"
 
@@ -37831,7 +37880,7 @@ msgid "With {PREMIUM_PRODUCT_NAME}, you can use animated avatars ({ANIMATED_AVAT
 msgstr "With {PREMIUM_PRODUCT_NAME}, you can use animated avatars ({ANIMATED_AVATAR_FORMATS}), profile banners, customise your tag, and unlock many other {PREMIUM_PRODUCT_NAME} perks."
 
 #. Premium upsell sentence in the file-too-large alert. premiumProductName is the paid product name; fileSizeLimit is a localized file size.
-#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:46
+#: src/features/messaging/components/alerts/FileSizeTooLargeModal.tsx:43
 msgid "With {premiumProductName}, your per-file upload limit increases to {fileSizeLimit}, plus animated avatars, longer messages, and many other {premiumProductName} perks."
 msgstr "With {premiumProductName}, your per-file upload limit increases to {fileSizeLimit}, plus animated avatars, longer messages, and many other {premiumProductName} perks."
 
@@ -37961,7 +38010,7 @@ msgid "You are about to transfer ownership of this community to <0>{0}</0>. This
 msgstr "You're about to transfer ownership of this community to <0>{0}</0>. This action is <1>irreversible</1> and you'll lose all owner privileges."
 
 #. Error message in the user banned from guild modal. Keep the tone plain and specific.
-#: src/features/moderation/components/alerts/UserBannedFromGuildModal.tsx:13
+#: src/features/moderation/components/alerts/UserBannedFromGuildModal.tsx:12
 msgid "You are banned from this community and cannot join."
 msgstr "You're banned from this community and can't join."
 
@@ -38084,7 +38133,7 @@ msgid "You can't add new reactions while you're on timeout."
 msgstr "You can't add new reactions while you're on timeout."
 
 #. Description text in the attachment permission denied modal. Keep the tone plain and specific.
-#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:20
+#: src/features/messaging/components/alerts/AttachmentPermissionDeniedModal.tsx:17
 msgid "You can't attach files in this channel."
 msgstr "You can't attach files in this channel."
 
@@ -38275,11 +38324,11 @@ msgstr "You can't remove this permission as it would remove it from yourself"
 msgid "You changed your nickname in this community from **{previousNickname}** to **{newNickname}**."
 msgstr "You changed your nickname in this community from **{previousNickname}** to **{newNickname}**."
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:362
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:367
 msgid "You changed your tag while on {PREMIUM_PRODUCT_NAME}. It will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires on <0>{premiumExpiresAtLabel}</0>, unless it renews."
 msgstr "You changed your tag while on {PREMIUM_PRODUCT_NAME}. It will re-roll randomly when your {PREMIUM_PRODUCT_NAME} expires on <0>{premiumExpiresAtLabel}</0>, unless it renews."
 
-#: src/features/user/components/modals/FluxerTagChangeModal.tsx:369
+#: src/features/user/components/modals/FluxerTagChangeModal.tsx:374
 msgid "You changed your tag while on {PREMIUM_PRODUCT_NAME}. It will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires, unless it renews."
 msgstr "You changed your tag while on {PREMIUM_PRODUCT_NAME}. It will reroll randomly when your {PREMIUM_PRODUCT_NAME} expires, unless it renews."
 
@@ -38336,7 +38385,7 @@ msgid "You don't have permission to rename this emoji. The name was reverted to 
 msgstr "You don't have permission to rename this emoji. The name was reverted to what it was before."
 
 #. Error message for when no question has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:54
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:55
 msgid "You forgot to enter a question."
 msgstr ""
 
@@ -38545,7 +38594,7 @@ msgid "You or someone you're adding already has the maximum number of group DMs 
 msgstr "You or someone you're adding already has the maximum number of group DMs open. Leave one and try again."
 
 #. Error message for when no answer has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:58
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:59
 msgid "You should enter at least one answer."
 msgstr ""
 
@@ -38607,17 +38656,17 @@ msgid "You're already Visionary"
 msgstr "You're already Visionary"
 
 #. Modal body shown when the bookmarks limit is reached on a self-hosted instance with no upgrade path. Limit count is interpolated.
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:19
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:20
 msgid "You're at {bookmarksText} — your instance admin sets this cap. Remove one to add another."
 msgstr "You're at {bookmarksText} — your instance admin sets this cap. Remove one to add another."
 
 #. Modal body shown when the bookmarks limit is reached and Plutonium is unavailable on this instance. Limit count is interpolated.
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:24
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:25
 msgid "You're at {bookmarksText}. Remove one to add another."
 msgstr "You're at {bookmarksText}. Remove one to add another."
 
 #. Modal body shown when the favorite-memes limit is reached on a self-hosted instance with no Plutonium upgrade path. Limit text is interpolated.
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:19
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:20
 msgid "You're at the cap of {freeItemsText} — your instance admin sets this limit."
 msgstr "You're at the cap of {freeItemsText} — your instance admin sets this limit."
 
@@ -38629,12 +38678,12 @@ msgid "You're at the creation limit. Delete one to create another."
 msgstr "You're at the creation limit. Delete one to create another."
 
 #. Modal body shown when the free bookmarks limit is reached and Plutonium would increase it. Free and Plutonium limits are interpolated.
-#: src/features/app/components/alerts/MaxBookmarksModal.tsx:29
+#: src/features/app/components/alerts/MaxBookmarksModal.tsx:30
 msgid "You're at the free cap of {bookmarksText}. {premiumProductName} bumps you up to {premiumBookmarksText} — or remove one to add another."
 msgstr "You're at the free limit of {bookmarksText}. {premiumProductName} bumps you up to {premiumBookmarksText} — or remove one to add another."
 
 #. Modal body shown when the free favorite-memes limit is reached and Plutonium would increase it. Free and Plutonium limits are interpolated.
-#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:24
+#: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:25
 msgid "You're at the free cap of {freeItemsText}. {premiumProductName} bumps you up to {premiumItemsText}."
 msgstr "You're at the free cap of {freeItemsText}. {premiumProductName} bumps you up to {premiumItemsText}."
 
@@ -38646,7 +38695,7 @@ msgid "You're at the install limit. Remove one to add another."
 msgstr "You're at the install limit. Remove one to add another."
 
 #. Short label in the user banned from guild modal. Keep it concise. Keep the tone plain and specific.
-#: src/features/moderation/components/alerts/UserBannedFromGuildModal.tsx:9
+#: src/features/moderation/components/alerts/UserBannedFromGuildModal.tsx:8
 msgid "You're banned"
 msgstr "You're banned"
 
@@ -38671,7 +38720,7 @@ msgid "You're deafened"
 msgstr "You’re deafened."
 
 #. Label in the message delete too quick modal. Keep the tone plain and specific.
-#: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:9
+#: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:8
 msgid "You're deleting messages too quickly"
 msgstr "You're deleting messages too quickly"
 
@@ -38830,12 +38879,12 @@ msgid "You've reached the group DM limit"
 msgstr "You’ve reached the group DM limit"
 
 #. Emoji upload limit message in community emoji settings. Do not suggest that communities can be upgraded.
-#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:50
+#: src/features/guild/components/modals/guild_tabs/GuildEmojiTab.tsx:51
 msgid "You've reached the maximum number of emojis. Delete some existing emojis to make room."
 msgstr "You've reached the maximum number of emojis. Delete some existing emojis to make room."
 
 #. Sticker upload limit message in community sticker settings. Do not suggest that communities can be upgraded.
-#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:65
+#: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:62
 msgid "You've reached the maximum number of stickers. Delete some existing stickers to make room."
 msgstr "You've reached the maximum number of stickers. Delete some existing stickers to make room."
 
@@ -38908,7 +38957,7 @@ msgid "Your account requires multi-factor authentication, but no supported metho
 msgstr "Your account requires multi-factor authentication, but no supported methods are set up on this device. Sign in on a device with your authenticator app or security key, or contact support."
 
 #. Modal body shown when the safety system blocks the requested action. Keep plain and calm; offer support path.
-#: src/features/auth/components/ContentBlockedHandler.tsx:15
+#: src/features/auth/components/ContentBlockedHandler.tsx:14
 msgid "Your action could not be completed because it was flagged by our safety systems. If you believe this is a mistake, please contact support."
 msgstr "Your action couldn't be completed because it was flagged by our safety systems. If you believe this is a mistake, please contact support."
 
@@ -39033,12 +39082,12 @@ msgid "Your IP address has been successfully authorized."
 msgstr "Your IP address has been successfully authorised."
 
 #. Error message in the user ip banned from guild modal. Keep the tone plain and specific.
-#: src/features/moderation/components/alerts/UserIpBannedFromGuildModal.tsx:13
+#: src/features/moderation/components/alerts/UserIpBannedFromGuildModal.tsx:12
 msgid "Your IP address is banned from this community and you cannot join."
 msgstr "Your IP address is banned from this community and you can't join."
 
 #. Label in the user ip banned from guild modal. Keep the tone plain and specific.
-#: src/features/moderation/components/alerts/UserIpBannedFromGuildModal.tsx:9
+#: src/features/moderation/components/alerts/UserIpBannedFromGuildModal.tsx:8
 msgid "Your IP is banned"
 msgstr "Your IP is banned"
 
@@ -39252,7 +39301,7 @@ msgstr "Zoom"
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
 #. Native View menu item that increases UI zoom level.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:623
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:627
 #: src/features/input/state/input_keybind/shared.ts:253
 #: src/features/platform/utils/DesktopLocaleBridge.ts:62
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:82
@@ -39263,7 +39312,7 @@ msgstr "Zoom in"
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
 #. Native View menu item that decreases UI zoom level.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/i18n/utils/CommonMessageDescriptors.ts:619
+#: src/features/i18n/utils/CommonMessageDescriptors.ts:623
 #: src/features/input/state/input_keybind/shared.ts:257
 #: src/features/platform/utils/DesktopLocaleBridge.ts:66
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:86
