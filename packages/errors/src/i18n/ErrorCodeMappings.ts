@@ -61,6 +61,7 @@ export const ErrorCodeToI18nKey = {
 	[APIErrorCodes.CANNOT_REPORT_OWN_GUILD]: 'channels_and_guilds.cannot_report_own_guild',
 	[APIErrorCodes.CANNOT_REPORT_OWN_MESSAGE]: 'moderation_and_reports.cannot_report_own_message',
 	[APIErrorCodes.CANNOT_REPORT_YOURSELF]: 'moderation_and_reports.cannot_report_yourself',
+	[APIErrorCodes.CANNOT_SELECT_MULTIPLE_ANSWERS]: 'messages.cannot_select_multiple_answers',
 	[APIErrorCodes.CANNOT_SEND_EMPTY_MESSAGE]: 'messages.cannot_send_empty_message',
 	[APIErrorCodes.CANNOT_SEND_FRIEND_REQUEST_TO_BLOCKED_USER]:
 		'friends_and_dms.cannot_send_friend_request_to_blocked_user',

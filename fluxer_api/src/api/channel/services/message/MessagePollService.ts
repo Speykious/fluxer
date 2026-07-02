@@ -5,6 +5,7 @@ import {Message} from '@app/api/models/Message';
 import type {PollMessageExpiryRow} from '@app/api/Tables';
 import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
+import {CannotSelectMultipleAnswersError} from '@fluxer/errors/src/domains/channel/CannotSelectMultipleAnswersError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import type {ChannelID, MessageID, UserID} from '../../../BrandedTypes';
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
@@ -133,6 +134,8 @@ export class MessagePollService {
 		const newMessageRow = message.toRow();
 		const poll = newMessageRow.poll;
 		if (!poll) throw new CannotVoteOnNonPollError();
+
+		if (!poll.allow_multiselect && answerIds.length > 1) throw new CannotSelectMultipleAnswersError();
 
 		if (!poll.results) {
 			poll.results = {

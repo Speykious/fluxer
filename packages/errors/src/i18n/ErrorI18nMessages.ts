@@ -427,6 +427,7 @@ export const ERROR_I18N_MESSAGES = {
 	'messages.cannot_preload_more_than_100_channels':
 		"You can't preload more than {max, plural, one {# channel} other {# channels}} at once.",
 	'messages.cannot_reply_to_system_message': "You can't reply to a system message.",
+	'messages.cannot_select_multiple_answers': "You can't select multiple answers on this poll.",
 	'messages.cannot_send_empty_message': "You can't send an empty message.",
 	'messages.cannot_vote_on_non_poll_error': "You cannot vote on a message that doesn't contain a poll.",
 	'messages.forward_messages_cannot_include_extra_content':
