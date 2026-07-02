@@ -331,7 +331,17 @@ export class Message {
 				mention_roles: ('mention_roles' in updates ? updates.mention_roles : this.mentionRoles) ?? [],
 				mention_channels: updates.mention_channels ?? this.mentionChannels,
 				embeds: updates.embeds ?? this.embeds,
-				poll: updates.poll ?? this.poll,
+				poll: updates.poll ? {
+					question: updates.poll.question ?? this.poll?.question,
+					answers: updates.poll.answers ?? this.poll?.answers,
+					expiry: updates.poll.expiry ?? this.poll?.expiry,
+					allow_multiselect: updates.poll.allow_multiselect ?? this.poll?.allow_multiselect,
+					layout_type: updates.poll.layout_type ?? this.poll?.layout_type,
+					results: updates.poll.results ? {
+						is_finalized: updates.poll.results.is_finalized ?? this.poll?.results?.is_finalized,
+						answer_counts: updates.poll.results.answer_counts ?? this.poll?.results?.answer_counts,
+					} : this.poll?.results,
+				} : this.poll,
 				attachments: updates.attachments ?? this.attachments,
 				stickers: updates.stickers ?? this.stickerItems,
 				reactions: updates.reactions ?? this.reactions,

@@ -116,6 +116,7 @@
 
 	&[data-variant='me'] {
 		border-color: var(--poll-answer-bar-accent);
+		background-color: var(--background-tertiary);
 
 		.answerPercentageBar {
 			background: color-mix(in srgb, var(--poll-answer-bar-accent), transparent 70%);
@@ -124,6 +125,7 @@
 
 	&[data-variant='winner'] {
 		border-color: var(--accent-success);
+		background-color: var(--background-tertiary);
 
 		.answerPercentageBar {
 			background: color-mix(in srgb, var(--accent-success), transparent 70%);
@@ -144,4 +146,10 @@
 .answerPercentage {
 	font-weight: bold;
 	text-wrap: nowrap;
+}
+
+.answerMeSuccess {
+	width: 1.5em;
+	height: 1.5em;
+	color: var(--accent-success);
 }

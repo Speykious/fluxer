@@ -12,6 +12,7 @@ import type {
 } from '@fluxer/schema/src/domains/message/PollSchemas';
 import {msg} from '@lingui/core/macro';
 import {useLingui} from '@lingui/react';
+import { CheckCircleIcon } from '@phosphor-icons/react';
 import {observer} from 'mobx-react-lite';
 import {useMemo, useState} from 'react';
 
@@ -58,9 +59,15 @@ export const Poll = observer((props: PollProps) => {
 	const {i18n} = useLingui();
 
 	const isSent = props.messageState === 'SENT';
-	const hasVoted = (props.poll.results?.answer_counts ?? []).find((answerCount) => answerCount.me_voted) !== undefined;
 
-	const [selectedAnswers, setSelectedAnswers] = useState<Array<number>>([]);
+	const answerCounts = props.poll.results?.answer_counts ?? [];
+	const hasVoted = answerCounts.find((answerCount) => answerCount.me_voted) !== undefined;
+
+	const [selectedAnswers, setSelectedAnswers] = useState<Array<number>>(
+		answerCounts
+			.filter((answerCount) => answerCount.id !== undefined && answerCount.me_voted)
+			.map((answerCount) => answerCount.id ?? 0)
+	);
 	const [isVoting, setIsVoting] = useState(!hasVoted);
 	const [isViewingResults, setIsViewingResults] = useState(false);
 
@@ -196,6 +203,7 @@ export const Poll = observer((props: PollProps) => {
 									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
 										{Math.round(answer.percentage)}%
 									</h2>
+									{isFinalized && answer.me ? <CheckCircleIcon weight="fill" className={styles.answerMeSuccess} data-flx="poll.answer.me-check" /> : undefined}
 								</section>
 							)}
 						</div>
@@ -221,7 +229,7 @@ export const Poll = observer((props: PollProps) => {
 						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} ·{' '}
 						{totalVoteCount} votes
 					</p>
-					{isFinalized ? undefined : (
+					{isFinalized || !isVoting ? undefined : (
 						<Button
 							variant="secondary"
 							disabled={!isSent}

@@ -46,7 +46,7 @@ export class MessageRequestService {
 			around: params.query.around,
 			access,
 		});
-		Promise.all(
+		await Promise.all(
 			messages.map((message) =>
 				this.fillMessagePollAnswerAuthorInfo(
 					params.channelId,
@@ -79,7 +79,7 @@ export class MessageRequestService {
 				query: request.query,
 				requestCache: params.requestCache,
 			});
-			Promise.all(
+			await Promise.all(
 				messages.map((message) =>
 					this.fillMessagePollAnswerAuthorInfo(
 						request.channelId,

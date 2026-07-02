@@ -329,7 +329,7 @@ export class MessageReactionService extends MessageInteractionBase {
 			if (!message.poll) throw new CannotVoteOnNonPollError();
 			if (!isRemovingOwnReaction) throw new CannotEditOtherUserMessageError();
 			const answerId = Number(parsedEmoji.id);
-			if (message.poll.answers.find((answer) => answer.answer_id === answerId) === undefined)
+			if (message.poll.answers.find((answer) => Number(answer.answer_id) === answerId) === undefined)
 				throw new UnknownPollAnswerError();
 
 			await this.channelRepository.messageInteractions.removeVote(channel.id, messageId, targetId, answerId);

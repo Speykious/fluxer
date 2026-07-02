@@ -114,6 +114,7 @@ export class MessageService {
 			snowflakeService,
 			favoriteMemeRepository,
 		});
+		const pollMessageExpiryRepository = new PollMessageExpiryRepository();
 		this.send = new MessageSendService({
 			channelRepository,
 			userRepository,
@@ -130,7 +131,7 @@ export class MessageService {
 			processingService: this.processing,
 			dispatchService: this.dispatch,
 			embedAttachmentResolver: this.persistence.getEmbedAttachmentResolver(),
-			pollMessageExpiryRepository: new PollMessageExpiryRepository(),
+			pollMessageExpiryRepository,
 			operationsHelpers,
 			limitConfigService,
 			directMessageSpamMitigationService,
@@ -152,7 +153,7 @@ export class MessageService {
 			channelAuthService: this.channelAuth,
 			channelRepository,
 			dispatchService: this.dispatch,
-			pollExpiryRepository: new PollMessageExpiryRepository(),
+			pollExpiryRepository: pollMessageExpiryRepository,
 			messageReactionService,
 		});
 		this.deletion = new MessageDeleteService({
@@ -163,6 +164,7 @@ export class MessageService {
 			channelAuthService: this.channelAuth,
 			dispatchService: this.dispatch,
 			searchService: this.search,
+			pollService: this.poll,
 			gatewayService,
 			guildAuditLogService,
 		});

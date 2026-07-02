@@ -4,7 +4,7 @@ import type {MessagePollSelectedAnswer, MessagePollVoteRow} from '@app/api/datab
 import * as BucketUtils from '@fluxer/snowflake/src/SnowflakeBuckets';
 import type {ChannelID, EmojiID, MessageID, UserID} from '../../BrandedTypes';
 import {createEmojiID} from '../../BrandedTypes';
-import {deleteOneOrMany, fetchMany, fetchOne, upsertOne} from '../../database/CassandraQueryExecution';
+import {BatchBuilder, deleteOneOrMany, fetchMany, fetchOne, upsertOne} from '../../database/CassandraQueryExecution';
 import {Db} from '../../database/CassandraTypes';
 import type {ChannelPinRow, MessageReactionRow} from '../../database/types/MessageTypes';
 import type {Message} from '../../models/Message';
@@ -276,6 +276,43 @@ export class MessageInteractionRepository extends IMessageInteractionRepository 
 			};
 			await upsertOne(MessagePollVotes.upsertAll(voteData));
 		}
+	}
+
+	async removeAllVotes(channelId: ChannelID, messageId: MessageID): Promise<void> {
+		const bucket = BucketUtils.makeBucket(messageId);
+		const deleteQuery = MessagePollVotes.deleteCql({
+			where: [
+				MessagePollVotes.where.eq('channel_id'),
+				MessagePollVotes.where.eq('bucket'),
+				MessagePollVotes.where.eq('message_id'),
+			],
+		});
+		await deleteOneOrMany(deleteQuery, {
+			channel_id: channelId,
+			bucket,
+			message_id: messageId,
+		});
+	}
+
+	async removeAllVotesBulk(channelId: ChannelID, messageIds: Array<MessageID>): Promise<void> {
+		const batch = new BatchBuilder();
+		for (const messageId of messageIds) {
+			const bucket = BucketUtils.makeBucket(messageId);
+			batch.addPrepared(
+				MessagePollVotes.delete({
+					where: [
+						MessagePollVotes.where.eq('channel_id'),
+						MessagePollVotes.where.eq('bucket'),
+						MessagePollVotes.where.eq('message_id'),
+					],
+				}).bind({
+					channel_id: channelId,
+					bucket,
+					message_id: messageId,
+				}),
+			);
+		}
+		await batch.execute();
 	}
 
 	async removeAllReactions(channelId: ChannelID, messageId: MessageID): Promise<void> {

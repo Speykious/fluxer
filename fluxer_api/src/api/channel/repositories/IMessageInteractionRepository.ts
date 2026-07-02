@@ -50,6 +50,10 @@ export abstract class IMessageInteractionRepository {
 
 	abstract removeVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void>;
 
+	abstract removeAllVotes(channelId: ChannelID, messageId: MessageID): Promise<void>;
+
+	abstract removeAllVotesBulk(channelId: ChannelID, messageIds: Array<MessageID>): Promise<void>;
+
 	abstract removeAllReactions(channelId: ChannelID, messageId: MessageID): Promise<void>;
 
 	abstract removeAllReactionsForEmoji(

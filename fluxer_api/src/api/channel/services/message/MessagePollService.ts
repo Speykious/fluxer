@@ -85,7 +85,7 @@ export class MessagePollService {
 
 		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
 
-		if (newMessageRow.poll) newMessageRow.poll.results = null;
+		if (newMessageRow.poll?.results) newMessageRow.poll.results.answer_counts = null;
 		await this.deps.dispatchService.dispatchMessageUpdate({
 			channel,
 			message: new Message(newMessageRow),
@@ -100,6 +100,14 @@ export class MessagePollService {
 				message_id: message.id,
 			});
 		}
+	}
+
+	async removeAllVotes(channelId: ChannelID, messageId: MessageID) {
+		await this.deps.channelRepository.messageInteractions.removeAllVotes(channelId, messageId);
+	}
+
+	async removeAllVotesBulk(channelId: ChannelID, messageIds: Array<MessageID>) {
+		await this.deps.channelRepository.messageInteractions.removeAllVotesBulk(channelId, messageIds);
 	}
 
 	async vote({
