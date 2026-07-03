@@ -159,7 +159,7 @@ export class MessagePollService {
 
 		if (answerIds.length === 0) {
 			for (const answerId of existingAnswerIds) {
-				this.deps.messageReactionService.removeReaction({
+				await this.deps.messageReactionService.removeReaction({
 					authChannel,
 					messageId,
 					actorId: userId,
@@ -171,7 +171,7 @@ export class MessagePollService {
 		} else {
 			for (const answerId of answerIds) {
 				if (existingAnswerIds.includes(answerId)) continue;
-				this.deps.messageReactionService.addReaction({
+				await this.deps.messageReactionService.addReaction({
 					authChannel,
 					messageId,
 					userId,
@@ -181,7 +181,7 @@ export class MessagePollService {
 			}
 			for (const existingAnswerId of existingAnswerIds) {
 				if (answerIds.includes(existingAnswerId)) continue;
-				this.deps.messageReactionService.removeReaction({
+				await this.deps.messageReactionService.removeReaction({
 					authChannel,
 					messageId,
 					actorId: userId,
