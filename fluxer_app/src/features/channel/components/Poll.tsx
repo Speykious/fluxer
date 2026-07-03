@@ -2,6 +2,7 @@
 
 import styles from '@app/features/channel/components/Poll.module.css';
 import Emoji from '@app/features/emoji/state/Emoji';
+import UnicodeEmojis from '@app/features/expressions/utils/UnicodeEmojis';
 import {Button} from '@app/features/ui/button/Button';
 import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
 import FocusRing from '@app/features/ui/focus_ring/FocusRing';
@@ -12,7 +13,7 @@ import type {
 } from '@fluxer/schema/src/domains/message/PollSchemas';
 import {msg} from '@lingui/core/macro';
 import {useLingui} from '@lingui/react';
-import { CheckCircleIcon } from '@phosphor-icons/react';
+import {CheckCircleIcon} from '@phosphor-icons/react';
 import {observer} from 'mobx-react-lite';
 import {useMemo, useState} from 'react';
 
@@ -42,31 +43,37 @@ const SHOW_RESULTS_DESCRIPTOR = msg({
 });
 
 function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
-	if (!pollEmoji?.id) return undefined;
-	const emoji = Emoji.getEmojiById(pollEmoji.id);
+	if (!pollEmoji) return undefined;
+
+	const emoji = pollEmoji.id
+		? Emoji.getEmojiById(pollEmoji.id)
+		: pollEmoji.name
+			? UnicodeEmojis.getByName(pollEmoji.name)
+			: undefined;
+
 	if (!emoji) return undefined;
 	return <img src={emoji.url} alt={emoji.name} width="24" height="24" data-flx="poll.answer.emoji.img" />;
 }
 
 interface PollProps {
+	isMobile: boolean;
 	poll: MessagePoll;
 	messageState: string;
 	onVote?: (add: boolean, selectedAnswers: Array<number>) => void;
 }
 
-export const Poll = observer((props: PollProps) => {
-	const poll = props.poll;
+export const Poll = observer(({isMobile, poll, messageState, onVote}: PollProps) => {
 	const {i18n} = useLingui();
 
-	const isSent = props.messageState === 'SENT';
+	const isSent = messageState === 'SENT';
 
-	const answerCounts = props.poll.results?.answer_counts ?? [];
+	const answerCounts = poll.results?.answer_counts ?? [];
 	const hasVoted = answerCounts.find((answerCount) => answerCount.me_voted) !== undefined;
 
 	const [selectedAnswers, setSelectedAnswers] = useState<Array<number>>(
 		answerCounts
 			.filter((answerCount) => answerCount.id !== undefined && answerCount.me_voted)
-			.map((answerCount) => answerCount.id ?? 0)
+			.map((answerCount) => answerCount.id ?? 0),
 	);
 	const [isVoting, setIsVoting] = useState(!hasVoted);
 	const [isViewingResults, setIsViewingResults] = useState(false);
@@ -143,7 +150,7 @@ export const Poll = observer((props: PollProps) => {
 	}, [poll]);
 
 	return (
-		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized} data-state={props.messageState}>
+		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized} data-state={messageState}>
 			<h2 data-flx="poll.question">{poll.question?.text ?? ''}</h2>
 			<p data-flx="poll.description">
 				<small>
@@ -203,21 +210,23 @@ export const Poll = observer((props: PollProps) => {
 									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
 										{Math.round(answer.percentage)}%
 									</h2>
-									{answer.me ? <CheckCircleIcon weight="fill" className={styles.answerMeSuccess} data-flx="poll.answer.me-check" /> : undefined}
+									{answer.me ? (
+										<CheckCircleIcon weight="fill" className={styles.answerMeSuccess} data-flx="poll.answer.me-check" />
+									) : undefined}
 								</section>
 							)}
 						</div>
 					</button>
 				</FocusRing>
 			))}
-			<footer data-flx="poll.footer">
+			<footer data-flx="poll.footer" data-mobile={isMobile}>
 				{isFinalized ? undefined : (
 					<Button
 						variant={isVoting ? 'primary' : 'secondary'}
 						disabled={isViewingResults || (isVoting && selectedAnswers.length === 0) || !isSent}
 						onClick={() => {
 							setIsVoting((prevIsVoting) => !prevIsVoting);
-							if (props.onVote) props.onVote(isVoting, selectedAnswers);
+							if (onVote) onVote(isVoting, selectedAnswers);
 						}}
 						data-flx="poll.footer.vote.button"
 					>
@@ -226,8 +235,8 @@ export const Poll = observer((props: PollProps) => {
 				)}
 				<section>
 					<p className={styles.answerVotes} data-flx="poll.footer.vote-count">
-						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} ·{' '}
-						{totalVoteCount} votes
+						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} · {totalVoteCount}{' '}
+						votes
 					</p>
 					{isFinalized || !isVoting ? undefined : (
 						<Button

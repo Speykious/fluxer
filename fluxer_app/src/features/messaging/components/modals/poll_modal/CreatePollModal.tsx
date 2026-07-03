@@ -88,7 +88,7 @@ interface CreatePollModalProps {
 }
 
 // TODO: localize labels
-const durationOptions: ReadonlyArray<ComboboxOption<number>> = [
+export const DURATION_OPTIONS: ReadonlyArray<ComboboxOption<number>> = [
 	{value: 1, label: '1 hour'},
 	{value: 2, label: '2 hours'},
 	{value: 4, label: '4 hours'},
@@ -267,7 +267,7 @@ export const CreatePollModal = observer(
 								<Combobox<number>
 									label={i18n._(POLL_DURATION_DESCRIPTOR)}
 									value={duration}
-									options={durationOptions}
+									options={DURATION_OPTIONS}
 									onChange={setDuration}
 									isSearchable={false}
 									density="compact"
@@ -290,7 +290,7 @@ export const CreatePollModal = observer(
 						onClick={handleSubmit}
 						submitting={submitting}
 						variant="primary"
-						data-flx="messaging.confirm-modal.button.primary-click"
+						data-flx="messaging.create-poll-modal.button.primary-click"
 					>
 						{i18n._(POLL_SUBMIT_DESCRIPTOR)}
 					</Button>

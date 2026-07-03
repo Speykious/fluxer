@@ -47,6 +47,7 @@ import * as DraftCommands from '@app/features/messaging/commands/DraftCommands';
 import * as MessageCommands from '@app/features/messaging/commands/MessageCommands';
 import * as ScheduledMessageCommands from '@app/features/messaging/commands/ScheduledMessageCommands';
 import {TooManyAttachmentsModal} from '@app/features/messaging/components/alerts/TooManyAttachmentsModal';
+import {CreatePollBottomSheet} from '@app/features/messaging/components/modals/poll_modal/CreatePollBottomSheet';
 import {CreatePollModal, type PollForm} from '@app/features/messaging/components/modals/poll_modal/CreatePollModal';
 import {ScheduleMessageModal} from '@app/features/messaging/components/modals/ScheduleMessageModal';
 import {useTextareaAttachments} from '@app/features/messaging/hooks/useCloudUpload';
@@ -152,6 +153,7 @@ const ChannelTextareaContent = observer(
 		const mentionModalKey = useMemo(() => `mention-everyone-modal-${channel.id}`, [channel.id]);
 		const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
 		const [mobilePlusSheetOpen, setMobilePlusSheetOpen] = useState(false);
+		const [createPollSheetOpen, setCreatePollSheetOpen] = useState(false);
 		const autocompleteListId = useId();
 		const textareaRef = useRef<HTMLTextAreaElement>(null);
 		const expressionPickerTriggerRef = useRef<HTMLButtonElement>(null);
@@ -514,6 +516,9 @@ const ChannelTextareaContent = observer(
 		const handleCloseMobilePlusSheet = useCallback(() => {
 			setMobilePlusSheetOpen(false);
 		}, []);
+		const handleCloseCreatePollSheet = useCallback(() => {
+			setCreatePollSheetOpen(false);
+		}, []);
 		const handleScheduleSubmit = useCallback(
 			async (scheduledLocalAt: string, timezone: string) => {
 				const actualContent = trimmedMessageContent;
@@ -609,35 +614,41 @@ const ChannelTextareaContent = observer(
 			DraftCommands.deleteDraft(channel.id);
 			textareaRef.current?.focus();
 		}, [textareaInputDisabled, canAttachFiles, value, channel.id, uploadAttachments.length, maxAttachments]);
+		const handlePollSubmit = useCallback((pollForm: PollForm) => {
+			if (mobileLayout.enabled) setCreatePollSheetOpen(false);
+			const messagePoll: MessageCreatePoll = {
+				question: {
+					text: pollForm.question,
+				},
+				answers: pollForm.answers.map((answer) => ({
+					answer_id: answer.id,
+					poll_media: {
+						emoji: answer.emoji,
+						text: answer.text,
+					},
+				})),
+				duration: pollForm.duration,
+				allow_multiselect: pollForm.allowMultipleAnswers,
+				layout_type: 1,
+			};
+			handleSendMessage('', false, messagePoll);
+		}, []);
 		const handleSendPoll = useCallback(async () => {
 			if (textareaInputDisabled || !canSendPolls) return;
 
-			ModalCommands.push(
-				modal(() => (
-					<CreatePollModal
-						onSubmit={(pollForm: PollForm) => {
-							const messagePoll: MessageCreatePoll = {
-								question: {
-									text: pollForm.question,
-								},
-								answers: pollForm.answers.map((answer) => ({
-									answer_id: answer.id,
-									poll_media: {
-										emoji: answer.emoji,
-										text: answer.text,
-									},
-								})),
-								duration: pollForm.duration,
-								allow_multiselect: pollForm.allowMultipleAnswers,
-								layout_type: 1,
-							};
-							handleSendMessage('', false, messagePoll);
-						}}
-						channelId={channel.id}
-						data-flx="channel.channel-textarea.handle-send-poll"
-					/>
-				)),
-			);
+			if (mobileLayout.enabled) {
+				setCreatePollSheetOpen(true);
+			} else {
+				ModalCommands.push(
+					modal(() => (
+						<CreatePollModal
+							onSubmit={handlePollSubmit}
+							channelId={channel.id}
+							data-flx="channel.channel-textarea.handle-send-poll"
+						/>
+					)),
+				);
+			}
 		}, [textareaInputDisabled, canSendPolls]);
 		useTextareaExpressionHandlers({
 			setValue,
@@ -1306,12 +1317,20 @@ const ChannelTextareaContent = observer(
 							data-flx="channel.channel-textarea.channel-textarea-content.expression-picker-sheet"
 						/>
 						<MobileTextareaPlusBottomSheet
+							canSendPolls={canSendPolls}
 							isOpen={mobilePlusSheetOpen}
 							onClose={handleCloseMobilePlusSheet}
 							onUploadFile={handleFileButtonClick}
+							onSendPoll={handleSendPoll}
 							textareaValue={value}
 							onUploadAsFile={handleUploadMessageAsFile}
 							data-flx="channel.channel-textarea.channel-textarea-content.mobile-textarea-plus-bottom-sheet"
+						/>
+						<CreatePollBottomSheet
+							isOpen={createPollSheetOpen}
+							onClose={handleCloseCreatePollSheet}
+							onSubmit={handlePollSubmit}
+							channelId={channel.id}
 						/>
 					</>
 				)}

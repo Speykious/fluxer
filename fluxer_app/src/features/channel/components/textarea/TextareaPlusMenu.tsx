@@ -20,7 +20,7 @@ const YOU_DO_NOT_HAVE_PERMISSION_TO_UPLOAD_FILES_DESCRIPTOR = msg({
 	message: "You can't upload files in this channel.",
 	comment: 'Tooltip on the disabled upload file item when the user lacks Attach Files permission. Calm, factual tone.',
 });
-const UPLOAD_FILE_DESCRIPTOR = msg({
+export const UPLOAD_FILE_DESCRIPTOR = msg({
 	message: 'Upload file',
 	comment: 'Plus menu item that opens the system file picker to attach a file.',
 });
@@ -28,15 +28,15 @@ const YOU_DO_NOT_HAVE_PERMISSION_TO_CREATE_POLL_DESCRIPTOR = msg({
 	message: "You can't create polls in this channel.",
 	comment: 'Tooltip on the disabled create poll item when the user lacks Create Poll permission. Calm, factual tone.',
 });
-const CREATE_POLL_DESCRIPTOR = msg({
+export const CREATE_POLL_DESCRIPTOR = msg({
 	message: 'Create poll',
 	comment: 'Plus menu item that opens a form to create a poll.',
 });
-const UPLOAD_YOUR_MESSAGE_AS_A_FILE_DESCRIPTOR = msg({
+export const UPLOAD_YOUR_MESSAGE_AS_A_FILE_DESCRIPTOR = msg({
 	message: 'Upload your message as a file',
 	comment: 'Plus menu item that uploads the current textarea content as a .txt file when it exceeds the size limit.',
 });
-const SEND_GIFT_DESCRIPTOR = msg({
+export const SEND_GIFT_DESCRIPTOR = msg({
 	message: 'Send gift',
 	comment: 'Plus menu item that opens the gift purchase flow.',
 });

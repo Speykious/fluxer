@@ -608,7 +608,7 @@ export const UserMessage = observer(() => {
 					}
 				</CompactMessageLayout>
 				<div className={styles.container} data-flx="channel.user-message.container--2">
-					{message.poll ? <Poll poll={message.poll} messageState={message.state} onVote={handlePollVote} /> : undefined}
+					{message.poll ? <Poll poll={message.poll} isMobile={mobileLayout.enabled} messageState={message.state} onVote={handlePollVote} /> : undefined}
 					<MessageAttachments data-flx="channel.user-message.message-attachments--2" />
 					{renderFailedFooter()}
 				</div>
@@ -786,7 +786,7 @@ export const UserMessage = observer(() => {
 						)}
 					</AuthorHeading>
 				)}
-				{message.poll ? <Poll poll={message.poll} messageState={message.state} onVote={handlePollVote} /> : undefined}
+				{message.poll ? <Poll poll={message.poll} isMobile={mobileLayout.enabled} messageState={message.state} onVote={handlePollVote} /> : undefined}
 				<MessageAttachments data-flx="channel.user-message.message-attachments--3" />
 				{renderFailedFooter()}
 			</div>
