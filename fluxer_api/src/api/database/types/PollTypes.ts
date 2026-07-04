@@ -63,14 +63,14 @@ export interface MessagePollVoteRow {
 	bucket: number;
 	channel_id: ChannelID;
 	message_id: MessageID;
+    answer_id: number;
 	user_id: UserID;
-    answers: Array<MessagePollSelectedAnswer>;
 }
 
 export const MESSAGE_POLL_VOTES_COLUMNS = [
 	'bucket',
 	'channel_id',
 	'message_id',
+    'answer_id',
 	'user_id',
-    'answers',
 ] as const satisfies ReadonlyArray<keyof MessagePollVoteRow>;

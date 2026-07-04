@@ -200,6 +200,12 @@ export const ReactionUsersPageResponse = z.object({
 
 export type ReactionUsersPageResponse = z.infer<typeof ReactionUsersPageResponse>;
 
+export const PollAnswerVotersResponse = z.object({
+	users: z.array(z.lazy(() => UserPartialResponse)).describe('Users who reacted with the requested answer'),
+});
+
+export type PollAnswerVotersResponse = z.infer<typeof PollAnswerVotersResponse>;
+
 export const MessageSearchResultsResponse = z.object({
 	messages: z
 		.array(MessageResponseSchema.omit({referenced_message: true}))

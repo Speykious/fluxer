@@ -6515,6 +6515,33 @@
 			"options": ""
 		},
 		{
+			"name": "message_poll_votes",
+			"columns": [
+				{
+					"name": "channel_id",
+					"type": "bigint"
+				},
+				{
+					"name": "bucket",
+					"type": "int"
+				},
+				{
+					"name": "message_id",
+					"type": "bigint"
+				},
+				{
+					"name": "answer_id",
+					"type": "int"
+				},
+				{
+					"name": "user_id",
+					"type": "bigint"
+				}
+			],
+			"primary_key": "((bucket, channel_id), message_id, user_id, answer_id)",
+			"options": ""
+		},
+		{
 			"name": "message_reactions",
 			"columns": [
 				{

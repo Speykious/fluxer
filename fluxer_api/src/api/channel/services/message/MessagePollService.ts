@@ -4,8 +4,8 @@ import type {Channel} from '@app/api/models/Channel';
 import {Message} from '@app/api/models/Message';
 import type {PollMessageExpiryRow} from '@app/api/Tables';
 import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
-import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {CannotSelectMultipleAnswersError} from '@fluxer/errors/src/domains/channel/CannotSelectMultipleAnswersError';
+import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import type {ChannelID, MessageID, UserID} from '../../../BrandedTypes';
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
@@ -13,10 +13,15 @@ import type {PollMessageExpiryRepository} from '../../repositories/PollMessageEx
 import type {MessageReactionService} from '../interaction/MessageReactionService';
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
+import type {IUserRepository} from '@app/api/user/IUserRepository';
+import {UnknownPollAnswerError} from '@fluxer/errors/src/domains/channel/UnknownPollAnswerError';
+import { mapUserToPartialResponse } from '@app/api/user/UserMappers';
+import type { UserPartialResponse } from '@fluxer/schema/src/domains/user/UserResponseSchemas';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
 	channelRepository: IChannelRepositoryAggregate;
+	userRepository: IUserRepository;
 	dispatchService: MessageDispatchService;
 	pollExpiryRepository: PollMessageExpiryRepository;
 	messageReactionService: MessageReactionService;
@@ -103,12 +108,48 @@ export class MessagePollService {
 		}
 	}
 
-	async removeAllVotes(channelId: ChannelID, messageId: MessageID) {
+	async removeAllVotes(channelId: ChannelID, messageId: MessageID): Promise<void> {
 		await this.deps.channelRepository.messageInteractions.removeAllVotes(channelId, messageId);
 	}
 
-	async removeAllVotesBulk(channelId: ChannelID, messageIds: Array<MessageID>) {
+	async removeAllVotesBulk(channelId: ChannelID, messageIds: Array<MessageID>): Promise<void> {
 		await this.deps.channelRepository.messageInteractions.removeAllVotesBulk(channelId, messageIds);
+	}
+
+	async getVotesForAnswer({
+		userId,
+		channelId,
+		messageId,
+		answerId,
+		limit,
+		after,
+	}: {
+		userId: UserID;
+		channelId: ChannelID;
+		messageId: MessageID;
+		answerId: number;
+		limit?: number;
+		after?: UserID;
+	}): Promise<Array<UserPartialResponse>> {
+		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
+			userId,
+			channelId,
+		});
+		const {channel} = authChannel;
+		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
+		if (!message) throw new UnknownMessageError();
+
+		if (!message.poll || !message.poll.answers || !message.poll.answers.find((answer) => answer.answer_id === answerId))
+			throw new UnknownPollAnswerError();
+
+		const userIds = await this.deps.channelRepository.messageInteractions.getVotesForAnswer(
+			channelId,
+			messageId,
+			answerId,
+			limit,
+			after,
+		);
+		return (await this.deps.userRepository.listUsers(userIds)).map((user) => mapUserToPartialResponse(user));
 	}
 
 	async vote({

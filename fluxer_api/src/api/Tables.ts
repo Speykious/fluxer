@@ -682,12 +682,12 @@ export const MessageReactions = defineTable<
 });
 export const MessagePollVotes = defineTable<
 	MessagePollVoteRow,
-	'channel_id' | 'bucket' | 'message_id' | 'user_id',
+	'channel_id' | 'bucket' | 'message_id' | 'answer_id' | 'user_id',
 	'channel_id' | 'bucket'
 >({
 	name: 'message_poll_votes',
 	columns: MESSAGE_POLL_VOTES_COLUMNS,
-	primaryKey: ['channel_id', 'bucket', 'message_id', 'user_id'],
+	primaryKey: ['channel_id', 'bucket', 'message_id', 'answer_id', 'user_id'],
 	partitionKey: ['channel_id', 'bucket'],
 });
 export const AttachmentLookup = defineTable<AttachmentLookupRow, 'channel_id' | 'attachment_id' | 'filename'>({

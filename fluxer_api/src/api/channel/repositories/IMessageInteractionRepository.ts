@@ -46,6 +46,14 @@ export abstract class IMessageInteractionRepository {
 		userId: UserID,
 	): Promise<Array<MessagePollSelectedAnswer>>;
 
+	abstract getVotesForAnswer(
+		channelId: ChannelID,
+		messageId: MessageID,
+		answerId: number,
+		limit?: number,
+		after?: UserID,
+	): Promise<Array<UserID>>;
+
 	abstract addVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void>;
 
 	abstract removeVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void>;

@@ -152,6 +152,7 @@ export class MessageService {
 		this.poll = new MessagePollService({
 			channelAuthService: this.channelAuth,
 			channelRepository,
+			userRepository,
 			dispatchService: this.dispatch,
 			pollExpiryRepository: pollMessageExpiryRepository,
 			messageReactionService,

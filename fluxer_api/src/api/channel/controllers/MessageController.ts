@@ -22,7 +22,6 @@ import {
 	MessageRequestSchema,
 	MessagesQuery,
 	MessageUpdateRequestSchema,
-	PollVoteRequestSchema,
 } from '@fluxer/schema/src/domains/message/MessageRequestSchemas';
 import {
 	BulkMessageFetchResponse,
@@ -340,37 +339,6 @@ export function MessageController(app: HonoApp) {
 			const userId = ctx.get('user').id;
 			const channelId = createChannelID(ctx.req.valid('param').channel_id);
 			await ctx.get('readStateService').deleteReadState({userId, channelId});
-			return ctx.body(null, 204);
-		},
-	);
-	app.put(
-		'/channels/:channel_id/polls/:message_id/answers/@me',
-		RateLimitMiddleware(RateLimitConfigs.CHANNEL_REACTIONS),
-		LoginRequired,
-		Validator('param', ChannelIdMessageIdParam),
-		Validator('json', PollVoteRequestSchema),
-		OpenAPI({
-			operationId: 'vote',
-			summary: 'Vote on the poll',
-			description: 'Vote on the poll.',
-			responseSchema: null,
-			requestSchema: PollVoteRequestSchema,
-			statusCode: 204,
-			security: ['botToken', 'bearerToken', 'sessionToken'],
-			tags: ['Channels', 'Messages'],
-		}),
-		async (ctx) => {
-			const {channel_id, message_id} = ctx.req.valid('param');
-			const {answerIds} = ctx.req.valid('json');
-			const userId = ctx.get('user').id;
-			const channelId = createChannelID(channel_id);
-			const messageId = createMessageID(message_id);
-			await ctx.get('channelService').messages.poll.vote({
-				userId,
-				channelId,
-				messageId,
-				answerIds: answerIds.map((id) => Number(id)),
-			});
 			return ctx.body(null, 204);
 		},
 	);

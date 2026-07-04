@@ -5,6 +5,6 @@ import {NotFoundError} from '@fluxer/errors/src/domains/core/NotFoundError';
 
 export class UnknownPollAnswerError extends NotFoundError {
 	constructor() {
-		super({code: APIErrorCodes.UNKNOWN_MESSAGE});
+		super({code: APIErrorCodes.UNKNOWN_POLL_ANSWER});
 	}
 }
