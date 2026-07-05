@@ -13415,6 +13415,20 @@
 				},
 				"required": ["messages", "has_more"]
 			},
+			"PollMedia": {
+				"type": "object",
+				"properties": {
+					"emoji": {
+						"type": "object",
+						"nullable": true,
+						"properties": {
+							"id": {"nullable": true, "type": "string"},
+							"name": {"nullable": true, "type": "string"}
+						}
+					},
+					"text": {"nullable": true, "type": "string"}
+				}
+			},
 			"AdminMessageSchema": {
 				"type": "object",
 				"properties": {
@@ -13443,6 +13457,44 @@
 					"author_avatar": {"nullable": true, "type": "string"},
 					"content": {"type": "string"},
 					"timestamp": {"type": "string"},
+					"poll": {
+						"type": "object",
+						"properties": {
+							"question": {"$ref": "#/components/schemas/PollMedia"},
+							"answers": {
+								"type": "array",
+								"nullable": true,
+								"items": {
+									"type": "object",
+									"properties": {
+										"answer_id": {"nullable": true, "type": "integer"},
+										"poll_media": {"$ref": "#/components/schemas/PollMedia"}
+									}
+								}
+							},
+							"expiry": {"nullable": true, "type": "string"},
+							"allow_multiselect": {"nullable": true, "type": "boolean"},
+							"layout_type": {"nullable": true, "type": "integer"},
+							"results": {
+								"type": "object",
+								"nullable": true,
+								"properties": {
+									"answer_counts": {
+										"type": "array",
+										"nullable": true,
+										"items": {
+											"type": "object",
+											"properties": {
+												"id": {"nullable": true, "type": "integer"},
+												"count": {"nullable": true, "type": "integer"}
+											}
+										}
+									},
+									"is_finalized": {"nullable": true, "type": "boolean"}
+								}
+							}
+						}
+					},
 					"attachments": {
 						"type": "array",
 						"items": {

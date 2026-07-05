@@ -3,11 +3,7 @@
 use std::cmp::Ordering;
 
 use crate::{
-    acl,
-    api::types::ReportEntry,
-    config::AdminConfig,
-    middleware::auth::AuthContext,
-    templates::{
+    acl, api::types::ReportEntry, config::AdminConfig, middleware::auth::AuthContext, templates::{
         components::{
             badge::{BadgeVariant, badge},
             data_field::{data_field, data_field_link_mono, data_field_mono, data_field_text},
@@ -20,10 +16,8 @@ use crate::{
             page_container::page_header_with_back,
             resource_link::{ResourceType, resource_link},
             section_card::section_card,
-        },
-        layout::admin_layout,
-    },
-    utils::timestamps::format_admin_timestamp,
+        }, layout::admin_layout, pages::messages_page::poll_from_value,
+    }, utils::timestamps::format_admin_timestamp,
 };
 use maud::{Markup, html};
 use serde_json::Value;
@@ -596,6 +590,7 @@ fn message_from_value(value: &Value) -> Message {
             .and_then(Value::as_str)
             .map(ToOwned::to_owned),
         guild_nsfw: value.get("guild_nsfw").and_then(Value::as_bool),
+        poll: value.get("poll").map(poll_from_value),
         attachments,
     }
 }
