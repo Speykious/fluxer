@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 use maud::{Markup, PreEscaped, html};
 
@@ -214,7 +214,7 @@ fn render_other_attachments(msg: &Message, has_content_or_images: bool) -> Marku
 }
 
 fn render_poll(poll: &Poll) -> Markup {
-    let mut answers = HashMap::new();
+    let mut answers = BTreeMap::new();
     if let Some(poll_answers) = &poll.answers {
         for answer in poll_answers {
             let text = answer.poll_media.as_ref().and_then(|pm| pm.text.as_ref().map(String::as_str)).unwrap_or("");
