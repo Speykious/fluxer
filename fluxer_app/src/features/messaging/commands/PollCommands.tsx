@@ -13,6 +13,7 @@ import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
 import {modal} from '@app/features/ui/commands/ModalCommands';
 import * as ToastCommands from '@app/features/ui/commands/ToastCommands';
 import {APIErrorCodes} from '@fluxer/constants/src/ApiErrorCodes';
+import type {UserPartialResponse} from '@fluxer/schema/src/domains/user/UserResponseSchemas';
 import type {I18n} from '@lingui/core';
 import {msg} from '@lingui/core/macro';
 
@@ -68,14 +69,14 @@ function onHttpError(i18n: I18n, error: any) {
 	}
 }
 
-export function endPoll(i18n: I18n, channelId: string, messageId: string): void {
+export function endPoll(i18n: I18n, channelId: string, messageId: string): Promise<unknown> {
 	logger.debug(`Ending poll from message ${messageId} in channel ${channelId}`);
-	http.post(Endpoints.CHANNEL_POLL_EXPIRE(channelId, messageId)).catch((error) => onHttpError(i18n, error));
+	return http.post(Endpoints.CHANNEL_POLL_EXPIRE(channelId, messageId)).catch((error) => onHttpError(i18n, error));
 }
 
-export function addVote(i18n: I18n, channelId: string, messageId: string, answerIds: Array<number>): void {
+export function addVote(i18n: I18n, channelId: string, messageId: string, answerIds: Array<number>): Promise<unknown> {
 	logger.debug(`Adding vote ${answerIds} to poll from message ${messageId} in channel ${channelId}`);
-	http
+	return http
 		.put(Endpoints.CHANNEL_POLL_ANSWERS(channelId, messageId, '@me'), {
 			body: {
 				answerIds: answerIds.map((id) => String(id)),
@@ -84,13 +85,31 @@ export function addVote(i18n: I18n, channelId: string, messageId: string, answer
 		.catch((error) => onHttpError(i18n, error));
 }
 
-export function removeVote(i18n: I18n, channelId: string, messageId: string): void {
+export function removeVote(i18n: I18n, channelId: string, messageId: string): Promise<unknown> {
 	logger.debug(`Removing vote on poll from message ${messageId} in channel ${channelId}`);
-	http
+	return http
 		.put(Endpoints.CHANNEL_POLL_ANSWERS(channelId, messageId, '@me'), {
 			body: {
 				answerIds: [],
 			},
 		})
 		.catch((error) => onHttpError(i18n, error));
+}
+
+export function fetchAnswerVoters(
+	i18n: I18n,
+	channelId: string,
+	messageId: string,
+	answerId: number,
+	limit?: number,
+	after?: string,
+): Promise<Array<UserPartialResponse>> {
+	logger.debug(`Fetching voters for answer ${answerId} in poll from message ${messageId} in channel ${channelId}`);
+	return http
+		.get<{users: Array<UserPartialResponse>}>(Endpoints.CHANNEL_POLL_ANSWER_VOTERS(channelId, messageId, answerId, limit, after))
+		.then((response) => response.body.users ?? [])
+		.catch((error) => {
+			onHttpError(i18n, error);
+			return [];
+		});
 }

@@ -3,8 +3,11 @@
 import styles from '@app/features/channel/components/Poll.module.css';
 import Emoji from '@app/features/emoji/state/Emoji';
 import UnicodeEmojis from '@app/features/expressions/utils/UnicodeEmojis';
+import type {Guild} from '@app/features/guild/models/Guild';
 import {Button} from '@app/features/ui/button/Button';
 import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
+import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
+import {modal} from '@app/features/ui/commands/ModalCommands';
 import FocusRing from '@app/features/ui/focus_ring/FocusRing';
 import type {
 	MessagePoll,
@@ -15,7 +18,8 @@ import {msg} from '@lingui/core/macro';
 import {useLingui} from '@lingui/react';
 import {CheckCircleIcon} from '@phosphor-icons/react';
 import {observer} from 'mobx-react-lite';
-import {useMemo, useState} from 'react';
+import {useCallback, useMemo, useState} from 'react';
+import {PollAnswerVotersModal} from './modals/PollAnswerVotersModal';
 
 const SELECT_ONE_ANSWER_DESCRIPTOR = msg({
 	message: 'Select one answer',
@@ -56,13 +60,16 @@ function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
 }
 
 interface PollProps {
+	guild?: Guild;
+	channelId: string;
+	messageId: string;
 	isMobile: boolean;
 	poll: MessagePoll;
 	messageState: string;
 	onVote?: (add: boolean, selectedAnswers: Array<number>) => void;
 }
 
-export const Poll = observer(({isMobile, poll, messageState, onVote}: PollProps) => {
+export const Poll = observer(({guild, channelId, messageId, isMobile, poll, messageState, onVote}: PollProps) => {
 	const {i18n} = useLingui();
 
 	const isSent = messageState === 'SENT';
@@ -149,6 +156,21 @@ export const Poll = observer(({isMobile, poll, messageState, onVote}: PollProps)
 		return answers;
 	}, [poll]);
 
+	const openPollAnswerVotersModal = useCallback((initialAnswerId: number) => {
+		ModalCommands.push(
+			modal(() => (
+				<PollAnswerVotersModal
+					guild={guild}
+					channelId={channelId}
+					messageId={messageId}
+					poll={poll}
+					initialAnswerId={initialAnswerId}
+					key={`poll-answers-modal-${messageId}`}
+				/>
+			)),
+		);
+	}, []);
+
 	return (
 		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized} data-state={messageState}>
 			<h2 data-flx="poll.question">{poll.question?.text ?? ''}</h2>
@@ -204,9 +226,14 @@ export const Poll = observer(({isMobile, poll, messageState, onVote}: PollProps)
 							</section>
 							{inVoteScreen ? undefined : (
 								<section data-flx="poll.answer.section.votes">
-									<p className={styles.answerVotes} data-flx="poll.answer.vote-count">
+									<button
+										type="button"
+										onClick={() => openPollAnswerVotersModal(answer.id)}
+										className={styles.answerVotes}
+										data-flx="poll.answer.vote-count"
+									>
 										{answer.votes} votes
-									</p>
+									</button>
 									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
 										{Math.round(answer.percentage)}%
 									</h2>
@@ -234,10 +261,17 @@ export const Poll = observer(({isMobile, poll, messageState, onVote}: PollProps)
 					</Button>
 				)}
 				<section>
-					<p className={styles.answerVotes} data-flx="poll.footer.vote-count">
-						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} · {totalVoteCount}{' '}
-						votes
-					</p>
+					<div className={styles.answerTotalVotes} data-flx="poll.footer.total-vote-count">
+						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} ·{' '}
+						<button
+							type="button"
+							onClick={() => openPollAnswerVotersModal(1)}
+							className={styles.answerVotes}
+							data-flx="poll.footer.vote-count"
+						>
+							{totalVoteCount} votes
+						</button>
+					</div>
 					{isFinalized || !isVoting ? undefined : (
 						<Button
 							variant="secondary"

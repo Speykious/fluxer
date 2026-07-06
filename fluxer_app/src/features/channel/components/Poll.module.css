@@ -169,9 +169,19 @@
 	text-align: left;
 }
 
+.answerTotalVotes {
+	font-size: small;
+	text-wrap: nowrap;
+}
+
 .answerVotes {
 	font-size: small;
 	text-wrap: nowrap;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .answerPercentage {
