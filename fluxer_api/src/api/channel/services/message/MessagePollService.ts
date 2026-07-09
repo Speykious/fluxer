@@ -3,20 +3,20 @@
 import type {Channel} from '@app/api/models/Channel';
 import {Message} from '@app/api/models/Message';
 import type {PollMessageExpiryRow} from '@app/api/Tables';
+import type {IUserRepository} from '@app/api/user/IUserRepository';
+import {mapUserToPartialResponse} from '@app/api/user/UserMappers';
 import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 import {CannotSelectMultipleAnswersError} from '@fluxer/errors/src/domains/channel/CannotSelectMultipleAnswersError';
 import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
+import {UnknownPollAnswerError} from '@fluxer/errors/src/domains/channel/UnknownPollAnswerError';
+import type {PollAnswerVotersResponse} from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
 import type {ChannelID, MessageID, UserID} from '../../../BrandedTypes';
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
 import type {PollMessageExpiryRepository} from '../../repositories/PollMessageExpiryRepository';
 import type {MessageReactionService} from '../interaction/MessageReactionService';
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
-import type {IUserRepository} from '@app/api/user/IUserRepository';
-import {UnknownPollAnswerError} from '@fluxer/errors/src/domains/channel/UnknownPollAnswerError';
-import { mapUserToPartialResponse } from '@app/api/user/UserMappers';
-import type { UserPartialResponse } from '@fluxer/schema/src/domains/user/UserResponseSchemas';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -130,7 +130,7 @@ export class MessagePollService {
 		answerId: number;
 		limit?: number;
 		after?: UserID;
-	}): Promise<Array<UserPartialResponse>> {
+	}): Promise<PollAnswerVotersResponse> {
 		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
 			userId,
 			channelId,
@@ -142,14 +142,19 @@ export class MessagePollService {
 		if (!message.poll || !message.poll.answers || !message.poll.answers.find((answer) => answer.answer_id === answerId))
 			throw new UnknownPollAnswerError();
 
-		const userIds = await this.deps.channelRepository.messageInteractions.getVotesForAnswer(
+		const response = await this.deps.channelRepository.messageInteractions.getVotesForAnswer(
 			channelId,
 			messageId,
 			answerId,
 			limit,
 			after,
 		);
-		return (await this.deps.userRepository.listUsers(userIds)).map((user) => mapUserToPartialResponse(user));
+		const users = await this.deps.userRepository.listUsers(response.userIds);
+		return {
+			users: users.map((user) => mapUserToPartialResponse(user)),
+			has_more: response.hasMore ?? false,
+			next_after: response.nextAfter ?? null,
+		};
 	}
 
 	async vote({
@@ -208,6 +213,11 @@ export class MessagePollService {
 					emoji: `${answerId}:${answerId}`,
 					reactionType: 2,
 				});
+				const answerCount = poll.results.answer_counts.find((ac) => ac.id === answerId);
+				if (answerCount) {
+					if (!answerCount.count) answerCount.count = 0;
+					answerCount.count--;
+				}
 			}
 		} else {
 			for (const answerId of answerIds) {
@@ -219,6 +229,11 @@ export class MessagePollService {
 					emoji: `${answerId}:${answerId}`,
 					reactionType: 2,
 				});
+				const answerCount = poll.results.answer_counts.find((ac) => ac.id === answerId);
+				if (answerCount) {
+					if (!answerCount.count) answerCount.count = 0;
+					answerCount.count++;
+				}
 			}
 			for (const existingAnswerId of existingAnswerIds) {
 				if (answerIds.includes(existingAnswerId)) continue;
@@ -230,15 +245,12 @@ export class MessagePollService {
 					emoji: `${existingAnswerId}:${existingAnswerId}`,
 					reactionType: 2,
 				});
+				const answerCount = poll.results.answer_counts.find((ac) => ac.id === existingAnswerId);
+				if (answerCount) {
+					if (!answerCount.count) answerCount.count = 0;
+					answerCount.count--;
+				}
 			}
-		}
-
-		for (const answerCount of poll.results.answer_counts) {
-			const currentlyExists = existingAnswerIds.includes(answerCount.id ?? 0);
-			const willExist = answerIds.includes(answerCount.id ?? 0);
-			if (!answerCount.count) answerCount.count = 0;
-			if (currentlyExists && !willExist) answerCount.count--;
-			if (!currentlyExists && willExist) answerCount.count++;
 		}
 
 		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);

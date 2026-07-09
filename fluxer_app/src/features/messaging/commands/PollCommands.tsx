@@ -13,9 +13,10 @@ import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
 import {modal} from '@app/features/ui/commands/ModalCommands';
 import * as ToastCommands from '@app/features/ui/commands/ToastCommands';
 import {APIErrorCodes} from '@fluxer/constants/src/ApiErrorCodes';
-import type {UserPartialResponse} from '@fluxer/schema/src/domains/user/UserResponseSchemas';
+import type {UserPartial, UserPartialResponse} from '@fluxer/schema/src/domains/user/UserResponseSchemas';
 import type {I18n} from '@lingui/core';
 import {msg} from '@lingui/core/macro';
+import PollVotes from '../state/PollVotes';
 
 const logger = new Logger('PollCommands');
 
@@ -27,6 +28,18 @@ const THIS_WILL_CLOSE_THE_POLL_DESCRIPTOR = msg({
 interface ShowEndPollConfirmationOptions {
 	message: MessageModel;
 	onEndPoll?: () => void;
+}
+
+interface VoteFetchOptions {
+	limit?: number;
+	after?: string;
+	totalCount?: number;
+}
+
+interface FetchAnswerVotersResponse {
+	users: Array<UserPartialResponse>;
+	has_more?: boolean;
+	next_after?: string | null;
 }
 
 export function showEndPollConfirmation(i18n: I18n, {message, onEndPoll}: ShowEndPollConfirmationOptions): void {
@@ -74,6 +87,62 @@ export function endPoll(i18n: I18n, channelId: string, messageId: string): Promi
 	return http.post(Endpoints.CHANNEL_POLL_EXPIRE(channelId, messageId)).catch((error) => onHttpError(i18n, error));
 }
 
+function applyPollVoteFetchResult(
+	messageId: string,
+	answerId: number,
+	data: Array<UserPartial>,
+	options: VoteFetchOptions,
+	responseHasMore?: boolean,
+	requestId?: number,
+	nextAfter?: string | null,
+): void {
+	const {limit, after, totalCount} = options;
+	if (after !== undefined) {
+		PollVotes.handleFetchAppend(messageId, data, answerId, limit, responseHasMore, totalCount, requestId, nextAfter);
+		return;
+	}
+	PollVotes.handleFetchSuccess(messageId, data, answerId, limit, responseHasMore, totalCount, requestId, nextAfter);
+}
+
+export async function getVotes(
+	channelId: string,
+	messageId: string,
+	answerId: number,
+	options: VoteFetchOptions = {},
+): Promise<FetchAnswerVotersResponse> {
+	const {limit, after} = options;
+	const requestId = PollVotes.handleFetchPending(messageId, answerId);
+	try {
+		const response = await fetchAnswerVoters(null, channelId, messageId, answerId, limit, after);
+		const users = response.users;
+		const responseHasMore = response.has_more;
+		const nextAfter = response.next_after;
+		applyPollVoteFetchResult(messageId, answerId, users, {limit, after}, responseHasMore, requestId, nextAfter);
+		logger.debug(`Retrieved ${response.users.length} reactions for message ${messageId}`);
+		return response;
+	} catch (error) {
+		logger.error(`Failed to get reactions for message ${messageId}:`, error);
+		PollVotes.handleFetchError(messageId, answerId, requestId);
+		throw error;
+	}
+}
+
+export async function loadMoreVotes(
+	channelId: string,
+	messageId: string,
+	answerId: number,
+	options: {totalCount?: number} = {},
+): Promise<void> {
+	const fetchStatus = PollVotes.getFetchStatus(messageId, answerId);
+	if (fetchStatus === 'pending') return;
+	if (!PollVotes.getHasMore(messageId, answerId)) return;
+	const after = PollVotes.getLastUserId(messageId, answerId);
+	if (!after) return;
+	try {
+		await getVotes(channelId, messageId, answerId, {limit: 100, after, totalCount: options.totalCount});
+	} catch {}
+}
+
 export function addVote(i18n: I18n, channelId: string, messageId: string, answerIds: Array<number>): Promise<unknown> {
 	logger.debug(`Adding vote ${answerIds} to poll from message ${messageId} in channel ${channelId}`);
 	return http
@@ -97,19 +166,31 @@ export function removeVote(i18n: I18n, channelId: string, messageId: string): Pr
 }
 
 export function fetchAnswerVoters(
-	i18n: I18n,
+	i18n: I18n | null,
 	channelId: string,
 	messageId: string,
 	answerId: number,
 	limit?: number,
 	after?: string,
-): Promise<Array<UserPartialResponse>> {
+): Promise<FetchAnswerVotersResponse> {
 	logger.debug(`Fetching voters for answer ${answerId} in poll from message ${messageId} in channel ${channelId}`);
-	return http
-		.get<{users: Array<UserPartialResponse>}>(Endpoints.CHANNEL_POLL_ANSWER_VOTERS(channelId, messageId, answerId, limit, after))
-		.then((response) => response.body.users ?? [])
-		.catch((error) => {
-			onHttpError(i18n, error);
-			return [];
+
+	const query: Record<string, string> = {};
+	if (limit) query.limit = `${limit}`;
+	if (after) query.after = after;
+
+	const response = http
+		.get<FetchAnswerVotersResponse>(Endpoints.CHANNEL_POLL_ANSWER_VOTERS(channelId, messageId, answerId), {
+			query,
+		})
+		.then((response) => response.body);
+
+	if (i18n) {
+		return response.catch((error) => {
+			if (i18n) onHttpError(i18n, error);
+			return {users: [], has_more: false, next_after: null};
 		});
+	}
+
+	return response;
 }

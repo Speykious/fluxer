@@ -2,6 +2,12 @@ import type {ChannelID, MessageID, UserID} from '@app/api/BrandedTypes';
 
 type Nullish<T> = T | null;
 
+export interface MessagePollAnswerVotersPage {
+	userIds: Array<UserID>,
+	hasMore?: boolean,
+	nextAfter?: string | null,
+}
+
 export interface MessagePollEmoji {
 	id: Nullish<string>;
 	name: Nullish<string>;

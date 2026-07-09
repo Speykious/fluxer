@@ -32,6 +32,7 @@ import type {
 	Message as WireMessage,
 } from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
 import type {MessagePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
+import PollVotes from '../state/PollVotes';
 
 type MessageInput = Omit<WireMessage, 'mentions' | 'mention_roles' | 'tts'> &
 	Partial<Pick<WireMessage, 'mentions' | 'mention_roles' | 'tts'>>;
@@ -226,6 +227,12 @@ export class Message {
 			} else if (options?.missingReactions !== 'preserve') {
 				MessageReactions.hydrateMessageReactions(this.id, []);
 			}
+
+			if ('poll' in message) {
+				PollVotes.hydrateMessagePollVotes(this.id, message.poll?.results?.answer_counts);
+			} else if (options?.missingReactions !== 'preserve') {
+				PollVotes.hydrateMessagePollVotes(this.id, []);
+			}
 		}
 		this.messageReference = message.message_reference;
 		this.referencedMessage = message.referenced_message
@@ -312,6 +319,9 @@ export class Message {
 		if ('reactions' in updates) {
 			MessageReactions.replaceMessageReactions(this.id, updates.reactions ?? []);
 		}
+		if ('poll' in updates) {
+			PollVotes.replaceMessagePollVotes(this.id, updates.poll?.results?.answer_counts ?? []);
+		}
 		return new Message(
 			{
 				id: this.id,
@@ -331,17 +341,21 @@ export class Message {
 				mention_roles: ('mention_roles' in updates ? updates.mention_roles : this.mentionRoles) ?? [],
 				mention_channels: updates.mention_channels ?? this.mentionChannels,
 				embeds: updates.embeds ?? this.embeds,
-				poll: updates.poll ? {
-					question: updates.poll.question ?? this.poll?.question,
-					answers: updates.poll.answers ?? this.poll?.answers,
-					expiry: updates.poll.expiry ?? this.poll?.expiry,
-					allow_multiselect: updates.poll.allow_multiselect ?? this.poll?.allow_multiselect,
-					layout_type: updates.poll.layout_type ?? this.poll?.layout_type,
-					results: updates.poll.results ? {
-						is_finalized: updates.poll.results.is_finalized ?? this.poll?.results?.is_finalized,
-						answer_counts: updates.poll.results.answer_counts ?? this.poll?.results?.answer_counts,
-					} : this.poll?.results,
-				} : this.poll,
+				poll: updates.poll
+					? {
+							question: updates.poll.question ?? this.poll?.question,
+							answers: updates.poll.answers ?? this.poll?.answers,
+							expiry: updates.poll.expiry ?? this.poll?.expiry,
+							allow_multiselect: updates.poll.allow_multiselect ?? this.poll?.allow_multiselect,
+							layout_type: updates.poll.layout_type ?? this.poll?.layout_type,
+							results: updates.poll.results
+								? {
+										is_finalized: updates.poll.results.is_finalized ?? this.poll?.results?.is_finalized,
+										answer_counts: updates.poll.results.answer_counts ?? this.poll?.results?.answer_counts,
+									}
+								: this.poll?.results,
+						}
+					: this.poll,
 				attachments: updates.attachments ?? this.attachments,
 				stickers: updates.stickers ?? this.stickerItems,
 				reactions: updates.reactions ?? this.reactions,

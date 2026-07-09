@@ -202,6 +202,8 @@ export type ReactionUsersPageResponse = z.infer<typeof ReactionUsersPageResponse
 
 export const PollAnswerVotersResponse = z.object({
 	users: z.array(z.lazy(() => UserPartialResponse)).describe('Users who reacted with the requested answer'),
+	has_more: z.boolean().describe('Whether more reaction users can be fetched'),
+	next_after: SnowflakeStringType.nullable().describe('Cursor for the next page, or null when there are no more users'),
 });
 
 export type PollAnswerVotersResponse = z.infer<typeof PollAnswerVotersResponse>;

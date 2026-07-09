@@ -424,7 +424,7 @@ export function MessageInteractionController(app: HonoApp) {
 			const channelId = createChannelID(channel_id);
 			const messageId = createMessageID(message_id);
 			const afterUserId = after ? createUserID(after) : undefined;
-			const users = await ctx.get('channelService').messages.poll.getVotesForAnswer({
+			const response = await ctx.get('channelService').messages.poll.getVotesForAnswer({
 				userId,
 				channelId,
 				messageId,
@@ -434,7 +434,9 @@ export function MessageInteractionController(app: HonoApp) {
 			});
 			return ctx.json(
 				{
-					users,
+					users: response.users,
+					has_more: response.has_more,
+					next_after: response.next_after,
 				},
 				200,
 			);

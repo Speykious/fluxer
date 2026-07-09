@@ -4,11 +4,13 @@ import styles from '@app/features/channel/components/Poll.module.css';
 import Emoji from '@app/features/emoji/state/Emoji';
 import UnicodeEmojis from '@app/features/expressions/utils/UnicodeEmojis';
 import type {Guild} from '@app/features/guild/models/Guild';
+import {PollAnswerVotersModal} from '@app/features/messaging/components/modals/poll_modal/PollAnswerVotersModal';
 import {Button} from '@app/features/ui/button/Button';
 import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
 import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
 import {modal} from '@app/features/ui/commands/ModalCommands';
 import FocusRing from '@app/features/ui/focus_ring/FocusRing';
+import Users from '@app/features/user/state/Users';
 import type {
 	MessagePoll,
 	MessagePollAnswerCount,
@@ -19,7 +21,6 @@ import {useLingui} from '@lingui/react';
 import {CheckCircleIcon} from '@phosphor-icons/react';
 import {observer} from 'mobx-react-lite';
 import {useCallback, useMemo, useState} from 'react';
-import {PollAnswerVotersModal} from './modals/PollAnswerVotersModal';
 
 const SELECT_ONE_ANSWER_DESCRIPTOR = msg({
 	message: 'Select one answer',
@@ -74,6 +75,9 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 
 	const isSent = messageState === 'SENT';
 
+	const currentUser = Users.getCurrentUser();
+	const isVerified = useMemo(() => currentUser?.verified ?? false, [currentUser]);
+
 	const answerCounts = poll.results?.answer_counts ?? [];
 	const hasVoted = answerCounts.find((answerCount) => answerCount.me_voted) !== undefined;
 
@@ -104,8 +108,8 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 
 	const isFinalized = useMemo(() => poll.results?.is_finalized, [poll]);
 	const inVoteScreen = useMemo(
-		() => isVoting && !isViewingResults && !isFinalized,
-		[isVoting, isViewingResults, isFinalized],
+		() => isVoting && !isViewingResults && !isFinalized && isVerified,
+		[isVoting, isViewingResults, isFinalized, isVerified],
 	);
 
 	if (secondsLeft > 0 && !isFinalized) {
@@ -164,7 +168,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 					channelId={channelId}
 					messageId={messageId}
 					poll={poll}
-					initialAnswerId={initialAnswerId}
+					openToAnswerId={initialAnswerId}
 					key={`poll-answers-modal-${messageId}`}
 				/>
 			)),
@@ -226,14 +230,15 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 							</section>
 							{inVoteScreen ? undefined : (
 								<section data-flx="poll.answer.section.votes">
-									<button
-										type="button"
+									<a
+										role="button"
+										// biome-ignore lint/a11y/useValidAnchor: Apparently I can't nest a button inside of a button because it's bad for hydration or something
 										onClick={() => openPollAnswerVotersModal(answer.id)}
 										className={styles.answerVotes}
 										data-flx="poll.answer.vote-count"
 									>
 										{answer.votes} votes
-									</button>
+									</a>
 									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
 										{Math.round(answer.percentage)}%
 									</h2>
@@ -246,19 +251,28 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 					</button>
 				</FocusRing>
 			))}
+			{isVerified || isFinalized ? undefined : (
+				<section>
+					<p>
+						<small>You need to verify your email address to vote on a poll.</small>
+					</p>
+				</section>
+			)}
 			<footer data-flx="poll.footer" data-mobile={isMobile}>
 				{isFinalized ? undefined : (
-					<Button
-						variant={isVoting ? 'primary' : 'secondary'}
-						disabled={isViewingResults || (isVoting && selectedAnswers.length === 0) || !isSent}
-						onClick={() => {
-							setIsVoting((prevIsVoting) => !prevIsVoting);
-							if (onVote) onVote(isVoting, selectedAnswers);
-						}}
-						data-flx="poll.footer.vote.button"
-					>
-						{i18n._(isVoting ? VOTE_DESCRIPTOR : REMOVE_VOTE_DESCRIPTOR)}
-					</Button>
+					<FocusRing data-flx="poll.footer.vote.button.focus-ring">
+						<Button
+							variant={isVoting ? 'primary' : 'secondary'}
+							disabled={isViewingResults || (isVoting && selectedAnswers.length === 0) || !isSent || !isVerified}
+							onClick={() => {
+								setIsVoting((prevIsVoting) => !prevIsVoting);
+								if (onVote) onVote(isVoting, selectedAnswers);
+							}}
+							data-flx="poll.footer.vote.button"
+						>
+							{i18n._(isVoting ? VOTE_DESCRIPTOR : REMOVE_VOTE_DESCRIPTOR)}
+						</Button>
+					</FocusRing>
 				)}
 				<section>
 					<div className={styles.answerTotalVotes} data-flx="poll.footer.total-vote-count">
@@ -272,7 +286,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 							{totalVoteCount} votes
 						</button>
 					</div>
-					{isFinalized || !isVoting ? undefined : (
+					{isFinalized || !isVoting || !isVerified ? undefined : (
 						<Button
 							variant="secondary"
 							disabled={!isSent}

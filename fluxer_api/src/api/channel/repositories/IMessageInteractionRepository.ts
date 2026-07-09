@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type {MessagePollSelectedAnswer} from '@app/api/database/types/PollTypes';
+import type {MessagePollAnswerVotersPage, MessagePollSelectedAnswer} from '@app/api/database/types/PollTypes';
 import type {ChannelID, EmojiID, MessageID, UserID} from '../../BrandedTypes';
 import type {Message} from '../../models/Message';
 import type {MessageReaction} from '../../models/MessageReaction';
@@ -52,7 +52,7 @@ export abstract class IMessageInteractionRepository {
 		answerId: number,
 		limit?: number,
 		after?: UserID,
-	): Promise<Array<UserID>>;
+	): Promise<MessagePollAnswerVotersPage>;
 
 	abstract addVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void>;
 

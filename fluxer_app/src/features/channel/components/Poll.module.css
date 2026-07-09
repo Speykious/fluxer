@@ -178,8 +178,10 @@
 	font-size: small;
 	text-wrap: nowrap;
 	cursor: pointer;
+	color: var(--text-primary);
 
 	&:hover {
+		color: var(--text-primary);
 		text-decoration: underline;
 	}
 }

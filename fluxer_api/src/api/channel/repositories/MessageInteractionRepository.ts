@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type {MessagePollSelectedAnswer, MessagePollVoteRow} from '@app/api/database/types/PollTypes';
+import type {MessagePollAnswerVotersPage, MessagePollSelectedAnswer, MessagePollVoteRow} from '@app/api/database/types/PollTypes';
 import * as BucketUtils from '@fluxer/snowflake/src/SnowflakeBuckets';
 import type {ChannelID, EmojiID, MessageID, UserID} from '../../BrandedTypes';
 import {createEmojiID} from '../../BrandedTypes';
@@ -263,15 +263,16 @@ export class MessageInteractionRepository extends IMessageInteractionRepository 
 		answerId: number,
 		limit: number = 25,
 		after?: UserID,
-	): Promise<Array<UserID>> {
+	): Promise<MessagePollAnswerVotersPage> {
 		const requestedLimit = limit !== undefined && Number.isFinite(limit) ? Math.floor(limit) : 25;
 		const validatedLimit = Math.min(Math.max(requestedLimit, 1), 100);
+		const fetchLimit = validatedLimit + 1;
 
 		const bucket = BucketUtils.makeBucket(messageId);
 		const hasAfter = !!after;
 		const rows = hasAfter
 			? await fetchMany<Pick<MessagePollVoteRow, 'user_id'>>(
-					createCheckAnswerVotesQuery(validatedLimit, true).bind({
+					createCheckAnswerVotesQuery(fetchLimit, true).bind({
 						channel_id: channelId,
 						bucket,
 						message_id: messageId,
@@ -280,14 +281,22 @@ export class MessageInteractionRepository extends IMessageInteractionRepository 
 					}),
 				)
 			: await fetchMany<Pick<MessagePollVoteRow, 'user_id'>>(
-					createCheckAnswerVotesQuery(validatedLimit, false).bind({
+					createCheckAnswerVotesQuery(fetchLimit, false).bind({
 						channel_id: channelId,
 						bucket,
 						message_id: messageId,
 						answer_id: answerId,
 					}),
 				);
-		return rows?.map((row) => row.user_id) ?? [];
+		const hasMore = rows.length > validatedLimit;
+		const pageRows = hasMore ? rows.slice(0, validatedLimit) : rows;
+		if (!pageRows.length) return {userIds: [], hasMore: false, nextAfter: null};
+		const nextAfter = hasMore ? pageRows[pageRows.length - 1].user_id.toString() : null;
+		return {
+			userIds: rows?.map((row) => row.user_id) ?? [],
+			hasMore,
+			nextAfter,
+		};
 	}
 
 	async addVote(channelId: ChannelID, messageId: MessageID, userId: UserID, answerId: number): Promise<void> {
