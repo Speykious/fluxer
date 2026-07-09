@@ -11,7 +11,7 @@ import {Button} from '@app/features/ui/button/Button';
 import {msg} from '@lingui/core/macro';
 import {useLingui} from '@lingui/react';
 import {Trans} from '@lingui/react/macro';
-import {TableIcon} from '@phosphor-icons/react';
+import {CheckCircleIcon, TableIcon} from '@phosphor-icons/react';
 import clsx from 'clsx';
 import {observer} from 'mobx-react-lite';
 import {SystemMessageMessageLink} from './SystemMessageMessageLink';
@@ -88,6 +88,14 @@ export const PollClosedMessage = observer(({message}: PollClosedMessage) => {
 					<section>
 						<div className={styles.resultDescription} data-flx="channel.poll-closed-message.embed.result-description">
 							{isDraw ? i18n._(ITS_A_DRAW_DESCRIPTOR) : winningAnswer}
+							{isDraw ? undefined : (
+								<CheckCircleIcon
+									weight="fill"
+									className={pollStyles.answerMeSuccess}
+									data-variant="winner"
+									data-flx="poll.answer.me-check"
+								/>
+							)}
 						</div>
 						{totalVotes > 0 && (
 							<div className={styles.victorPercentage} data-flx="channel.poll-closed-message.embed.victor-percentage">

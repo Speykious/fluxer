@@ -194,4 +194,10 @@
 .answerMeSuccess {
 	width: 1.5em;
 	height: 1.5em;
+
+	&[data-variant='winner'] {
+		color: var(--accent-success);
+		background: white;
+		background: radial-gradient(circle, white 0%, white 50%, transparent 50%, transparent 100%);
+	}
 }
