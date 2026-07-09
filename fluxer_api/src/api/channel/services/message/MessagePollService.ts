@@ -17,6 +17,8 @@ import type {PollMessageExpiryRepository} from '../../repositories/PollMessageEx
 import type {MessageReactionService} from '../interaction/MessageReactionService';
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
+import type {MessageSendService} from './MessageSendService';
+import {createRequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -25,7 +27,7 @@ interface MessagePollServiceDeps {
 	dispatchService: MessageDispatchService;
 	pollExpiryRepository: PollMessageExpiryRepository;
 	messageReactionService: MessageReactionService;
-	// guildAuditLogService: GuildAuditLogService;
+	messageSendService: MessageSendService;
 }
 
 export class MessagePollService {
@@ -91,12 +93,65 @@ export class MessagePollService {
 
 		await this.deps.channelRepository.messages.upsertMessage(newMessageRow, oldMessageRow);
 
+		const answerCounts = newMessageRow.poll?.results?.answer_counts;
 		if (newMessageRow.poll?.results) newMessageRow.poll.results.answer_counts = null;
 		await this.deps.dispatchService.dispatchMessageUpdate({
 			channel,
 			message: new Message(newMessageRow),
 		});
-		// TODO(speykious): send poll results embed
+
+		if (message.authorId) {
+			const user = await this.deps.userRepository.findUnique(message.authorId);
+			if (user) {
+				let victorAnswerVotes = 0;
+				let totalVotes = 0;
+				for (const answerCount of answerCounts ?? []) {
+					victorAnswerVotes = Math.max(victorAnswerVotes, answerCount.count ?? 0);
+					totalVotes += answerCount.count ?? 0;
+				}
+
+				const requestCache = createRequestCache();
+				await this.deps.messageSendService.sendMessage({
+					channelId: channel.id,
+					user,
+					data: {
+						content: 'This is supposed to be a poll embed',
+						allowed_mentions: {
+							users: [message.authorId],
+						},
+						embeds: [
+							{
+								type: 'poll_result',
+								fields: [
+									{
+										name: 'poll_question_text',
+										value: poll?.question?.text ?? '',
+										inline: false,
+									},
+									{
+										name: 'victor_answer_votes',
+										value: `${victorAnswerVotes}`,
+										inline: false,
+									},
+									{
+										name: 'total_votes',
+										value: `${totalVotes}`,
+										inline: false,
+									},
+								],
+							},
+						],
+						message_reference: {
+							type: 0,
+							channel_id: message.channelId,
+							message_id: message.id,
+						}
+					},
+					mentionAuthor: true,
+					requestCache,
+				});
+			}
+		}
 
 		const row = expiryRow ? expiryRow : await this.deps.pollExpiryRepository.fetchById(message.id);
 		if (row) {

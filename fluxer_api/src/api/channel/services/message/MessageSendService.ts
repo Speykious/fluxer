@@ -717,6 +717,10 @@ export class MessageSendService {
 		if (!data.message_reference) {
 			return MessageTypes.DEFAULT;
 		}
+		if (data.embeds?.[0]?.type === 'poll_result') {
+			return MessageTypes.POLL_RESULT;
+		}
+
 		const referenceType = data.message_reference.type ?? MessageReferenceTypes.DEFAULT;
 		return referenceType === MessageReferenceTypes.FORWARD ? MessageTypes.DEFAULT : MessageTypes.REPLY;
 	}
@@ -757,11 +761,13 @@ export class MessageSendService {
 		user,
 		channelId,
 		data,
+		mentionAuthor,
 		requestCache,
 	}: {
 		user: User;
 		channelId: ChannelID;
 		data: MessageRequest;
+		mentionAuthor?: boolean;
 		requestCache: RequestCache;
 	}): Promise<Message> {
 		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
@@ -877,6 +883,9 @@ export class MessageSendService {
 				guild,
 				canMentionEveryone,
 			});
+			if (mentionAuthor && !mentions.userMentions.has(user.id)) {
+				mentions.userMentions.add(user.id);
+			}
 			const {validUserIds, validRoleIds, validChannelMentions} = await this.deps.mentionService.validateMentions({
 				userMentions: mentions.userMentions,
 				roleMentions: mentions.roleMentions,

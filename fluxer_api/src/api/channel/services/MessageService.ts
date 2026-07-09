@@ -156,6 +156,7 @@ export class MessageService {
 			dispatchService: this.dispatch,
 			pollExpiryRepository: pollMessageExpiryRepository,
 			messageReactionService,
+			messageSendService: this.send,
 		});
 		this.deletion = new MessageDeleteService({
 			channelRepository,

@@ -1,0 +1,17 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+
+.pollResults {
+	display: flex;
+	flex-direction: row !important;
+	justify-content: space-between;
+	max-width: 25rem !important;
+
+	.resultDescription {
+		font-size: 0.8rem;
+	}
+
+	.victorPercentage {
+		font-size: 0.8rem;
+		color: var(--text-tertiary);
+	}
+}

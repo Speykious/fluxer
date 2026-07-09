@@ -79,6 +79,7 @@ const RichEmbedFieldRequest = z.object({
 });
 
 export const RichEmbedRequest = z.object({
+	type: z.string().optional().describe('Type of the embed'),
 	url: URLType.nullish().describe('URL of the embed'),
 	title: createStringType(0, 256).nullish().describe('Title of the embed (0-256 characters)'),
 	color: ColorType.nullish().describe('Color code of the embed (hex integer)'),

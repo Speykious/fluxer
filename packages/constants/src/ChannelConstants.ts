@@ -46,6 +46,7 @@ export const MessageTypes = {
 	CHANNEL_PINNED_MESSAGE: 6,
 	USER_JOIN: 7,
 	REPLY: 19,
+	POLL_RESULT: 46,
 	CLIENT_SYSTEM: 99,
 } as const;
 
@@ -54,6 +55,7 @@ export type MessageTypeValue = ValueOf<typeof MessageTypes>;
 const MESSAGE_TYPE_DELETABLE = {
 	[MessageTypes.DEFAULT]: true,
 	[MessageTypes.REPLY]: true,
+	[MessageTypes.POLL_RESULT]: true,
 	[MessageTypes.CHANNEL_PINNED_MESSAGE]: true,
 	[MessageTypes.USER_JOIN]: true,
 	[MessageTypes.RECIPIENT_ADD]: false,
