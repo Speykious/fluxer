@@ -49,7 +49,6 @@ export const MessagePollRequest = z.object({
     duration: z.int32().nullish().describe('Duration of the poll in hours'),
     allow_multiselect: z.boolean().nullish().describe('Whether the poll allows multiple answers'),
     layout_type: z.int32().nullish().describe('The layout type of the poll'),
-    results: MessagePollResultsSchema.nullish().describe('The results of the poll'),
 });
 export type MessagePollRequest = z.infer<typeof MessagePollRequest>;
 

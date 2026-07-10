@@ -986,18 +986,7 @@ export class MessageSendService {
 						expiry: pollExpiry?.toISOString() ?? null,
 						allow_multiselect: data.poll.allow_multiselect ?? null,
 						layout_type: data.poll.layout_type ?? null,
-						results: data.poll.results
-							? {
-									answer_counts: data.poll.results.answer_counts
-										? data.poll.results.answer_counts.map((answer_count) => ({
-												id: answer_count.id ?? null,
-												count: answer_count.count ?? null,
-												me_voted: answer_count.me_voted ?? null,
-											}))
-										: null,
-									is_finalized: data.poll.results.is_finalized ?? null,
-								}
-							: null,
+						results: null,
 					}
 				: undefined,
 			attachments: attachmentsToProcess,
