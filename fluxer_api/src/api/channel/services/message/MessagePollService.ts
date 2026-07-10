@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import {createRequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 import type {Channel} from '@app/api/models/Channel';
 import {Message} from '@app/api/models/Message';
 import type {PollMessageExpiryRow} from '@app/api/Tables';
@@ -7,6 +8,7 @@ import type {IUserRepository} from '@app/api/user/IUserRepository';
 import {mapUserToPartialResponse} from '@app/api/user/UserMappers';
 import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 import {CannotSelectMultipleAnswersError} from '@fluxer/errors/src/domains/channel/CannotSelectMultipleAnswersError';
+import {CannotVoteOnFinalizedPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnFinalizedPollError';
 import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import {UnknownPollAnswerError} from '@fluxer/errors/src/domains/channel/UnknownPollAnswerError';
@@ -18,7 +20,6 @@ import type {MessageReactionService} from '../interaction/MessageReactionService
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
 import type {MessageSendService} from './MessageSendService';
-import {createRequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -145,7 +146,7 @@ export class MessagePollService {
 							type: 0,
 							channel_id: message.channelId,
 							message_id: message.id,
-						}
+						},
 					},
 					mentionAuthor: true,
 					requestCache,
@@ -236,6 +237,7 @@ export class MessagePollService {
 		const poll = newMessageRow.poll;
 		if (!poll) throw new CannotVoteOnNonPollError();
 
+		if (poll.results?.is_finalized) throw new CannotVoteOnFinalizedPollError();
 		if (!poll.allow_multiselect && answerIds.length > 1) throw new CannotSelectMultipleAnswersError();
 
 		if (!poll.results) {
