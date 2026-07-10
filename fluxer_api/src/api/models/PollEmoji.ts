@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type { MessagePollEmoji } from "../database/types/MessageTypes";
+import type {MessagePollEmoji} from '../database/types/PollTypes';
 
 export class PollEmoji {
 	readonly id: string | null;
@@ -15,6 +15,6 @@ export class PollEmoji {
 		return {
 			id: this.id,
 			name: this.name,
-		}
+		};
 	}
 }

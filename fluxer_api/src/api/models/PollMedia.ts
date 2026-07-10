@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type { MessagePollMedia } from "../database/types/MessageTypes";
-import { PollEmoji } from "./PollEmoji";
+import type {MessagePollMedia} from '../database/types/PollTypes';
+import {PollEmoji} from './PollEmoji';
 
 export class PollMedia {
 	readonly emoji: PollEmoji | null;
@@ -16,6 +16,6 @@ export class PollMedia {
 		return {
 			emoji: this.emoji?.toMessagePollEmoji() ?? null,
 			text: this.text,
-		}
+		};
 	}
 }
