@@ -115,7 +115,7 @@ export class MessagePollService {
 					channelId: channel.id,
 					user,
 					data: {
-						content: 'This is supposed to be a poll embed',
+						content: '',
 						allowed_mentions: {
 							users: [message.authorId],
 						},
