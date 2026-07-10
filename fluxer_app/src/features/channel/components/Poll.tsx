@@ -63,7 +63,7 @@ const POLL_NOT_SENT_DESCRIPTOR = msg({
 	comment: 'Small text informing the user that the poll message has not been sent yet.',
 });
 export const VOTES_DESCRIPTOR = msg({
-	message: '{count, plural, one {# vote}, many {#votes}',
+	message: '{count, plural, one {# vote} other {# votes}}',
 	comment: 'Small text indicating the number of votes on the poll or on a specific answer of the poll.',
 });
 
