@@ -17,8 +17,9 @@ import {observer} from 'mobx-react-lite';
 import {useCallback, useMemo, useState} from 'react';
 import {useTextareaSegments} from '../../../hooks/useTextareaSegments';
 import {
+	ADD_ANSWER_DESCRIPTOR,
 	CREATE_A_POLL_DESCRIPTOR,
-	DURATION_OPTIONS,
+	generateDurationOptions,
 	POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR,
 	POLL_ANSWERS_DESCRIPTOR,
 	POLL_DURATION_DESCRIPTOR,
@@ -80,6 +81,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 		},
 	];
 	const defaultDuration = 24;
+	const durationOptions = useMemo(() => generateDurationOptions(i18n), [i18n]);
 
 	const [duration, setDuration] = useState<number>(defaultDuration);
 	const [forgotToEnterAnswer, setForgotToEnterAnswer] = useState(false);
@@ -226,13 +228,13 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 									});
 								}}
 							>
-								Add Answer
+								{i18n._(ADD_ANSWER_DESCRIPTOR)}
 							</Button>
 						</FieldSet>
 						<Combobox<number>
 							label={i18n._(POLL_DURATION_DESCRIPTOR)}
 							value={duration}
-							options={DURATION_OPTIONS}
+							options={durationOptions}
 							onChange={setDuration}
 							isSearchable={false}
 							density="compact"

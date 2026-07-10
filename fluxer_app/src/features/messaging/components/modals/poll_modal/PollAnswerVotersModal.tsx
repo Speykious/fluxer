@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import * as Modal from '@app/features/app/components/dialogs/Modal';
+import {VOTES_DESCRIPTOR} from '@app/features/channel/components/Poll';
 import {PreloadableUserPopout} from '@app/features/channel/components/PreloadableUserPopout';
 import type {Guild} from '@app/features/guild/models/Guild';
 import {useMessagePollAnswerVotersState} from '@app/features/messaging/hooks/useMessagePollAnswerVotersState';
@@ -11,6 +12,7 @@ import {Scroller} from '@app/features/ui/components/Scroller';
 import FocusRing from '@app/features/ui/focus_ring/FocusRing';
 import * as NicknameUtils from '@app/features/user/utils/NicknameUtils';
 import type {MessagePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
+import {useLingui} from '@lingui/react/macro';
 import {observer} from 'mobx-react-lite';
 import {useCallback, useMemo, type UIEvent} from 'react';
 import * as styles from './PollAnswerVotersModal.module.css';
@@ -26,7 +28,7 @@ interface PollAnswerVotersModalProps {
 
 export const PollAnswerVotersModal = observer(
 	({guild, channelId, messageId, message: messageFallback, poll, openToAnswerId}: PollAnswerVotersModalProps) => {
-		// const {i18n} = useLingui();
+		const {i18n} = useLingui();
 		const {
 			message,
 			selectedAnswerId,
@@ -86,7 +88,7 @@ export const PollAnswerVotersModal = observer(
 			<Modal.Root size="medium" centered data-flx="messaging.poll-answer-voters-modal.modal-root">
 				<Modal.Header title={poll.question?.text ?? ''} data-flx="messaging.poll-answer-voters-modal.modal-header">
 					<div className={styles.smallText} data-flx="messaging.poll-answer-voters-modal.modal-header.total-votes">
-						{totalVotes} votes
+						{i18n._(VOTES_DESCRIPTOR, {count: totalVotes})}
 					</div>
 				</Modal.Header>
 				<div className={styles.contentSplit} data-flx="messaging.poll-answer-voters-modal.content-split">
@@ -108,7 +110,7 @@ export const PollAnswerVotersModal = observer(
 										{answer.poll_media?.text ?? ''}
 									</div>
 									<div className={styles.smallText} data-flx="messaging.poll-answer-voters-modal.answer.votes">
-										{answerVoteArray[answer.answer_id ?? 0] ?? 0} votes
+										{i18n._(VOTES_DESCRIPTOR, {count: answerVoteArray[answer.answer_id ?? 0] ?? 0})}
 									</div>
 								</button>
 							))}

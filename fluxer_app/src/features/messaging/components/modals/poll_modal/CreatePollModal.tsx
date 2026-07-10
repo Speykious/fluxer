@@ -12,6 +12,7 @@ import {Combobox, type ComboboxOption} from '@app/features/ui/components/form/Fo
 import {FieldSet, Textarea} from '@app/features/ui/components/form/FormInput';
 import {Scroller} from '@app/features/ui/components/Scroller';
 import type {ModalProps} from '@app/features/ui/utils/ModalUtils';
+import type {I18n} from '@lingui/core';
 import {msg} from '@lingui/core/macro';
 import {useLingui} from '@lingui/react';
 import {PlusIcon} from '@phosphor-icons/react';
@@ -60,6 +61,22 @@ export const POLL_ERROR_YOU_SHOULD_ENTER_AT_LEAST_ONE_ANSWER = msg({
 	message: 'You should enter at least one answer.',
 	comment: 'Error message for when no answer has been entered in the poll.',
 });
+export const ADD_ANSWER_DESCRIPTOR = msg({
+	message: 'Add Answer',
+	comment: 'Label of the button that lets the user add another answer.',
+});
+export const N_WEEKS_DESCRIPTOR = msg({
+	message: '{count, plural, one {# week} other {# weeks}}',
+	comment: 'Generic description for a duration option that is measured in weeks.',
+});
+export const N_DAYS_DESCRIPTOR = msg({
+	message: '{count, plural, one {# day} other {# days}}',
+	comment: 'Generic description for a duration option that is measured in days.',
+});
+export const N_HOURS_DESCRIPTOR = msg({
+	message: '{count, plural, one {# hour} other {# hours}}',
+	comment: 'Generic description for a duration option that is measured in hours.',
+});
 
 export interface IdlessPollAnswerItem {
 	emoji?: FlatEmoji;
@@ -87,20 +104,24 @@ interface CreatePollModalProps {
 	channelId: string;
 }
 
-// TODO: localize labels
-export const DURATION_OPTIONS: ReadonlyArray<ComboboxOption<number>> = [
-	{value: 1, label: '1 hour'},
-	{value: 2, label: '2 hours'},
-	{value: 4, label: '4 hours'},
-	{value: 8, label: '8 hours'},
-	{value: 12, label: '12 hours'},
-	{value: 24, label: '24 hours'},
-	{value: 48, label: '2 days'},
-	{value: 72, label: '3 days'},
-	{value: 120, label: '5 days'},
-	{value: 168, label: '1 weeks'},
-	{value: 336, label: '2 weeks'},
-];
+function durationToLabel(i18n: I18n, hours: number): string {
+	if (hours >= 168) {
+		const count = Math.floor(hours / 168);
+		return i18n._(N_WEEKS_DESCRIPTOR, {count});
+	}
+	if (hours > 24) {
+		const count = Math.floor(hours / 24);
+		return i18n._(N_DAYS_DESCRIPTOR, {count});
+	}
+	return i18n._(N_HOURS_DESCRIPTOR, {count: hours});
+}
+
+export function generateDurationOptions(i18n: I18n): ReadonlyArray<ComboboxOption<number>> {
+	return [1, 2, 4, 8, 12, 24, 48, 72, 120, 168, 336].map((hours) => ({
+		value: hours,
+		label: durationToLabel(i18n, hours),
+	}));
+}
 
 export const CreatePollModal = observer(
 	({size = 'small', hideCloseButton, onSubmit, disableAutoDismiss, channelId}: CreatePollModalProps) => {
@@ -128,6 +149,8 @@ export const CreatePollModal = observer(
 				text: '',
 			},
 		]);
+
+		const durationOptions = useMemo(() => generateDurationOptions(i18n), [i18n]);
 
 		const handleSubmit = useCallback(async () => {
 			const selfKey = ModalCommands.getTopModalKey();
@@ -261,13 +284,13 @@ export const CreatePollModal = observer(
 											});
 										}}
 									>
-										Add Answer
+										{i18n._(ADD_ANSWER_DESCRIPTOR)}
 									</Button>
 								</FieldSet>
 								<Combobox<number>
 									label={i18n._(POLL_DURATION_DESCRIPTOR)}
 									value={duration}
-									options={DURATION_OPTIONS}
+									options={durationOptions}
 									onChange={setDuration}
 									isSearchable={false}
 									density="compact"

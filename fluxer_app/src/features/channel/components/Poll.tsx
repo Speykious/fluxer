@@ -17,7 +17,7 @@ import type {
 	MessagePollEmoji,
 } from '@fluxer/schema/src/domains/message/PollSchemas';
 import {msg} from '@lingui/core/macro';
-import {useLingui} from '@lingui/react';
+import {Trans, useLingui} from '@lingui/react/macro';
 import {CheckCircleIcon} from '@phosphor-icons/react';
 import {observer} from 'mobx-react-lite';
 import {useCallback, useMemo, useState} from 'react';
@@ -45,6 +45,26 @@ const VOTE_DESCRIPTOR = msg({
 const SHOW_RESULTS_DESCRIPTOR = msg({
 	message: 'Show results',
 	comment: 'Label of the button to show poll answer results.',
+});
+const VERIFY_YOU_EMAIL_ADDRESS_DESCRIPTOR = msg({
+	message: 'You need to verify your email address to vote on a poll.',
+	comment: 'Small disclaimer explaining to the user that email verification is necessary to vote on a poll.',
+});
+const LESS_THAN_ONE_MINUTE_LEFT_DESCRIPTOR = msg({
+	message: '<1m left',
+	comment: 'Very short text informing the user that the poll ends in less than one minute.',
+});
+const POLL_CLOSED_DESCRIPTOR = msg({
+	message: 'Poll closed',
+	comment: 'Small text informing the user that the poll is closed.',
+});
+const POLL_NOT_SENT_DESCRIPTOR = msg({
+	message: 'Poll not sent',
+	comment: 'Small text informing the user that the poll message has not been sent yet.',
+});
+export const VOTES_DESCRIPTOR = msg({
+	message: '{count, plural, one {# vote}, many {#votes}',
+	comment: 'Small text indicating the number of votes on the poll or on a specific answer of the poll.',
 });
 
 function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
@@ -119,12 +139,11 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 		);
 	}
 
-	function timeLeft(secondsLeft: number): string {
-		// TODO: localize
-		if (secondsLeft < 60) return `<1m left`;
-		if (secondsLeft < 3600) return `${Math.round(secondsLeft / 60)}m left`;
-		if (secondsLeft < 86400) return `${Math.round(secondsLeft / 3600)}h left`;
-		return `${Math.floor(secondsLeft / 86400)}d left`;
+	function timeLeft(secondsLeft: number): React.ReactNode {
+		if (secondsLeft < 60) return <>{i18n._(LESS_THAN_ONE_MINUTE_LEFT_DESCRIPTOR)}</>;
+		if (secondsLeft < 3600) return <Trans>{Math.round(secondsLeft / 60)}m left</Trans>;
+		if (secondsLeft < 86400) return <Trans>{Math.round(secondsLeft / 3600)}h left</Trans>;
+		return <Trans>{Math.floor(secondsLeft / 86400)}d left</Trans>;
 	}
 
 	const answers = useMemo(() => {
@@ -237,7 +256,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 										className={styles.answerVotes}
 										data-flx="poll.answer.vote-count"
 									>
-										{answer.votes} votes
+										{i18n._(VOTES_DESCRIPTOR, {count: answer.votes})}
 									</a>
 									<h2 className={styles.answerPercentage} data-flx="poll.answer.vote-percentage">
 										{Math.round(answer.percentage)}%
@@ -254,7 +273,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 			{isVerified || isFinalized ? undefined : (
 				<section>
 					<p>
-						<small>You need to verify your email address to vote on a poll.</small>
+						<small>{i18n._(VERIFY_YOU_EMAIL_ADDRESS_DESCRIPTOR)}</small>
 					</p>
 				</section>
 			)}
@@ -276,14 +295,19 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 				)}
 				<section>
 					<div className={styles.answerTotalVotes} data-flx="poll.footer.total-vote-count">
-						{isFinalized ? 'Poll closed' : poll.expiry ? timeLeft(secondsLeft) : 'Poll not sent'} ·{' '}
+						{isFinalized
+							? i18n._(POLL_CLOSED_DESCRIPTOR)
+							: poll.expiry
+								? timeLeft(secondsLeft)
+								: i18n._(POLL_NOT_SENT_DESCRIPTOR)}{' '}
+						·{' '}
 						<button
 							type="button"
 							onClick={() => openPollAnswerVotersModal(1)}
 							className={styles.answerVotes}
 							data-flx="poll.footer.vote-count"
 						>
-							{totalVoteCount} votes
+							{i18n._(VOTES_DESCRIPTOR, {count: totalVoteCount})}
 						</button>
 					</div>
 					{isFinalized || !isVoting || !isVerified ? undefined : (

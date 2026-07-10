@@ -40,7 +40,6 @@ export const PollClosedMessage = observer(({message}: PollClosedMessage) => {
 	const question = fields?.find((field) => field.name === 'poll_question_text')?.value ?? '';
 	const victorAnswerVotes = Number(fields?.find((field) => field.name === 'victor_answer_votes')?.value ?? '0');
 	const totalVotes = Number(fields?.find((field) => field.name === 'total_votes')?.value ?? '0');
-
 	const percentage = totalVotes && totalVotes > 0 ? Math.floor((victorAnswerVotes * 100) / totalVotes) : 0;
 
 	let isDraw = false;
