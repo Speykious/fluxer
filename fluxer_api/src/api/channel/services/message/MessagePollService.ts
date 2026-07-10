@@ -58,10 +58,10 @@ export class MessagePollService {
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
 
-		return await this.endPollSkipAuth({channel, message, requestCache, expiryRow});
+		return await this.endPollBypassAuth({channel, message, requestCache, expiryRow});
 	}
 
-	async endPollSkipAuth({
+	async endPollBypassAuth({
 		channel,
 		message,
 		requestCache,
@@ -70,7 +70,6 @@ export class MessagePollService {
 		channel: Channel;
 		message: Message | null;
 		requestCache: RequestCache;
-		skipGuildAuditLog?: boolean;
 		expiryRow?: PollMessageExpiryRow;
 	}): Promise<void> {
 		if (!message) throw new UnknownMessageError();
@@ -112,7 +111,7 @@ export class MessagePollService {
 					totalVotes += answerCount.count ?? 0;
 				}
 
-				await this.deps.messageSendService.sendMessage({
+				await this.deps.messageSendService.sendSimpleMessageBypassAuth({
 					channelId: channel.id,
 					user,
 					data: {

@@ -19,6 +19,7 @@ import type {DirectMessageSpamMitigationService} from '../../user/services/Direc
 import type {WorkerTaskName} from '../../worker/WorkerLaneConfig';
 import type {IChannelRepositoryAggregate} from '../repositories/IChannelRepositoryAggregate';
 import {PollMessageExpiryRepository} from '../repositories/PollMessageExpiryRepository';
+import type {MessageReactionService} from './interaction/MessageReactionService';
 import {MessageAnonymizationService} from './message/MessageAnonymizationService';
 import {MessageChannelAuthService} from './message/MessageChannelAuthService';
 import {MessageDeleteService} from './message/MessageDeleteService';
@@ -35,7 +36,6 @@ import {MessageSearchService} from './message/MessageSearchService';
 import {MessageSendService} from './message/MessageSendService';
 import {MessageSystemService} from './message/MessageSystemService';
 import {MessageValidationService} from './message/MessageValidationService';
-import type { MessageReactionService } from './interaction/MessageReactionService';
 
 export class MessageService {
 	public readonly validation: MessageValidationService;
@@ -116,6 +116,7 @@ export class MessageService {
 		});
 		const pollMessageExpiryRepository = new PollMessageExpiryRepository();
 		this.send = new MessageSendService({
+			guildRepository,
 			channelRepository,
 			userRepository,
 			storageService,

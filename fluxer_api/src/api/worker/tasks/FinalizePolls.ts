@@ -50,7 +50,7 @@ export async function processFinalizedPolls(now = new Date()): Promise<void> {
 					continue;
 				}
 
-				await pollService.endPollSkipAuth({
+				await pollService.endPollBypassAuth({
 					channel,
 					message,
 					requestCache,
