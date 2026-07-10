@@ -203,7 +203,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 				</small>
 			</p>
 			{answers.map((answer) => (
-				<FocusRing offset={-2} enabled={inVoteScreen} data-flx="poll.answer.focus-ring">
+				<FocusRing key={answer.id} offset={-2} enabled={inVoteScreen} data-flx="poll.answer.focus-ring">
 					<button
 						type="button"
 						key={answer.id}

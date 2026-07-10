@@ -103,6 +103,7 @@ export const PollAnswerVotersModal = observer(
 								return (
 									<button
 										type="button"
+										key={answerId}
 										className={styles.answer}
 										data-selected={answerId === selectedAnswerId}
 										data-answer-id={answerId}
@@ -132,6 +133,7 @@ export const PollAnswerVotersModal = observer(
 							{voters.map((user) => (
 								<PreloadableUserPopout
 									user={user}
+									key={user.id}
 									isWebhook={false}
 									guildId={guild?.id}
 									channelId={channelId}

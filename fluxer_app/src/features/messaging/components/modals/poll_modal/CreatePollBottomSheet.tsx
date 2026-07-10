@@ -171,6 +171,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 						>
 							{answers.map((answer, index) => (
 								<PollAnswerInput
+									key={index}
 									textValue={answer.text}
 									maxLength={maxAnswerLength}
 									isMobile={true}
