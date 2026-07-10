@@ -53,6 +53,21 @@ msgstr "(vous)"
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# membre} other {# membres}}"
 
+#. placeholder {0}: Math.floor(secondsLeft / 86400)
+#: src/features/channel/components/Poll.tsx:146
+msgid "{0}d left"
+msgstr ""
+
+#. placeholder {0}: Math.round(secondsLeft / 3600)
+#: src/features/channel/components/Poll.tsx:145
+msgid "{0}h left"
+msgstr ""
+
+#. placeholder {0}: Math.round(secondsLeft / 60)
+#: src/features/channel/components/Poll.tsx:144
+msgid "{0}m left"
+msgstr ""
+
 #: src/features/channel/components/TypingUsers.tsx:68
 msgid "{a} and {b} are typing..."
 msgstr "{a} et {b} sont en train d'écrire..."
@@ -364,7 +379,9 @@ msgstr "{count, plural, one {# communauté est temporairement indisponible en ra
 msgid "{count, plural, one {# connection} other {# connections}}"
 msgstr "{count, plural, one {# connexion} other {# connexions}}"
 
+#. Generic description for a duration option that is measured in days.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:131
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:72
 msgid "{count, plural, one {# day} other {# days}}"
 msgstr "{count, plural, one {# jour} other {# jours}}"
 
@@ -378,7 +395,9 @@ msgstr "{count, plural, one {# emoji} other {# emojis}}"
 msgid "{count, plural, one {# gift} other {# gifts}}"
 msgstr "{count, plural, one {# cadeau} other {# cadeaux}}"
 
+#. Generic description for a duration option that is measured in hours.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:139
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:76
 msgid "{count, plural, one {# hour} other {# hours}}"
 msgstr "{count, plural, one {# heure} other {# heures}}"
 
@@ -428,6 +447,16 @@ msgstr "{count, plural, one {# élément multimédia enregistré} other {# élé
 #: src/features/channel/components/channel_header_components/developer_tools/MockingMenu.tsx:182
 msgid "{count, plural, one {# second} other {# seconds}}"
 msgstr "{count, plural, one {# seconde} other {# secondes}}"
+
+#. Small text indicating the number of votes on the poll or on a specific answer of the poll.
+#: src/features/channel/components/Poll.tsx:65
+msgid "{count, plural, one {# vote}, many {#votes}"
+msgstr ""
+
+#. Generic description for a duration option that is measured in weeks.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:68
+msgid "{count, plural, one {# week} other {# weeks}}"
+msgstr ""
 
 #: src/features/channel/components/embeds/attachments/TextualAttachmentPreviewFooter.tsx:63
 msgid "{count, plural, one {Collapse (# line)} other {Collapse (# lines)}}"
@@ -1508,6 +1537,10 @@ msgstr "<0/> a démarré un appel qui a duré {durationText}."
 msgid "<0/> started a call."
 msgstr "<0/> a démarré un appel."
 
+#: src/features/channel/components/PollClosedMessage.tsx:63
+msgid "<0/>'s poll <1/> has closed."
+msgstr ""
+
 #: src/features/app/components/alerts/RoleDeleteFailedModal.tsx:23
 msgid "<0>\"{roleName}\"</0> wouldn't delete. Try again."
 msgstr "<0>\" {roleName} \"</0> n'a pas pu être supprimé. Veuillez réessayer."
@@ -1577,6 +1610,11 @@ msgstr "<0>A réactivé le son</0> du membre."
 #: src/features/channel/components/pickers/gif/FavoriteGifFirstTimePromptModal.tsx:72
 msgid "<0>URL-only favorites (default)</0>: synced across your devices, no upload, doesn't count against saved media. The original media may disappear if its host removes it."
 msgstr "<0>Favoris URL uniquement (par défaut)</0> : synchronisés sur tous vos appareils, pas de téléversement, ne compte pas dans les médias enregistrés. Le média d'origine peut disparaître si son hébergeur le supprime."
+
+#. Very short text informing the user that the poll ends in less than one minute.
+#: src/features/channel/components/Poll.tsx:53
+msgid "<1m left"
+msgstr ""
 
 #. Summary chip text in the mobile channel search sheet when exactly one channel is selected as a filter.
 #: src/features/channel/components/bottomsheets/ChannelSearchBottomSheet.tsx:160
@@ -1986,7 +2024,7 @@ msgid "a poll"
 msgstr "un sondage"
 
 #. Placeholder text for each answer input.
-#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:20
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:25
 msgid "A possible answer"
 msgstr ""
 
@@ -2509,7 +2547,9 @@ msgid "Add another reaction"
 msgstr "Ajouter une autre réaction"
 
 #. Label for the button that adds a new answer to the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:39
+#. Label of the button that lets the user add another answer.
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:40
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:64
 msgid "Add Answer"
 msgstr ""
 
@@ -3166,7 +3206,7 @@ msgid "Allow microphone"
 msgstr "Autoriser le micro"
 
 #. Label for the checkbox that allows users of the poll to select multiple answers.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:47
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:48
 msgid "Allow Multiple Answers"
 msgstr ""
 
@@ -3673,7 +3713,7 @@ msgid "Answer the incoming call"
 msgstr "Répondre à l'appel entrant"
 
 #. Label for the answers fieldset.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:35
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:36
 msgid "Answers"
 msgstr ""
 
@@ -9617,7 +9657,7 @@ msgid "Create a new group with {userName}"
 msgstr "Créer un nouveau groupe avec {userName}"
 
 #. Title of the poll creation modal.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:23
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:24
 msgid "Create a Poll"
 msgstr ""
 
@@ -10765,7 +10805,7 @@ msgid "Delete all messages"
 msgstr "Supprimer tous les messages"
 
 #. Tooltip text for the button that deletes an answer from the poll.
-#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:28
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:33
 msgid "Delete Answer"
 msgstr ""
 
@@ -10807,7 +10847,9 @@ msgid "Delete community"
 msgstr "Supprimer la communauté"
 
 #. Confirmation modal title for deleting a custom emoji.
+#. Title of a context menu item to delete the emoji of a poll answer.
 #: src/features/emoji/components/emojis/EmojiListItem.tsx:195
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:41
 msgid "Delete emoji"
 msgstr "Supprimer l'emoji"
 
@@ -12357,7 +12399,7 @@ msgid "Duplicate channel"
 msgstr "Dupliquer le canal"
 
 #. Label for the duration input.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:43
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:44
 msgid "Duration"
 msgstr ""
 
@@ -15857,7 +15899,7 @@ msgid "Go back and enter a valid email."
 msgstr "Retournez en arrière et saisissez une adresse e-mail valide."
 
 #. Label of the button to go back to vote when the user is looking at poll results.
-#: src/features/channel/components/Poll.tsx:27
+#: src/features/channel/components/Poll.tsx:33
 msgid "Go back to vote"
 msgstr ""
 
@@ -18135,6 +18177,11 @@ msgstr "Il a peut-être été supprimé. Le nom a été restauré à sa version 
 #: src/features/discovery/discovery/DiscoveryGuildCard.tsx:69
 msgid "It may have left discovery or turned off new joins. Refresh the page and you won't see it again."
 msgstr "Il se peut qu’il ait quitté la découverte ou désactivé les nouvelles adhésions. Actualisez la page et vous ne le verrez plus."
+
+#. Small explanatory text informing the user that the poll resulted in a draw.
+#: src/features/channel/components/PollClosedMessage.tsx:23
+msgid "It's a draw"
+msgstr ""
 
 #. Label in the channel and chat typing users.
 #: src/features/channel/components/TypingUsers.tsx:35
@@ -24417,6 +24464,16 @@ msgstr "Polonais"
 msgid "poll"
 msgstr "sondage"
 
+#. Small text informing the user that the poll is closed.
+#: src/features/channel/components/Poll.tsx:57
+msgid "Poll closed"
+msgstr ""
+
+#. Small text informing the user that the poll message has not been sent yet.
+#: src/features/channel/components/Poll.tsx:61
+msgid "Poll not sent"
+msgstr ""
+
 #. Button label in a popped-out voice window titlebar that restores the content into the main app window.
 #. Button label on the popped-out overlay that closes the popout window and restores the view in the app.
 #: src/features/voice/components/popout/PopoutTitlebar.tsx:22
@@ -25247,7 +25304,7 @@ msgid "quality limited"
 msgstr "qualité limitée"
 
 #. Label for the question input.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:27
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:28
 msgid "Question"
 msgstr ""
 
@@ -26166,7 +26223,7 @@ msgid "Remove translator"
 msgstr "Supprimer le traducteur"
 
 #. Label of the button to remove the user's vote.
-#: src/features/channel/components/Poll.tsx:31
+#: src/features/channel/components/Poll.tsx:37
 msgid "Remove vote"
 msgstr ""
 
@@ -26382,6 +26439,11 @@ msgstr "Remplacer l'arrière-plan"
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:106
 msgid "Replace background?"
 msgstr "Remplacer l'arrière-plan ?"
+
+#. Title of a context menu item to replace the emoji of a poll answer.
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:37
+msgid "Replace emoji"
+msgstr ""
 
 #. Button or menu action label in the background image gallery modal. Keep it concise.
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:154
@@ -28296,7 +28358,7 @@ msgid "Select an option from the radio group"
 msgstr "Sélectionnez une option dans le groupe de boutons radio"
 
 #. Tooltip text for the emoji selection button on an answer.
-#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:24
+#: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:29
 msgid "Select emoji"
 msgstr ""
 
@@ -28330,12 +28392,12 @@ msgid "Select media size for uploaded attachments"
 msgstr "Sélectionner la taille des médias pour les pièces jointes importées"
 
 #. Small explanatory text instructing the user to select one answer on the poll.
-#: src/features/channel/components/Poll.tsx:19
+#: src/features/channel/components/Poll.tsx:25
 msgid "Select one answer"
 msgstr ""
 
 #. Small explanatory text instructing the user to select one or multiple answers on the poll.
-#: src/features/channel/components/Poll.tsx:23
+#: src/features/channel/components/Poll.tsx:29
 msgid "Select one or multiple answers"
 msgstr ""
 
@@ -28559,9 +28621,7 @@ msgid "Send GIF {title}"
 msgstr "Envoyer le GIF {title}"
 
 #. Action label for sending a gift to a friend.
-#. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that opens the gift purchase flow.
-#: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:21
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
 #: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:33
 msgid "Send gift"
@@ -29645,7 +29705,7 @@ msgid "Show recent instances"
 msgstr "Afficher les instances récentes"
 
 #. Label of the button to show poll answer results.
-#: src/features/channel/components/Poll.tsx:39
+#: src/features/channel/components/Poll.tsx:45
 msgid "Show results"
 msgstr ""
 
@@ -31398,7 +31458,7 @@ msgid "Submenu"
 msgstr "Sous-menu"
 
 #. Label for the poll submit button.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:51
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:52
 msgid "Submit"
 msgstr ""
 
@@ -32322,7 +32382,7 @@ msgid "The provided redirect_uri must use HTTP or HTTPS."
 msgstr "L'URI de redirection fournie doit utiliser HTTP ou HTTPS."
 
 #. Placeholder text for the question input.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:31
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:32
 msgid "The question you want to ask"
 msgstr ""
 
@@ -33291,7 +33351,7 @@ msgid "This will close the current popout and stop screen share picture-in-pictu
 msgstr "Cela fermera la fenêtre contextuelle actuelle et empêchera l’ouverture automatique des fenêtres contextuelles d’image dans l’image du partage d’écran. Vous pouvez les réactiver dans {audioVideoSettingsPath}."
 
 #. Description of the action of ending a poll in a confirmation modal.
-#: src/features/messaging/commands/PollCommands.tsx:21
+#: src/features/messaging/commands/PollCommands.tsx:23
 msgid "This will close the poll now and show the results."
 msgstr ""
 
@@ -35346,9 +35406,7 @@ msgstr "Envoyer directement à {displayName}"
 msgid "Upload emoji"
 msgstr "Importer un emoji"
 
-#. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that opens the system file picker to attach a file.
-#: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:13
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:23
 msgid "Upload file"
 msgstr "Importer un fichier"
@@ -35395,9 +35453,7 @@ msgstr "Importer un sticker"
 msgid "Upload to {displayName}"
 msgstr "Importer vers {displayName}"
 
-#. Button or menu action label in the channel and chat mobile textarea plus bottom sheet. Keep it concise.
 #. Plus menu item that uploads the current textarea content as a .txt file when it exceeds the size limit.
-#: src/features/channel/components/textarea/MobileTextareaPlusBottomSheet.tsx:17
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:35
 msgid "Upload your message as a file"
 msgstr "Envoyer votre message sous forme de fichier"
@@ -36725,6 +36781,11 @@ msgstr "Afficher les autorisations"
 msgid "View plans"
 msgstr "Voir les forfaits"
 
+#. Title of the button that redirects to the poll message.
+#: src/features/channel/components/PollClosedMessage.tsx:27
+msgid "View poll"
+msgstr ""
+
 #. Action label that opens the user profile modal or sheet for the selected user.
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:353
 msgid "View profile"
@@ -37130,7 +37191,7 @@ msgid "Volume sliders"
 msgstr "Curseurs de volume"
 
 #. Label of the vote button.
-#: src/features/channel/components/Poll.tsx:35
+#: src/features/channel/components/Poll.tsx:41
 msgid "Vote"
 msgstr ""
 
@@ -38385,7 +38446,7 @@ msgid "You don't have permission to rename this emoji. The name was reverted to 
 msgstr "Vous n'avez pas l'autorisation de renommer cet emoji. Le nom a été rétabli tel qu'il était auparavant."
 
 #. Error message for when no question has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:55
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:56
 msgid "You forgot to enter a question."
 msgstr ""
 
@@ -38574,6 +38635,11 @@ msgstr "Vous devez vérifier votre adresse e-mail avant de pouvoir envoyer des d
 msgid "You need to verify your email address before you can start a direct message."
 msgstr "Vous devez vérifier votre adresse e-mail avant de pouvoir démarrer un message direct."
 
+#. Small disclaimer explaining to the user that email verification is necessary to vote on a poll.
+#: src/features/channel/components/Poll.tsx:49
+msgid "You need to verify your email address to vote on a poll."
+msgstr ""
+
 #. Body of the error modal shown when an unverified account tries to join the canary testers community.
 #: src/features/app/components/layout/app_layout/nagbars/CanaryTesterCtaNagbar.tsx:34
 msgid "You need to verify your email before you can join {testersCommunityName}."
@@ -38594,7 +38660,7 @@ msgid "You or someone you're adding already has the maximum number of group DMs 
 msgstr "Vous ou l'un des destinataires avez déjà atteint le nombre maximal de MP de groupe ouverts. Quittez-en un et réessayez."
 
 #. Error message for when no answer has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:59
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:60
 msgid "You should enter at least one answer."
 msgstr ""
 
