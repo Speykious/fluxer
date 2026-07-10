@@ -98,22 +98,26 @@ export const PollAnswerVotersModal = observer(
 							contentClassName={styles.scrollerContent}
 							data-flx="messaging.poll-answer-voters-modal.answer-list.scroller"
 						>
-							{(poll.answers ?? []).map((answer) => (
-								<button
-									type="button"
-									className={styles.answer}
-									data-selected={answer.answer_id === selectedAnswerId}
-									onClick={() => setSelectedAnswerId(answer.answer_id ?? 0)}
-									data-flx="messaging.poll-answer-voters-modal.answer.button"
-								>
-									<div className={styles.answerText} data-flx="messaging.poll-answer-voters-modal.answer.text">
-										{answer.poll_media?.text ?? ''}
-									</div>
-									<div className={styles.smallText} data-flx="messaging.poll-answer-voters-modal.answer.votes">
-										{i18n._(VOTES_DESCRIPTOR, {count: answerVoteArray[answer.answer_id ?? 0] ?? 0})}
-									</div>
-								</button>
-							))}
+							{(poll.answers ?? []).map((answer) => {
+								const answerId = Number(answer.answer_id ?? 0);
+								return (
+									<button
+										type="button"
+										className={styles.answer}
+										data-selected={answerId === selectedAnswerId}
+										data-answer-id={answerId}
+										onClick={() => setSelectedAnswerId(answerId)}
+										data-flx="messaging.poll-answer-voters-modal.answer.button"
+									>
+										<div className={styles.answerText} data-flx="messaging.poll-answer-voters-modal.answer.text">
+											{answer.poll_media?.text ?? ''}
+										</div>
+										<div className={styles.smallText} data-flx="messaging.poll-answer-voters-modal.answer.votes">
+											{i18n._(VOTES_DESCRIPTOR, {count: answerVoteArray[answerId] ?? 0})}
+										</div>
+									</button>
+								);
+							})}
 							<div className={styles.scrollerVoid} />
 						</Scroller>
 					</div>
