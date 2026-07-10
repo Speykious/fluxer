@@ -22,7 +22,7 @@ import {useTextareaSegments} from '../../../hooks/useTextareaSegments';
 import {PollAnswerInput} from './PollAnswerInput';
 
 export const CREATE_A_POLL_DESCRIPTOR = msg({
-	message: 'Create a Poll',
+	message: 'Create a poll',
 	comment: 'Title of the poll creation modal.',
 });
 export const POLL_QUESTION_DESCRIPTOR = msg({
@@ -38,7 +38,7 @@ export const POLL_ANSWERS_DESCRIPTOR = msg({
 	comment: 'Label for the answers section of the poll creation modal.',
 });
 export const POLL_ADD_ANSWER_DESCRIPTOR = msg({
-	message: 'Add Answer',
+	message: 'Add answer',
 	comment: 'Label for the button that adds a new answer to the poll.',
 });
 export const POLL_DURATION_DESCRIPTOR = msg({
@@ -46,7 +46,7 @@ export const POLL_DURATION_DESCRIPTOR = msg({
 	comment: 'Label for the duration input.',
 });
 export const POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR = msg({
-	message: 'Allow Multiple Answers',
+	message: 'Allow multiple answers',
 	comment: 'Label for the checkbox that allows users of the poll to select multiple answers.',
 });
 export const POLL_SUBMIT_DESCRIPTOR = msg({

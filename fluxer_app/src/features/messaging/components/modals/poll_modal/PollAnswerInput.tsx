@@ -31,7 +31,7 @@ export const POLL_SELECT_EMOJI_DESCRIPTOR = msg({
 	comment: 'Tooltip text for the emoji selection button on an answer.',
 });
 export const POLL_DELETE_ANSWER_DESCRIPTOR = msg({
-	message: 'Delete Answer',
+	message: 'Delete answer',
 	comment: 'Tooltip text for the button that deletes an answer from the poll.',
 });
 export const POLL_ANSWER_REPLACE_EMOJI = msg({

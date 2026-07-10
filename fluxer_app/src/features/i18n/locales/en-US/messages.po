@@ -2549,8 +2549,8 @@ msgstr "Add another reaction"
 
 #. Label for the button that adds a new answer to the poll.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:40
-msgid "Add Answer"
-msgstr "Add Answer"
+msgid "Add answer"
+msgstr "Add answer"
 
 #. Setup wizard body for Bluesky integration credentials.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:922
@@ -3206,8 +3206,8 @@ msgstr "Allow microphone"
 
 #. Label for the checkbox that allows users of the poll to select multiple answers.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:48
-msgid "Allow Multiple Answers"
-msgstr "Allow Multiple Answers"
+msgid "Allow multiple answers"
+msgstr "Allow multiple answers"
 
 #: src/features/guild/components/modals/guild_tabs/CloneAllowedToggle.tsx:56
 msgid "Allow others to clone your emojis"
@@ -9657,8 +9657,8 @@ msgstr "Create a new group with {userName}"
 
 #. Title of the poll creation modal.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:24
-msgid "Create a Poll"
-msgstr "Create a Poll"
+msgid "Create a poll"
+msgstr "Create a poll"
 
 #. Generic authentication action label for starting or submitting account creation.
 #: src/features/auth/components/pages/RegisterPage.tsx:42
@@ -10805,8 +10805,8 @@ msgstr "Delete all messages"
 
 #. Tooltip text for the button that deletes an answer from the poll.
 #: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:33
-msgid "Delete Answer"
-msgstr "Delete Answer"
+msgid "Delete answer"
+msgstr "Delete answer"
 
 #. Button or menu action label in the application detail. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/ApplicationDetail.tsx:49
