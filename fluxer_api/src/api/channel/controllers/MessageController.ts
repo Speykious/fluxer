@@ -361,11 +361,12 @@ export function MessageController(app: HonoApp) {
 			const userId = ctx.get('user').id;
 			const channelId = createChannelID(channel_id);
 			const messageId = createMessageID(message_id);
+			const requestCache = ctx.get('requestCache');
 			await ctx.get('channelService').messages.poll.endPoll({
 				userId,
 				channelId,
 				messageId,
-				skipGuildAuditLog: false,
+				requestCache,
 			});
 			return ctx.body(null, 204);
 		},

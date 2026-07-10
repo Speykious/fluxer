@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import {createRequestCache} from '@app/api/middleware/RequestCacheMiddleware';
+import type {RequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 import type {Channel} from '@app/api/models/Channel';
 import {Message} from '@app/api/models/Message';
 import type {PollMessageExpiryRow} from '@app/api/Tables';
@@ -43,12 +43,12 @@ export class MessagePollService {
 		channelId,
 		messageId,
 		expiryRow,
-		skipGuildAuditLog,
+		requestCache,
 	}: {
 		userId: UserID;
 		channelId: ChannelID;
 		messageId: MessageID;
-		skipGuildAuditLog?: boolean;
+		requestCache: RequestCache;
 		expiryRow?: PollMessageExpiryRow;
 	}): Promise<void> {
 		const {channel} = await this.deps.channelAuthService.getChannelAuthenticated({
@@ -58,17 +58,18 @@ export class MessagePollService {
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
 
-		return await this.endPollSkipAuth({channel, message, expiryRow, skipGuildAuditLog});
+		return await this.endPollSkipAuth({channel, message, requestCache, expiryRow});
 	}
 
 	async endPollSkipAuth({
 		channel,
 		message,
+		requestCache,
 		expiryRow,
-		// skipGuildAuditLog,
 	}: {
 		channel: Channel;
 		message: Message | null;
+		requestCache: RequestCache;
 		skipGuildAuditLog?: boolean;
 		expiryRow?: PollMessageExpiryRow;
 	}): Promise<void> {
@@ -111,7 +112,6 @@ export class MessagePollService {
 					totalVotes += answerCount.count ?? 0;
 				}
 
-				const requestCache = createRequestCache();
 				await this.deps.messageSendService.sendMessage({
 					channelId: channel.id,
 					user,

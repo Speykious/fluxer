@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import {getExpiryBucket} from '@app/api/channel/repositories/PollMessageExpiryRepository';
+import {createRequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 import type {WorkerTaskHandler} from '@pkgs/worker/src/contracts/WorkerTask';
 import {Logger} from '../../Logger';
 import {getWorkerDependencies} from '../WorkerContext';
@@ -11,6 +12,7 @@ const FETCH_LIMIT = 200;
 export async function processFinalizedPolls(now = new Date()): Promise<void> {
 	const {channelService, channelRepository} = getWorkerDependencies();
 	const pollService = channelService.messages.poll;
+	const requestCache = createRequestCache();
 
 	const repo = pollService.expiry;
 	let totalQueued = 0;
@@ -51,8 +53,8 @@ export async function processFinalizedPolls(now = new Date()): Promise<void> {
 				await pollService.endPollSkipAuth({
 					channel,
 					message,
+					requestCache,
 					expiryRow: row,
-					skipGuildAuditLog: true,
 				});
 				totalQueued++;
 				totalDeletedRows++;
