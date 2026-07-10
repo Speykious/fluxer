@@ -17,9 +17,9 @@ import {observer} from 'mobx-react-lite';
 import {useCallback, useMemo, useState} from 'react';
 import {useTextareaSegments} from '../../../hooks/useTextareaSegments';
 import {
-	ADD_ANSWER_DESCRIPTOR,
 	CREATE_A_POLL_DESCRIPTOR,
 	generateDurationOptions,
+	POLL_ADD_ANSWER_DESCRIPTOR,
 	POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR,
 	POLL_ANSWERS_DESCRIPTOR,
 	POLL_DURATION_DESCRIPTOR,
@@ -228,7 +228,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 									});
 								}}
 							>
-								{i18n._(ADD_ANSWER_DESCRIPTOR)}
+								{i18n._(POLL_ADD_ANSWER_DESCRIPTOR)}
 							</Button>
 						</FieldSet>
 						<Combobox<number>

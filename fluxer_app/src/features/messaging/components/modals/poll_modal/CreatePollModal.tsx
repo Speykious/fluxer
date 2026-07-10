@@ -61,10 +61,6 @@ export const POLL_ERROR_YOU_SHOULD_ENTER_AT_LEAST_ONE_ANSWER = msg({
 	message: 'You should enter at least one answer.',
 	comment: 'Error message for when no answer has been entered in the poll.',
 });
-export const ADD_ANSWER_DESCRIPTOR = msg({
-	message: 'Add Answer',
-	comment: 'Label of the button that lets the user add another answer.',
-});
 export const N_WEEKS_DESCRIPTOR = msg({
 	message: '{count, plural, one {# week} other {# weeks}}',
 	comment: 'Generic description for a duration option that is measured in weeks.',
@@ -284,7 +280,7 @@ export const CreatePollModal = observer(
 											});
 										}}
 									>
-										{i18n._(ADD_ANSWER_DESCRIPTOR)}
+										{i18n._(POLL_ADD_ANSWER_DESCRIPTOR)}
 									</Button>
 								</FieldSet>
 								<Combobox<number>
