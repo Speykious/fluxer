@@ -381,7 +381,7 @@ msgstr "{count, plural, one {# conexiune} other {# conexiuni}}"
 
 #. Generic description for a duration option that is measured in days.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:131
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:72
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:68
 msgid "{count, plural, one {# day} other {# days}}"
 msgstr "{count, plural, one {# zi} other {# zile}}"
 
@@ -397,7 +397,7 @@ msgstr "{count, plural, one {# cadou} other {# cadouri}}"
 
 #. Generic description for a duration option that is measured in hours.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:139
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:76
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:72
 msgid "{count, plural, one {# hour} other {# hours}}"
 msgstr "{count, plural, one {# oră} other {# ore}}"
 
@@ -450,11 +450,11 @@ msgstr "{count, plural, one {# secundă} other {# secunde}}"
 
 #. Small text indicating the number of votes on the poll or on a specific answer of the poll.
 #: src/features/channel/components/Poll.tsx:65
-msgid "{count, plural, one {# vote}, many {#votes}"
+msgid "{count, plural, one {# vote} other {# votes}}"
 msgstr ""
 
 #. Generic description for a duration option that is measured in weeks.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:68
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:64
 msgid "{count, plural, one {# week} other {# weeks}}"
 msgstr ""
 
@@ -2547,9 +2547,7 @@ msgid "Add another reaction"
 msgstr "Adaugă altă reacție"
 
 #. Label for the button that adds a new answer to the poll.
-#. Label of the button that lets the user add another answer.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:40
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:64
 msgid "Add Answer"
 msgstr ""
 
@@ -3712,7 +3710,7 @@ msgstr "Încă o casetă de selectare rotundă"
 msgid "Answer the incoming call"
 msgstr "Răspunde la apelul primit"
 
-#. Label for the answers fieldset.
+#. Label for the answers section of the poll creation modal.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:36
 msgid "Answers"
 msgstr ""

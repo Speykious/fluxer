@@ -35,7 +35,7 @@ export const POLL_QUESTION_PLACEHOLDER_DESCRIPTOR = msg({
 });
 export const POLL_ANSWERS_DESCRIPTOR = msg({
 	message: 'Answers',
-	comment: 'Label for the answers fieldset.',
+	comment: 'Label for the answers section of the poll creation modal.',
 });
 export const POLL_ADD_ANSWER_DESCRIPTOR = msg({
 	message: 'Add Answer',
