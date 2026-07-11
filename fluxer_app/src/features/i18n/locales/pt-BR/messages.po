@@ -13,6 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
+#: src/features/channel/components/Poll.tsx:77
+msgid ", "
+msgstr ""
+
 #. Description text in the messages tab.
 #: src/features/user/components/modals/tabs/appearance_tab/MessagesTab.tsx:51
 msgid "... turn dense mode on. Nice!"
@@ -54,17 +59,17 @@ msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# membro} other {# membros}}"
 
 #. placeholder {0}: Math.floor(secondsLeft / 86400)
-#: src/features/channel/components/Poll.tsx:146
+#: src/features/channel/components/Poll.tsx:168
 msgid "{0}d left"
 msgstr ""
 
 #. placeholder {0}: Math.round(secondsLeft / 3600)
-#: src/features/channel/components/Poll.tsx:145
+#: src/features/channel/components/Poll.tsx:167
 msgid "{0}h left"
 msgstr ""
 
 #. placeholder {0}: Math.round(secondsLeft / 60)
-#: src/features/channel/components/Poll.tsx:144
+#: src/features/channel/components/Poll.tsx:166
 msgid "{0}m left"
 msgstr ""
 
@@ -28450,6 +28455,11 @@ msgstr "Texto selecionável"
 msgid "selected"
 msgstr "selecionado"
 
+#. Label showing the answer with the most votes on the poll.
+#: src/features/channel/components/Poll.tsx:73
+msgid "Selected answer"
+msgstr ""
+
 #. Accessible label for the draggable end handle in an audio waveform trimmer.
 #: src/features/voice/components/AudioWaveform.tsx:14
 msgid "Selection end"
@@ -33190,8 +33200,8 @@ msgid "This removes every custom shortcut and re-enables all built-in shortcuts.
 msgstr "Isso remove todos os atalhos personalizados e reativa todos os atalhos integrados. Esta ação não pode ser desfeita."
 
 #: src/features/auth/components/pages/ResetPasswordPage.tsx:114
-msgid "This reset link has expired. Reset links last 24 hours. Request a new one."
-msgstr "Este link de redefinição expirou. Links de redefinição duram 24 horas. Solicite um novo."
+msgid "This reset link has expired. Reset links last 1 hour. Please request a new one."
+msgstr ""
 
 #. Fallback role name in a mass-mention warning title.
 #: src/features/channel/components/MentionEveryonePopout.tsx:14
@@ -37926,6 +37936,11 @@ msgstr "Janelas cortadas na parte superior ou inferior da tela, e DevTools encai
 #: src/features/voice/utils/VoiceMessageDescriptors.ts:14
 msgid "Windows default"
 msgstr "Padrão do Windows"
+
+#. Label showing or describing the answer with the most votes on the poll.
+#: src/features/channel/components/Poll.tsx:69
+msgid "Winning answer"
+msgstr ""
 
 #. Switch description in the leave-community confirmation modal. Warns that deleting the caller's community messages is destructive.
 #. Switch description in the leave-group confirmation modal. Warns that deleting the caller's group messages is destructive.

@@ -66,6 +66,18 @@ export const VOTES_DESCRIPTOR = msg({
 	message: '{count, plural, one {# vote} other {# votes}}',
 	comment: 'Small text indicating the number of votes on the poll or on a specific answer of the poll.',
 });
+const WINNING_ANSWER = msg({
+	message: 'Winning answer',
+	comment: 'Label showing or describing the answer with the most votes on the poll.',
+});
+const SELECTED_ANSWER = msg({
+	message: 'Selected answer',
+	comment: 'Label showing the answer with the most votes on the poll.',
+});
+const ARIA_LABEL_ANSWER_QUALIFIER_SEPARATOR = msg({
+	message: ', ',
+	comment: 'Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".',
+});
 
 function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
 	if (!pollEmoji) return undefined;
@@ -78,6 +90,16 @@ function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
 
 	if (!emoji) return undefined;
 	return <img src={emoji.url} alt={emoji.name} width="24" height="24" data-flx="poll.answer.emoji.img" />;
+}
+
+interface Answer {
+	id: number;
+	emoji?: MessagePollEmoji;
+	text: string;
+	me: boolean;
+	votes: number;
+	percentage: number;
+	winner: boolean;
 }
 
 interface PollProps {
@@ -146,7 +168,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 		return <Trans>{Math.floor(secondsLeft / 86400)}d left</Trans>;
 	}
 
-	const answers = useMemo(() => {
+	const answers = useMemo<Array<Answer>>(() => {
 		const answerCountById: Array<MessagePollAnswerCount> = [];
 		for (const answerCount of poll.results?.answer_counts ?? []) {
 			if (answerCount) answerCountById[answerCount.id ?? 0] = answerCount;
@@ -194,6 +216,13 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 		);
 	}, []);
 
+	function answerAriaLabel(answer: Answer): string {
+		const qualifiers = [];
+		if (answer.me) qualifiers.push(i18n._(SELECTED_ANSWER));
+		if (answer.winner) qualifiers.push(i18n._(WINNING_ANSWER));
+		return qualifiers.join(i18n._(ARIA_LABEL_ANSWER_QUALIFIER_SEPARATOR));
+	}
+
 	return (
 		<div data-flx="poll" className={styles.pollContainer} data-open={!isFinalized} data-state={messageState}>
 			<h2 data-flx="poll.question">{poll.question?.text ?? ''}</h2>
@@ -222,6 +251,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 						data-variant={answer.winner ? 'winner' : answer.me ? (isFinalized ? 'me-finalized' : 'me') : undefined}
 						data-voting={inVoteScreen}
 						data-checked={answer.me}
+						aria-label={answerAriaLabel(answer)}
 						data-flx="poll.answer.button"
 					>
 						{inVoteScreen ? undefined : (
