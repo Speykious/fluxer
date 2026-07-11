@@ -24,7 +24,7 @@ export const UPLOAD_FILE_DESCRIPTOR = msg({
 	message: 'Upload file',
 	comment: 'Plus menu item that opens the system file picker to attach a file.',
 });
-const YOU_DO_NOT_HAVE_PERMISSION_TO_CREATE_POLL_DESCRIPTOR = msg({
+const CANNOT_CREATE_POLL_DESCRIPTOR = msg({
 	message: "You can't create polls in this channel.",
 	comment: 'Tooltip on the disabled create poll item when the user lacks Create Poll permission. Calm, factual tone.',
 });
@@ -103,7 +103,7 @@ export const TextareaPlusMenu = observer(
 		const hasTextContent = textareaValue && textareaValue.trim().length > 0;
 		const cannotSendMessagesHint = i18n._(CANNOT_SEND_MESSAGES_IN_CHANNEL_DESCRIPTOR);
 		const cannotUploadFilesHint = i18n._(YOU_DO_NOT_HAVE_PERMISSION_TO_UPLOAD_FILES_DESCRIPTOR);
-		const cannotCreatePollHint = i18n._(YOU_DO_NOT_HAVE_PERMISSION_TO_CREATE_POLL_DESCRIPTOR);
+		const cannotCreatePollHint = i18n._(CANNOT_CREATE_POLL_DESCRIPTOR);
 		let uploadActionHint: string | undefined;
 		if (!canSendMessages) {
 			uploadActionHint = cannotSendMessagesHint;

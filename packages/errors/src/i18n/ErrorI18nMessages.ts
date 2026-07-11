@@ -217,6 +217,7 @@ export const ERROR_I18N_MESSAGES = {
 		"You can't position a channel relative to itself or its descendants.",
 	'channels_and_guilds.cannot_report_guild': "You can't report this community.",
 	'channels_and_guilds.cannot_report_own_guild': "You can't report your own community.",
+	'channels_and_guilds.cannot_send_poll_in_personal_notes': "You can't send a poll in your personal notes.",
 	'channels_and_guilds.cannot_transfer_ownership_to_bot': "Community ownership can't be transferred to a bot.",
 	'channels_and_guilds.categories_cannot_have_parent_channel': "Categories can't have a parent channel.",
 	'channels_and_guilds.categories_cannot_have_parents': "Categories can't have parents.",

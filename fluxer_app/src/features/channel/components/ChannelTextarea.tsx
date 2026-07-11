@@ -1352,7 +1352,7 @@ export const ChannelTextarea = observer(
 		const canAttachFiles = channel.isPrivate()
 			? !forceNoAttachFiles
 			: !forceNoAttachFiles && Permission.can(Permissions.ATTACH_FILES, channel);
-		const canSendPolls = channel.isPrivate() ? true : Permission.can(Permissions.SEND_POLLS, channel);
+		const canSendPolls = channel.isPrivate() ? !channel.isPersonalNotes() : Permission.can(Permissions.SEND_POLLS, channel);
 		const canEmbedLinks = channel.isPrivate() ? true : Permission.can(Permissions.EMBED_LINKS, channel);
 		const canSendFavoriteMemeId = canAttachFiles && canEmbedLinks;
 		return (

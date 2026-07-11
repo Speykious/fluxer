@@ -14,6 +14,7 @@ import {GuildNSFWLevel, GuildOperations} from '@fluxer/constants/src/GuildConsta
 import {RelationshipTypes, SensitiveMediaFilterLevel, UserFlags} from '@fluxer/constants/src/UserConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
 import {CannotForwardPollError} from '@fluxer/errors/src/domains/channel/CannotForwardPollError';
+import {CannotSendPollInPersonalNotesError} from '@fluxer/errors/src/domains/channel/CannotSendPollInPersonalNotesError';
 import {UnknownChannelError} from '@fluxer/errors/src/domains/channel/UnknownChannelError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import {CannotExecuteOnDmError} from '@fluxer/errors/src/domains/core/CannotExecuteOnDmError';
@@ -1502,6 +1503,7 @@ export class MessageSendService {
 		requestCache: RequestCache;
 	}): Promise<Message> {
 		const {channel} = await this.deps.channelAuthService.getChannelAuthenticated({userId: user.id, channelId});
+		if (data.poll) throw new CannotSendPollInPersonalNotesError();
 		const isForwardMessage = this.ensureMessageRequestIsValid({user, data, guildFeatures: null});
 		this.deps.embedAttachmentResolver.validateAttachmentReferences({
 			embeds: data.embeds,
