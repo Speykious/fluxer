@@ -17,6 +17,13 @@ export const Int32TypeSchema: OpenAPISchema = {
 	format: 'int32',
 };
 export const Int32TypeRef: OpenAPIRef = {$ref: '#/components/schemas/Int32Type'};
+export const NonNegativeSafeIntegerTypeSchema: OpenAPISchema = {
+	type: 'integer',
+	minimum: 0,
+	maximum: 9007199254740991,
+	format: 'int53',
+};
+export const NonNegativeSafeIntegerTypeRef: OpenAPIRef = {$ref: '#/components/schemas/NonNegativeSafeIntegerType'};
 export const Int64TypeSchema: OpenAPISchema = {
 	type: 'string',
 	format: 'int64',
@@ -200,7 +207,7 @@ export const APIErrorCodeSchema = {
 export const ValidationErrorItemSchema: OpenAPISchema = {
 	type: 'object',
 	properties: {
-		field: {
+		path: {
 			type: 'string',
 			description: 'Field path that failed validation',
 		},
@@ -213,5 +220,5 @@ export const ValidationErrorItemSchema: OpenAPISchema = {
 			description: 'Human-readable validation error message',
 		},
 	},
-	required: ['field', 'code', 'message'],
+	required: ['path', 'message'],
 };
