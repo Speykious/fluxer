@@ -16,7 +16,7 @@ msgstr ""
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
 #: src/features/channel/components/Poll.tsx:77
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #. Description text in the messages tab.
 #: src/features/user/components/modals/tabs/appearance_tab/MessagesTab.tsx:51
@@ -61,17 +61,17 @@ msgstr "{0, plural, one {# medlem} other {# medlemmar}}"
 #. placeholder {0}: Math.floor(secondsLeft / 86400)
 #: src/features/channel/components/Poll.tsx:168
 msgid "{0}d left"
-msgstr ""
+msgstr "{0}d left"
 
 #. placeholder {0}: Math.round(secondsLeft / 3600)
 #: src/features/channel/components/Poll.tsx:167
 msgid "{0}h left"
-msgstr ""
+msgstr "{0}h left"
 
 #. placeholder {0}: Math.round(secondsLeft / 60)
 #: src/features/channel/components/Poll.tsx:166
 msgid "{0}m left"
-msgstr ""
+msgstr "{0}m left"
 
 #: src/features/channel/components/TypingUsers.tsx:68
 msgid "{a} and {b} are typing..."
@@ -456,12 +456,12 @@ msgstr "{count, plural, one {# sekund} other {# sekunder}}"
 #. Small text indicating the number of votes on the poll or on a specific answer of the poll.
 #: src/features/channel/components/Poll.tsx:65
 msgid "{count, plural, one {# vote} other {# votes}}"
-msgstr ""
+msgstr "{count, plural, one {# vote} other {# votes}}"
 
 #. Generic description for a duration option that is measured in weeks.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:64
 msgid "{count, plural, one {# week} other {# weeks}}"
-msgstr ""
+msgstr "{count, plural, one {# week} other {# weeks}}"
 
 #: src/features/channel/components/embeds/attachments/TextualAttachmentPreviewFooter.tsx:63
 msgid "{count, plural, one {Collapse (# line)} other {Collapse (# lines)}}"
@@ -1544,7 +1544,7 @@ msgstr "<0/> startade ett samtal."
 
 #: src/features/channel/components/PollClosedMessage.tsx:63
 msgid "<0/>'s poll <1/> has closed."
-msgstr ""
+msgstr "<0/>'s poll <1/> has closed."
 
 #: src/features/app/components/alerts/RoleDeleteFailedModal.tsx:23
 msgid "<0>\"{roleName}\"</0> wouldn't delete. Try again."
@@ -1619,7 +1619,7 @@ msgstr "<0>Endast URL-favoriter (standard)</0>: synkroniseras mellan dina enhete
 #. Very short text informing the user that the poll ends in less than one minute.
 #: src/features/channel/components/Poll.tsx:53
 msgid "<1m left"
-msgstr ""
+msgstr "<1m left"
 
 #. Summary chip text in the mobile channel search sheet when exactly one channel is selected as a filter.
 #: src/features/channel/components/bottomsheets/ChannelSearchBottomSheet.tsx:160
@@ -2031,7 +2031,7 @@ msgstr "en omröstning"
 #. Placeholder text for each answer input.
 #: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:25
 msgid "A possible answer"
-msgstr ""
+msgstr "A possible answer"
 
 #. OAuth authorize page error shown when the bot scope requires a redirect_uri that is missing. Technical message; keep "redirect_uri" and "bot" untranslated.
 #: src/features/auth/components/pages/oauth_authorize_page/state/useAuthorizeFlow.ts:53
@@ -2554,7 +2554,7 @@ msgstr "Lägg till en till reaktion"
 #. Label for the button that adds a new answer to the poll.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:40
 msgid "Add answer"
-msgstr ""
+msgstr "Add answer"
 
 #. Setup wizard body for Bluesky integration credentials.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:922
@@ -3211,7 +3211,7 @@ msgstr "Tillåt mikrofon"
 #. Label for the checkbox that allows users of the poll to select multiple answers.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:48
 msgid "Allow multiple answers"
-msgstr ""
+msgstr "Allow multiple answers"
 
 #: src/features/guild/components/modals/guild_tabs/CloneAllowedToggle.tsx:56
 msgid "Allow others to clone your emojis"
@@ -3718,7 +3718,7 @@ msgstr "Svara på det inkommande samtalet"
 #. Label for the answers section of the poll creation modal.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:36
 msgid "Answers"
-msgstr ""
+msgstr "Answers"
 
 #: src/features/input/components/modals/KeyboardShortcutsCheatsheetModal.tsx:100
 #: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutChipList.tsx:28
@@ -9662,7 +9662,7 @@ msgstr "Skapa en ny grupp med {userName}"
 #. Title of the poll creation modal.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:24
 msgid "Create a poll"
-msgstr ""
+msgstr "Create a poll"
 
 #. Generic authentication action label for starting or submitting account creation.
 #: src/features/auth/components/pages/RegisterPage.tsx:42
@@ -9798,12 +9798,12 @@ msgstr "Skapa eller gå med i en community"
 #. Plus menu item that opens a form to create a poll.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:31
 msgid "Create poll"
-msgstr ""
+msgstr "Create poll"
 
 #. Permission name: allows creating polls.
 #: src/features/permissions/utils/PermissionLabelDescriptors.ts:233
 msgid "Create polls"
-msgstr ""
+msgstr "Create polls"
 
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/MobileRoleList.tsx:45
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:171
@@ -10810,7 +10810,7 @@ msgstr "Radera alla meddelanden"
 #. Tooltip text for the button that deletes an answer from the poll.
 #: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:33
 msgid "Delete answer"
-msgstr ""
+msgstr "Delete answer"
 
 #. Button or menu action label in the application detail. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/ApplicationDetail.tsx:49
@@ -12404,7 +12404,7 @@ msgstr "Duplicera kanal"
 #. Label for the duration input.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:44
 msgid "Duration"
-msgstr ""
+msgstr "Duration"
 
 #. Inline validation error on the custom duration input of the timeout-member modal when the value is zero or negative.
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:53
@@ -13372,7 +13372,7 @@ msgstr "Avsluta respitperioden nu?"
 #: src/features/channel/components/MessageActionMenu.tsx:96
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:466
 msgid "End poll now"
-msgstr ""
+msgstr "End poll now"
 
 #. Button label that stops the current screen share.
 #. Voice control menu action to stop sharing the screen.
@@ -15904,7 +15904,7 @@ msgstr "Gå tillbaka och ange en giltig e-postadress."
 #. Label of the button to go back to vote when the user is looking at poll results.
 #: src/features/channel/components/Poll.tsx:33
 msgid "Go back to vote"
-msgstr ""
+msgstr "Go back to vote"
 
 #. CTA label that opens the premium settings tab from gift inventory.
 #: src/features/user/components/modals/tabs/GiftInventoryTab.tsx:94
@@ -18184,7 +18184,7 @@ msgstr "Den kan ha lämnat upptäcktsfunktionen eller stängt av nya anslutninga
 #. Small explanatory text informing the user that the poll resulted in a draw.
 #: src/features/channel/components/PollClosedMessage.tsx:23
 msgid "It's a draw"
-msgstr ""
+msgstr "It's a draw"
 
 #. Label in the channel and chat typing users.
 #: src/features/channel/components/TypingUsers.tsx:35
@@ -24470,12 +24470,12 @@ msgstr "omröstning"
 #. Small text informing the user that the poll is closed.
 #: src/features/channel/components/Poll.tsx:57
 msgid "Poll closed"
-msgstr ""
+msgstr "Poll closed"
 
 #. Small text informing the user that the poll message has not been sent yet.
 #: src/features/channel/components/Poll.tsx:61
 msgid "Poll not sent"
-msgstr ""
+msgstr "Poll not sent"
 
 #. Button label in a popped-out voice window titlebar that restores the content into the main app window.
 #. Button label on the popped-out overlay that closes the popout window and restores the view in the app.
@@ -25309,7 +25309,7 @@ msgstr "kvaliteten är begränsad"
 #. Label for the question input.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:28
 msgid "Question"
-msgstr ""
+msgstr "Question"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the theme studio. Keep it concise.
@@ -26228,7 +26228,7 @@ msgstr "Ta bort översättare"
 #. Label of the button to remove the user's vote.
 #: src/features/channel/components/Poll.tsx:37
 msgid "Remove vote"
-msgstr ""
+msgstr "Remove vote"
 
 #. Button or menu action label in the premium badge settings. Keep it concise. Preserve {premiumProductName}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/my_profile_tab/PremiumBadgeSettings.tsx:31
@@ -26446,7 +26446,7 @@ msgstr "Byta bakgrund?"
 #. Title of a context menu item to replace the emoji of a poll answer.
 #: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:37
 msgid "Replace emoji"
-msgstr ""
+msgstr "Replace emoji"
 
 #. Button or menu action label in the background image gallery modal. Keep it concise.
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:154
@@ -28363,7 +28363,7 @@ msgstr "Välj ett alternativ från radiogruppen"
 #. Tooltip text for the emoji selection button on an answer.
 #: src/features/messaging/components/modals/poll_modal/PollAnswerInput.tsx:29
 msgid "Select emoji"
-msgstr ""
+msgstr "Select emoji"
 
 #. Button or menu action label in the add friends to group modal. Keep it concise.
 #. Button or menu action label in the create dm bottom sheet. Keep it concise.
@@ -28397,12 +28397,12 @@ msgstr "Välj mediestorlek för uppladdade bilagor"
 #. Small explanatory text instructing the user to select one answer on the poll.
 #: src/features/channel/components/Poll.tsx:25
 msgid "Select one answer"
-msgstr ""
+msgstr "Select one answer"
 
 #. Small explanatory text instructing the user to select one or multiple answers on the poll.
 #: src/features/channel/components/Poll.tsx:29
 msgid "Select one or multiple answers"
-msgstr ""
+msgstr "Select one or multiple answers"
 
 #. Button or menu action label in the o auth builder section. Keep it concise. Keep the tone plain and specific.
 #: src/features/user/components/modals/tabs/applications_tab/application_detail/OAuthBuilderSection.tsx:38
@@ -28458,7 +28458,7 @@ msgstr "vald"
 #. Label showing the answer with the most votes on the poll.
 #: src/features/channel/components/Poll.tsx:73
 msgid "Selected answer"
-msgstr ""
+msgstr "Selected answer"
 
 #. Accessible label for the draggable end handle in an audio waveform trimmer.
 #: src/features/voice/components/AudioWaveform.tsx:14
@@ -29715,7 +29715,7 @@ msgstr "Visa senaste instanser"
 #. Label of the button to show poll answer results.
 #: src/features/channel/components/Poll.tsx:45
 msgid "Show results"
-msgstr ""
+msgstr "Show results"
 
 #. Description for the YouTube enrichment service toggle in the setup wizard.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:289
@@ -31468,7 +31468,7 @@ msgstr "Undermeny"
 #. Label for the poll submit button.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:52
 msgid "Submit"
-msgstr ""
+msgstr "Submit"
 
 #: src/features/user/components/modals/tabs/component_gallery_tab/ComponentGalleryTabButtonsTab.tsx:409
 msgid "Submitting"
@@ -32392,7 +32392,7 @@ msgstr "Den angivna redirect_uri måste använda HTTP eller HTTPS."
 #. Placeholder text for the question input.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:32
 msgid "The question you want to ask"
-msgstr ""
+msgstr "The question you want to ask"
 
 #. Body of a modal shown when a browser screen share track ends outside the app, for example from the browser sharing controls.
 #: src/features/voice/engine/v2/VoiceEngineV2AppScreenShareExecutionAdapter.tsx:115
@@ -33201,7 +33201,7 @@ msgstr "Detta tar bort alla anpassade genvägar och återaktiverar alla inbyggda
 
 #: src/features/auth/components/pages/ResetPasswordPage.tsx:114
 msgid "This reset link has expired. Reset links last 1 hour. Please request a new one."
-msgstr ""
+msgstr "This reset link has expired. Reset links last 1 hour. Please request a new one."
 
 #. Fallback role name in a mass-mention warning title.
 #: src/features/channel/components/MentionEveryonePopout.tsx:14
@@ -33361,7 +33361,7 @@ msgstr "Detta kommer att stänga det aktuella flytande fönstret och hindra skä
 #. Description of the action of ending a poll in a confirmation modal.
 #: src/features/messaging/commands/PollCommands.tsx:23
 msgid "This will close the poll now and show the results."
-msgstr ""
+msgstr "This will close the poll now and show the results."
 
 #: src/features/messaging/commands/FavoritesCommands.tsx:30
 msgid "This will hide all favorites-related UI elements including buttons and menu items. Your existing favorites will be preserved and can be re-enabled anytime from <0>{favoritesSettingsPath}</0>."
@@ -36792,7 +36792,7 @@ msgstr "Visa abonnemang"
 #. Title of the button that redirects to the poll message.
 #: src/features/channel/components/PollClosedMessage.tsx:27
 msgid "View poll"
-msgstr ""
+msgstr "View poll"
 
 #. Action label that opens the user profile modal or sheet for the selected user.
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:353
@@ -37201,7 +37201,7 @@ msgstr "Volymreglage"
 #. Label of the vote button.
 #: src/features/channel/components/Poll.tsx:41
 msgid "Vote"
-msgstr ""
+msgstr "Vote"
 
 #. Description text in the message delete too quick modal. Keep the tone plain and specific.
 #: src/features/messaging/components/alerts/MessageDeleteTooQuickModal.tsx:12
@@ -37940,7 +37940,7 @@ msgstr "Windows standard"
 #. Label showing or describing the answer with the most votes on the poll.
 #: src/features/channel/components/Poll.tsx:69
 msgid "Winning answer"
-msgstr ""
+msgstr "Winning answer"
 
 #. Switch description in the leave-community confirmation modal. Warns that deleting the caller's community messages is destructive.
 #. Switch description in the leave-group confirmation modal. Warns that deleting the caller's group messages is destructive.
@@ -38224,7 +38224,7 @@ msgstr "Du kan inte ändra ditt smeknamn här"
 #. Tooltip on the disabled create poll item when the user lacks Create Poll permission. Calm, factual tone.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:27
 msgid "You can't create polls in this channel."
-msgstr ""
+msgstr "You can't create polls in this channel."
 
 #. Title of the error modal shown when the user lacks permission to delete a channel or category.
 #: src/features/app/components/alerts/ChannelDeleteFailedModal.tsx:18
@@ -38461,7 +38461,7 @@ msgstr "Du har inte behörighet att byta namn på den här emojin. Namnet åters
 #. Error message for when no question has been entered in the poll.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:56
 msgid "You forgot to enter a question."
-msgstr ""
+msgstr "You forgot to enter a question."
 
 #. Body of the error modal shown when the user is banned from a discovery community.
 #: src/features/discovery/discovery/DiscoveryGuildCard.tsx:60
@@ -38651,7 +38651,7 @@ msgstr "Du måste verifiera din e-postadress innan du kan starta ett direktmedde
 #. Small disclaimer explaining to the user that email verification is necessary to vote on a poll.
 #: src/features/channel/components/Poll.tsx:49
 msgid "You need to verify your email address to vote on a poll."
-msgstr ""
+msgstr "You need to verify your email address to vote on a poll."
 
 #. Body of the error modal shown when an unverified account tries to join the canary testers community.
 #: src/features/app/components/layout/app_layout/nagbars/CanaryTesterCtaNagbar.tsx:34
@@ -38675,7 +38675,7 @@ msgstr "Du eller någon du lägger till har redan det maximala antalet grupp-DM 
 #. Error message for when no answer has been entered in the poll.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:60
 msgid "You should enter at least one answer."
-msgstr ""
+msgstr "You should enter at least one answer."
 
 #. Voice chat status tooltip for the current user. A moderator deafened them so they cannot hear voice chat.
 #: src/features/voice/utils/VoiceMessageDescriptors.ts:61
