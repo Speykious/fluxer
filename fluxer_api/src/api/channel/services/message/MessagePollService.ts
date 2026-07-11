@@ -20,6 +20,9 @@ import type {MessageReactionService} from '../interaction/MessageReactionService
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
 import type {MessageSendService} from './MessageSendService';
+import {Permissions} from '@fluxer/constants/src/ChannelConstants';
+import type {AuthenticatedChannel} from '../AuthenticatedChannel';
+import {snowflakeToDate} from '@fluxer/snowflake/src/Snowflake';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -38,6 +41,26 @@ export class MessagePollService {
 		this.expiry = deps.pollExpiryRepository;
 	}
 
+	private async assertMessageHistoryAccess({
+		authChannel,
+		messageId,
+	}: {
+		authChannel: AuthenticatedChannel;
+		messageId: MessageID;
+	}): Promise<void> {
+		const {guild, hasPermission} = authChannel;
+		if (!guild) {
+			return;
+		}
+		if (await hasPermission(Permissions.READ_MESSAGE_HISTORY)) {
+			return;
+		}
+		const cutoff = guild.message_history_cutoff;
+		if (!cutoff || snowflakeToDate(messageId).getTime() < new Date(cutoff).getTime()) {
+			throw new UnknownMessageError();
+		}
+	}
+
 	async endPoll({
 		userId,
 		channelId,
@@ -51,10 +74,12 @@ export class MessagePollService {
 		requestCache: RequestCache;
 		expiryRow?: PollMessageExpiryRow;
 	}): Promise<void> {
-		const {channel} = await this.deps.channelAuthService.getChannelAuthenticated({
+		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
 			userId,
 			channelId,
 		});
+		await this.assertMessageHistoryAccess({authChannel, messageId});
+		const {channel} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
 
@@ -190,6 +215,7 @@ export class MessagePollService {
 			userId,
 			channelId,
 		});
+		await this.assertMessageHistoryAccess({authChannel, messageId});
 		const {channel} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) throw new UnknownMessageError();
@@ -227,6 +253,7 @@ export class MessagePollService {
 			userId,
 			channelId,
 		});
+		await this.assertMessageHistoryAccess({authChannel, messageId});
 		const {channel} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) throw new UnknownMessageError();
