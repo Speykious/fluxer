@@ -9,7 +9,7 @@ import {getWorkerDependencies} from '../WorkerContext';
 const BUCKET_LOOKBACK_DAYS = 3;
 const FETCH_LIMIT = 200;
 
-export async function processFinalizedPolls(now = new Date()): Promise<void> {
+async function processFinalizedPolls(now = new Date()): Promise<void> {
 	const {channelService, channelRepository} = getWorkerDependencies();
 	const pollService = channelService.messages.poll;
 	const requestCache = createRequestCache();

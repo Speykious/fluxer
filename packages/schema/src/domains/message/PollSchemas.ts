@@ -2,32 +2,32 @@
 
 import z from "zod";
 
-export const MessagePollEmojiSchema = z.object({
+const MessagePollEmojiSchema = z.object({
     id: z.string().nullish().describe('The ID of the emoji'),
     name: z.string().nullish().describe('The name of the emoji'),
 });
 export type MessagePollEmojiSchema = z.infer<typeof MessagePollEmojiSchema>;
 
-export const MessagePollMediaSchema = z.object({
+const MessagePollMediaSchema = z.object({
     emoji: MessagePollEmojiSchema.nullish().describe('The emoji of the poll media'),
     text: z.string().nullish().describe('The text of the poll media'),
 });
 export type MessagePollMediaSchema = z.infer<typeof MessagePollMediaSchema>;
 
-export const MessagePollAnswerSchema = z.object({
+const MessagePollAnswerSchema = z.object({
     answer_id: z.int32().nullish().describe('The ID of the poll answer (starts at 1)'),
     poll_media: MessagePollMediaSchema.nullish().describe('The poll media of the answer (contains the text and emoji)'),
 });
 export type MessagePollAnswerSchema = z.infer<typeof MessagePollAnswerSchema>;
 
-export const MessagePollAnswerCountSchema = z.object({
+const MessagePollAnswerCountSchema = z.object({
     id: z.int32().nullish().describe('The ID of the poll answer'),
     count: z.int32().nullish().describe('The number of votes on this answer'),
     me_voted: z.boolean().nullish().describe('Whether the requesting user voted on this answer'),
 });
 export type MessagePollAnswerCountSchema = z.infer<typeof MessagePollAnswerCountSchema>;
 
-export const MessagePollResultsSchema = z.object({
+const MessagePollResultsSchema = z.object({
     answer_counts: z.array(MessagePollAnswerCountSchema).nullish().describe('The answer counts of the poll results'),
     is_finalized: z.boolean().nullish().describe('Whether the poll results are finalized'),
 });

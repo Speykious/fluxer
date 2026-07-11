@@ -406,7 +406,7 @@ export const PollVoteRequestSchema = z.object({
 	answerIds: z.array(z.string()),
 });
 
-export type PollVoteRequestSchemaType = z.infer<typeof PollVoteRequestSchema>;
+export type PollVoteRequestSchema = z.infer<typeof PollVoteRequestSchema>;
 
 const BulkMessageFetchEntryRequest = z.object({
 	channel_id: SnowflakeType.describe('The ID of the channel to fetch messages from'),
