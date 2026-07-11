@@ -218,16 +218,18 @@ fn render_poll(poll: &Poll) -> Markup {
     if let Some(poll_answers) = &poll.answers {
         for answer in poll_answers {
             let text = (answer.poll_media.as_ref())
-                .and_then(|pm| pm.text.as_ref().map(String::as_str))
+                .and_then(|pm| pm.text.as_deref())
                 .unwrap_or("");
             answers.insert(answer.answer_id.unwrap_or_default(), (text, 0_i32));
         }
     }
-    if let Some(poll_results) = &poll.results {
-        if let Some(answer_counts) = &poll_results.answer_counts {
-            for answer_count in answer_counts {
-                let key = answer_count.id.unwrap_or_default();
-                (answers.get_mut(&key)).map(|v| v.1 = answer_count.count.unwrap_or_default());
+    if let Some(poll_results) = &poll.results
+        && let Some(answer_counts) = &poll_results.answer_counts
+    {
+        for answer_count in answer_counts {
+            let key = answer_count.id.unwrap_or_default();
+            if let Some((_text, count)) = answers.get_mut(&key) {
+                *count = answer_count.count.unwrap_or_default();
             }
         }
     }

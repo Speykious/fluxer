@@ -588,7 +588,7 @@ pub fn poll_from_value(value: &Value) -> Poll {
         answers: value
             .get("answers")
             .and_then(Value::as_array)
-            .map(|answers| answers.into_iter().map(poll_answer_from_value).collect()),
+            .map(|answers| answers.iter().map(poll_answer_from_value).collect()),
         expiry: value
             .get("expiry")
             .and_then(Value::as_str)
@@ -641,8 +641,7 @@ fn poll_results_from_value(value: &Value) -> PollResults {
             .get("answer_counts")
             .and_then(Value::as_array)
             .map(|answer_counts| {
-                answer_counts
-                    .into_iter()
+                (answer_counts.iter())
                     .map(poll_answer_count_from_value)
                     .collect()
             }),
