@@ -13516,13 +13516,51 @@
 					"question": {
 						"description": "The question of the poll",
 						"nullable": true,
-						"allOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}]
+						"type": "object",
+						"properties": {
+							"emoji": {
+								"description": "The emoji of the poll media",
+								"nullable": true,
+								"type": "object",
+								"properties": {
+									"id": {"description": "The ID of the emoji", "nullable": true, "type": "string"},
+									"name": {"description": "The name of the emoji", "nullable": true, "type": "string"}
+								}
+							},
+							"text": {"description": "The text of the poll media", "nullable": true, "type": "string"}
+						}
 					},
 					"answers": {
 						"description": "The possible answers of the poll",
 						"nullable": true,
 						"type": "array",
-						"items": {"$ref": "#/components/schemas/MessagePollAnswerSchema"}
+						"items": {
+							"type": "object",
+							"properties": {
+								"answer_id": {
+									"description": "The ID of the poll answer (starts at 1)",
+									"nullable": true,
+									"type": "number"
+								},
+								"poll_media": {
+									"description": "The poll media of the answer (contains the text and emoji)",
+									"nullable": true,
+									"type": "object",
+									"properties": {
+										"emoji": {
+											"description": "The emoji of the poll media",
+											"nullable": true,
+											"type": "object",
+											"properties": {
+												"id": {"description": "The ID of the emoji", "nullable": true, "type": "string"},
+												"name": {"description": "The name of the emoji", "nullable": true, "type": "string"}
+											}
+										},
+										"text": {"description": "The text of the poll media", "nullable": true, "type": "string"}
+									}
+								}
+							}
+						}
 					},
 					"expiry": {
 						"description": "Expiration date of the poll as an ISO date",
@@ -13539,60 +13577,31 @@
 					"results": {
 						"description": "The results of the poll",
 						"nullable": true,
-						"allOf": [{"$ref": "#/components/schemas/MessagePollResultsSchema"}]
-					}
-				}
-			},
-			"MessagePollMediaSchema": {
-				"type": "object",
-				"properties": {
-					"emoji": {
-						"description": "The emoji of the poll media",
-						"nullable": true,
-						"allOf": [{"$ref": "#/components/schemas/MessagePollEmojiSchema"}]
-					},
-					"text": {"description": "The text of the poll media", "nullable": true, "type": "string"}
-				}
-			},
-			"MessagePollEmojiSchema": {
-				"type": "object",
-				"properties": {
-					"id": {"description": "The ID of the emoji", "nullable": true, "type": "string"},
-					"name": {"description": "The name of the emoji", "nullable": true, "type": "string"}
-				}
-			},
-			"MessagePollAnswerSchema": {
-				"type": "object",
-				"properties": {
-					"answer_id": {"description": "The ID of the poll answer (starts at 1)", "nullable": true, "type": "number"},
-					"poll_media": {
-						"description": "The poll media of the answer (contains the text and emoji)",
-						"nullable": true,
-						"allOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}]
-					}
-				}
-			},
-			"MessagePollResultsSchema": {
-				"type": "object",
-				"properties": {
-					"answer_counts": {
-						"description": "The answer counts of the poll results",
-						"nullable": true,
-						"type": "array",
-						"items": {"$ref": "#/components/schemas/MessagePollAnswerCountSchema"}
-					},
-					"is_finalized": {"description": "Whether the poll results are finalized", "nullable": true, "type": "boolean"}
-				}
-			},
-			"MessagePollAnswerCountSchema": {
-				"type": "object",
-				"properties": {
-					"id": {"description": "The ID of the poll answer", "nullable": true, "type": "number"},
-					"count": {"description": "The number of votes on this answer", "nullable": true, "type": "number"},
-					"me_voted": {
-						"description": "Whether the requesting user voted on this answer",
-						"nullable": true,
-						"type": "boolean"
+						"type": "object",
+						"properties": {
+							"answer_counts": {
+								"description": "The answer counts of the poll results",
+								"nullable": true,
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {"description": "The ID of the poll answer", "nullable": true, "type": "number"},
+										"count": {"description": "The number of votes on this answer", "nullable": true, "type": "number"},
+										"me_voted": {
+											"description": "Whether the requesting user voted on this answer",
+											"nullable": true,
+											"type": "boolean"
+										}
+									}
+								}
+							},
+							"is_finalized": {
+								"description": "Whether the poll results are finalized",
+								"nullable": true,
+								"type": "boolean"
+							}
+						}
 					}
 				}
 			},

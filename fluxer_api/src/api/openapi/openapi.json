@@ -27460,12 +27460,81 @@
 				"type": "object",
 				"properties": {
 					"question": {
-						"anyOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}, {"type": "null"}],
+						"anyOf": [
+							{
+								"type": "object",
+								"properties": {
+									"emoji": {
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"id": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The ID of the emoji"},
+													"name": {
+														"anyOf": [{"type": "string"}, {"type": "null"}],
+														"description": "The name of the emoji"
+													}
+												}
+											},
+											{"type": "null"}
+										],
+										"description": "The emoji of the poll media"
+									},
+									"text": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The text of the poll media"}
+								}
+							},
+							{"type": "null"}
+						],
 						"description": "The question of the poll"
 					},
 					"answers": {
 						"anyOf": [
-							{"type": "array", "items": {"$ref": "#/components/schemas/MessagePollAnswerSchema"}},
+							{
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"answer_id": {
+											"anyOf": [{"type": "number"}, {"type": "null"}],
+											"description": "The ID of the poll answer (starts at 1)"
+										},
+										"poll_media": {
+											"anyOf": [
+												{
+													"type": "object",
+													"properties": {
+														"emoji": {
+															"anyOf": [
+																{
+																	"type": "object",
+																	"properties": {
+																		"id": {
+																			"anyOf": [{"type": "string"}, {"type": "null"}],
+																			"description": "The ID of the emoji"
+																		},
+																		"name": {
+																			"anyOf": [{"type": "string"}, {"type": "null"}],
+																			"description": "The name of the emoji"
+																		}
+																	}
+																},
+																{"type": "null"}
+															],
+															"description": "The emoji of the poll media"
+														},
+														"text": {
+															"anyOf": [{"type": "string"}, {"type": "null"}],
+															"description": "The text of the poll media"
+														}
+													}
+												},
+												{"type": "null"}
+											],
+											"description": "The poll media of the answer (contains the text and emoji)"
+										}
+									}
+								}
+							},
 							{"type": "null"}
 						],
 						"description": "The possible answers of the poll"
@@ -27483,68 +27552,45 @@
 						"description": "The layout type of the poll"
 					},
 					"results": {
-						"anyOf": [{"$ref": "#/components/schemas/MessagePollResultsSchema"}, {"type": "null"}],
-						"description": "The results of the poll"
-					}
-				}
-			},
-			"MessagePollMediaSchema": {
-				"type": "object",
-				"properties": {
-					"emoji": {
-						"anyOf": [{"$ref": "#/components/schemas/MessagePollEmojiSchema"}, {"type": "null"}],
-						"description": "The emoji of the poll media"
-					},
-					"text": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The text of the poll media"}
-				}
-			},
-			"MessagePollEmojiSchema": {
-				"type": "object",
-				"properties": {
-					"id": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The ID of the emoji"},
-					"name": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The name of the emoji"}
-				}
-			},
-			"MessagePollAnswerSchema": {
-				"type": "object",
-				"properties": {
-					"answer_id": {
-						"anyOf": [{"type": "number"}, {"type": "null"}],
-						"description": "The ID of the poll answer (starts at 1)"
-					},
-					"poll_media": {
-						"anyOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}, {"type": "null"}],
-						"description": "The poll media of the answer (contains the text and emoji)"
-					}
-				}
-			},
-			"MessagePollResultsSchema": {
-				"type": "object",
-				"properties": {
-					"answer_counts": {
 						"anyOf": [
-							{"type": "array", "items": {"$ref": "#/components/schemas/MessagePollAnswerCountSchema"}},
+							{
+								"type": "object",
+								"properties": {
+									"answer_counts": {
+										"anyOf": [
+											{
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"id": {
+															"anyOf": [{"type": "number"}, {"type": "null"}],
+															"description": "The ID of the poll answer"
+														},
+														"count": {
+															"anyOf": [{"type": "number"}, {"type": "null"}],
+															"description": "The number of votes on this answer"
+														},
+														"me_voted": {
+															"anyOf": [{"type": "boolean"}, {"type": "null"}],
+															"description": "Whether the requesting user voted on this answer"
+														}
+													}
+												}
+											},
+											{"type": "null"}
+										],
+										"description": "The answer counts of the poll results"
+									},
+									"is_finalized": {
+										"anyOf": [{"type": "boolean"}, {"type": "null"}],
+										"description": "Whether the poll results are finalized"
+									}
+								}
+							},
 							{"type": "null"}
 						],
-						"description": "The answer counts of the poll results"
-					},
-					"is_finalized": {
-						"anyOf": [{"type": "boolean"}, {"type": "null"}],
-						"description": "Whether the poll results are finalized"
-					}
-				}
-			},
-			"MessagePollAnswerCountSchema": {
-				"type": "object",
-				"properties": {
-					"id": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "The ID of the poll answer"},
-					"count": {
-						"anyOf": [{"type": "number"}, {"type": "null"}],
-						"description": "The number of votes on this answer"
-					},
-					"me_voted": {
-						"anyOf": [{"type": "boolean"}, {"type": "null"}],
-						"description": "Whether the requesting user voted on this answer"
+						"description": "The results of the poll"
 					}
 				}
 			},
@@ -29040,12 +29086,81 @@
 				"type": "object",
 				"properties": {
 					"question": {
-						"anyOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}, {"type": "null"}],
+						"anyOf": [
+							{
+								"type": "object",
+								"properties": {
+									"emoji": {
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"id": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The ID of the emoji"},
+													"name": {
+														"anyOf": [{"type": "string"}, {"type": "null"}],
+														"description": "The name of the emoji"
+													}
+												}
+											},
+											{"type": "null"}
+										],
+										"description": "The emoji of the poll media"
+									},
+									"text": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The text of the poll media"}
+								}
+							},
+							{"type": "null"}
+						],
 						"description": "The question of the poll"
 					},
 					"answers": {
 						"anyOf": [
-							{"type": "array", "items": {"$ref": "#/components/schemas/MessagePollAnswerSchema"}},
+							{
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"answer_id": {
+											"anyOf": [{"type": "number"}, {"type": "null"}],
+											"description": "The ID of the poll answer (starts at 1)"
+										},
+										"poll_media": {
+											"anyOf": [
+												{
+													"type": "object",
+													"properties": {
+														"emoji": {
+															"anyOf": [
+																{
+																	"type": "object",
+																	"properties": {
+																		"id": {
+																			"anyOf": [{"type": "string"}, {"type": "null"}],
+																			"description": "The ID of the emoji"
+																		},
+																		"name": {
+																			"anyOf": [{"type": "string"}, {"type": "null"}],
+																			"description": "The name of the emoji"
+																		}
+																	}
+																},
+																{"type": "null"}
+															],
+															"description": "The emoji of the poll media"
+														},
+														"text": {
+															"anyOf": [{"type": "string"}, {"type": "null"}],
+															"description": "The text of the poll media"
+														}
+													}
+												},
+												{"type": "null"}
+											],
+											"description": "The poll media of the answer (contains the text and emoji)"
+										}
+									}
+								}
+							},
 							{"type": "null"}
 						],
 						"description": "The possible answers of the poll"
