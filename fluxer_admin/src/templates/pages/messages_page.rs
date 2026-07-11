@@ -637,12 +637,15 @@ fn poll_answer_from_value(value: &Value) -> PollAnswer {
 
 fn poll_results_from_value(value: &Value) -> PollResults {
     PollResults {
-        answer_counts: value.get("answer_counts").and_then(Value::as_array).map(|answer_counts| {
-            answer_counts
-                .into_iter()
-                .map(poll_answer_count_from_value)
-                .collect()
-        }),
+        answer_counts: value
+            .get("answer_counts")
+            .and_then(Value::as_array)
+            .map(|answer_counts| {
+                answer_counts
+                    .into_iter()
+                    .map(poll_answer_count_from_value)
+                    .collect()
+            }),
         is_finalized: value.get("is_finalized").and_then(Value::as_bool),
     }
 }
