@@ -9773,6 +9773,8 @@
 					"CANNOT_EDIT_OTHER_USER_MESSAGE",
 					"CANNOT_EXECUTE_ON_DM",
 					"CANNOT_BLOCK_SYSTEM_USER",
+					"CANNOT_FORWARD_POLL",
+					"CANNOT_MODIFY_POLL",
 					"CANNOT_MODIFY_SYSTEM_WEBHOOK",
 					"CANNOT_MODIFY_VOICE_STATE",
 					"CANNOT_REDEEM_PLUTONIUM_WITH_VISIONARY",
@@ -9780,12 +9782,16 @@
 					"CANNOT_REPORT_OWN_GUILD",
 					"CANNOT_REPORT_OWN_MESSAGE",
 					"CANNOT_REPORT_YOURSELF",
+					"CANNOT_SELECT_MULTIPLE_ANSWERS",
 					"CANNOT_SEND_EMPTY_MESSAGE",
 					"CANNOT_SEND_FRIEND_REQUEST_TO_BLOCKED_USER",
 					"CANNOT_SEND_FRIEND_REQUEST_TO_SELF",
 					"CANNOT_SEND_MESSAGES_IN_NON_TEXT_CHANNEL",
 					"CANNOT_SEND_MESSAGES_TO_USER",
+					"CANNOT_SEND_POLL_IN_PERSONAL_NOTES",
 					"CANNOT_TRANSFER_OWNERSHIP_TO_BOT",
+					"CANNOT_VOTE_ON_FINALIZED_POLL_ERROR",
+					"CANNOT_VOTE_ON_NON_POLL_ERROR",
 					"CANNOT_SHRINK_RESERVED_SLOTS",
 					"CAPTCHA_REQUIRED",
 					"CHANNEL_INDEXING",
@@ -9819,6 +9825,7 @@
 					"GUILD_CREATION_EMAIL_VERIFICATION_REQUIRED",
 					"GUILD_EMAIL_VERIFICATION_REQUIRED",
 					"MFA_EMAIL_VERIFICATION_REQUIRED",
+					"POLL_VOTE_EMAIL_VERIFICATION_REQUIRED",
 					"PROFILE_EMAIL_VERIFICATION_REQUIRED",
 					"PURCHASE_EMAIL_VERIFICATION_REQUIRED",
 					"REACTION_EMAIL_VERIFICATION_REQUIRED",
@@ -9921,6 +9928,7 @@
 					"MESSAGE_TOTAL_ATTACHMENT_SIZE_TOO_LARGE",
 					"MAX_REACTIONS",
 					"MAX_STICKERS",
+					"MAX_POLL_VOTES",
 					"MAX_WEBHOOKS_PER_CHANNEL",
 					"MAX_WEBHOOKS_PER_GUILD",
 					"MAX_WEBHOOKS",
@@ -10031,6 +10039,7 @@
 					"UNKNOWN_MEMBER",
 					"UNKNOWN_MESSAGE",
 					"UNKNOWN_PACK",
+					"UNKNOWN_POLL_ANSWER",
 					"UNKNOWN_REPORT",
 					"UNKNOWN_ROLE",
 					"UNKNOWN_STICKER",
@@ -13416,20 +13425,6 @@
 				},
 				"required": ["messages", "has_more"]
 			},
-			"PollMedia": {
-				"type": "object",
-				"properties": {
-					"emoji": {
-						"type": "object",
-						"nullable": true,
-						"properties": {
-							"id": {"nullable": true, "type": "string"},
-							"name": {"nullable": true, "type": "string"}
-						}
-					},
-					"text": {"nullable": true, "type": "string"}
-				}
-			},
 			"AdminMessageSchema": {
 				"type": "object",
 				"properties": {
@@ -13458,44 +13453,6 @@
 					"author_avatar": {"nullable": true, "type": "string"},
 					"content": {"type": "string"},
 					"timestamp": {"type": "string"},
-					"poll": {
-						"type": "object",
-						"properties": {
-							"question": {"$ref": "#/components/schemas/PollMedia"},
-							"answers": {
-								"type": "array",
-								"nullable": true,
-								"items": {
-									"type": "object",
-									"properties": {
-										"answer_id": {"nullable": true, "type": "integer"},
-										"poll_media": {"$ref": "#/components/schemas/PollMedia"}
-									}
-								}
-							},
-							"expiry": {"nullable": true, "type": "string"},
-							"allow_multiselect": {"nullable": true, "type": "boolean"},
-							"layout_type": {"nullable": true, "type": "integer"},
-							"results": {
-								"type": "object",
-								"nullable": true,
-								"properties": {
-									"answer_counts": {
-										"type": "array",
-										"nullable": true,
-										"items": {
-											"type": "object",
-											"properties": {
-												"id": {"nullable": true, "type": "integer"},
-												"count": {"nullable": true, "type": "integer"}
-											}
-										}
-									},
-									"is_finalized": {"nullable": true, "type": "boolean"}
-								}
-							}
-						}
-					},
 					"attachments": {
 						"type": "array",
 						"items": {
@@ -13532,6 +13489,7 @@
 						},
 						"maxItems": 10
 					},
+					"poll": {"$ref": "#/components/schemas/MessagePollResponse"},
 					"user_prior_ncmec_report_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 100}
 				},
 				"required": [
@@ -13551,6 +13509,92 @@
 					"timestamp",
 					"attachments"
 				]
+			},
+			"MessagePollResponse": {
+				"type": "object",
+				"properties": {
+					"question": {
+						"description": "The question of the poll",
+						"nullable": true,
+						"allOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}]
+					},
+					"answers": {
+						"description": "The possible answers of the poll",
+						"nullable": true,
+						"type": "array",
+						"items": {"$ref": "#/components/schemas/MessagePollAnswerSchema"}
+					},
+					"expiry": {
+						"description": "Expiration date of the poll as an ISO date",
+						"nullable": true,
+						"type": "string",
+						"format": "date-time"
+					},
+					"allow_multiselect": {
+						"description": "Whether the poll allows multiple answers",
+						"nullable": true,
+						"type": "boolean"
+					},
+					"layout_type": {"description": "The layout type of the poll", "nullable": true, "type": "number"},
+					"results": {
+						"description": "The results of the poll",
+						"nullable": true,
+						"allOf": [{"$ref": "#/components/schemas/MessagePollResultsSchema"}]
+					}
+				}
+			},
+			"MessagePollMediaSchema": {
+				"type": "object",
+				"properties": {
+					"emoji": {
+						"description": "The emoji of the poll media",
+						"nullable": true,
+						"allOf": [{"$ref": "#/components/schemas/MessagePollEmojiSchema"}]
+					},
+					"text": {"description": "The text of the poll media", "nullable": true, "type": "string"}
+				}
+			},
+			"MessagePollEmojiSchema": {
+				"type": "object",
+				"properties": {
+					"id": {"description": "The ID of the emoji", "nullable": true, "type": "string"},
+					"name": {"description": "The name of the emoji", "nullable": true, "type": "string"}
+				}
+			},
+			"MessagePollAnswerSchema": {
+				"type": "object",
+				"properties": {
+					"answer_id": {"description": "The ID of the poll answer (starts at 1)", "nullable": true, "type": "number"},
+					"poll_media": {
+						"description": "The poll media of the answer (contains the text and emoji)",
+						"nullable": true,
+						"allOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}]
+					}
+				}
+			},
+			"MessagePollResultsSchema": {
+				"type": "object",
+				"properties": {
+					"answer_counts": {
+						"description": "The answer counts of the poll results",
+						"nullable": true,
+						"type": "array",
+						"items": {"$ref": "#/components/schemas/MessagePollAnswerCountSchema"}
+					},
+					"is_finalized": {"description": "Whether the poll results are finalized", "nullable": true, "type": "boolean"}
+				}
+			},
+			"MessagePollAnswerCountSchema": {
+				"type": "object",
+				"properties": {
+					"id": {"description": "The ID of the poll answer", "nullable": true, "type": "number"},
+					"count": {"description": "The number of votes on this answer", "nullable": true, "type": "number"},
+					"me_voted": {
+						"description": "Whether the requesting user voted on this answer",
+						"nullable": true,
+						"type": "boolean"
+					}
+				}
 			},
 			"MessageResponseSchema": {
 				"type": "object",
@@ -13574,7 +13618,7 @@
 					"type": {
 						"type": "integer",
 						"format": "int32",
-						"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+						"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 						"description": "The type of message"
 					},
 					"flags": {"$ref": "#/components/schemas/MessageFlags"},
@@ -13620,6 +13664,11 @@
 						"nullable": true,
 						"type": "array",
 						"items": {"$ref": "#/components/schemas/MessageEmbedResponse"}
+					},
+					"poll": {
+						"description": "The poll attached to the message",
+						"nullable": true,
+						"allOf": [{"$ref": "#/components/schemas/MessagePollResponse"}]
 					},
 					"attachments": {
 						"description": "The files attached to the message",
@@ -13722,7 +13771,7 @@
 							"type": {
 								"type": "integer",
 								"format": "int32",
-								"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+								"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 								"description": "The type of message"
 							},
 							"flags": {"$ref": "#/components/schemas/MessageFlags"},
@@ -13768,6 +13817,11 @@
 								"nullable": true,
 								"type": "array",
 								"items": {"$ref": "#/components/schemas/MessageEmbedResponse"}
+							},
+							"poll": {
+								"description": "The poll attached to the message",
+								"nullable": true,
+								"allOf": [{"$ref": "#/components/schemas/MessagePollResponse"}]
 							},
 							"attachments": {
 								"description": "The files attached to the message",
@@ -14331,7 +14385,7 @@
 					"type": {
 						"type": "integer",
 						"format": "int32",
-						"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+						"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 						"description": "The type of message"
 					},
 					"flags": {"$ref": "#/components/schemas/MessageFlags"}

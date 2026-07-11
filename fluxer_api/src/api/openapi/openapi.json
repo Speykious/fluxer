@@ -5059,6 +5059,273 @@
 				]
 			}
 		},
+		"/channels/{channel_id}/polls/{message_id}/answers/@me": {
+			"put": {
+				"operationId": "vote",
+				"summary": "Vote on the poll",
+				"tags": ["Channels", "Messages"],
+				"responses": {
+					"204": {"description": "No Content"},
+					"400": {
+						"description": "Bad Request - The request was malformed or contained invalid data",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"401": {
+						"description": "Unauthorized - Authentication is required or the token is invalid",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"403": {
+						"description": "Forbidden - You do not have permission to perform this action",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"429": {
+						"description": "Too Many Requests - You are being rate limited",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": {"type": "string", "enum": ["RATE_LIMITED"]},
+										"message": {"type": "string"},
+										"retry_after": {"type": "number", "description": "Seconds to wait before retrying"},
+										"global": {"type": "boolean", "description": "Whether this is a global rate limit"}
+									},
+									"required": ["code", "message", "retry_after"]
+								}
+							}
+						},
+						"headers": {
+							"Retry-After": {
+								"description": "Number of seconds to wait before retrying (only on 429)",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Limit": {
+								"description": "The number of requests that can be made in the current window",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Remaining": {
+								"description": "The number of remaining requests that can be made",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Reset": {
+								"description": "Unix timestamp when the rate limit resets",
+								"schema": {"type": "integer"}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error - An unexpected error occurred",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					}
+				},
+				"x-mint": {"metadata": {"title": "Vote on the poll"}},
+				"description": "Vote on the poll.",
+				"security": [{"botToken": []}, {"sessionToken": []}],
+				"parameters": [
+					{
+						"name": "channel_id",
+						"in": "path",
+						"required": true,
+						"schema": {"$ref": "#/components/schemas/SnowflakeType"},
+						"description": "The ID of the channel"
+					},
+					{
+						"name": "message_id",
+						"in": "path",
+						"required": true,
+						"schema": {"$ref": "#/components/schemas/SnowflakeType"},
+						"description": "The ID of the message"
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {"application/json": {"schema": {"$ref": "#/components/schemas/PollVoteRequestSchema"}}}
+				}
+			}
+		},
+		"/channels/{channel_id}/polls/{message_id}/answers/{answer_id}": {
+			"get": {
+				"operationId": "get_answer_voters",
+				"summary": "Get answer voters",
+				"tags": ["Channels", "Messages"],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/PollAnswerVotersResponse"}}}
+					},
+					"400": {
+						"description": "Bad Request - The request was malformed or contained invalid data",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"401": {
+						"description": "Unauthorized - Authentication is required or the token is invalid",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"403": {
+						"description": "Forbidden - You do not have permission to perform this action",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"429": {
+						"description": "Too Many Requests - You are being rate limited",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": {"type": "string", "enum": ["RATE_LIMITED"]},
+										"message": {"type": "string"},
+										"retry_after": {"type": "number", "description": "Seconds to wait before retrying"},
+										"global": {"type": "boolean", "description": "Whether this is a global rate limit"}
+									},
+									"required": ["code", "message", "retry_after"]
+								}
+							}
+						},
+						"headers": {
+							"Retry-After": {
+								"description": "Number of seconds to wait before retrying (only on 429)",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Limit": {
+								"description": "The number of requests that can be made in the current window",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Remaining": {
+								"description": "The number of remaining requests that can be made",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Reset": {
+								"description": "Unix timestamp when the rate limit resets",
+								"schema": {"type": "integer"}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error - An unexpected error occurred",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					}
+				},
+				"x-mint": {"metadata": {"title": "Get answer voters"}},
+				"description": "Get a list of users that voted for this specific answer.",
+				"security": [{"botToken": []}, {"sessionToken": []}],
+				"parameters": [
+					{
+						"name": "channel_id",
+						"in": "path",
+						"required": true,
+						"schema": {"$ref": "#/components/schemas/SnowflakeType"},
+						"description": "The ID of the channel"
+					},
+					{
+						"name": "message_id",
+						"in": "path",
+						"required": true,
+						"schema": {"$ref": "#/components/schemas/SnowflakeType"},
+						"description": "The ID of the message"
+					},
+					{
+						"name": "answer_id",
+						"in": "path",
+						"required": true,
+						"schema": {"type": "string"},
+						"description": "The answer id"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"minimum": 1,
+							"maximum": 100,
+							"format": "int32",
+							"description": "Maximum number of users to return (1-100)"
+						}
+					},
+					{"name": "after", "in": "query", "required": false, "schema": {"$ref": "#/components/schemas/SnowflakeType"}}
+				]
+			}
+		},
+		"/channels/{channel_id}/polls/{message_id}/expire": {
+			"post": {
+				"operationId": "end_poll",
+				"summary": "End poll immediately",
+				"tags": ["Channels", "Messages"],
+				"responses": {
+					"204": {"description": "No Content"},
+					"400": {
+						"description": "Bad Request - The request was malformed or contained invalid data",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"401": {
+						"description": "Unauthorized - Authentication is required or the token is invalid",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"403": {
+						"description": "Forbidden - You do not have permission to perform this action",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"429": {
+						"description": "Too Many Requests - You are being rate limited",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": {"type": "string", "enum": ["RATE_LIMITED"]},
+										"message": {"type": "string"},
+										"retry_after": {"type": "number", "description": "Seconds to wait before retrying"},
+										"global": {"type": "boolean", "description": "Whether this is a global rate limit"}
+									},
+									"required": ["code", "message", "retry_after"]
+								}
+							}
+						},
+						"headers": {
+							"Retry-After": {
+								"description": "Number of seconds to wait before retrying (only on 429)",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Limit": {
+								"description": "The number of requests that can be made in the current window",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Remaining": {
+								"description": "The number of remaining requests that can be made",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Reset": {
+								"description": "Unix timestamp when the rate limit resets",
+								"schema": {"type": "integer"}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error - An unexpected error occurred",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					}
+				},
+				"x-mint": {"metadata": {"title": "End poll immediately"}},
+				"description": "End the poll immediately. You cannot end polls from other users.",
+				"security": [{"botToken": []}, {"sessionToken": []}],
+				"parameters": [
+					{
+						"name": "channel_id",
+						"in": "path",
+						"required": true,
+						"schema": {"$ref": "#/components/schemas/SnowflakeType"},
+						"description": "The ID of the channel"
+					},
+					{
+						"name": "message_id",
+						"in": "path",
+						"required": true,
+						"schema": {"$ref": "#/components/schemas/SnowflakeType"},
+						"description": "The ID of the message"
+					}
+				]
+			}
+		},
 		"/channels/{channel_id}/recipients/{user_id}": {
 			"put": {
 				"operationId": "add_group_dm_recipient",
@@ -25166,6 +25433,8 @@
 					"CANNOT_EDIT_OTHER_USER_MESSAGE",
 					"CANNOT_EXECUTE_ON_DM",
 					"CANNOT_BLOCK_SYSTEM_USER",
+					"CANNOT_FORWARD_POLL",
+					"CANNOT_MODIFY_POLL",
 					"CANNOT_MODIFY_SYSTEM_WEBHOOK",
 					"CANNOT_MODIFY_VOICE_STATE",
 					"CANNOT_REDEEM_PLUTONIUM_WITH_VISIONARY",
@@ -25173,12 +25442,16 @@
 					"CANNOT_REPORT_OWN_GUILD",
 					"CANNOT_REPORT_OWN_MESSAGE",
 					"CANNOT_REPORT_YOURSELF",
+					"CANNOT_SELECT_MULTIPLE_ANSWERS",
 					"CANNOT_SEND_EMPTY_MESSAGE",
 					"CANNOT_SEND_FRIEND_REQUEST_TO_BLOCKED_USER",
 					"CANNOT_SEND_FRIEND_REQUEST_TO_SELF",
 					"CANNOT_SEND_MESSAGES_IN_NON_TEXT_CHANNEL",
 					"CANNOT_SEND_MESSAGES_TO_USER",
+					"CANNOT_SEND_POLL_IN_PERSONAL_NOTES",
 					"CANNOT_TRANSFER_OWNERSHIP_TO_BOT",
+					"CANNOT_VOTE_ON_FINALIZED_POLL_ERROR",
+					"CANNOT_VOTE_ON_NON_POLL_ERROR",
 					"CANNOT_SHRINK_RESERVED_SLOTS",
 					"CAPTCHA_REQUIRED",
 					"CHANNEL_INDEXING",
@@ -25212,6 +25485,7 @@
 					"GUILD_CREATION_EMAIL_VERIFICATION_REQUIRED",
 					"GUILD_EMAIL_VERIFICATION_REQUIRED",
 					"MFA_EMAIL_VERIFICATION_REQUIRED",
+					"POLL_VOTE_EMAIL_VERIFICATION_REQUIRED",
 					"PROFILE_EMAIL_VERIFICATION_REQUIRED",
 					"PURCHASE_EMAIL_VERIFICATION_REQUIRED",
 					"REACTION_EMAIL_VERIFICATION_REQUIRED",
@@ -25314,6 +25588,7 @@
 					"MESSAGE_TOTAL_ATTACHMENT_SIZE_TOO_LARGE",
 					"MAX_REACTIONS",
 					"MAX_STICKERS",
+					"MAX_POLL_VOTES",
 					"MAX_WEBHOOKS_PER_CHANNEL",
 					"MAX_WEBHOOKS_PER_GUILD",
 					"MAX_WEBHOOKS",
@@ -25424,6 +25699,7 @@
 					"UNKNOWN_MEMBER",
 					"UNKNOWN_MESSAGE",
 					"UNKNOWN_PACK",
+					"UNKNOWN_POLL_ANSWER",
 					"UNKNOWN_REPORT",
 					"UNKNOWN_ROLE",
 					"UNKNOWN_STICKER",
@@ -25483,6 +25759,8 @@
 					"You can't edit another user's message.",
 					"This action can't be performed in a DM.",
 					"You can't block the system user.",
+					"You can't forward a message containing a poll.",
+					"You can't edit a message containing a poll.",
 					"You can't edit system messages.",
 					"You can't modify voice state.",
 					"You can't redeem {premium_tier_name} with Visionary.",
@@ -25490,12 +25768,16 @@
 					"You can't report your own community.",
 					"You can't report your own message.",
 					"You can't report yourself.",
+					"You can't select multiple answers on this poll.",
 					"You can't send an empty message.",
 					"You can't send a friend request to a blocked user.",
 					"You can't send a friend request to yourself.",
 					"You can't send messages in a non-text channel.",
 					"You can't send messages to this user.",
+					"You can't send a poll in your personal notes.",
 					"Community ownership can't be transferred to a bot.",
+					"You cannot vote on a poll that has already ended.",
+					"You cannot vote on a message that doesn't contain a poll.",
 					"You can't shrink reserved slots.",
 					"Captcha is required.",
 					"Channels are being indexed. Please try again in a moment.",
@@ -25522,6 +25804,7 @@
 					"This community isn't listed in discovery.",
 					"Discriminator is required.",
 					"Email service is temporarily unavailable. Please try again later.",
+					"Email verification is required for this action.",
 					"Email verification is required for this action.",
 					"Email verification is required for this action.",
 					"Email verification is required for this action.",
@@ -25631,6 +25914,7 @@
 					"File size is too large. Maximum file size is {maxSize}.",
 					"You've reached the maximum of {count, plural, one {# reaction} other {# reactions}}.",
 					"You've reached the maximum of {count, plural, one {# sticker} other {# stickers}}.",
+					"You've reached the maximum of {count, plural, one {# vote} other {# votes}} per answer.",
 					"You've reached the maximum of {count, plural, one {# webhook} other {# webhooks}} per channel.",
 					"You've reached the maximum of {count, plural, one {# webhook} other {# webhooks}} per community.",
 					"You've reached the maximum of {count, plural, one {# webhook} other {# webhooks}}.",
@@ -25741,6 +26025,7 @@
 					"Member wasn't found in this community.",
 					"Message wasn't found.",
 					"Pack wasn't found.",
+					"Poll answer wasn't found.",
 					"Unknown report.",
 					"Role wasn't found.",
 					"Unknown sticker.",
@@ -26497,9 +26782,10 @@
 					"type": {
 						"type": "integer",
 						"format": "int32",
-						"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+						"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 						"x-enumNames": [
 							"DEFAULT",
+							"POLL_RESULT",
 							"RECIPIENT_ADD",
 							"RECIPIENT_REMOVE",
 							"CALL",
@@ -26511,6 +26797,7 @@
 						],
 						"x-enumDescriptions": [
 							"A regular message",
+							"A system message indicating a poll has closed",
 							"A system message indicating a user was added to the conversation",
 							"A system message indicating a user was removed from the conversation",
 							"A message representing a call",
@@ -26566,6 +26853,10 @@
 							{"type": "null"}
 						],
 						"description": "The embeds attached to the message"
+					},
+					"poll": {
+						"anyOf": [{"$ref": "#/components/schemas/MessagePollResponse"}, {"type": "null"}],
+						"description": "The poll attached to the message"
 					},
 					"attachments": {
 						"anyOf": [
@@ -26675,9 +26966,10 @@
 									"type": {
 										"type": "integer",
 										"format": "int32",
-										"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+										"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 										"x-enumNames": [
 											"DEFAULT",
+											"POLL_RESULT",
 											"RECIPIENT_ADD",
 											"RECIPIENT_REMOVE",
 											"CALL",
@@ -26689,6 +26981,7 @@
 										],
 										"x-enumDescriptions": [
 											"A regular message",
+											"A system message indicating a poll has closed",
 											"A system message indicating a user was added to the conversation",
 											"A system message indicating a user was removed from the conversation",
 											"A message representing a call",
@@ -26744,6 +27037,10 @@
 											{"type": "null"}
 										],
 										"description": "The embeds attached to the message"
+									},
+									"poll": {
+										"anyOf": [{"$ref": "#/components/schemas/MessagePollResponse"}, {"type": "null"}],
+										"description": "The poll attached to the message"
 									},
 									"attachments": {
 										"anyOf": [
@@ -27159,6 +27456,98 @@
 				},
 				"required": ["type"]
 			},
+			"MessagePollResponse": {
+				"type": "object",
+				"properties": {
+					"question": {
+						"anyOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}, {"type": "null"}],
+						"description": "The question of the poll"
+					},
+					"answers": {
+						"anyOf": [
+							{"type": "array", "items": {"$ref": "#/components/schemas/MessagePollAnswerSchema"}},
+							{"type": "null"}
+						],
+						"description": "The possible answers of the poll"
+					},
+					"expiry": {
+						"anyOf": [{"type": "string", "format": "date-time"}, {"type": "null"}],
+						"description": "Expiration date of the poll as an ISO date"
+					},
+					"allow_multiselect": {
+						"anyOf": [{"type": "boolean"}, {"type": "null"}],
+						"description": "Whether the poll allows multiple answers"
+					},
+					"layout_type": {
+						"anyOf": [{"type": "number"}, {"type": "null"}],
+						"description": "The layout type of the poll"
+					},
+					"results": {
+						"anyOf": [{"$ref": "#/components/schemas/MessagePollResultsSchema"}, {"type": "null"}],
+						"description": "The results of the poll"
+					}
+				}
+			},
+			"MessagePollMediaSchema": {
+				"type": "object",
+				"properties": {
+					"emoji": {
+						"anyOf": [{"$ref": "#/components/schemas/MessagePollEmojiSchema"}, {"type": "null"}],
+						"description": "The emoji of the poll media"
+					},
+					"text": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The text of the poll media"}
+				}
+			},
+			"MessagePollEmojiSchema": {
+				"type": "object",
+				"properties": {
+					"id": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The ID of the emoji"},
+					"name": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "The name of the emoji"}
+				}
+			},
+			"MessagePollAnswerSchema": {
+				"type": "object",
+				"properties": {
+					"answer_id": {
+						"anyOf": [{"type": "number"}, {"type": "null"}],
+						"description": "The ID of the poll answer (starts at 1)"
+					},
+					"poll_media": {
+						"anyOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}, {"type": "null"}],
+						"description": "The poll media of the answer (contains the text and emoji)"
+					}
+				}
+			},
+			"MessagePollResultsSchema": {
+				"type": "object",
+				"properties": {
+					"answer_counts": {
+						"anyOf": [
+							{"type": "array", "items": {"$ref": "#/components/schemas/MessagePollAnswerCountSchema"}},
+							{"type": "null"}
+						],
+						"description": "The answer counts of the poll results"
+					},
+					"is_finalized": {
+						"anyOf": [{"type": "boolean"}, {"type": "null"}],
+						"description": "Whether the poll results are finalized"
+					}
+				}
+			},
+			"MessagePollAnswerCountSchema": {
+				"type": "object",
+				"properties": {
+					"id": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "The ID of the poll answer"},
+					"count": {
+						"anyOf": [{"type": "number"}, {"type": "null"}],
+						"description": "The number of votes on this answer"
+					},
+					"me_voted": {
+						"anyOf": [{"type": "boolean"}, {"type": "null"}],
+						"description": "Whether the requesting user voted on this answer"
+					}
+				}
+			},
 			"MessageAttachmentResponse": {
 				"type": "object",
 				"properties": {
@@ -27358,9 +27747,10 @@
 					"type": {
 						"type": "integer",
 						"format": "int32",
-						"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+						"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 						"x-enumNames": [
 							"DEFAULT",
+							"POLL_RESULT",
 							"RECIPIENT_ADD",
 							"RECIPIENT_REMOVE",
 							"CALL",
@@ -27372,6 +27762,7 @@
 						],
 						"x-enumDescriptions": [
 							"A regular message",
+							"A system message indicating a poll has closed",
 							"A system message indicating a user was added to the conversation",
 							"A system message indicating a user was removed from the conversation",
 							"A message representing a call",
@@ -28496,6 +28887,7 @@
 						"items": {"$ref": "#/components/schemas/RichEmbedRequest"},
 						"description": "Array of embed objects to include in the message"
 					},
+					"poll": {"anyOf": [{"$ref": "#/components/schemas/MessagePollRequest"}, {"type": "null"}]},
 					"attachments": {
 						"type": "array",
 						"items": {
@@ -28537,6 +28929,7 @@
 			"RichEmbedRequest": {
 				"type": "object",
 				"properties": {
+					"type": {"type": "string", "description": "Type of the embed"},
 					"url": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "URL of the embed"},
 					"title": {
 						"anyOf": [{"type": "string"}, {"type": "null"}],
@@ -28642,6 +29035,28 @@
 					},
 					{"type": "null"}
 				]
+			},
+			"MessagePollRequest": {
+				"type": "object",
+				"properties": {
+					"question": {
+						"anyOf": [{"$ref": "#/components/schemas/MessagePollMediaSchema"}, {"type": "null"}],
+						"description": "The question of the poll"
+					},
+					"answers": {
+						"anyOf": [
+							{"type": "array", "items": {"$ref": "#/components/schemas/MessagePollAnswerSchema"}},
+							{"type": "null"}
+						],
+						"description": "The possible answers of the poll"
+					},
+					"duration": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "Duration of the poll in hours"},
+					"allow_multiselect": {
+						"anyOf": [{"type": "boolean"}, {"type": "null"}],
+						"description": "Whether the poll allows multiple answers"
+					},
+					"layout_type": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "The layout type of the poll"}
+				}
 			},
 			"ClientUploadedAttachmentRequest": {
 				"type": "object",
@@ -28812,9 +29227,10 @@
 							"type": {
 								"type": "integer",
 								"format": "int32",
-								"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+								"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 								"x-enumNames": [
 									"DEFAULT",
+									"POLL_RESULT",
 									"RECIPIENT_ADD",
 									"RECIPIENT_REMOVE",
 									"CALL",
@@ -28826,6 +29242,7 @@
 								],
 								"x-enumDescriptions": [
 									"A regular message",
+									"A system message indicating a poll has closed",
 									"A system message indicating a user was added to the conversation",
 									"A system message indicating a user was removed from the conversation",
 									"A message representing a call",
@@ -28881,6 +29298,10 @@
 									{"type": "null"}
 								],
 								"description": "The embeds attached to the message"
+							},
+							"poll": {
+								"anyOf": [{"$ref": "#/components/schemas/MessagePollResponse"}, {"type": "null"}],
+								"description": "The poll attached to the message"
 							},
 							"attachments": {
 								"anyOf": [
@@ -29131,6 +29552,7 @@
 						"items": {"$ref": "#/components/schemas/RichEmbedRequest"},
 						"description": "Array of embed objects to include in the message"
 					},
+					"poll": {"anyOf": [{"$ref": "#/components/schemas/MessagePollRequest"}, {"type": "null"}]},
 					"attachments": {
 						"type": "array",
 						"items": {
@@ -29420,6 +29842,27 @@
 					"deny": {"$ref": "#/components/schemas/UnsignedInt64Type"}
 				},
 				"required": ["type"]
+			},
+			"PollVoteRequestSchema": {
+				"type": "object",
+				"properties": {"answerIds": {"type": "array", "items": {"type": "string"}}},
+				"required": ["answerIds"]
+			},
+			"PollAnswerVotersResponse": {
+				"type": "object",
+				"properties": {
+					"users": {
+						"type": "array",
+						"items": {"$ref": "#/components/schemas/UserPartialResponse"},
+						"description": "Users who reacted with the requested answer"
+					},
+					"has_more": {"type": "boolean", "description": "Whether more reaction users can be fetched"},
+					"next_after": {
+						"anyOf": [{"$ref": "#/components/schemas/SnowflakeType"}, {"type": "null"}],
+						"description": "Cursor for the next page, or null when there are no more users"
+					}
+				},
+				"required": ["users", "has_more", "next_after"]
 			},
 			"RtcRegionResponse": {
 				"type": "object",
@@ -33814,9 +34257,10 @@
 								"type": {
 									"type": "integer",
 									"format": "int32",
-									"enum": [0, 1, 2, 3, 4, 5, 6, 7, 19],
+									"enum": [0, 46, 1, 2, 3, 4, 5, 6, 7, 19],
 									"x-enumNames": [
 										"DEFAULT",
+										"POLL_RESULT",
 										"RECIPIENT_ADD",
 										"RECIPIENT_REMOVE",
 										"CALL",
@@ -33828,6 +34272,7 @@
 									],
 									"x-enumDescriptions": [
 										"A regular message",
+										"A system message indicating a poll has closed",
 										"A system message indicating a user was added to the conversation",
 										"A system message indicating a user was removed from the conversation",
 										"A message representing a call",
@@ -33883,6 +34328,10 @@
 										{"type": "null"}
 									],
 									"description": "The embeds attached to the message"
+								},
+								"poll": {
+									"anyOf": [{"$ref": "#/components/schemas/MessagePollResponse"}, {"type": "null"}],
+									"description": "The poll attached to the message"
 								},
 								"attachments": {
 									"anyOf": [
