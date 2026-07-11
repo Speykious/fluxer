@@ -50,10 +50,6 @@ export const PollAnswerVotersModal = observer(
 			onMissingMessage: () => ModalCommands.pop(),
 		});
 
-		if (!message || !selectedAnswerId) {
-			return null;
-		}
-
 		const handleScroll = useCallback(
 			(event: UIEvent<HTMLDivElement>) => {
 				if (!loadMore || !hasMore || isLoading) {
@@ -83,6 +79,10 @@ export const PollAnswerVotersModal = observer(
 			}
 			return total;
 		}, [votes]);
+
+		if (!message || !selectedAnswerId) {
+			return null;
+		}
 
 		return (
 			<Modal.Root size="medium" centered data-flx="messaging.poll-answer-voters-modal.modal-root">

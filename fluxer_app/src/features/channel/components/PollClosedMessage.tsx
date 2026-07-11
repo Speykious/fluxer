@@ -30,12 +30,12 @@ const VIEW_POLL_DESCRIPTOR = msg({
 });
 
 export const PollClosedMessage = observer(({message}: PollClosedMessage) => {
+	const {i18n} = useLingui();
 	const {author, channel, guild} = useSystemMessageData(message);
 	if (!channel) {
 		return null;
 	}
 
-	const {i18n} = useLingui();
 	const fields = message.embeds[0]?.fields;
 	const question = fields?.find((field) => field.name === 'poll_question_text')?.value ?? '';
 	const victorAnswerVotes = Number(fields?.find((field) => field.name === 'victor_answer_votes')?.value ?? '0');
