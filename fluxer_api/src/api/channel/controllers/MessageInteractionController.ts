@@ -390,11 +390,11 @@ export function MessageInteractionController(app: HonoApp) {
 		async (ctx) => {
 			const {channel_id, message_id} = ctx.req.valid('param');
 			const {answerIds} = ctx.req.valid('json');
-			const userId = ctx.get('user').id;
+			const user = ctx.get('user');
 			const channelId = createChannelID(channel_id);
 			const messageId = createMessageID(message_id);
 			await ctx.get('channelService').messages.poll.vote({
-				userId,
+				user,
 				channelId,
 				messageId,
 				answerIds: answerIds.map((id) => Number(id)),
