@@ -201,7 +201,7 @@ pub struct PollResultsUdt {
 pub struct PollUdt {
     pub question: Option<PollMediaUdt>,
     pub answers: Option<Vec<PollAnswerUdt>>,
-    pub expiry: Option<String>,
+    pub expiry: Option<DateTime<Utc>>,
     pub allow_multiselect: Option<bool>,
     pub layout_type: Option<i32>,
     pub results: Option<PollResultsUdt>,

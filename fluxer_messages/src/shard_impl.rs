@@ -2984,7 +2984,7 @@ fn convert_poll(p: udt::PollUdt) -> MessagePoll {
         answers: p
             .answers
             .map(|v| v.into_iter().map(convert_poll_answer).collect()),
-        expiry: p.expiry,
+        expiry: p.expiry.map(|expiry| expiry.to_rfc3339_opts(chrono::SecondsFormat::Millis, true)),
         allow_multiselect: p.allow_multiselect,
         layout_type: p.layout_type,
         results: p.results.map(convert_poll_results),
