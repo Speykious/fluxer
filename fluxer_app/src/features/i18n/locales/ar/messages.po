@@ -1542,7 +1542,7 @@ msgstr "<0/> بدأ مكالمة استمرت {durationText}."
 msgid "<0/> started a call."
 msgstr "<0/> بدأ مكالمة."
 
-#: src/features/channel/components/PollClosedMessage.tsx:63
+#: src/features/channel/components/PollClosedMessage.tsx:67
 msgid "<0/>'s poll <1/> has closed."
 msgstr "<0/>'s poll <1/> has closed."
 
@@ -18182,7 +18182,7 @@ msgid "It may have left discovery or turned off new joins. Refresh the page and 
 msgstr "ربما غادرت الاستكشاف أو أوقفت الانضمامات الجديدة. حدّث الصفحة ولن تراها مرة أخرى."
 
 #. Small explanatory text informing the user that the poll resulted in a draw.
-#: src/features/channel/components/PollClosedMessage.tsx:23
+#: src/features/channel/components/PollClosedMessage.tsx:27
 msgid "It's a draw"
 msgstr "It's a draw"
 
@@ -22422,6 +22422,11 @@ msgstr "لم يتفاعل أحد بهذا بعد."
 #: src/features/channel/components/guild_members_page/MembersTableEmptyState.tsx:16
 msgid "Nobody matches that search."
 msgstr "لا يوجد أحد يطابق هذا البحث."
+
+#. Small explanatory text informing the user that nobody voted on the poll.
+#: src/features/channel/components/PollClosedMessage.tsx:23
+msgid "Nobody voted!"
+msgstr "Nobody voted!"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:109
@@ -36790,7 +36795,7 @@ msgid "View plans"
 msgstr "عرض الخطط"
 
 #. Title of the button that redirects to the poll message.
-#: src/features/channel/components/PollClosedMessage.tsx:27
+#: src/features/channel/components/PollClosedMessage.tsx:31
 msgid "View poll"
 msgstr "View poll"
 

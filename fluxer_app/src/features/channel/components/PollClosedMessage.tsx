@@ -20,6 +20,10 @@ interface PollClosedMessage {
 	message: Message;
 }
 
+const NOBODY_VOTED_DESCRIPTOR = msg({
+	message: "Nobody voted!",
+	comment: 'Small explanatory text informing the user that nobody voted on the poll.',
+});
 const ITS_A_DRAW_DESCRIPTOR = msg({
 	message: "It's a draw",
 	comment: 'Small explanatory text informing the user that the poll resulted in a draw.',
@@ -86,8 +90,8 @@ export const PollClosedMessage = observer(({message}: PollClosedMessage) => {
 				>
 					<section>
 						<div className={styles.resultDescription} data-flx="channel.poll-closed-message.embed.result-description">
-							{isDraw ? i18n._(ITS_A_DRAW_DESCRIPTOR) : winningAnswer}
-							{isDraw ? undefined : (
+							{totalVotes === 0 ? i18n._(NOBODY_VOTED_DESCRIPTOR) : isDraw ? i18n._(ITS_A_DRAW_DESCRIPTOR) : winningAnswer}
+							{isDraw || totalVotes === 0 ? undefined : (
 								<CheckCircleIcon
 									weight="fill"
 									className={pollStyles.answerMeSuccess}
