@@ -5,12 +5,14 @@ import Emoji from '@app/features/emoji/state/Emoji';
 import UnicodeEmojis from '@app/features/expressions/utils/UnicodeEmojis';
 import type {Guild} from '@app/features/guild/models/Guild';
 import {PollAnswerVotersModal} from '@app/features/messaging/components/modals/poll_modal/PollAnswerVotersModal';
+import Permission from '@app/features/permissions/state/Permission';
 import {Button} from '@app/features/ui/button/Button';
 import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
 import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
 import {modal} from '@app/features/ui/commands/ModalCommands';
 import FocusRing from '@app/features/ui/focus_ring/FocusRing';
 import Users from '@app/features/user/state/Users';
+import {Permissions} from '@fluxer/constants/src/ChannelConstants';
 import type {
 	MessagePoll,
 	MessagePollAnswerCount,
@@ -49,6 +51,11 @@ const SHOW_RESULTS_DESCRIPTOR = msg({
 const THIS_POLL_IS_ANONYMOUS_DESCRIPTOR = msg({
 	message: 'This poll is anonymous.',
 	comment: 'Small disclaimer explaining to the user that this poll is anonymous.',
+});
+const THIS_POLL_IS_ANONYMOUS_BUT_YOU_CAN_SEE_VOTES_DESCRIPTOR = msg({
+	message: 'This poll is anonymous, but you can see votes.',
+	comment:
+		'Small disclaimer explaining to the user that this poll is anonymous, but they can see votes because they have the permission for it.',
 });
 const VERIFY_YOU_EMAIL_ADDRESS_DESCRIPTOR = msg({
 	message: 'You need to verify your email address to vote on a poll.',
@@ -124,6 +131,17 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 
 	const currentUser = Users.getCurrentUser();
 	const isVerified = useMemo(() => currentUser?.verified ?? false, [currentUser]);
+
+	const canManageMessages = Permission.can(Permissions.MANAGE_MESSAGES, {
+		guildId: guild?.id,
+		channelId: channelId,
+	});
+	const canSeeVotesOnAnonymousPolls = Permission.can(Permissions.SEE_VOTES_ON_ANONYMOUS_POLLS, {
+		guildId: guild?.id,
+		channelId: channelId,
+	});
+
+	const canSeeVotes = useMemo(() => !poll.anonymous_voting || canManageMessages || canSeeVotesOnAnonymousPolls, [poll]);
 
 	const answerCounts = poll.results?.answer_counts ?? [];
 	const hasVoted = answerCounts.find((answerCount) => answerCount.me_voted) !== undefined;
@@ -288,9 +306,9 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 										role="button"
 										// biome-ignore lint/a11y/useValidAnchor: Apparently I can't nest a button inside of a button because it's bad for hydration or something
 										onClick={() => {
-											if (!poll.anonymous_voting) openPollAnswerVotersModal(answer.id);
+											if (canSeeVotes) openPollAnswerVotersModal(answer.id);
 										}}
-										aria-disabled={poll.anonymous_voting}
+										aria-disabled={!canSeeVotes}
 										className={styles.answerVotes}
 										data-flx="poll.answer.vote-count"
 									>
@@ -311,7 +329,13 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 			{poll.anonymous_voting && (
 				<section>
 					<p>
-						<small>{i18n._(THIS_POLL_IS_ANONYMOUS_DESCRIPTOR)}</small>
+						<small>
+							{i18n._(
+								canSeeVotes
+									? THIS_POLL_IS_ANONYMOUS_BUT_YOU_CAN_SEE_VOTES_DESCRIPTOR
+									: THIS_POLL_IS_ANONYMOUS_DESCRIPTOR,
+							)}
+						</small>
 					</p>
 				</section>
 			)}
@@ -349,7 +373,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 						<button
 							type="button"
 							onClick={() => openPollAnswerVotersModal(1)}
-							disabled={poll.anonymous_voting}
+							disabled={!canSeeVotes}
 							className={styles.answerVotes}
 							data-flx="poll.footer.vote-count"
 						>

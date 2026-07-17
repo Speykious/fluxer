@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
-#: src/features/channel/components/Poll.tsx:81
+#: src/features/channel/components/Poll.tsx:88
 msgid ", "
 msgstr ", "
 
@@ -59,17 +59,17 @@ msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# medlem} other {# medlemmar}}"
 
 #. placeholder {0}: Math.floor(secondsLeft / 86400)
-#: src/features/channel/components/Poll.tsx:173
+#: src/features/channel/components/Poll.tsx:191
 msgid "{0}d left"
 msgstr "{0}d left"
 
 #. placeholder {0}: Math.round(secondsLeft / 3600)
-#: src/features/channel/components/Poll.tsx:172
+#: src/features/channel/components/Poll.tsx:190
 msgid "{0}h left"
 msgstr "{0}h left"
 
 #. placeholder {0}: Math.round(secondsLeft / 60)
-#: src/features/channel/components/Poll.tsx:171
+#: src/features/channel/components/Poll.tsx:189
 msgid "{0}m left"
 msgstr "{0}m left"
 
@@ -454,7 +454,7 @@ msgid "{count, plural, one {# second} other {# seconds}}"
 msgstr "{count, plural, one {# sekund} other {# sekunder}}"
 
 #. Small text indicating the number of votes on the poll or on a specific answer of the poll.
-#: src/features/channel/components/Poll.tsx:69
+#: src/features/channel/components/Poll.tsx:76
 msgid "{count, plural, one {# vote} other {# votes}}"
 msgstr "{count, plural, one {# vote} other {# votes}}"
 
@@ -1617,7 +1617,7 @@ msgid "<0>URL-only favorites (default)</0>: synced across your devices, no uploa
 msgstr "<0>Endast URL-favoriter (standard)</0>: synkroniseras mellan dina enheter, ingen uppladdning, räknas inte mot sparad media. Originalmediet kan försvinna om dess värd tar bort det."
 
 #. Very short text informing the user that the poll ends in less than one minute.
-#: src/features/channel/components/Poll.tsx:57
+#: src/features/channel/components/Poll.tsx:64
 msgid "<1m left"
 msgstr "<1m left"
 
@@ -15907,7 +15907,7 @@ msgid "Go back and enter a valid email."
 msgstr "Gå tillbaka och ange en giltig e-postadress."
 
 #. Label of the button to go back to vote when the user is looking at poll results.
-#: src/features/channel/components/Poll.tsx:33
+#: src/features/channel/components/Poll.tsx:35
 msgid "Go back to vote"
 msgstr "Go back to vote"
 
@@ -24478,12 +24478,12 @@ msgid "poll"
 msgstr "omröstning"
 
 #. Small text informing the user that the poll is closed.
-#: src/features/channel/components/Poll.tsx:61
+#: src/features/channel/components/Poll.tsx:68
 msgid "Poll closed"
 msgstr "Poll closed"
 
 #. Small text informing the user that the poll message has not been sent yet.
-#: src/features/channel/components/Poll.tsx:65
+#: src/features/channel/components/Poll.tsx:72
 msgid "Poll not sent"
 msgstr "Poll not sent"
 
@@ -26236,7 +26236,7 @@ msgid "Remove translator"
 msgstr "Ta bort översättare"
 
 #. Label of the button to remove the user's vote.
-#: src/features/channel/components/Poll.tsx:37
+#: src/features/channel/components/Poll.tsx:39
 msgid "Remove vote"
 msgstr "Remove vote"
 
@@ -28410,12 +28410,12 @@ msgid "Select media size for uploaded attachments"
 msgstr "Välj mediestorlek för uppladdade bilagor"
 
 #. Small explanatory text instructing the user to select one answer on the poll.
-#: src/features/channel/components/Poll.tsx:25
+#: src/features/channel/components/Poll.tsx:27
 msgid "Select one answer"
 msgstr "Select one answer"
 
 #. Small explanatory text instructing the user to select one or multiple answers on the poll.
-#: src/features/channel/components/Poll.tsx:29
+#: src/features/channel/components/Poll.tsx:31
 msgid "Select one or multiple answers"
 msgstr "Select one or multiple answers"
 
@@ -28471,7 +28471,7 @@ msgid "selected"
 msgstr "vald"
 
 #. Label showing the answer with the most votes on the poll.
-#: src/features/channel/components/Poll.tsx:77
+#: src/features/channel/components/Poll.tsx:84
 msgid "Selected answer"
 msgstr "Selected answer"
 
@@ -29728,7 +29728,7 @@ msgid "Show recent instances"
 msgstr "Visa senaste instanser"
 
 #. Label of the button to show poll answer results.
-#: src/features/channel/components/Poll.tsx:45
+#: src/features/channel/components/Poll.tsx:47
 msgid "Show results"
 msgstr "Show results"
 
@@ -33177,8 +33177,13 @@ msgstr "Den här väljaren är bara tillgänglig i datorappen."
 msgid "This plan isn't available. Contact support."
 msgstr "Den här planen är inte tillgänglig. Kontakta supporten."
 
+#. Small disclaimer explaining to the user that this poll is anonymous, but they can see votes because they have the permission for it.
+#: src/features/channel/components/Poll.tsx:55
+msgid "This poll is anonymous, but you can see votes."
+msgstr "This poll is anonymous, but you can see votes."
+
 #. Small disclaimer explaining to the user that this poll is anonymous.
-#: src/features/channel/components/Poll.tsx:49
+#: src/features/channel/components/Poll.tsx:51
 msgid "This poll is anonymous."
 msgstr "This poll is anonymous."
 
@@ -37219,7 +37224,7 @@ msgid "Volume sliders"
 msgstr "Volymreglage"
 
 #. Label of the vote button.
-#: src/features/channel/components/Poll.tsx:41
+#: src/features/channel/components/Poll.tsx:43
 msgid "Vote"
 msgstr "Vote"
 
@@ -37958,7 +37963,7 @@ msgid "Windows default"
 msgstr "Windows standard"
 
 #. Label showing or describing the answer with the most votes on the poll.
-#: src/features/channel/components/Poll.tsx:73
+#: src/features/channel/components/Poll.tsx:80
 msgid "Winning answer"
 msgstr "Winning answer"
 
@@ -38669,7 +38674,7 @@ msgid "You need to verify your email address before you can start a direct messa
 msgstr "Du måste verifiera din e-postadress innan du kan starta ett direktmeddelande."
 
 #. Small disclaimer explaining to the user that email verification is necessary to vote on a poll.
-#: src/features/channel/components/Poll.tsx:53
+#: src/features/channel/components/Poll.tsx:60
 msgid "You need to verify your email address to vote on a poll."
 msgstr "You need to verify your email address to vote on a poll."
 
