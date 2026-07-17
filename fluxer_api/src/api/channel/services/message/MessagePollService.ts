@@ -29,6 +29,7 @@ import type {MessageReactionService} from '../interaction/MessageReactionService
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
 import type {MessageSendService} from './MessageSendService';
+import {MissingPermissionsError} from '@fluxer/errors/src/domains/core/MissingPermissionsError';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -223,12 +224,18 @@ export class MessagePollService {
 			channelId,
 		});
 		await this.assertMessageHistoryAccess({authChannel, messageId});
-		const {channel} = authChannel;
+		const {channel, hasPermission} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) throw new UnknownMessageError();
 
 		if (!message.poll || !message.poll.answers || !message.poll.answers.find((answer) => answer.answer_id === answerId))
 			throw new UnknownPollAnswerError();
+
+		if (message.poll.anonymous_voting) {
+			const managesMessages = await hasPermission(Permissions.MANAGE_MESSAGES);
+			const canSeeVotes = await hasPermission(Permissions.SEE_VOTES_ON_ANONYMOUS_POLLS);
+			if (!managesMessages && !canSeeVotes) throw new MissingPermissionsError();
+		}
 
 		const response = await this.deps.channelRepository.messageInteractions.getVotesForAnswer(
 			channelId,

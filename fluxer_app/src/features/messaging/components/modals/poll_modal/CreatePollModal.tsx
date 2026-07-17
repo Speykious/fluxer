@@ -6,11 +6,11 @@ import {Limits} from '@app/features/app/utils/UserLimits';
 import type {FlatEmoji} from '@app/features/emoji/types/EmojiTypes';
 import styles from '@app/features/messaging/components/modals/poll_modal/CreatePollModal.module.css';
 import {Button} from '@app/features/ui/button/Button';
-import {Checkbox} from '@app/features/ui/checkbox/Checkbox';
 import * as ModalCommands from '@app/features/ui/commands/ModalCommands';
 import {Combobox, type ComboboxOption} from '@app/features/ui/components/form/FormCombobox';
 import {FieldSet, Textarea} from '@app/features/ui/components/form/FormInput';
 import {Scroller} from '@app/features/ui/components/Scroller';
+import {SwitchGroup, SwitchGroupItem} from '@app/features/ui/components/SwitchGroup';
 import type {ModalProps} from '@app/features/ui/utils/ModalUtils';
 import type {I18n} from '@lingui/core';
 import {msg} from '@lingui/core/macro';
@@ -48,6 +48,11 @@ export const POLL_DURATION_DESCRIPTOR = msg({
 export const POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR = msg({
 	message: 'Allow multiple answers',
 	comment: 'Label for the checkbox that allows users of the poll to select multiple answers.',
+});
+export const POLL_ANONYMOUS_VOTING_DESCRIPTOR = msg({
+	message: 'Anonymous voting',
+	comment:
+		'Label for the checkbox that makes the poll anonymous (only moderators/admins of the community can see who voted).',
 });
 export const POLL_SUBMIT_DESCRIPTOR = msg({
 	message: 'Submit',
@@ -89,6 +94,7 @@ export interface PollForm {
 	question: string;
 	answers: Array<PollAnswerItem>;
 	duration: number;
+	anonymousVoting: boolean;
 	allowMultipleAnswers: boolean;
 }
 
@@ -137,6 +143,7 @@ export const CreatePollModal = observer(
 		const [duration, setDuration] = useState<number>(24);
 		const [forgotToEnterAnswer, setForgotToEnterAnswer] = useState(false);
 		const [allowMultipleAnswers, setAllowMultipleAnswers] = useState(false);
+		const [anonymousVoting, setAnonymousVoting] = useState(false);
 		const [answers, setAnswers] = useState<Array<IdlessPollAnswerItem>>([
 			{
 				text: '',
@@ -169,6 +176,7 @@ export const CreatePollModal = observer(
 						.filter((answer) => answer.text.length > 0)
 						.map((answer, index) => ({id: index + 1, ...answer})),
 					duration,
+					anonymousVoting,
 					allowMultipleAnswers,
 				});
 				if (!disableAutoDismiss) {
@@ -294,18 +302,25 @@ export const CreatePollModal = observer(
 									aria-label={i18n._(POLL_DURATION_DESCRIPTOR)}
 									data-flx="messaging.create-poll-modal.combobox.duration"
 								/>
+								<SwitchGroup data-flx="messaging.create-poll-modal.switch-group">
+									<SwitchGroupItem
+										value={allowMultipleAnswers}
+										label={i18n._(POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR)}
+										onChange={setAllowMultipleAnswers}
+										data-flx="messaging.create-poll-modal.switch.allow-multiple-answers"
+									/>
+									<SwitchGroupItem
+										value={anonymousVoting}
+										label={i18n._(POLL_ANONYMOUS_VOTING_DESCRIPTOR)}
+										onChange={setAnonymousVoting}
+										data-flx="messaging.create-poll-modal.switch.anonymous-voting"
+									/>
+								</SwitchGroup>
 							</div>
 						</Scroller>
 					</div>
 				</Modal.Content>
 				<Modal.Footer className={styles.modalFooter} data-flx="messaging.create-poll-modal.modal-footer">
-					<Checkbox
-						checked={allowMultipleAnswers}
-						onChange={(e) => setAllowMultipleAnswers(e.valueOf())}
-						data-flx="messaging.create-poll-modal.checkbox.allow-multiple-answers"
-					>
-						{i18n._(POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR)}
-					</Checkbox>
 					<Button
 						onClick={handleSubmit}
 						submitting={submitting}

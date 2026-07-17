@@ -61,7 +61,7 @@ import type {
 	MessageStickerItem,
 	Message as WireMessage,
 } from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
-import type {MessagePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
+import type {MessageCreatePoll} from '@fluxer/schema/src/domains/message/PollSchemas';
 import * as SnowflakeUtils from '@fluxer/snowflake/src/SnowflakeUtils';
 import type {I18n} from '@lingui/core';
 import {msg} from '@lingui/core/macro';
@@ -289,7 +289,7 @@ interface SendMessageParams {
 	flags?: number;
 	favoriteMemeId?: string;
 	stickers?: Array<MessageStickerItem>;
-	poll?: MessagePoll;
+	poll?: MessageCreatePoll;
 	tts?: boolean;
 }
 
@@ -512,8 +512,7 @@ export async function send(channelId: string, params: SendMessageParams): Promis
 		MessageQueue.rejectLocalRateLimitedSend(channelId, params.nonce, params.hasAttachments);
 		return null;
 	}
-	const sendOrder =
-		Accessibility.sequentialFileSend && params.hasAttachments ? nextChannelOrder(channelId) : -1;
+	const sendOrder = Accessibility.sequentialFileSend && params.hasAttachments ? nextChannelOrder(channelId) : -1;
 	const prepared = await prepareSendAttachments(channelId, params);
 	if (!prepared) {
 		if (Accessibility.sequentialFileSend) {

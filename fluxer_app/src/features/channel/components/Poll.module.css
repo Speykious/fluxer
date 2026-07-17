@@ -184,6 +184,12 @@
 		color: var(--text-primary);
 		text-decoration: underline;
 	}
+
+	&[aria-disabled='true'], &:disabled {
+		color: var(--text-tertiary);
+		text-decoration: none;
+		cursor: not-allowed;
+	}
 }
 
 .answerPercentage {

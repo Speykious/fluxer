@@ -628,6 +628,7 @@ const ChannelTextareaContent = observer(
 					},
 				})),
 				duration: pollForm.duration,
+				anonymous_voting: pollForm.anonymousVoting,
 				allow_multiselect: pollForm.allowMultipleAnswers,
 				layout_type: 1,
 			};

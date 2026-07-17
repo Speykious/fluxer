@@ -646,6 +646,7 @@ pub struct MessagePoll {
     pub question: Option<MessagePollMedia>,
     pub answers: Option<Vec<MessagePollAnswer>>,
     pub expiry: Option<String>,
+    pub anonymous_voting: Option<bool>,
     pub allow_multiselect: Option<bool>,
     pub layout_type: Option<i32>,
     pub results: Option<MessagePollResults>,

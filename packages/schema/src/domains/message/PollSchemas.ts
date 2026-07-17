@@ -32,6 +32,7 @@ export const MessagePollResponse = z.object({
     question: MessagePollMediaSchema.nullish().describe('The question of the poll'),
     answers: z.array(MessagePollAnswerSchema).nullish().describe('The possible answers of the poll'),
     expiry: z.iso.datetime().nullish().describe('Expiration date of the poll as an ISO date'),
+    anonymous_voting: z.boolean().nullish().describe('Whether the votes are anonymous on this poll'),
     allow_multiselect: z.boolean().nullish().describe('Whether the poll allows multiple answers'),
     layout_type: z.int32().nullish().describe('The layout type of the poll'),
     results: MessagePollResultsSchema.nullish().describe('The results of the poll'),
@@ -42,6 +43,7 @@ export const MessagePollRequest = z.object({
     question: MessagePollMediaSchema.nullish().describe('The question of the poll'),
     answers: z.array(MessagePollAnswerSchema).nullish().describe('The possible answers of the poll'),
     duration: z.int32().nullish().describe('Duration of the poll in hours'),
+    anonymous_voting: z.boolean().nullish().describe('Whether the votes are anonymous on this poll'),
     allow_multiselect: z.boolean().nullish().describe('Whether the poll allows multiple answers'),
     layout_type: z.int32().nullish().describe('The layout type of the poll'),
 });
@@ -77,6 +79,7 @@ export interface MessageCreatePoll {
     question?: MessagePollMedia;
     answers?: Array<MessagePollAnswer>;
     duration?: number;
+    anonymous_voting?: boolean;
     allow_multiselect?: boolean;
     layout_type?: number;
     results?: MessagePollResults;
@@ -86,6 +89,7 @@ export interface MessagePoll {
     question?: MessagePollMedia;
     answers?: Array<MessagePollAnswer>;
     expiry?: string;
+    anonymous_voting?: boolean;
     allow_multiselect?: boolean;
     layout_type?: number;
     results?: MessagePollResults;

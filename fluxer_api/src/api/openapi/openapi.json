@@ -27543,6 +27543,10 @@
 						"anyOf": [{"type": "string", "format": "date-time"}, {"type": "null"}],
 						"description": "Expiration date of the poll as an ISO date"
 					},
+					"anonymous_voting": {
+						"anyOf": [{"type": "boolean"}, {"type": "null"}],
+						"description": "Whether the votes are anonymous on this poll"
+					},
 					"allow_multiselect": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Whether the poll allows multiple answers"
@@ -29166,6 +29170,10 @@
 						"description": "The possible answers of the poll"
 					},
 					"duration": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "Duration of the poll in hours"},
+					"anonymous_voting": {
+						"anyOf": [{"type": "boolean"}, {"type": "null"}],
+						"description": "Whether the votes are anonymous on this poll"
+					},
 					"allow_multiselect": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Whether the poll allows multiple answers"

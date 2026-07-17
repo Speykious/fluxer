@@ -21,6 +21,7 @@ import {
 	generateDurationOptions,
 	POLL_ADD_ANSWER_DESCRIPTOR,
 	POLL_ALLOW_MULTIPLE_ANSWERS_DESCRIPTOR,
+	POLL_ANONYMOUS_VOTING_DESCRIPTOR,
 	POLL_ANSWERS_DESCRIPTOR,
 	POLL_DURATION_DESCRIPTOR,
 	POLL_ERROR_YOU_FORGOT_TO_ENTER_A_QUESTION,
@@ -28,26 +29,10 @@ import {
 	POLL_QUESTION_DESCRIPTOR,
 	POLL_QUESTION_PLACEHOLDER_DESCRIPTOR,
 	POLL_SUBMIT_DESCRIPTOR,
+	type IdlessPollAnswerItem,
+	type PollForm,
 } from './CreatePollModal';
 import {EmojiContextMenuBottomSheet, PollAnswerInput} from './PollAnswerInput';
-
-export interface IdlessPollAnswerItem {
-	emoji?: FlatEmoji;
-	text: string;
-}
-
-export interface PollAnswerItem {
-	id: number;
-	emoji?: FlatEmoji;
-	text: string;
-}
-
-export interface PollForm {
-	question: string;
-	answers: Array<PollAnswerItem>;
-	duration: number;
-	allowMultipleAnswers: boolean;
-}
 
 interface CreatePollBottomSheetProps {
 	isOpen: boolean;
@@ -86,6 +71,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 	const [duration, setDuration] = useState<number>(defaultDuration);
 	const [forgotToEnterAnswer, setForgotToEnterAnswer] = useState(false);
 	const [allowMultipleAnswers, setAllowMultipleAnswers] = useState(false);
+	const [anonymousVoting, setAnonymousVoting] = useState(false);
 	const [answers, setAnswers] = useState<Array<IdlessPollAnswerItem>>(defaultAnswerState);
 
 	const handleSubmit = useCallback(async () => {
@@ -108,6 +94,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 					.filter((answer) => answer.text.length > 0)
 					.map((answer, index) => ({id: index + 1, ...answer})),
 				duration,
+				anonymousVoting,
 				allowMultipleAnswers,
 			});
 
@@ -248,6 +235,12 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 								value={allowMultipleAnswers}
 								onChange={setAllowMultipleAnswers}
 								data-flx="messaging.create-poll-bottom-sheet.switch-group-item.voice-channel-double-click"
+							/>
+							<SwitchGroupItem
+								value={anonymousVoting}
+								label={i18n._(POLL_ANONYMOUS_VOTING_DESCRIPTOR)}
+								onChange={setAnonymousVoting}
+								data-flx="messaging.create-poll-modal.switch.anonymous-voting"
 							/>
 						</SwitchGroup>
 						<Button

@@ -234,6 +234,10 @@ const CREATE_POLLS_DESCRIPTOR = msg({
 	message: 'Create polls',
 	comment: 'Permission name: allows creating polls.',
 });
+const SEE_VOTES_ON_ANONYMOUS_POLLS_DESCRIPTOR = msg({
+	message: 'See votes on anonymous polls',
+	comment: 'Permission name: allows looking at votes on anonymous polls.',
+});
 const READ_MESSAGE_HISTORY_DESCRIPTOR = msg({
 	message: 'Read message history',
 	comment: 'Permission name: allows seeing earlier messages in a channel.',
@@ -350,6 +354,7 @@ const PERMISSION_TITLE_DESCRIPTORS = new Map<bigint, MessageDescriptor>([
 	[Permissions.EMBED_LINKS, EMBED_LINKS_DESCRIPTOR],
 	[Permissions.ATTACH_FILES, ATTACH_FILES_DESCRIPTOR],
 	[Permissions.SEND_POLLS, CREATE_POLLS_DESCRIPTOR],
+	[Permissions.SEE_VOTES_ON_ANONYMOUS_POLLS, SEE_VOTES_ON_ANONYMOUS_POLLS_DESCRIPTOR],
 	[Permissions.READ_MESSAGE_HISTORY, READ_MESSAGE_HISTORY_DESCRIPTOR],
 	[
 		Permissions.MENTION_EVERYONE,

@@ -202,6 +202,7 @@ pub struct PollUdt {
     pub question: Option<PollMediaUdt>,
     pub answers: Option<Vec<PollAnswerUdt>>,
     pub expiry: Option<DateTime<Utc>>,
+    pub anonymous_voting: Option<bool>,
     pub allow_multiselect: Option<bool>,
     pub layout_type: Option<i32>,
     pub results: Option<PollResultsUdt>,

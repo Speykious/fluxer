@@ -13568,6 +13568,11 @@
 						"type": "string",
 						"format": "date-time"
 					},
+					"anonymous_voting": {
+						"description": "Whether the votes are anonymous on this poll",
+						"nullable": true,
+						"type": "boolean"
+					},
 					"allow_multiselect": {
 						"description": "Whether the poll allows multiple answers",
 						"nullable": true,

@@ -37,6 +37,7 @@ export interface MessagePoll {
 	question: Nullish<MessagePollMedia>;
 	answers: Nullish<Array<MessagePollAnswer>>;
 	expiry: Nullish<string>;
+	anonymous_voting: Nullish<boolean>;
 	allow_multiselect: Nullish<boolean>;
 	layout_type: Nullish<number>;
 	results: Nullish<MessagePollResults>;
@@ -56,6 +57,7 @@ export interface MessagePollDb {
 	question: Nullish<MessagePollMedia>;
 	answers: Nullish<Array<MessagePollAnswer>>;
 	expiry: Nullish<string>;
+	anonymous_voting: Nullish<boolean>;
 	allow_multiselect: Nullish<boolean>;
 	layout_type: Nullish<number>;
 	results: Nullish<MessagePollResultsDb>;

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
-#: src/features/channel/components/Poll.tsx:77
+#: src/features/channel/components/Poll.tsx:81
 msgid ", "
 msgstr ", "
 
@@ -59,17 +59,17 @@ msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# membro} other {# membros}}"
 
 #. placeholder {0}: Math.floor(secondsLeft / 86400)
-#: src/features/channel/components/Poll.tsx:168
+#: src/features/channel/components/Poll.tsx:173
 msgid "{0}d left"
 msgstr "{0}d left"
 
 #. placeholder {0}: Math.round(secondsLeft / 3600)
-#: src/features/channel/components/Poll.tsx:167
+#: src/features/channel/components/Poll.tsx:172
 msgid "{0}h left"
 msgstr "{0}h left"
 
 #. placeholder {0}: Math.round(secondsLeft / 60)
-#: src/features/channel/components/Poll.tsx:166
+#: src/features/channel/components/Poll.tsx:171
 msgid "{0}m left"
 msgstr "{0}m left"
 
@@ -386,7 +386,7 @@ msgstr "{count, plural, one {# conexão} other {# conexões}}"
 
 #. Generic description for a duration option that is measured in days.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:131
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:68
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:73
 msgid "{count, plural, one {# day} other {# days}}"
 msgstr "{count, plural, one {# dia} other {# dias}}"
 
@@ -402,7 +402,7 @@ msgstr "{count, plural, one {# presente} other {# presentes}}"
 
 #. Generic description for a duration option that is measured in hours.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:139
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:72
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:77
 msgid "{count, plural, one {# hour} other {# hours}}"
 msgstr "{count, plural, one {# hora} other {# horas}}"
 
@@ -454,12 +454,12 @@ msgid "{count, plural, one {# second} other {# seconds}}"
 msgstr "{count, plural, one {# segundo} other {# segundos}}"
 
 #. Small text indicating the number of votes on the poll or on a specific answer of the poll.
-#: src/features/channel/components/Poll.tsx:65
+#: src/features/channel/components/Poll.tsx:69
 msgid "{count, plural, one {# vote} other {# votes}}"
 msgstr "{count, plural, one {# vote} other {# votes}}"
 
 #. Generic description for a duration option that is measured in weeks.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:64
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:69
 msgid "{count, plural, one {# week} other {# weeks}}"
 msgstr "{count, plural, one {# week} other {# weeks}}"
 
@@ -1617,7 +1617,7 @@ msgid "<0>URL-only favorites (default)</0>: synced across your devices, no uploa
 msgstr "<0>Favoritos somente com URL (padrão)</0>: sincronizados em todos os seus aparelhos, sem upload, não contam no limite de mídia salva. A mídia original pode desaparecer se o provedor a remover."
 
 #. Very short text informing the user that the poll ends in less than one minute.
-#: src/features/channel/components/Poll.tsx:53
+#: src/features/channel/components/Poll.tsx:57
 msgid "<1m left"
 msgstr "<1m left"
 
@@ -2664,7 +2664,7 @@ msgid "Add reaction"
 msgstr "Adicionar reação"
 
 #. Permission name: allows adding reactions to messages.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:249
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:253
 msgid "Add reactions"
 msgstr "Adicionar reações"
 
@@ -3696,6 +3696,11 @@ msgstr "Comunicados"
 #: src/features/user/components/settings_utils/search_index/PlutoniumIndex.ts:59
 msgid "Annual"
 msgstr "Anual"
+
+#. Label for the checkbox that makes the poll anonymous (only moderators/admins of the community can see who voted).
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:52
+msgid "Anonymous voting"
+msgstr "Anonymous voting"
 
 #: src/features/user/components/modals/tabs/component_gallery_tab/SelectionsTab.tsx:274
 msgid "Another checkbox"
@@ -5703,7 +5708,7 @@ msgid "Bypass mention suppression"
 msgstr "Ignorar supressão de menção"
 
 #. Permission name: allows ignoring per-channel message rate limits.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:253
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:257
 msgid "Bypass slowmode"
 msgstr "Ignorar modo lento"
 
@@ -8351,7 +8356,7 @@ msgstr "Conecte uma câmera ou dispositivo de captura virtual e tente novamente.
 
 #. Permission name: allows joining voice channels.
 #. Primary CTA in the mobile voice-channel lobby bottom sheet. Joins the voice channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:269
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:273
 #: src/features/voice/components/bottomsheets/VoiceLobbyBottomSheet.tsx:56
 msgid "Connect to voice"
 msgstr "Conectar ao chat de voz"
@@ -10529,7 +10534,7 @@ msgid "Deafen device"
 msgstr "Desativar áudio do aparelho"
 
 #. Permission name: allows moderators to deafen other voice participants.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:294
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:298
 msgid "Deafen members"
 msgstr "Silenciar membros"
 
@@ -19534,7 +19539,7 @@ msgid "Manage blocked users"
 msgstr "Gerenciar usuários bloqueados"
 
 #. Channel-scoped permission name: allows editing this channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:306
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:310
 msgid "Manage channel"
 msgstr "Gerenciar canal"
 
@@ -19587,7 +19592,7 @@ msgid "Manage payment methods"
 msgstr "Gerenciar formas de pagamento"
 
 #. Channel-scoped permission name: allows editing permission overwrites.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:310
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:314
 msgid "Manage permissions"
 msgstr "Gerenciar permissões"
 
@@ -21049,7 +21054,7 @@ msgid "Move item up"
 msgstr "Mover item para cima"
 
 #. Permission name: allows moving members between voice channels.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:298
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:302
 msgid "Move members"
 msgstr "Mover membros"
 
@@ -21235,7 +21240,7 @@ msgid "Mute favourites"
 msgstr "Silenciar favoritos"
 
 #. Permission name: allows moderators to mute other voice participants.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:290
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:294
 msgid "Mute members"
 msgstr "Silenciar membros"
 
@@ -24473,12 +24478,12 @@ msgid "poll"
 msgstr "enquete"
 
 #. Small text informing the user that the poll is closed.
-#: src/features/channel/components/Poll.tsx:57
+#: src/features/channel/components/Poll.tsx:61
 msgid "Poll closed"
 msgstr "Poll closed"
 
 #. Small text informing the user that the poll message has not been sent yet.
-#: src/features/channel/components/Poll.tsx:61
+#: src/features/channel/components/Poll.tsx:65
 msgid "Poll not sent"
 msgstr "Poll not sent"
 
@@ -24837,7 +24842,7 @@ msgid "Prioritize speakers"
 msgstr "Priorizar quem fala"
 
 #. Permission name: allows a voice participant to be heard over others.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:286
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:290
 msgid "Priority speaker"
 msgstr "Prioridade de fala"
 
@@ -25490,7 +25495,7 @@ msgid "Read message aloud"
 msgstr "Ler mensagem em voz alta"
 
 #. Permission name: allows seeing earlier messages in a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:237
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:241
 msgid "Read message history"
 msgstr "Ler histórico de mensagens"
 
@@ -28276,6 +28281,11 @@ msgstr "Ver a lista de membros dos canais nesta comunidade."
 msgid "See the member list for this channel."
 msgstr "Ver a lista de membros deste canal."
 
+#. Permission name: allows looking at votes on anonymous polls.
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:237
+msgid "See votes on anonymous polls"
+msgstr "See votes on anonymous polls"
+
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/AccessibilityIndex.ts:121
 msgid "Seek preview"
@@ -28461,7 +28471,7 @@ msgid "selected"
 msgstr "selecionado"
 
 #. Label showing the answer with the most votes on the poll.
-#: src/features/channel/components/Poll.tsx:73
+#: src/features/channel/components/Poll.tsx:77
 msgid "Selected answer"
 msgstr "Selected answer"
 
@@ -29070,7 +29080,7 @@ msgid "Set verification level to <0>none</0>."
 msgstr "Definir nível de verificação para <0>nenhum</0>."
 
 #. Permission name: allows changing the voice service region.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:302
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:306
 msgid "Set voice region"
 msgstr "Definir região de voz"
 
@@ -30664,7 +30674,7 @@ msgid "Spatial and temporal layers"
 msgstr "Camadas espaciais e temporais"
 
 #. Permission name: allows speaking in voice channels.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:273
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:277
 msgctxt "voice-permission"
 msgid "Speak"
 msgstr "Falar"
@@ -31370,7 +31380,7 @@ msgid "Stream settings"
 msgstr "Configurações de transmissão"
 
 #. Permission name: allows video streaming or screen sharing in voice.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:278
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:282
 msgid "Stream video"
 msgstr "Transmitir vídeo"
 
@@ -31471,7 +31481,7 @@ msgid "Submenu"
 msgstr "Submenu"
 
 #. Label for the poll submit button.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:52
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:57
 msgid "Submit"
 msgstr "Submit"
 
@@ -33167,6 +33177,11 @@ msgstr "Este seletor está disponível apenas no aplicativo para computador."
 msgid "This plan isn't available. Contact support."
 msgstr "Este plano não está disponível. Entre em contato com o suporte."
 
+#. Small disclaimer explaining to the user that this poll is anonymous.
+#: src/features/channel/components/Poll.tsx:49
+msgid "This poll is anonymous."
+msgstr "This poll is anonymous."
+
 #: src/features/app/components/dialogs/components/plutonium/SelfServeRefundSection.tsx:191
 msgid "This purchase is not eligible for a refund."
 msgstr "Esta compra não é elegível para reembolso."
@@ -33506,7 +33521,7 @@ msgid "Time format selection"
 msgstr "Seleção do formato da hora"
 
 #. Permission name: allows temporarily restricting members.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:257
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:261
 msgid "Time out members"
 msgstr "Aplicar tempo limite a membros"
 
@@ -35732,12 +35747,12 @@ msgid "Use emoji from other communities."
 msgstr "Usar emojis de outras comunidades."
 
 #. Permission name: allows using emoji from other communities.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:241
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:245
 msgid "Use external emoji"
 msgstr "Usar emojis externos"
 
 #. Permission name: allows using stickers from other communities.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:245
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:249
 msgid "Use external stickers"
 msgstr "Usar figurinhas externas"
 
@@ -35904,7 +35919,7 @@ msgid "Use video and camera previews."
 msgstr "Usar prévias de vídeo e câmera."
 
 #. Permission name: allows voice activation instead of requiring push-to-talk.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:282
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:286
 msgid "Use voice activity"
 msgstr "Usar atividade de voz"
 
@@ -36706,12 +36721,12 @@ msgid "View call controls"
 msgstr "Ver controles da chamada"
 
 #. Permission name: allows seeing a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:261
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:265
 msgid "View channel"
 msgstr "Ver canal"
 
 #. Permission name: allows seeing the member list for a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:265
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:269
 msgid "View channel members"
 msgstr "Ver membros do canal"
 
@@ -37943,7 +37958,7 @@ msgid "Windows default"
 msgstr "Padrão do Windows"
 
 #. Label showing or describing the answer with the most votes on the poll.
-#: src/features/channel/components/Poll.tsx:69
+#: src/features/channel/components/Poll.tsx:73
 msgid "Winning answer"
 msgstr "Winning answer"
 
@@ -38464,7 +38479,7 @@ msgid "You don't have permission to rename this emoji. The name was reverted to 
 msgstr "Você não tem permissão para renomear este emoji. O nome foi revertido para o anterior."
 
 #. Error message for when no question has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:56
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:61
 msgid "You forgot to enter a question."
 msgstr "You forgot to enter a question."
 
@@ -38654,7 +38669,7 @@ msgid "You need to verify your email address before you can start a direct messa
 msgstr "Você precisa verificar seu endereço de e-mail antes de iniciar uma mensagem direta."
 
 #. Small disclaimer explaining to the user that email verification is necessary to vote on a poll.
-#: src/features/channel/components/Poll.tsx:49
+#: src/features/channel/components/Poll.tsx:53
 msgid "You need to verify your email address to vote on a poll."
 msgstr "You need to verify your email address to vote on a poll."
 
@@ -38678,7 +38693,7 @@ msgid "You or someone you're adding already has the maximum number of group DMs 
 msgstr "Você ou alguém que você está adicionando já atingiu o número máximo de DMs em grupo abertas. Saia de uma e tente novamente."
 
 #. Error message for when no answer has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:60
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:65
 msgid "You should enter at least one answer."
 msgstr "You should enter at least one answer."
 

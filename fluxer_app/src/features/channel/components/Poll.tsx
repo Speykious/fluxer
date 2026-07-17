@@ -46,6 +46,10 @@ const SHOW_RESULTS_DESCRIPTOR = msg({
 	message: 'Show results',
 	comment: 'Label of the button to show poll answer results.',
 });
+const THIS_POLL_IS_ANONYMOUS_DESCRIPTOR = msg({
+	message: 'This poll is anonymous.',
+	comment: 'Small disclaimer explaining to the user that this poll is anonymous.',
+});
 const VERIFY_YOU_EMAIL_ADDRESS_DESCRIPTOR = msg({
 	message: 'You need to verify your email address to vote on a poll.',
 	comment: 'Small disclaimer explaining to the user that email verification is necessary to vote on a poll.',
@@ -76,7 +80,8 @@ const SELECTED_ANSWER = msg({
 });
 const ARIA_LABEL_ANSWER_QUALIFIER_SEPARATOR = msg({
 	message: ', ',
-	comment: 'Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".',
+	comment:
+		'Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".',
 });
 
 function renderPollEmoji(pollEmoji?: MessagePollEmoji) {
@@ -282,7 +287,10 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 									<a
 										role="button"
 										// biome-ignore lint/a11y/useValidAnchor: Apparently I can't nest a button inside of a button because it's bad for hydration or something
-										onClick={() => openPollAnswerVotersModal(answer.id)}
+										onClick={() => {
+											if (!poll.anonymous_voting) openPollAnswerVotersModal(answer.id);
+										}}
+										aria-disabled={poll.anonymous_voting}
 										className={styles.answerVotes}
 										data-flx="poll.answer.vote-count"
 									>
@@ -300,6 +308,13 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 					</button>
 				</FocusRing>
 			))}
+			{poll.anonymous_voting && (
+				<section>
+					<p>
+						<small>{i18n._(THIS_POLL_IS_ANONYMOUS_DESCRIPTOR)}</small>
+					</p>
+				</section>
+			)}
 			{isVerified || isFinalized ? undefined : (
 				<section>
 					<p>
@@ -334,6 +349,7 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 						<button
 							type="button"
 							onClick={() => openPollAnswerVotersModal(1)}
+							disabled={poll.anonymous_voting}
 							className={styles.answerVotes}
 							data-flx="poll.footer.vote-count"
 						>

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
-#: src/features/channel/components/Poll.tsx:77
+#: src/features/channel/components/Poll.tsx:81
 msgid ", "
 msgstr ", "
 
@@ -59,17 +59,17 @@ msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {#명} other {#명}}"
 
 #. placeholder {0}: Math.floor(secondsLeft / 86400)
-#: src/features/channel/components/Poll.tsx:168
+#: src/features/channel/components/Poll.tsx:173
 msgid "{0}d left"
 msgstr "{0}d left"
 
 #. placeholder {0}: Math.round(secondsLeft / 3600)
-#: src/features/channel/components/Poll.tsx:167
+#: src/features/channel/components/Poll.tsx:172
 msgid "{0}h left"
 msgstr "{0}h left"
 
 #. placeholder {0}: Math.round(secondsLeft / 60)
-#: src/features/channel/components/Poll.tsx:166
+#: src/features/channel/components/Poll.tsx:171
 msgid "{0}m left"
 msgstr "{0}m left"
 
@@ -386,7 +386,7 @@ msgstr "{count, plural, one {# 연결} other {# 연결}}"
 
 #. Generic description for a duration option that is measured in days.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:131
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:68
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:73
 msgid "{count, plural, one {# day} other {# days}}"
 msgstr "{count, plural, one {#일} other {#일}}"
 
@@ -402,7 +402,7 @@ msgstr "{count, plural, one {#개 선물} other {#개 선물}}"
 
 #. Generic description for a duration option that is measured in hours.
 #: src/features/channel/components/modals/GroupInvitesBottomSheet.tsx:139
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:72
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:77
 msgid "{count, plural, one {# hour} other {# hours}}"
 msgstr "{count, plural, one {#시간} other {#시간}}"
 
@@ -454,12 +454,12 @@ msgid "{count, plural, one {# second} other {# seconds}}"
 msgstr "{count, plural, one {#초} other {#초}}"
 
 #. Small text indicating the number of votes on the poll or on a specific answer of the poll.
-#: src/features/channel/components/Poll.tsx:65
+#: src/features/channel/components/Poll.tsx:69
 msgid "{count, plural, one {# vote} other {# votes}}"
 msgstr "{count, plural, one {# vote} other {# votes}}"
 
 #. Generic description for a duration option that is measured in weeks.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:64
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:69
 msgid "{count, plural, one {# week} other {# weeks}}"
 msgstr "{count, plural, one {# week} other {# weeks}}"
 
@@ -1617,7 +1617,7 @@ msgid "<0>URL-only favorites (default)</0>: synced across your devices, no uploa
 msgstr "<0>URL 전용 즐겨찾기 (기본)</0>: 기기 간 동기화되며, 업로드되지 않고, 저장된 미디어 용량에 포함되지 않습니다. 원본 미디어는 호스트에서 삭제되면 사라질 수 있습니다."
 
 #. Very short text informing the user that the poll ends in less than one minute.
-#: src/features/channel/components/Poll.tsx:53
+#: src/features/channel/components/Poll.tsx:57
 msgid "<1m left"
 msgstr "<1m left"
 
@@ -2664,7 +2664,7 @@ msgid "Add reaction"
 msgstr "이모티콘 추가"
 
 #. Permission name: allows adding reactions to messages.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:249
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:253
 msgid "Add reactions"
 msgstr "반응 추가"
 
@@ -3696,6 +3696,11 @@ msgstr "공지사항"
 #: src/features/user/components/settings_utils/search_index/PlutoniumIndex.ts:59
 msgid "Annual"
 msgstr "연간"
+
+#. Label for the checkbox that makes the poll anonymous (only moderators/admins of the community can see who voted).
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:52
+msgid "Anonymous voting"
+msgstr "Anonymous voting"
 
 #: src/features/user/components/modals/tabs/component_gallery_tab/SelectionsTab.tsx:274
 msgid "Another checkbox"
@@ -5703,7 +5708,7 @@ msgid "Bypass mention suppression"
 msgstr "멘션 알림 끄기 무시"
 
 #. Permission name: allows ignoring per-channel message rate limits.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:253
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:257
 msgid "Bypass slowmode"
 msgstr "슬로우 모드 우회"
 
@@ -8351,7 +8356,7 @@ msgstr "카메라 또는 가상 캡처 장치를 연결한 후 다시 시도하�
 
 #. Permission name: allows joining voice channels.
 #. Primary CTA in the mobile voice-channel lobby bottom sheet. Joins the voice channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:269
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:273
 #: src/features/voice/components/bottomsheets/VoiceLobbyBottomSheet.tsx:56
 msgid "Connect to voice"
 msgstr "음성 채널에 연결"
@@ -10529,7 +10534,7 @@ msgid "Deafen device"
 msgstr "기기 소리 끄기"
 
 #. Permission name: allows moderators to deafen other voice participants.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:294
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:298
 msgid "Deafen members"
 msgstr "멤버 소리 끄기"
 
@@ -19534,7 +19539,7 @@ msgid "Manage blocked users"
 msgstr "차단된 사용자 관리"
 
 #. Channel-scoped permission name: allows editing this channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:306
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:310
 msgid "Manage channel"
 msgstr "채널 관리"
 
@@ -19587,7 +19592,7 @@ msgid "Manage payment methods"
 msgstr "결제 수단 관리"
 
 #. Channel-scoped permission name: allows editing permission overwrites.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:310
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:314
 msgid "Manage permissions"
 msgstr "권한 관리"
 
@@ -21049,7 +21054,7 @@ msgid "Move item up"
 msgstr "항목 위로 이동"
 
 #. Permission name: allows moving members between voice channels.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:298
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:302
 msgid "Move members"
 msgstr "멤버 이동"
 
@@ -21235,7 +21240,7 @@ msgid "Mute favourites"
 msgstr "즐겨찾기 알림 끄기"
 
 #. Permission name: allows moderators to mute other voice participants.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:290
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:294
 msgid "Mute members"
 msgstr "멤버 음소거"
 
@@ -24473,12 +24478,12 @@ msgid "poll"
 msgstr "투표"
 
 #. Small text informing the user that the poll is closed.
-#: src/features/channel/components/Poll.tsx:57
+#: src/features/channel/components/Poll.tsx:61
 msgid "Poll closed"
 msgstr "Poll closed"
 
 #. Small text informing the user that the poll message has not been sent yet.
-#: src/features/channel/components/Poll.tsx:61
+#: src/features/channel/components/Poll.tsx:65
 msgid "Poll not sent"
 msgstr "Poll not sent"
 
@@ -24837,7 +24842,7 @@ msgid "Prioritize speakers"
 msgstr "발언자 우선 표시"
 
 #. Permission name: allows a voice participant to be heard over others.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:286
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:290
 msgid "Priority speaker"
 msgstr "우선 발언권"
 
@@ -25490,7 +25495,7 @@ msgid "Read message aloud"
 msgstr "메시지 소리 내어 읽기"
 
 #. Permission name: allows seeing earlier messages in a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:237
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:241
 msgid "Read message history"
 msgstr "메시지 기록 읽기"
 
@@ -28276,6 +28281,11 @@ msgstr "이 커뮤니티의 채널 멤버 목록을 확인하세요."
 msgid "See the member list for this channel."
 msgstr "이 채널의 멤버 목록을 확인하세요."
 
+#. Permission name: allows looking at votes on anonymous polls.
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:237
+msgid "See votes on anonymous polls"
+msgstr "See votes on anonymous polls"
+
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/AccessibilityIndex.ts:121
 msgid "Seek preview"
@@ -28461,7 +28471,7 @@ msgid "selected"
 msgstr "선택됨"
 
 #. Label showing the answer with the most votes on the poll.
-#: src/features/channel/components/Poll.tsx:73
+#: src/features/channel/components/Poll.tsx:77
 msgid "Selected answer"
 msgstr "Selected answer"
 
@@ -29070,7 +29080,7 @@ msgid "Set verification level to <0>none</0>."
 msgstr "인증 레벨을 <0>없음</0>으로 설정했습니다."
 
 #. Permission name: allows changing the voice service region.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:302
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:306
 msgid "Set voice region"
 msgstr "음성 지역 설정"
 
@@ -30664,7 +30674,7 @@ msgid "Spatial and temporal layers"
 msgstr "공간 및 시간 레이어"
 
 #. Permission name: allows speaking in voice channels.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:273
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:277
 msgctxt "voice-permission"
 msgid "Speak"
 msgstr "말하기"
@@ -31370,7 +31380,7 @@ msgid "Stream settings"
 msgstr "스트림 설정"
 
 #. Permission name: allows video streaming or screen sharing in voice.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:278
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:282
 msgid "Stream video"
 msgstr "비디오 스트리밍"
 
@@ -31471,7 +31481,7 @@ msgid "Submenu"
 msgstr "하위 메뉴"
 
 #. Label for the poll submit button.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:52
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:57
 msgid "Submit"
 msgstr "Submit"
 
@@ -33167,6 +33177,11 @@ msgstr "이 선택 도구는 데스크톱 앱에서만 사용할 수 있습니�
 msgid "This plan isn't available. Contact support."
 msgstr "이용할 수 없는 플랜입니다. 지원팀에 문의하세요."
 
+#. Small disclaimer explaining to the user that this poll is anonymous.
+#: src/features/channel/components/Poll.tsx:49
+msgid "This poll is anonymous."
+msgstr "This poll is anonymous."
+
 #: src/features/app/components/dialogs/components/plutonium/SelfServeRefundSection.tsx:191
 msgid "This purchase is not eligible for a refund."
 msgstr "이 구매는 환불 대상이 아닙니다."
@@ -33506,7 +33521,7 @@ msgid "Time format selection"
 msgstr "시간 형식 선택"
 
 #. Permission name: allows temporarily restricting members.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:257
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:261
 msgid "Time out members"
 msgstr "멤버 타임아웃"
 
@@ -35732,12 +35747,12 @@ msgid "Use emoji from other communities."
 msgstr "다른 커뮤니티의 이모티콘 사용."
 
 #. Permission name: allows using emoji from other communities.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:241
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:245
 msgid "Use external emoji"
 msgstr "외부 이모티콘 사용"
 
 #. Permission name: allows using stickers from other communities.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:245
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:249
 msgid "Use external stickers"
 msgstr "외부 스티커 사용"
 
@@ -35904,7 +35919,7 @@ msgid "Use video and camera previews."
 msgstr "동영상 및 카메라 미리보기를 사용합니다."
 
 #. Permission name: allows voice activation instead of requiring push-to-talk.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:282
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:286
 msgid "Use voice activity"
 msgstr "음성 자동 감지 사용"
 
@@ -36706,12 +36721,12 @@ msgid "View call controls"
 msgstr "통화 제어 보기"
 
 #. Permission name: allows seeing a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:261
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:265
 msgid "View channel"
 msgstr "채널 보기"
 
 #. Permission name: allows seeing the member list for a channel.
-#: src/features/permissions/utils/PermissionLabelDescriptors.ts:265
+#: src/features/permissions/utils/PermissionLabelDescriptors.ts:269
 msgid "View channel members"
 msgstr "채널 멤버 보기"
 
@@ -37943,7 +37958,7 @@ msgid "Windows default"
 msgstr "Windows 기본값"
 
 #. Label showing or describing the answer with the most votes on the poll.
-#: src/features/channel/components/Poll.tsx:69
+#: src/features/channel/components/Poll.tsx:73
 msgid "Winning answer"
 msgstr "Winning answer"
 
@@ -38464,7 +38479,7 @@ msgid "You don't have permission to rename this emoji. The name was reverted to 
 msgstr "이 이모티콘의 이름을 변경할 권한이 없습니다. 이름이 이전으로 되돌려졌습니다."
 
 #. Error message for when no question has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:56
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:61
 msgid "You forgot to enter a question."
 msgstr "You forgot to enter a question."
 
@@ -38654,7 +38669,7 @@ msgid "You need to verify your email address before you can start a direct messa
 msgstr "쪽지를 보내려면 이메일 주소를 인증해야 합니다."
 
 #. Small disclaimer explaining to the user that email verification is necessary to vote on a poll.
-#: src/features/channel/components/Poll.tsx:49
+#: src/features/channel/components/Poll.tsx:53
 msgid "You need to verify your email address to vote on a poll."
 msgstr "You need to verify your email address to vote on a poll."
 
@@ -38678,7 +38693,7 @@ msgid "You or someone you're adding already has the maximum number of group DMs 
 msgstr "회원님 또는 추가하려는 상대방이 이미 최대 그룹 DM 수를 열었습니다. 그룹 DM 중 하나를 나가고 다시 시도해 주세요."
 
 #. Error message for when no answer has been entered in the poll.
-#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:60
+#: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:65
 msgid "You should enter at least one answer."
 msgstr "You should enter at least one answer."
 

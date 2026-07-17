@@ -1172,6 +1172,7 @@ export class MessageSendService {
 								}))
 							: null,
 						expiry: pollExpiry?.toISOString() ?? null,
+						anonymous_voting: data.poll.anonymous_voting ?? null,
 						allow_multiselect: data.poll.allow_multiselect ?? null,
 						layout_type: data.poll.layout_type ?? null,
 						results: null,
