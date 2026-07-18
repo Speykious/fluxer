@@ -25967,7 +25967,7 @@
 					"The community for this instance cannot be deleted.",
 					"You cannot leave the community for this instance.",
 					"This instance policy change is not allowed.",
-					"Slow mode rate limited.",
+					"Slowmode rate limited.",
 					"Service unavailable.",
 					"Invalid request.",
 					"Stream key channel mismatch.",
@@ -28038,6 +28038,10 @@
 						},
 						"description": "Permission overwrites for roles and members"
 					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
+					},
 					"nsfw": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Legacy: setting true maps to nsfw_override=true; setting false maps to nsfw_override=null (inherit). Prefer nsfw_override."
@@ -28050,10 +28054,6 @@
 					"content_warning_text": {
 						"anyOf": [{"type": "string", "maxLength": 200}, {"type": "null"}],
 						"description": "Custom channel content warning text (max 200 characters); null inherits from parent or guild"
-					},
-					"rate_limit_per_user": {
-						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
-						"description": "Slowmode delay in seconds (0-21600)"
 					},
 					"icon": {
 						"anyOf": [{"$ref": "#/components/schemas/Base64ImageType"}, {"type": "null"}],
@@ -28132,6 +28132,10 @@
 						},
 						"description": "Permission overwrites for roles and members"
 					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
+					},
 					"nsfw": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Legacy: setting true maps to nsfw_override=true; setting false maps to nsfw_override=null (inherit). Prefer nsfw_override."
@@ -28144,10 +28148,6 @@
 					"content_warning_text": {
 						"anyOf": [{"type": "string", "maxLength": 200}, {"type": "null"}],
 						"description": "Custom channel content warning text (max 200 characters); null inherits from parent or guild"
-					},
-					"rate_limit_per_user": {
-						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
-						"description": "Slowmode delay in seconds (0-21600)"
 					},
 					"icon": {
 						"anyOf": [{"$ref": "#/components/schemas/Base64ImageType"}, {"type": "null"}],
@@ -28216,6 +28216,10 @@
 						},
 						"description": "Permission overwrites for roles and members"
 					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
+					},
 					"nsfw": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Legacy: setting true maps to nsfw_override=true; setting false maps to nsfw_override=null (inherit). Prefer nsfw_override."
@@ -28228,10 +28232,6 @@
 					"content_warning_text": {
 						"anyOf": [{"type": "string", "maxLength": 200}, {"type": "null"}],
 						"description": "Custom channel content warning text (max 200 characters); null inherits from parent or guild"
-					},
-					"rate_limit_per_user": {
-						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
-						"description": "Slowmode delay in seconds (0-21600)"
 					},
 					"icon": {
 						"anyOf": [{"$ref": "#/components/schemas/Base64ImageType"}, {"type": "null"}],
@@ -28300,6 +28300,10 @@
 						},
 						"description": "Permission overwrites for roles and members"
 					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
+					},
 					"nsfw": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Legacy: setting true maps to nsfw_override=true; setting false maps to nsfw_override=null (inherit). Prefer nsfw_override."
@@ -28312,10 +28316,6 @@
 					"content_warning_text": {
 						"anyOf": [{"type": "string", "maxLength": 200}, {"type": "null"}],
 						"description": "Custom channel content warning text (max 200 characters); null inherits from parent or guild"
-					},
-					"rate_limit_per_user": {
-						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
-						"description": "Slowmode delay in seconds (0-21600)"
 					},
 					"icon": {
 						"anyOf": [{"$ref": "#/components/schemas/Base64ImageType"}, {"type": "null"}],
@@ -31380,6 +31380,10 @@
 						},
 						"description": "Permission overwrites for roles and members"
 					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
+					},
 					"nsfw": {"type": "boolean", "description": "Whether the channel is marked as NSFW"},
 					"nsfw_override": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
@@ -31443,6 +31447,10 @@
 							"required": ["id", "type"]
 						},
 						"description": "Permission overwrites for roles and members"
+					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
 					},
 					"nsfw": {"type": "boolean", "description": "Whether the channel is marked as NSFW"},
 					"nsfw_override": {
@@ -31508,6 +31516,10 @@
 						},
 						"description": "Permission overwrites for roles and members"
 					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
+					},
 					"nsfw": {"type": "boolean", "description": "Whether the channel is marked as NSFW"},
 					"nsfw_override": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
@@ -31571,6 +31583,10 @@
 							"required": ["id", "type"]
 						},
 						"description": "Permission overwrites for roles and members"
+					},
+					"rate_limit_per_user": {
+						"anyOf": [{"type": "integer", "minimum": 0, "maximum": 21600, "format": "int32"}, {"type": "null"}],
+						"description": "Slowmode delay in seconds (0-21600)"
 					},
 					"nsfw": {"type": "boolean", "description": "Whether the channel is marked as NSFW"},
 					"nsfw_override": {
