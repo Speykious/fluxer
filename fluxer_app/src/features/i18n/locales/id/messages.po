@@ -10,8 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-07-07 23:18+0000\n"
 "Last-Translator: Hampus <hampus@fluxer.com>\n"
-"Language-Team: Indonesian <https://weblate.fluxer.tools/projects/fluxer/app/"
-"id/>\n"
+"Language-Team: Indonesian <https://weblate.fluxer.tools/projects/fluxer/app/id/>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
@@ -88,8 +87,7 @@ msgstr "{a}, {b}, dan {c} sedang mengetik..."
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabUtils.tsx:571
 msgid "{actor} added channel permissions for {targetEntity} in {channelNode}."
-msgstr ""
-"{actor} menambahkan perizinan saluran untuk {targetEntity} di {channelNode}."
+msgstr "{actor} menambahkan perizinan saluran untuk {targetEntity} di {channelNode}."
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabUtils.tsx:576
 msgid "{actor} added channel permissions for {targetEntity}."
@@ -200,9 +198,7 @@ msgstr "{actor} membersihkan anggota tidak aktif."
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabUtils.tsx:637
 msgid "{actor} pruned members inactive for {pruneDays, plural, one {# day} other {# days}}."
-msgstr ""
-"{actor} membersihkan anggota yang tidak aktif selama {pruneDays, plural, one "
-"{# hari} other {# hari}}."
+msgstr "{actor} membersihkan anggota yang tidak aktif selama {pruneDays, plural, one {# hari} other {# hari}}."
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabUtils.tsx:595
 msgid "{actor} removed channel permissions for {targetEntity} in {channelNode}."
@@ -227,8 +223,7 @@ msgstr "{actor} {targetMember} diperbarui."
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabUtils.tsx:583
 msgid "{actor} updated channel permissions for {targetEntity} in {channelNode}."
-msgstr ""
-"{actor} izin saluran untuk {targetEntity} sudah diperbarui di {channelNode}."
+msgstr "{actor} izin saluran untuk {targetEntity} sudah diperbarui di {channelNode}."
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabUtils.tsx:588
 msgid "{actor} updated channel permissions for {targetEntity}."
@@ -2889,9 +2884,7 @@ msgstr "Sesuaikan tingkat zoom keseluruhan aplikasi. Firefox tetap menggunakan p
 #. Description for the app zoom setting. The placeholders are keyboard shortcuts.
 #: src/features/user/components/modals/tabs/appearance_tab/ScalingTab.tsx:46
 msgid "Adjust the overall zoom level of the app. Use {zoomIn} / {zoomOut} to adjust quickly."
-msgstr ""
-"Sesuaikan tingkat level zoom aplikasi secara keseluruhan. Gunakan {zoomIn} / "
-"{zoomOut} untuk menyesuaikan dengan cepat."
+msgstr "Sesuaikan tingkat level zoom aplikasi secara keseluruhan. Gunakan {zoomIn} / {zoomOut} untuk menyesuaikan dengan cepat."
 
 #. Inline adaptive-quality status in the stream settings menu. Shows the current automatically lowered resolution and frame rate.
 #: src/features/voice/components/StreamSettingsMenuContent.tsx:146
@@ -6824,9 +6817,7 @@ msgstr "Pilih"
 #. Settings section description. One-line summary of what the settings section controls.
 #: src/features/user/components/settings_utils/section_registry/AppearanceSections.ts:34
 msgid "Choose a base appearance, manage quick CSS, organize saved theme files, and tune theme tokens."
-msgstr ""
-"Pilih tampilan dasar, kelola CSS cepat, kelola file tema tersimpan, dan "
-"sesuaikan tune token tema."
+msgstr "Pilih tampilan dasar, kelola CSS cepat, kelola file tema tersimpan, dan sesuaikan tune token tema."
 
 #. Form field label or placeholder for choosing a community.
 #: src/features/expressions/components/modals/AddFavoriteChannelModal.tsx:40
@@ -8273,8 +8264,7 @@ msgstr "Konfigurasikan penyedia terjemahan yang digunakan dari teks yang dipilih
 #. Settings section description. One-line summary of what the settings section controls.
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:153
 msgid "Configure your camera, screen sharing quality, previews, and frame rate."
-msgstr ""
-"Konfigurasi kameramu, kualitas berbagi layar, pratinjau, dan frame rate."
+msgstr "Konfigurasi kameramu, kualitas berbagi layar, pratinjau, dan frame rate."
 
 #. Settings section description. One-line summary of what the settings section controls.
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:17
@@ -11222,10 +11212,7 @@ msgstr "Bilah notifikasi desktop"
 
 #: src/features/ui/commands/NotificationCommands.tsx:31
 msgid "Desktop notifications have been blocked. You can enable them later in your browser settings or in user settings, or in {notificationSettingsPath}."
-msgstr ""
-"Notifikasi desktop telah diblokir. Kamu dapat mengaktifkannya nanti di "
-"pengaturan browser atau di pengaturan pengguna, atau di "
-"{notificationSettingsPath}."
+msgstr "Notifikasi desktop telah diblokir. Kamu dapat mengaktifkannya nanti di pengaturan browser atau di pengaturan pengguna, atau di {notificationSettingsPath}."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/DesktopSettingsIndex.ts:110
@@ -17014,9 +17001,7 @@ msgstr "Jika Anda tidak dapat menggunakan metode verifikasi apa pun, hubungi duk
 #. Confirmation modal body shown before dismissing the desktop-notification nagbar. {notificationSettingsPath} is the localized settings path.
 #: src/features/app/components/layout/app_layout/nagbars/DesktopNotificationNagbar.tsx:38
 msgid "If you dismiss this, you can always enable desktop notifications later under {notificationSettingsPath}."
-msgstr ""
-"Jika Anda menutup ini, Kamu selalu dapat mengaktifkan notifikasi desktop "
-"nanti di {notificationSettingsPath}."
+msgstr "Jika Anda menutup ini, Kamu selalu dapat mengaktifkan notifikasi desktop nanti di {notificationSettingsPath}."
 
 #: src/features/voice/components/dialogs/DisablePiPConfirmModal.tsx:56
 msgid "If you don't remember this preference, we'll only hide the popout for this session. You can change this any time in {audioVideoSettingsPath}."

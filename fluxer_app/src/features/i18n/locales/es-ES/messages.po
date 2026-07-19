@@ -10,8 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-07-07 23:18+0000\n"
 "Last-Translator: Hampus <hampus@fluxer.com>\n"
-"Language-Team: Spanish <https://weblate.fluxer.tools/projects/fluxer/app/es/>"
-"\n"
+"Language-Team: Spanish <https://weblate.fluxer.tools/projects/fluxer/app/es/>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".

@@ -10,8 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-07-09 00:18+0000\n"
 "Last-Translator: Hampus <hampus@fluxer.com>\n"
-"Language-Team: Finnish <https://weblate.fluxer.tools/projects/fluxer/app/fi/>"
-"\n"
+"Language-Team: Finnish <https://weblate.fluxer.tools/projects/fluxer/app/fi/>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
@@ -339,9 +338,7 @@ msgstr "{communityName} on tällä hetkellä vain {productName}-henkilöstön j�
 #. Displayed value for the voice channel participant limit slider. ∞ is the infinity symbol.
 #: src/features/channel/components/modals/channel_tabs/channel_overview_tab/VoiceSettings.tsx:43
 msgid "{count, plural, =0 {∞ No limit} one {# participant} other {# participants}}"
-msgstr ""
-"{count, plural, =0 {∞ Ei rajoitusta} one {# osallistuja} other {# "
-"osallistujaa}}"
+msgstr "{count, plural, =0 {∞ Ei rajoitusta} one {# osallistuja} other {# osallistujaa}}"
 
 #: src/features/channel/components/embeds/attachments/TextualAttachmentPreview.tsx:121
 msgid "{count, plural, one {... (# line left)} other {... (# lines left)}}"
@@ -380,10 +377,7 @@ msgstr "{count, plural, one {# yhteisö löytyi} other {# yhteisöä löytyi}}"
 
 #: src/features/app/components/layout/GuildsLayout.tsx:730
 msgid "{count, plural, one {# community is temporarily unavailable due to a flux capacitor malfunction.} other {# communities are temporarily unavailable due to a flux capacitor malfunction.}}"
-msgstr ""
-"{count, plural, one {# yhteisö on tilapäisesti pois käytöstä toimintahäiriön "
-"vuoksi.} other {# yhteisöä on tilapäisesti pois käytöstä toimintahäiriön "
-"vuoksi.}}"
+msgstr "{count, plural, one {# yhteisö on tilapäisesti pois käytöstä toimintahäiriön vuoksi.} other {# yhteisöä on tilapäisesti pois käytöstä toimintahäiriön vuoksi.}}"
 
 #. Displayed value for the voice channel connection limit slider.
 #: src/features/channel/components/modals/channel_tabs/channel_overview_tab/VoiceSettings.tsx:47
@@ -665,9 +659,7 @@ msgstr "{desktopChannel} Desktop {desktopVersion}"
 #. Unsaved-changes banner text in the devices tab. Counts selected devices that will be signed out.
 #: src/features/user/components/modals/tabs/DevicesTab.tsx:74
 msgid "{deviceCount, plural, one {# device selected for sign out} other {# devices selected for sign out}}"
-msgstr ""
-"{deviceCount, plural, one {# laite valittu uloskirjautumista varten} other "
-"{# laitetta valittu uloskirjautumista varten}}"
+msgstr "{deviceCount, plural, one {# laite valittu uloskirjautumista varten} other {# laitetta valittu uloskirjautumista varten}}"
 
 #. Sidebar Fluxer-home button tooltip showing how many incoming friend requests are pending. Count is interpolated.
 #: src/features/app/components/layout/sidebar_nav/FluxerButton.tsx:47
@@ -1099,10 +1091,7 @@ msgstr "{productName}-sovelluksen symboli"
 #. Label in the push settings.
 #: src/features/user/components/modals/tabs/notifications_tab/PushSettings.tsx:16
 msgid "{productName} avoids sending push notifications to your mobile devices when you are at your computer. Choose how long you need to be inactive on desktop before you receive push notifications."
-msgstr ""
-"{productName} ei lähetä push-ilmoituksia mobiililaitteeseesi, kun olet "
-"aktiivisena tietokoneella. Valitse, kuinka kauan sinun on oltava käyttämättä "
-"työpöydällä, ennen kuin saat push-ilmoituksia."
+msgstr "{productName} ei lähetä push-ilmoituksia mobiililaitteeseesi, kun olet aktiivisena tietokoneella. Valitse, kuinka kauan sinun on oltava käyttämättä työpöydällä, ennen kuin saat push-ilmoituksia."
 
 #. Short badge title in the user profile badges popout. Preserve {productName}; it is inserted by code. English locales use Title Case for official badge titles; other locales should use natural local capitalization.
 #: src/features/user/components/popouts/UserProfileBadges.tsx:37
@@ -1114,9 +1103,7 @@ msgstr "{productName}-buginmetsästäjä"
 #: src/features/voice/components/modals/screen_share_picker_modal/PerWindowAudioNotice.tsx:23
 #: src/features/voice/components/modals/screen_share_picker_modal/PerWindowAudioNotice.tsx:42
 msgid "{productName} cannot capture desktop audio here while excluding {productName}'s call audio."
-msgstr ""
-"{productName} ei voi jakaa työpöydän ääntä siten, että itse puhelun ääni "
-"jäisi pois jaosta."
+msgstr "{productName} ei voi jakaa työpöydän ääntä siten, että itse puhelun ääni jäisi pois jaosta."
 
 #. Inline notice body on Windows. Explains that app audio is disabled because productName cannot guarantee isolated audio capture on this OS build.
 #. Inline notice body on macOS. Explains that app audio is disabled because productName cannot guarantee isolated audio capture on this OS build.
@@ -4052,9 +4039,7 @@ msgstr "Haluatko varmasti ottaa kutsut käyttöön? Tämän jälkeen käyttäjä
 #. placeholder {0}: targetUser.tag
 #: src/features/moderation/components/modals/KickMemberModal.tsx:44
 msgid "Are you sure you want to kick <0>{0}</0> from the community? They will be able to rejoin with a new invite."
-msgstr ""
-"Haluatko varmasti potkaista käyttäjän <0>{0}</0> yhteisöstä? Hän voi liittyä "
-"uudelleen uudella kutsulla."
+msgstr "Haluatko varmasti potkaista käyttäjän <0>{0}</0> yhteisöstä? Hän voi liittyä uudelleen uudella kutsulla."
 
 #: src/features/user/components/modals/tabs/chat_settings_tab/SearchEnginesTab.tsx:229
 msgid "Are you sure you want to remove <0>{engineName}</0>?"
@@ -20894,10 +20879,7 @@ msgstr "Tässä näkyvät moderointitoimet ja yhteisön muutokset."
 #. Guild nagbar body shown when moderation actions in a community require two-factor authentication. {communityName} is the community name.
 #: src/features/app/components/layout/GuildLayout.tsx:77
 msgid "Moderation actions in {communityName} require two-factor authentication. Enable 2FA to kick, ban, timeout, or delete messages here."
-msgstr ""
-"Yhteisön {communityName} moderointitoiminnot edellyttävät kaksivaiheista "
-"todennusta. Ota kaksivaiheinen todennus käyttöön, jos haluat potkia, "
-"porttikieltää, aikakatkaista tai poistaa viestejä täällä."
+msgstr "Yhteisön {communityName} moderointitoiminnot edellyttävät kaksivaiheista todennusta. Ota kaksivaiheinen todennus käyttöön, jos haluat potkia, porttikieltää, aikakatkaista tai poistaa viestejä täällä."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:66
@@ -26674,9 +26656,7 @@ msgstr "Vaadi OAuth2-koodivaltuutus"
 
 #: src/features/guild/components/modals/guild_tabs/GuildModerationTab.tsx:466
 msgid "Require two-factor authentication for moderators before they can ban, kick, timeout, or remove messages."
-msgstr ""
-"Vaadi moderaattoreilta kaksivaiheista tunnistautumista ennen kuin he voivat "
-"porttikieltää, potkaista, aikakatkaista tai poistaa viestejä."
+msgstr "Vaadi moderaattoreilta kaksivaiheista tunnistautumista ennen kuin he voivat porttikieltää, potkaista, aikakatkaista tai poistaa viestejä."
 
 #. Short label in the authentication OAUTH scopes step. Keep the tone plain and specific.
 #: src/features/auth/components/pages/oauth_authorize_page/OAuthScopesStep.tsx:24

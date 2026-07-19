@@ -10,8 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-07-04 12:18+0000\n"
 "Last-Translator: Eyeflame <eyeflamx@gmail.com>\n"
-"Language-Team: Spanish (Latin America) <https://weblate.fluxer.tools/"
-"projects/fluxer/app/es_419/>\n"
+"Language-Team: Spanish (Latin America) <https://weblate.fluxer.tools/projects/fluxer/app/es_419/>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Separator that goes between answer qualifiers that are only readable for screenreaders. Example: "Winning answer[, ]Selected answer".
@@ -13343,9 +13342,7 @@ msgstr "Preferencia de codificador para nuevos flujos de pantalla."
 #. Settings search entry description. One-line summary of what the settings search entry controls.
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:164
 msgid "Encoder, SVC, backup stream, and bitrate presets"
-msgstr ""
-"Codificador, SVC, flujo secundario y ajustes preestablecidos de velocidad de "
-"bits"
+msgstr "Codificador, SVC, flujo secundario y ajustes preestablecidos de velocidad de bits"
 
 #. IAR modal: rule label.
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:375
@@ -18499,9 +18496,7 @@ msgstr "Mantener todos los mensajes"
 #. Settings search entry description. One-line summary of what the settings search entry controls.
 #: src/features/user/components/settings_utils/search_index/DesktopSettingsIndex.ts:66
 msgid "Keep animations, GIFs, hover, and tooltips running unfocused"
-msgstr ""
-"Mantén las animaciones, GIF, efectos visuales y consejos activos incluso "
-"cuando la ventana no esté enfocada"
+msgstr "Mantén las animaciones, GIF, efectos visuales y consejos activos incluso cuando la ventana no esté enfocada"
 
 #. Description for the mirror premium model.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:314
@@ -24765,8 +24760,7 @@ msgstr "Previsualizar sonido"
 #. Settings search entry description. One-line summary of what the settings search entry controls.
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:136
 msgid "Preview, popout, and stream thumbnail behavior"
-msgstr ""
-"Comportamiento de la vista previa, ventana emergente y miniatura del stream"
+msgstr "Comportamiento de la vista previa, ventana emergente y miniatura del stream"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #: src/features/user/components/settings_utils/section_registry/ChatSettingsSections.ts:82
