@@ -33226,7 +33226,7 @@ msgstr "Dadurch werden alle benutzerdefinierten Tastenkombinationen entfernt und
 
 #: src/features/auth/components/pages/ResetPasswordPage.tsx:114
 msgid "This reset link has expired. Reset links last 1 hour. Please request a new one."
-msgstr ""
+msgstr "Dieser Link zum Zurücksetzen ist abgelaufen. Solche Links sind nur eine Stunde lang gültig. Bitte fordern Sie einen neuen an."
 
 #. Fallback role name in a mass-mention warning title.
 #: src/features/channel/components/MentionEveryonePopout.tsx:14
