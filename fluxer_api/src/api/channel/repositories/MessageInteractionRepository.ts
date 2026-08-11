@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type {MessagePollAnswerVotersPage, MessagePollSelectedAnswer, MessagePollVoteRow} from '@app/api/database/types/PollTypes';
+import type {
+	MessagePollAnswerVotersPage,
+	MessagePollSelectedAnswer,
+	MessagePollVoteRow,
+} from '@app/api/database/types/PollTypes';
 import * as BucketUtils from '@fluxer/snowflake/src/SnowflakeBuckets';
 import type {ChannelID, EmojiID, MessageID, UserID} from '../../BrandedTypes';
 import {createEmojiID} from '../../BrandedTypes';
@@ -293,7 +297,7 @@ export class MessageInteractionRepository extends IMessageInteractionRepository 
 		if (!pageRows.length) return {userIds: [], hasMore: false, nextAfter: null};
 		const nextAfter = hasMore ? pageRows[pageRows.length - 1].user_id.toString() : null;
 		return {
-			userIds: rows?.map((row) => row.user_id) ?? [],
+			userIds: pageRows.map((row) => row.user_id),
 			hasMore,
 			nextAfter,
 		};
