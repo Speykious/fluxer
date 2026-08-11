@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type {LimitConfigService} from '@app/api/limits/LimitConfigService';
-import {resolveLimitSafe} from '@app/api/limits/LimitConfigUtils';
-import {createLimitMatchContext} from '@app/api/limits/LimitMatchContextBuilder';
 import type {RequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 import type {Channel} from '@app/api/models/Channel';
 import {Message} from '@app/api/models/Message';
@@ -11,14 +8,13 @@ import type {PollMessageExpiryRow} from '@app/api/Tables';
 import type {IUserRepository} from '@app/api/user/IUserRepository';
 import {mapUserToPartialResponse} from '@app/api/user/UserMappers';
 import {Permissions} from '@fluxer/constants/src/ChannelConstants';
-import {MAX_POLL_VOTES_PER_ANSWER} from '@fluxer/constants/src/LimitConstants';
 import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 import {CannotSelectMultipleAnswersError} from '@fluxer/errors/src/domains/channel/CannotSelectMultipleAnswersError';
 import {CannotVoteOnFinalizedPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnFinalizedPollError';
 import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
-import {MaxPollVotesPerAnswerError} from '@fluxer/errors/src/domains/channel/MaxPollVotesPerAnswerError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
 import {UnknownPollAnswerError} from '@fluxer/errors/src/domains/channel/UnknownPollAnswerError';
+import {MissingPermissionsError} from '@fluxer/errors/src/domains/core/MissingPermissionsError';
 import type {PollAnswerVotersResponse} from '@fluxer/schema/src/domains/message/MessageResponseSchemas';
 import {snowflakeToDate} from '@fluxer/snowflake/src/Snowflake';
 import type {ChannelID, MessageID, UserID} from '../../../BrandedTypes';
@@ -29,7 +25,6 @@ import type {MessageReactionService} from '../interaction/MessageReactionService
 import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
 import type {MessageSendService} from './MessageSendService';
-import {MissingPermissionsError} from '@fluxer/errors/src/domains/core/MissingPermissionsError';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -39,7 +34,6 @@ interface MessagePollServiceDeps {
 	pollExpiryRepository: PollMessageExpiryRepository;
 	messageReactionService: MessageReactionService;
 	messageSendService: MessageSendService;
-	limitConfigService: LimitConfigService;
 }
 
 export class MessagePollService {
@@ -245,8 +239,13 @@ export class MessagePollService {
 			after,
 		);
 		const users = await this.deps.userRepository.listUsers(response.userIds);
+		const usersById = new Map(users.map((user) => [user.id.toString(), user]));
+		const orderedUsers = response.userIds.flatMap((userId) => {
+			const user = usersById.get(userId.toString());
+			return user ? [user] : [];
+		});
 		return {
-			users: users.map((user) => mapUserToPartialResponse(user)),
+			users: orderedUsers.map((user) => mapUserToPartialResponse(user)),
 			has_more: response.hasMore ?? false,
 			next_after: response.nextAfter ?? null,
 		};
@@ -268,7 +267,7 @@ export class MessagePollService {
 			channelId,
 		});
 		await this.assertMessageHistoryAccess({authChannel, messageId});
-		const {channel, guild} = authChannel;
+		const {channel} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) throw new UnknownMessageError();
 
@@ -277,8 +276,12 @@ export class MessagePollService {
 		const poll = newMessageRow.poll;
 		if (!poll) throw new CannotVoteOnNonPollError();
 
-		if (poll.results?.is_finalized) throw new CannotVoteOnFinalizedPollError();
-		if (!poll.allow_multiselect && answerIds.length > 1) throw new CannotSelectMultipleAnswersError();
+		if (poll.results?.is_finalized || (poll.expiry && Date.parse(poll.expiry) <= Date.now())) {
+			throw new CannotVoteOnFinalizedPollError();
+		}
+
+		const uniqueAnswerIds = Array.from(new Set(answerIds));
+		if (!poll.allow_multiselect && uniqueAnswerIds.length > 1) throw new CannotSelectMultipleAnswersError();
 
 		if (!poll.results) {
 			poll.results = {
@@ -300,7 +303,7 @@ export class MessagePollService {
 		);
 		const existingAnswerIds = existingAnswers.map((answer) => answer.id);
 
-		if (answerIds.length === 0) {
+		if (uniqueAnswerIds.length === 0) {
 			for (const answerId of existingAnswerIds) {
 				await this.deps.messageReactionService.removeReaction({
 					authChannel,
@@ -317,14 +320,7 @@ export class MessagePollService {
 				}
 			}
 		} else {
-			const ctx = createLimitMatchContext({user, guildFeatures: guild?.features});
-			const evaluationContext = guild?.features ? 'guild' : 'user';
-			const configSnapshot = this.deps.limitConfigService.getConfigSnapshot();
-			const maxPollVotesCount = Math.floor(
-				resolveLimitSafe(configSnapshot, ctx, 'max_poll_answer_length', MAX_POLL_VOTES_PER_ANSWER, evaluationContext),
-			);
-
-			for (const answerId of answerIds) {
+			for (const answerId of uniqueAnswerIds) {
 				if (existingAnswerIds.includes(answerId)) continue;
 				await this.deps.messageReactionService.addReaction({
 					authChannel,
@@ -336,12 +332,11 @@ export class MessagePollService {
 				const answerCount = poll.results.answer_counts.find((ac) => ac.id === answerId);
 				if (answerCount) {
 					if (!answerCount.count) answerCount.count = 0;
-					if (answerCount.count >= maxPollVotesCount) throw new MaxPollVotesPerAnswerError(maxPollVotesCount);
 					answerCount.count++;
 				}
 			}
 			for (const existingAnswerId of existingAnswerIds) {
-				if (answerIds.includes(existingAnswerId)) continue;
+				if (uniqueAnswerIds.includes(existingAnswerId)) continue;
 				await this.deps.messageReactionService.removeReaction({
 					authChannel,
 					messageId,

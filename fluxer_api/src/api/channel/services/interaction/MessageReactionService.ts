@@ -15,7 +15,9 @@ import {
 	MAX_USERS_PER_MESSAGE_REACTION,
 } from '@fluxer/constants/src/LimitConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
+import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
+import {MaxPollVotesPerAnswerError} from '@fluxer/errors/src/domains/channel/MaxPollVotesPerAnswerError';
 import {MaxReactionsPerMessageError} from '@fluxer/errors/src/domains/channel/MaxReactionsPerMessageError';
 import {MaxUsersPerMessageReactionError} from '@fluxer/errors/src/domains/channel/MaxUsersPerMessageReactionError';
 import {UnknownMessageError} from '@fluxer/errors/src/domains/channel/UnknownMessageError';
@@ -47,7 +49,6 @@ import {assertGuildMemberCanCommunicate} from '../../../utils/GuildCommunication
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
 import type {AuthenticatedChannel} from '../AuthenticatedChannel';
 import {MessageInteractionBase, type ParsedEmoji} from './MessageInteractionBase';
-import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 
 const REACTION_CUSTOM_EMOJI_REGEX = /^(.+):(\d+)$/;
 
@@ -204,7 +205,7 @@ export class MessageReactionService extends MessageInteractionBase {
 				fallback: MAX_POLL_VOTES_PER_ANSWER,
 			});
 			const answerCount = message.poll.results?.answer_counts.find((answerCount) => answerCount.id === answerId);
-			if ((answerCount?.count ?? 0) >= maxVotesPerAnswer) throw new MaxUsersPerMessageReactionError(maxVotesPerAnswer);
+			if ((answerCount?.count ?? 0) >= maxVotesPerAnswer) throw new MaxPollVotesPerAnswerError(maxVotesPerAnswer);
 
 			await this.channelRepository.messageInteractions.addVote(channel.id, messageId, userId, answerId);
 		} else {

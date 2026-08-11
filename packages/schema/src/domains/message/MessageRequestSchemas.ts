@@ -403,7 +403,9 @@ export const MessagesQuery = z.object({
 export type MessagesQuery = z.infer<typeof MessagesQuery>;
 
 export const PollVoteRequestSchema = z.object({
-	answerIds: z.array(z.string()),
+	answerIds: z
+		.array(z.string().regex(/^[1-9]\d*$/))
+		.refine((answerIds) => new Set(answerIds).size === answerIds.length, 'Poll answer IDs must be unique'),
 });
 
 export type PollVoteRequestSchema = z.infer<typeof PollVoteRequestSchema>;

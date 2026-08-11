@@ -3,6 +3,7 @@
 import {
 	MessageRequestSchema,
 	MessageUpdateRequestSchema,
+	PollVoteRequestSchema,
 	RichEmbedRequest,
 } from '@fluxer/schema/src/domains/message/MessageRequestSchemas';
 import {describe, expect, it} from 'vitest';
@@ -106,5 +107,20 @@ describe('RichEmbedRequest', () => {
 			return;
 		}
 		expect(result.data.title).toBe('');
+	});
+});
+
+describe('PollVoteRequestSchema', () => {
+	it('accepts an empty vote and unique positive answer IDs', () => {
+		expect(PollVoteRequestSchema.safeParse({answerIds: []}).success).toBe(true);
+		expect(PollVoteRequestSchema.safeParse({answerIds: ['1', '2']}).success).toBe(true);
+	});
+
+	it('rejects duplicate answer IDs', () => {
+		expect(PollVoteRequestSchema.safeParse({answerIds: ['1', '1']}).success).toBe(false);
+	});
+
+	it.each(['0', '-1', '1.5', 'answer'])('rejects invalid answer ID %s', (answerId) => {
+		expect(PollVoteRequestSchema.safeParse({answerIds: [answerId]}).success).toBe(false);
 	});
 });
