@@ -10855,6 +10855,70 @@
 				]
 			}
 		},
+		"/harvest-downloads/{harvestId}": {
+			"get": {
+				"operationId": "download_data_harvest_archive",
+				"summary": "Download data harvest archive",
+				"tags": ["Users"],
+				"responses": {
+					"204": {"description": "No Content"},
+					"400": {
+						"description": "Bad Request - The request was malformed or contained invalid data",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"429": {
+						"description": "Too Many Requests - You are being rate limited",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": {"type": "string", "enum": ["RATE_LIMITED"]},
+										"message": {"type": "string"},
+										"retry_after": {"type": "number", "description": "Seconds to wait before retrying"},
+										"global": {"type": "boolean", "description": "Whether this is a global rate limit"}
+									},
+									"required": ["code", "message", "retry_after"]
+								}
+							}
+						},
+						"headers": {
+							"Retry-After": {
+								"description": "Number of seconds to wait before retrying (only on 429)",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Limit": {
+								"description": "The number of requests that can be made in the current window",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Remaining": {
+								"description": "The number of remaining requests that can be made",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Reset": {
+								"description": "Unix timestamp when the rate limit resets",
+								"schema": {"type": "integer"}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error - An unexpected error occurred",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					}
+				},
+				"x-mint": {"metadata": {"title": "Download data harvest archive"}},
+				"description": "Streams a completed data harvest archive. Authorised by a signed, expiring token rather than a session, so the link works from the harvest completion email. Only active when presigned harvest downloads are disabled.",
+				"parameters": [
+					{
+						"name": "harvestId",
+						"in": "path",
+						"required": true,
+						"schema": {"type": "string"},
+						"description": "The harvestId"
+					}
+				]
+			}
+		},
 		"/invites/{invite_code}": {
 			"get": {
 				"operationId": "get_invite",
@@ -11065,6 +11129,64 @@
 						"description": "The invite code"
 					}
 				]
+			}
+		},
+		"/ip": {
+			"get": {
+				"operationId": "get_client_geolocation",
+				"summary": "Get client geolocation",
+				"tags": ["Geolocation"],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/GeolocationResponse"}}}
+					},
+					"400": {
+						"description": "Bad Request - The request was malformed or contained invalid data",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					},
+					"429": {
+						"description": "Too Many Requests - You are being rate limited",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": {"type": "string", "enum": ["RATE_LIMITED"]},
+										"message": {"type": "string"},
+										"retry_after": {"type": "number", "description": "Seconds to wait before retrying"},
+										"global": {"type": "boolean", "description": "Whether this is a global rate limit"}
+									},
+									"required": ["code", "message", "retry_after"]
+								}
+							}
+						},
+						"headers": {
+							"Retry-After": {
+								"description": "Number of seconds to wait before retrying (only on 429)",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Limit": {
+								"description": "The number of requests that can be made in the current window",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Remaining": {
+								"description": "The number of remaining requests that can be made",
+								"schema": {"type": "integer"}
+							},
+							"X-RateLimit-Reset": {
+								"description": "Unix timestamp when the rate limit resets",
+								"schema": {"type": "integer"}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error - An unexpected error occurred",
+						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+					}
+				},
+				"x-mint": {"metadata": {"title": "Get client geolocation"}},
+				"description": "Resolves the approximate location of the requesting client from its IP address, together with the locations where age restricted content is gated or unavailable."
 			}
 		},
 		"/oauth2/@me": {
@@ -15187,7 +15309,7 @@
 					}
 				},
 				"x-mint": {"metadata": {"title": "Search messages"}},
-				"description": "Searches for messages across guilds and channels accessible to the authenticated user.",
+				"description": "Searches for messages across guilds and channels accessible to the authenticated user. Bots must supply a context guild or channel and may only use the current scope.",
 				"security": [{"sessionToken": []}],
 				"requestBody": {
 					"required": true,
@@ -16395,73 +16517,6 @@
 					"required": true,
 					"content": {"application/json": {"schema": {"$ref": "#/components/schemas/SudoVerificationSchema"}}}
 				}
-			}
-		},
-		"/users/@me/canary-tester/join": {
-			"post": {
-				"operationId": "join_canary_testers",
-				"summary": "Join the canary testers guild",
-				"tags": ["Users"],
-				"responses": {
-					"200": {
-						"description": "Success",
-						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/SuccessResponse"}}}
-					},
-					"400": {
-						"description": "Bad Request - The request was malformed or contained invalid data",
-						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
-					},
-					"401": {
-						"description": "Unauthorized - Authentication is required or the token is invalid",
-						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
-					},
-					"403": {
-						"description": "Forbidden - You do not have permission to perform this action",
-						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
-					},
-					"429": {
-						"description": "Too Many Requests - You are being rate limited",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object",
-									"properties": {
-										"code": {"type": "string", "enum": ["RATE_LIMITED"]},
-										"message": {"type": "string"},
-										"retry_after": {"type": "number", "description": "Seconds to wait before retrying"},
-										"global": {"type": "boolean", "description": "Whether this is a global rate limit"}
-									},
-									"required": ["code", "message", "retry_after"]
-								}
-							}
-						},
-						"headers": {
-							"Retry-After": {
-								"description": "Number of seconds to wait before retrying (only on 429)",
-								"schema": {"type": "integer"}
-							},
-							"X-RateLimit-Limit": {
-								"description": "The number of requests that can be made in the current window",
-								"schema": {"type": "integer"}
-							},
-							"X-RateLimit-Remaining": {
-								"description": "The number of remaining requests that can be made",
-								"schema": {"type": "integer"}
-							},
-							"X-RateLimit-Reset": {
-								"description": "Unix timestamp when the rate limit resets",
-								"schema": {"type": "integer"}
-							}
-						}
-					},
-					"500": {
-						"description": "Internal Server Error - An unexpected error occurred",
-						"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
-					}
-				},
-				"x-mint": {"metadata": {"title": "Join the canary testers guild"}},
-				"description": "Adds the authenticated user to the hardcoded Fluxer Testers guild used for canary feedback. Restricted to non-bot users with verified email, an account at least 30 minutes old, no effective suspicious-activity flags, and not banned from the target guild. Rate-limited; surfaced via the canary nagbar.",
-				"security": [{"sessionToken": []}]
 			}
 		},
 		"/users/@me/channels": {
@@ -25479,7 +25534,6 @@
 					"DISCRIMINATOR_REQUIRED",
 					"EMAIL_SERVICE_NOT_TESTABLE",
 					"EMAIL_VERIFICATION_REQUIRED",
-					"CANARY_TESTER_EMAIL_VERIFICATION_REQUIRED",
 					"DIRECT_MESSAGE_EMAIL_VERIFICATION_REQUIRED",
 					"FRIEND_REQUEST_EMAIL_VERIFICATION_REQUIRED",
 					"GUILD_CREATION_EMAIL_VERIFICATION_REQUIRED",
@@ -25564,8 +25618,6 @@
 					"GLOBAL_IP_BANNED",
 					"GLOBAL_IP_TEMPORARILY_BANNED",
 					"IP_BANNED",
-					"RESIDENTIAL_PROXY_BLOCKED",
-					"TOR_BLOCKED",
 					"MAX_ANIMATED_EMOJIS",
 					"MAX_APPLICATIONS",
 					"MAX_BOOKMARKS",
@@ -25815,7 +25867,6 @@
 					"Email verification is required for this action.",
 					"Email verification is required for this action.",
 					"Email verification is required for this action.",
-					"Email verification is required for this action.",
 					"Registration is closed on this instance.",
 					"This registration is waiting for admin approval.",
 					"This registration request was rejected.",
@@ -25890,8 +25941,6 @@
 					"Your IP address {ipAddress} has been permanently blocked from the Fluxer API by platform administrators. If you believe this is a mistake, contact support@fluxer.app to appeal. Include this IP address in your appeal.",
 					"Your IP address {ipAddress} has been temporarily blocked from the Fluxer API for 24 hours because of abusive or unusual access patterns. We usually do not provide appeals for temporary API bans. Change IP addresses or wait for the ban to expire, and review the Fluxer API access patterns coming from your client.",
 					"Your IP address {ipAddress} has been permanently blocked from the Fluxer API by platform administrators. If you believe this is a mistake, contact support@fluxer.app to appeal. Include this IP address in your appeal.",
-					"This user's IP is banned from this community.",
-					"This user's IP is banned from this community.",
 					"You've reached the maximum of {count, plural, one {# animated emoji} other {# animated emojis}}.",
 					"You've reached the maximum of {limit, plural, one {# application} other {# applications}}.",
 					"You've reached the maximum of {count, plural, one {# bookmark} other {# bookmarks}}.",
@@ -26336,11 +26385,18 @@
 										"anyOf": [{"type": "string"}, {"type": "null"}],
 										"description": "The operating system of the requesting device"
 									},
+									"device": {
+										"enum": ["mobile", "desktop"],
+										"type": "string",
+										"x-enumNames": ["mobile", "desktop"],
+										"description": "Device class of the requesting device, decided by the server"
+									},
 									"location": {
 										"anyOf": [{"$ref": "#/components/schemas/AuthSessionLocation"}, {"type": "null"}],
 										"description": "The approximate location of the requesting device"
 									}
-								}
+								},
+								"required": ["device"]
 							},
 							{"type": "null"}
 						],
@@ -26584,11 +26640,18 @@
 										"anyOf": [{"type": "string"}, {"type": "null"}],
 										"description": "The browser reported by the client"
 									},
+									"device": {
+										"enum": ["mobile", "desktop"],
+										"type": "string",
+										"x-enumNames": ["mobile", "desktop"],
+										"description": "Device class of the session, decided by the server"
+									},
 									"location": {
 										"anyOf": [{"$ref": "#/components/schemas/AuthSessionLocation"}, {"type": "null"}],
 										"description": "The geolocation data sent by the client"
 									}
-								}
+								},
+								"required": ["device"]
 							},
 							{"type": "null"}
 						],
@@ -27145,7 +27208,7 @@
 							},
 							{"type": "null"}
 						],
-						"description": "The message that this message is replying to or forwarding"
+						"description": "The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message carries no default reference. Clients must tell null apart from absent by key presence."
 					}
 				},
 				"required": [
@@ -27179,8 +27242,7 @@
 						"value": "4096",
 						"description": "This message will not trigger push or desktop notifications"
 					},
-					{"name": "VOICE_MESSAGE", "value": "8192", "description": "This message is a voice message"},
-					{"name": "COMPACT_ATTACHMENTS", "value": "131072", "description": "Display attachments in a compact format"}
+					{"name": "VOICE_MESSAGE", "value": "8192", "description": "This message is a voice message"}
 				],
 				"description": "Message flags bitfield"
 			},
@@ -27495,7 +27557,7 @@
 									"type": "object",
 									"properties": {
 										"answer_id": {
-											"anyOf": [{"type": "number"}, {"type": "null"}],
+											"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
 											"description": "The ID of the poll answer (starts at 1)"
 										},
 										"poll_media": {
@@ -27552,7 +27614,7 @@
 						"description": "Whether the poll allows multiple answers"
 					},
 					"layout_type": {
-						"anyOf": [{"type": "number"}, {"type": "null"}],
+						"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
 						"description": "The layout type of the poll"
 					},
 					"results": {
@@ -27568,11 +27630,11 @@
 													"type": "object",
 													"properties": {
 														"id": {
-															"anyOf": [{"type": "number"}, {"type": "null"}],
+															"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
 															"description": "The ID of the poll answer"
 														},
 														"count": {
-															"anyOf": [{"type": "number"}, {"type": "null"}],
+															"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
 															"description": "The number of votes on this answer"
 														},
 														"me_voted": {
@@ -27840,9 +27902,9 @@
 								"limit": {
 									"type": "integer",
 									"minimum": 1,
-									"maximum": 25,
+									"maximum": 50,
 									"format": "int32",
-									"description": "Number of messages to return for this channel (1-25)"
+									"description": "Number of messages to return for this channel (1-50)"
 								},
 								"before": {"$ref": "#/components/schemas/SnowflakeType"},
 								"after": {"$ref": "#/components/schemas/SnowflakeType"},
@@ -29039,8 +29101,7 @@
 						],
 						"description": "Array of field objects (max 25)"
 					}
-				},
-				"required": ["description"]
+				}
 			},
 			"RichEmbedAuthorRequest": {
 				"anyOf": [
@@ -29125,7 +29186,7 @@
 									"type": "object",
 									"properties": {
 										"answer_id": {
-											"anyOf": [{"type": "number"}, {"type": "null"}],
+											"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
 											"description": "The ID of the poll answer (starts at 1)"
 										},
 										"poll_media": {
@@ -29169,7 +29230,10 @@
 						],
 						"description": "The possible answers of the poll"
 					},
-					"duration": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "Duration of the poll in hours"},
+					"duration": {
+						"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
+						"description": "Duration of the poll in hours"
+					},
 					"anonymous_voting": {
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Whether the votes are anonymous on this poll"
@@ -29178,7 +29242,10 @@
 						"anyOf": [{"type": "boolean"}, {"type": "null"}],
 						"description": "Whether the poll allows multiple answers"
 					},
-					"layout_type": {"anyOf": [{"type": "number"}, {"type": "null"}], "description": "The layout type of the poll"}
+					"layout_type": {
+						"anyOf": [{"type": "integer", "format": "int53"}, {"type": "null"}],
+						"description": "The layout type of the poll"
+					}
 				}
 			},
 			"ClientUploadedAttachmentRequest": {
@@ -30325,6 +30392,7 @@
 								"id": {"type": "string", "pattern": "^(0|[1-9][0-9]*)$", "description": "Guild ID"},
 								"name": {"type": "string", "description": "Guild name"},
 								"icon": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "Guild icon hash"},
+								"banner": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "Guild banner hash"},
 								"description": {
 									"anyOf": [{"type": "string"}, {"type": "null"}],
 									"description": "Discovery description"
@@ -30353,9 +30421,21 @@
 						},
 						"description": "Discovery guild results"
 					},
-					"total": {"type": "number", "description": "Total number of matching guilds"}
+					"total": {"type": "number", "description": "Total number of matching guilds"},
+					"category_counts": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"category_type": {"type": "number", "description": "Discovery category type"},
+								"count": {"type": "number", "description": "Number of matching guilds in this category"}
+							},
+							"required": ["category_type", "count"]
+						},
+						"description": "Match counts per category for the current filters, ignoring the category filter"
+					}
 				},
-				"required": ["guilds", "total"]
+				"required": ["guilds", "total", "category_counts"]
 			},
 			"DonationCheckoutResponse": {
 				"type": "object",
@@ -32168,8 +32248,7 @@
 						"anyOf": [{"type": "string"}, {"type": "null"}],
 						"description": "The voice connection ID for the member"
 					}
-				},
-				"required": ["nick", "communication_disabled_until"]
+				}
 			},
 			"GuildRoleCreateRequest": {
 				"type": "object",
@@ -32561,6 +32640,49 @@
 					"temporary": {"type": "boolean", "description": "Whether the invite grants temporary access"}
 				},
 				"required": ["code", "type", "pack", "temporary"]
+			},
+			"GeolocationResponse": {
+				"type": "object",
+				"properties": {
+					"countryCode": {
+						"anyOf": [{"type": "string"}, {"type": "null"}],
+						"description": "ISO 3166-1 alpha-2 country code resolved for the client, or null when it cannot be resolved"
+					},
+					"regionCode": {
+						"anyOf": [{"type": "string"}, {"type": "null"}],
+						"description": "ISO 3166-2 subdivision code resolved for the client, or null when it cannot be resolved"
+					},
+					"latitude": {
+						"anyOf": [{"type": "string"}, {"type": "null"}],
+						"description": "Approximate latitude of the client, or null when it cannot be resolved"
+					},
+					"longitude": {
+						"anyOf": [{"type": "string"}, {"type": "null"}],
+						"description": "Approximate longitude of the client, or null when it cannot be resolved"
+					},
+					"ageRestrictedGeos": {
+						"type": "array",
+						"items": {"$ref": "#/components/schemas/GeoEntry"},
+						"description": "Locations where age restricted content requires an age check"
+					},
+					"ageBlockedGeos": {
+						"type": "array",
+						"items": {"$ref": "#/components/schemas/GeoEntry"},
+						"description": "Locations where age restricted content is unavailable"
+					}
+				},
+				"required": ["countryCode", "regionCode", "latitude", "longitude", "ageRestrictedGeos", "ageBlockedGeos"]
+			},
+			"GeoEntry": {
+				"type": "object",
+				"properties": {
+					"countryCode": {"type": "string", "description": "ISO 3166-1 alpha-2 country code"},
+					"regionCode": {
+						"anyOf": [{"type": "string"}, {"type": "null"}],
+						"description": "ISO 3166-2 subdivision code, or null when the entry covers the whole country"
+					}
+				},
+				"required": ["countryCode", "regionCode"]
 			},
 			"OAuth2MeResponse": {
 				"type": "object",
@@ -33762,12 +33884,20 @@
 					"payment_intent_id": {"anyOf": [{"type": "string"}, {"type": "null"}]},
 					"charge_id": {"anyOf": [{"type": "string"}, {"type": "null"}]},
 					"refund_id": {"anyOf": [{"type": "string"}, {"type": "null"}]},
-					"refunded_amount_cents": {"type": "integer", "format": "int53"},
+					"refunded_amount_cents": {
+						"type": "integer",
+						"format": "int53",
+						"description": "Amount actually refunded so far, in the currency minor unit; 0 until the provider confirms success"
+					},
 					"invoice_amount_paid_cents": {"type": "integer", "format": "int53"},
 					"currency": {"type": "string"},
 					"subscription_id": {
 						"anyOf": [{"type": "string"}, {"type": "null"}],
 						"description": "Subscription that was cancelled along with the refund, when applicable"
+					},
+					"status": {
+						"anyOf": [{"type": "string"}, {"type": "null"}],
+						"description": "Provider status of the refund (e.g. pending, succeeded, failed); money only moved once succeeded"
 					}
 				},
 				"required": [
@@ -33778,7 +33908,8 @@
 					"refunded_amount_cents",
 					"invoice_amount_paid_cents",
 					"currency",
-					"subscription_id"
+					"subscription_id",
+					"status"
 				]
 			},
 			"ReadStateAckResponse": {
@@ -35656,7 +35787,8 @@
 				"properties": {
 					"ticket": {"type": "string", "description": "Email change ticket identifier"},
 					"new_email": {"$ref": "#/components/schemas/EmailType"},
-					"original_proof": {"type": "string", "description": "Proof token obtained from verifying the original email"}
+					"original_proof": {"type": "string", "description": "Proof token obtained from verifying the original email"},
+					"new_password": {"$ref": "#/components/schemas/PasswordType"}
 				},
 				"required": ["ticket", "new_email", "original_proof"]
 			},
@@ -36401,7 +36533,7 @@
 			"HarvestDownloadUrlResponse": {
 				"type": "object",
 				"properties": {
-					"download_url": {"type": "string", "description": "The presigned URL to download the harvest archive"},
+					"download_url": {"type": "string", "description": "The temporary URL to download the harvest archive"},
 					"expires_at": {"type": "string", "description": "ISO 8601 timestamp when the harvest download expires"}
 				},
 				"required": ["download_url", "expires_at"]
@@ -38805,6 +38937,7 @@
 		{"name": "Connections"},
 		{"name": "Messages"},
 		{"name": "Donations"},
+		{"name": "Geolocation"},
 		{"name": "Discovery"},
 		{"name": "Emojis"},
 		{"name": "Stickers"},

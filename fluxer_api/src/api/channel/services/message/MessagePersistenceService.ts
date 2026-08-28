@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import assert from 'node:assert/strict';
 import type {MessagePoll} from '@app/api/database/types/PollTypes';
 import {MessageFlags, Permissions, SENDABLE_MESSAGE_FLAGS} from '@fluxer/constants/src/ChannelConstants';
 import {UserFlags} from '@fluxer/constants/src/UserConstants';
@@ -85,6 +86,7 @@ interface CreateMessageParams {
 	flags: number;
 	embeds?: Array<RichEmbedRequest>;
 	attachments?: Array<AttachmentToProcess>;
+	attachmentUploadUserId?: UserID;
 	processedAttachments?: Array<MessageAttachment>;
 	stickerIds?: Array<StickerID>;
 	poll?: MessagePoll;
@@ -295,12 +297,15 @@ export class MessagePersistenceService {
 		if (!params.attachments || params.attachments.length === 0) {
 			return null;
 		}
+		const uploadUserId = params.attachmentUploadUserId;
+		assert(uploadUserId !== undefined, 'Attachment upload actor must be resolved before processing new attachments');
 		return this.attachmentService.computeAttachments({
 			message: {
 				id: params.messageId,
 				channelId: params.channelId,
 			} as Message,
 			attachments: params.attachments,
+			uploadUserId,
 			channel: params.channel,
 			guild: params.guild,
 			member: params.member,
@@ -415,6 +420,7 @@ export class MessagePersistenceService {
 		guild: GuildResponse | null;
 		member?: GuildMemberResponse | null;
 		allowEmbeds?: boolean;
+		attachmentUploadUserId?: UserID;
 		isBot?: boolean;
 		isBugHunterBot?: boolean;
 		locale?: string | null;
@@ -496,9 +502,15 @@ export class MessagePersistenceService {
 				}
 				let processedNewAttachments: Array<MessageAttachment> = [];
 				if (newAttachments.length > 0) {
+					const uploadUserId = params.attachmentUploadUserId;
+					assert(
+						uploadUserId !== undefined,
+						'Attachment upload actor must be resolved before processing new attachments',
+					);
 					const attachmentResult = await this.attachmentService.computeAttachments({
 						message,
 						attachments: newAttachments,
+						uploadUserId,
 						channel,
 						guild,
 						member,
@@ -516,7 +528,8 @@ export class MessagePersistenceService {
 			}
 			hasChanges = true;
 		}
-		if (allowEmbeds && (data.embeds !== undefined || (data.content !== undefined && message.embeds.length === 0))) {
+		const embedsExplicitlyProvided = data.embeds !== undefined;
+		if (allowEmbeds && (embedsExplicitlyProvided || data.content !== undefined)) {
 			const attachmentsForResolution = updatedRowData.attachments || [];
 			const resolvedEmbeds = this.embedAttachmentResolver.resolveEmbedAttachmentUrls({
 				embeds: data.embeds,
@@ -534,7 +547,15 @@ export class MessagePersistenceService {
 				nsfwMode: isNSFWAllowed ? 'allow' : 'block',
 				isBugHunterBot: params.isBugHunterBot,
 			});
-			updatedRowData.embeds = initialEmbeds;
+			if (embedsExplicitlyProvided) {
+				updatedRowData.embeds = initialEmbeds;
+			} else {
+				const preservedEmbeds = message.embeds
+					.map((embed) => embed.toMessageEmbed())
+					.filter((embed) => embed.type === 'rich');
+				const nextEmbeds = [...preservedEmbeds, ...(initialEmbeds ?? [])];
+				updatedRowData.embeds = nextEmbeds.length > 0 ? nextEmbeds : null;
+			}
 			hasUncachedUrls = embedUrls;
 			hasChanges = true;
 		}

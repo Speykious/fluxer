@@ -60,8 +60,6 @@ import {CassandraHistoricalOutcomeRepository} from '../risk/HistoricalOutcomeRep
 import {buildIpInfoCache, buildIpInfoRequestAuditLogger} from '../risk/IpInfoCacheFactory';
 import {CassandraRegistrationEventsRepository} from '../risk/RegistrationEventsRepository';
 import {CassandraRiskAssessmentRepository} from '../risk/RiskAssessmentRepository';
-import {buildRiskCacheLoaders} from '../risk/RiskCacheLoaders';
-import {RiskCacheManager} from '../risk/RiskCacheManager';
 import {createRiskToolbox} from '../risk/RiskToolboxFactory';
 import {CassandraSuspiciousIpRepository} from '../risk/SuspiciousIpRepository';
 import {RpcService} from '../rpc/RpcService';
@@ -192,24 +190,6 @@ export function shutdownReportService(): void {
 	}
 }
 
-let _riskCacheManager: RiskCacheManager | null = null;
-
-function getRiskCacheManager(): RiskCacheManager {
-	if (!_riskCacheManager) {
-		_riskCacheManager = new RiskCacheManager({
-			logger: Logger,
-			...buildRiskCacheLoaders({
-				adminRepository: getAdminRepository(),
-			}),
-		});
-	}
-	return _riskCacheManager;
-}
-
-export function getRiskCacheManagerInstance(): RiskCacheManager {
-	return getRiskCacheManager();
-}
-
 let _inboundSmsChallengeService: InboundSmsChallengeService | null = null;
 
 function getInboundSmsChallengeService(): InboundSmsChallengeService {
@@ -304,20 +284,19 @@ export function setInjectedAccountPolicyEvaluator(evaluator: IAccountPolicyEvalu
 function getRegistrationRiskEvaluator(): IRegistrationRiskEvaluator {
 	if (_registrationRiskEvaluator) return _registrationRiskEvaluator;
 	if (!Config.risk.enabled) {
-		Logger.warn(
+		Logger.info(
 			{},
 			'[ServiceMiddleware] integrations.risk_integration.enabled is false — account risk scoring is disabled',
 		);
 		_registrationRiskEvaluator = noopRegistrationRiskEvaluator;
 		return _registrationRiskEvaluator;
 	}
-	const cacheManager = getRiskCacheManager();
 	const ipInfoService = getIpInfoService();
 	const ipInfoChecker = Config.risk.ipinfoApiKey ? createIpInfoChecker({ipInfoService}) : undefined;
 	const cacheService = getCacheService();
 	const reverseDnsLookup = createReverseDnsLookup({cacheService});
 	const toolbox = createRiskToolbox({
-		disposableDomainsRef: cacheManager.disposableDomainsRef,
+		adminRepository: getAdminRepository(),
 		ipInfoChecker,
 		reverseDnsLookup,
 		ipInfoService,
@@ -482,7 +461,6 @@ export const ServiceMiddleware = createMiddleware<HonoEnv>(async (ctx, next) => 
 		{
 			inviteService,
 			kvDeletionQueue: getKVAccountDeletionQueue(),
-			flutterClientGateMemberRepository: guildRepository,
 		},
 	);
 	const reportService = getReportServiceInstance();
@@ -705,8 +683,6 @@ export const ServiceMiddleware = createMiddleware<HonoEnv>(async (ctx, next) => 
 			webhookRepository,
 			storageService,
 			avatarService,
-			channelService,
-			userService.channelService,
 			rateLimitService,
 			limitConfigService,
 			kvClient,
@@ -787,3 +763,15 @@ export const ServiceMiddleware = createMiddleware<HonoEnv>(async (ctx, next) => 
 	ctx.set('ncmecSubmissionService', getNcmecSubmissionService());
 	await next();
 });
+
+export function resetServiceMiddlewareForTesting(): void {
+	shutdownReportService();
+	_inboundSmsChallengeService = null;
+	_registrationEventsRepository = null;
+	_riskAssessmentRepository = null;
+	_historicalOutcomeRepository = null;
+	_suspiciousIpRepository = null;
+	_ipInfoService = null;
+	_registrationRiskEvaluator = null;
+	_liveKitWebhookService = null;
+}

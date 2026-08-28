@@ -5,6 +5,7 @@ import {Endpoints} from '@app/features/app/constants/Endpoints';
 import * as DraftCommands from '@app/features/messaging/commands/DraftCommands';
 import * as MessageCommands from '@app/features/messaging/commands/MessageCommands';
 import {FileSizeTooLargeModal} from '@app/features/messaging/components/alerts/FileSizeTooLargeModal';
+import {MessageSendFailedModal} from '@app/features/messaging/components/alerts/MessageSendFailedModal';
 import {MessageSendTooQuickModal} from '@app/features/messaging/components/alerts/MessageSendTooQuickModal';
 import type {
 	ScheduledAttachment,
@@ -23,9 +24,10 @@ import {
 	normalizeMessageContent,
 } from '@app/features/messaging/utils/MessageRequestUtils';
 import * as MessageSubmitUtils from '@app/features/messaging/utils/MessageSubmitUtils';
+import {resolveRetryAfterMs} from '@app/features/messaging/utils/RetryAfterUtils';
 import {MatureContentRejectedModal} from '@app/features/moderation/components/alerts/MatureContentRejectedModal';
 import {http} from '@app/features/platform/transport/RestTransport';
-import type {HttpError} from '@app/features/platform/types/EndpointError';
+import {HttpError} from '@app/features/platform/types/EndpointError';
 import type {RestResponse} from '@app/features/platform/types/TransportTypes';
 import {Logger} from '@app/features/platform/utils/AppLogger';
 import * as SlowmodeCommands from '@app/features/slowmode/commands/SlowmodeCommands';
@@ -65,7 +67,6 @@ type ScheduledMessageRequest = MessageCreateRequest & {
 
 interface ApiErrorBody {
 	code?: number | string;
-	retry_after?: number;
 	message?: string;
 }
 
@@ -132,13 +133,12 @@ function claimScheduleAttachments(params: ScheduleMessageParams, nonce: string):
 		params.content,
 		params.messageReference,
 		params.replyMentioning,
-		params.favoriteMemeId,
 	);
 }
 
 async function prepareScheduledMessage(params: ScheduleMessageParams): Promise<PreparedScheduledMessage> {
 	const nonce = SnowflakeUtils.fromTimestamp(Date.now());
-	const normalized = normalizeMessageContent(params.content, params.favoriteMemeId);
+	const normalized = normalizeMessageContent(params.content);
 	claimScheduleAttachments(params, nonce);
 	let attachments: Array<ApiAttachmentMetadata> | undefined;
 	let files: Array<File> | undefined;
@@ -252,7 +252,7 @@ export async function scheduleMessage(i18n: I18n, params: ScheduleMessageParams)
 	} catch (error) {
 		handleScheduleError(
 			i18n,
-			error as HttpError,
+			error,
 			params.channelId,
 			prepared.nonce,
 			params.content,
@@ -367,12 +367,12 @@ async function scheduleMultipartMessage(
 }
 
 const getApiErrorBody = (error: HttpError): ApiErrorBody | undefined => {
-	return typeof error?.body === 'object' && error.body !== null ? (error.body as ApiErrorBody) : undefined;
+	return typeof error.body === 'object' && error.body !== null ? (error.body as ApiErrorBody) : undefined;
 };
 
 function handleScheduleError(
 	i18n: I18n,
-	error: HttpError,
+	error: unknown,
 	channelId: string,
 	nonce: string,
 	content: string,
@@ -381,13 +381,34 @@ function handleScheduleError(
 	hadAttachments?: boolean,
 ): void {
 	restoreDraftAfterScheduleFailure(channelId, nonce, content, messageReference, replyMentioning, hadAttachments);
+	if (!(error instanceof HttpError)) {
+		ModalCommands.push(
+			modal(() => (
+				<MessageSendFailedModal
+					hasAttachments={hadAttachments}
+					data-flx="messaging.scheduled-message-commands.handle-schedule-error.message-send-failed-modal--request"
+				/>
+			)),
+		);
+		return;
+	}
 	if (isRateLimitError(error)) {
 		handleScheduleRateLimit(i18n, error);
 		return;
 	}
 	if (isSlowmodeError(error)) {
-		const retryAfterBody = getApiErrorBody(error)?.retry_after;
-		const retryAfterMs = SlowmodeCommands.retryAfterSecondsToMs(retryAfterBody);
+		const retryAfterMs = SlowmodeCommands.clampSlowmodeRetryAfterMs(resolveRetryAfterMs(error));
+		if (retryAfterMs <= 0) {
+			ModalCommands.push(
+				modal(() => (
+					<MessageSendFailedModal
+						hasAttachments={hadAttachments}
+						data-flx="messaging.scheduled-message-commands.handle-schedule-error.message-send-failed-modal"
+					/>
+				)),
+			);
+			return;
+		}
 		const retryAfter = Math.ceil(retryAfterMs / 1000);
 		SlowmodeCommands.updateSlowmodeRemaining(channelId, retryAfterMs);
 		ModalCommands.push(
@@ -424,10 +445,19 @@ function handleScheduleError(
 		);
 		return;
 	}
+	ModalCommands.push(
+		modal(() => (
+			<MessageSendFailedModal
+				hasAttachments={hadAttachments}
+				data-flx="messaging.scheduled-message-commands.handle-schedule-error.message-send-failed-modal--http"
+			/>
+		)),
+	);
 }
 
 function handleScheduleRateLimit(_i18n: I18n, error: HttpError): void {
-	const retryAfterSeconds = getApiErrorBody(error)?.retry_after ?? 0;
+	const retryAfterMs = resolveRetryAfterMs(error);
+	const retryAfterSeconds = retryAfterMs === null ? undefined : Math.ceil(retryAfterMs / 1000);
 	ModalCommands.push(
 		modal(() => (
 			<MessageSendTooQuickModal
@@ -441,11 +471,15 @@ function handleScheduleRateLimit(_i18n: I18n, error: HttpError): void {
 }
 
 function isRateLimitError(error: HttpError): boolean {
-	return error?.status === 429;
+	if (error.status !== 429) return false;
+	return !isSlowmodeError(error);
 }
 
 function isSlowmodeError(error: HttpError): boolean {
-	return error?.status === 400 && getApiErrorBody(error)?.code === APIErrorCodes.SLOWMODE_RATE_LIMITED;
+	if (error.status !== 400 && error.status !== 429) return false;
+	const body = getApiErrorBody(error);
+	if (body === undefined) return false;
+	return body.code === APIErrorCodes.SLOWMODE_RATE_LIMITED;
 }
 
 function isFeatureDisabledError(error: HttpError): boolean {

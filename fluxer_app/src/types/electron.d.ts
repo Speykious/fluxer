@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import type {VoiceEngineV2BridgeApi} from '@fluxer/voice_engine_v2/bridge';
+import type {VoiceEngineV2BridgeHardwareEncoderApi} from '@fluxer/voice_engine_v2/bridge';
 import type {AuthenticationResponseJSON, RegistrationResponseJSON} from '@simplewebauthn/browser';
 
 export type InputMonitoringPermissionStatus = 'granted' | 'denied' | 'not-determined' | 'unsupported';
-export type DesktopBuildVariant = 'default' | 'windows-game-capture';
-
 export interface DesktopSource {
 	id: string;
 	name: string;
@@ -20,7 +18,6 @@ export interface DesktopSource {
 export interface DesktopInfo {
 	version: string;
 	channel: 'stable' | 'canary';
-	buildVariant: DesktopBuildVariant;
 	arch: string;
 	hardwareArch: string;
 	runningUnderRosetta: boolean;
@@ -96,7 +93,6 @@ export interface DesktopWindowBehaviorSettings {
 	activeSmoothScrolling: boolean;
 	middleClickAutoscroll: boolean;
 	activeMiddleClickAutoscroll: boolean;
-	firstClickPassThroughWhenUnfocused: boolean;
 }
 
 export interface ThemeLocalFileReference {
@@ -352,7 +348,6 @@ export interface AppMetricsSnapshot {
 export interface ElectronAPI {
 	platform: 'darwin' | 'win32' | 'linux' | string;
 	buildChannel: 'stable' | 'canary';
-	buildVariant: DesktopBuildVariant;
 	openExternal(url: string): Promise<void>;
 	downloadFile(url: string, suggestedName: string): Promise<DownloadResult>;
 	onUpdaterEvent(callback: (event: UpdaterEvent) => void): () => void;
@@ -382,7 +377,6 @@ export interface ElectronAPI {
 	clearThemeLocalFiles?(): Promise<void>;
 	importThemeDirectory?(): Promise<Array<ThemeDirectoryCssFile>>;
 	cacheVoiceBackgroundMedia?(options: VoiceBackgroundMediaCacheRequest): Promise<VoiceBackgroundMediaCacheResult>;
-	resolveVoiceBackgroundMedia?(id: string): Promise<VoiceBackgroundMediaCacheResult | null>;
 	readVoiceBackgroundMedia?(id: string): Promise<VoiceBackgroundMediaReadResult | null>;
 	deleteVoiceBackgroundMedia?(id: string): Promise<void>;
 	getDesktopTroubleshootingSettings?(): Promise<DesktopTroubleshootingSettings>;
@@ -489,15 +483,12 @@ export interface ElectronAPI {
 	passkeyIsSupported?(): Promise<boolean>;
 	passkeyRegister?(options: unknown, requestContext?: {pin?: string}): Promise<RegistrationResponseJSON>;
 	passkeyAuthenticate?(options: unknown, requestContext?: {pin?: string}): Promise<AuthenticationResponseJSON>;
-	onRpcNavigate?(callback: (path: string) => void): () => void;
-	switchInstanceUrl?(options: {instanceUrl: string; desktopHandoffCode?: string | null}): Promise<void>;
-	consumeDesktopHandoffCode?(): Promise<string | null>;
 	getOpenH264Status?(): Promise<OpenH264Status>;
 	setOpenH264Enabled?(enabled: boolean): Promise<OpenH264Status>;
 	virtmic?: VirtmicApi;
 	nativeAudio?: NativeAudioApi;
 	nativeScreenCapture?: NativeScreenCaptureApi;
-	voiceEngine?: VoiceEngineV2BridgeApi;
+	voiceEngine?: VoiceEngineV2BridgeHardwareEncoderApi;
 }
 
 export type VirtmicUnavailableReason =

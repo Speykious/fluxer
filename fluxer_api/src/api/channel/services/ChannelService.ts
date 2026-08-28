@@ -152,6 +152,7 @@ export class ChannelService {
 			favoriteMemeRepository,
 			guildAuditLogService,
 			messagePersistenceService,
+			attachmentUploadTraceRepository,
 			limitConfigService,
 			directMessageSpamMitigationService,
 			this.interactions.reactionService,

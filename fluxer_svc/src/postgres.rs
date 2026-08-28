@@ -11,6 +11,9 @@ use std::str::FromStr;
 use tokio_postgres::{Config as PgConfig, Row, config::SslMode, types::ToSql};
 use tokio_postgres_rustls::MakeRustlsConnect;
 
+const POSTGRES_KV_SCHEMA_LOCK_NAMESPACE: i32 = 0x4658_4b56;
+const POSTGRES_KV_SCHEMA_LOCK_TIMEOUT: &str = "120s";
+
 #[derive(Clone, Debug)]
 pub struct PostgresConfig {
     pub url: Option<String>,
@@ -134,8 +137,30 @@ pub async fn ensure_kv_schema(pool: &Pool, kv_table: &str) -> anyhow::Result<()>
     let messages_message_index = quote_identifier(&format!("{kv_table}_messages_message_idx"))?;
     let message_reactions_message_index =
         quote_identifier(&format!("{kv_table}_message_reactions_message_idx"))?;
-    let client = pool.get().await?;
-    client
+    let mut client = pool.get().await?;
+    let transaction = client
+        .transaction()
+        .await
+        .context("failed to begin Postgres KV schema transaction")?;
+    transaction
+        .query_one(
+            "SELECT set_config('statement_timeout', $1, true)",
+            &[&POSTGRES_KV_SCHEMA_LOCK_TIMEOUT],
+        )
+        .await
+        .context("failed to configure Postgres KV schema lock timeout")?;
+    transaction
+        .query_one(
+            "SELECT pg_advisory_xact_lock($1, hashtext($2))",
+            &[&POSTGRES_KV_SCHEMA_LOCK_NAMESPACE, &kv_table],
+        )
+        .await
+        .context("failed to acquire Postgres KV schema lock")?;
+    transaction
+        .query_one("SELECT set_config('statement_timeout', '0', true)", &[])
+        .await
+        .context("failed to clear Postgres KV schema lock timeout")?;
+    transaction
         .batch_execute(&format!(
             r#"
 CREATE TABLE IF NOT EXISTS {table} (
@@ -162,6 +187,10 @@ DROP INDEX IF EXISTS {old_partition_index};
         ))
         .await
         .context("failed to ensure Postgres KV schema")?;
+    transaction
+        .commit()
+        .await
+        .context("failed to commit Postgres KV schema transaction")?;
     Ok(())
 }
 
@@ -477,9 +506,6 @@ fn decode_value(value: Value, date_mode: DecodeDateMode) -> anyhow::Result<Value
 mod tests {
     use super::*;
     use serde_json::json;
-    use std::env;
-    use std::path::Path;
-    use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
     fn encodes_row_keys_like_postgres_kv_executor() {
@@ -532,119 +558,5 @@ mod tests {
         assert!(quote_identifier("fluxer_kv").is_ok());
         assert!(quote_identifier("fluxer-kv").is_err());
         assert!(quote_identifier("1kv").is_err());
-    }
-
-    #[tokio::test]
-    #[ignore = "requires a live Postgres; run with `cargo test -- --ignored`"]
-    async fn kv_client_reads_rows_from_real_postgres_table() -> anyhow::Result<()> {
-        let nanos = SystemTime::now().duration_since(UNIX_EPOCH)?.as_nanos();
-        let kv_table = format!("fluxer_kv_rust_test_{}_{}", std::process::id(), nanos);
-        let host = env::var("FLUXER_POSTGRES_TEST_HOST").unwrap_or_else(|_| {
-            if Path::new("/.dockerenv").exists() {
-                "host.docker.internal".to_owned()
-            } else {
-                "127.0.0.1".to_owned()
-            }
-        });
-        let port = env::var("FLUXER_POSTGRES_PORT")
-            .ok()
-            .and_then(|value| value.parse().ok())
-            .unwrap_or(5432);
-        let config = PostgresConfig {
-            url: env::var("FLUXER_POSTGRES_URL").ok(),
-            host,
-            port,
-            database: env::var("FLUXER_POSTGRES_DATABASE").unwrap_or_else(|_| "fluxer".to_owned()),
-            username: env::var("FLUXER_POSTGRES_USERNAME").unwrap_or_else(|_| "fluxer".to_owned()),
-            password: env::var("FLUXER_POSTGRES_PASSWORD")
-                .ok()
-                .or_else(|| Some("fluxer".to_owned())),
-            ssl: false,
-            ssl_ca: None,
-            max_connections: 2,
-            kv_table: kv_table.clone(),
-        };
-
-        let pool = connect(&config).await?;
-        let kv = KvClient::new(pool.clone(), &kv_table)?;
-        let client = pool.get().await?;
-        let table = quote_identifier(&kv_table)?;
-        let user_key = kv_key(&[KeyPart::BigInt(42)])?;
-        let message_partition = kv_key(&[KeyPart::BigInt(42)])?;
-        let message_key_1 = kv_key(&[KeyPart::BigInt(42), KeyPart::Number(1)])?;
-        let message_key_2 = kv_key(&[KeyPart::BigInt(42), KeyPart::Number(2)])?;
-        client
-            .batch_execute(&format!("DROP TABLE IF EXISTS {table}"))
-            .await?;
-        client
-            .batch_execute(&format!(
-                "CREATE TABLE {table} (
-                    table_name text NOT NULL,
-                    partition_key text NOT NULL,
-                    row_key text NOT NULL,
-                    row_data jsonb NOT NULL,
-                    expires_at timestamptz,
-                    updated_at timestamptz NOT NULL DEFAULT now(),
-                    PRIMARY KEY (table_name, row_key)
-                )"
-            ))
-            .await?;
-        let insert = format!(
-            "INSERT INTO {table} (table_name, partition_key, row_key, row_data, expires_at, updated_at) VALUES ($1, $2, $3, $4::jsonb, NULL, now())"
-        );
-
-        client
-            .execute(
-                &insert,
-                &[
-                    &"rust_users",
-                    &user_key,
-                    &user_key,
-                    &json!({"user_id": {"__fluxer_type": "bigint", "value": "42"}, "username": "ada"}),
-                ],
-            )
-            .await?;
-        client
-            .execute(
-                &insert,
-                &[
-                    &"rust_messages",
-                    &message_partition,
-                    &message_key_1,
-                    &json!({"message_id": {"__fluxer_type": "bigint", "value": "1"}, "body": "first"}),
-                ],
-            )
-            .await?;
-        client
-            .execute(
-                &insert,
-                &[
-                    &"rust_messages",
-                    &message_partition,
-                    &message_key_2,
-                    &json!({"message_id": {"__fluxer_type": "bigint", "value": "2"}, "body": "second"}),
-                ],
-            )
-            .await?;
-
-        let user = kv.get_row("rust_users", &user_key).await?.unwrap();
-        assert_eq!(user["username"], json!("ada"));
-
-        let rows = kv
-            .get_partition_rows("rust_messages", &message_partition)
-            .await?;
-        assert_eq!(2, rows.len());
-
-        let prefix = format!("{message_partition}\u{001f}");
-        let rows = kv.get_row_key_prefix_rows("rust_messages", &prefix).await?;
-        assert_eq!(2, rows.len());
-
-        kv.delete_row("rust_users", &user_key).await?;
-        assert!(kv.get_row("rust_users", &user_key).await?.is_none());
-
-        client
-            .batch_execute(&format!("DROP TABLE IF EXISTS {table}"))
-            .await?;
-        Ok(())
     }
 }

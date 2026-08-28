@@ -20,6 +20,7 @@ import type {WorkerTaskName} from '../../worker/WorkerLaneConfig';
 import type {IChannelRepositoryAggregate} from '../repositories/IChannelRepositoryAggregate';
 import {PollMessageExpiryRepository} from '../repositories/PollMessageExpiryRepository';
 import type {MessageReactionService} from './interaction/MessageReactionService';
+import type {AttachmentUploadTraceRepository} from '../repositories/message/AttachmentUploadTraceRepository';
 import {MessageAnonymizationService} from './message/MessageAnonymizationService';
 import {MessageChannelAuthService} from './message/MessageChannelAuthService';
 import {MessageDeleteService} from './message/MessageDeleteService';
@@ -70,6 +71,7 @@ export class MessageService {
 		favoriteMemeRepository: IFavoriteMemeRepository,
 		guildAuditLogService: GuildAuditLogService,
 		persistenceService: MessagePersistenceService,
+		attachmentUploadTraceRepository: AttachmentUploadTraceRepository,
 		limitConfigService: LimitConfigService,
 		directMessageSpamMitigationService: DirectMessageSpamMitigationService,
 		messageReactionService: MessageReactionService,
@@ -133,6 +135,7 @@ export class MessageService {
 			dispatchService: this.dispatch,
 			embedAttachmentResolver: this.persistence.getEmbedAttachmentResolver(),
 			pollMessageExpiryRepository,
+			attachmentUploadTraceRepository,
 			operationsHelpers,
 			limitConfigService,
 			directMessageSpamMitigationService,

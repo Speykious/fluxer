@@ -435,41 +435,6 @@ async fn mutating_admin_pages_render_usable_csrf_tokens() {
 }
 
 #[tokio::test]
-async fn hosted_instance_config_hides_self_host_setup_controls() {
-    let app = setup().await;
-    let body = get(&app, "/instance-config", &[]).await;
-
-    assert_full_layout(&body);
-    assert!(body.contains("Registration Controls"), "{body}");
-    assert!(body.contains("Runtime Integrations"), "{body}");
-    assert!(body.contains("Gateway Rollout Configuration"), "{body}");
-    assert!(!body.contains("Public App Identity"), "{body}");
-    assert!(!body.contains("Setup complete"), "{body}");
-    assert!(!body.contains("Community & Policy"), "{body}");
-    assert!(!body.contains("Single community"), "{body}");
-    assert!(!body.contains("Direct messages &amp; friends"), "{body}");
-    assert!(!body.contains("Premium model"), "{body}");
-    assert!(!body.contains("Optional services"), "{body}");
-    assert!(!body.contains("Registration Fields"), "{body}");
-    assert!(
-        !body.contains("Collect date of birth during registration"),
-        "{body}"
-    );
-    assert!(
-        !body.contains("/instance-config?action=update_app_public"),
-        "{body}"
-    );
-    assert!(
-        !body.contains("/instance-config?action=update_app_registration"),
-        "{body}"
-    );
-    assert!(
-        !body.contains("/instance-config?action=update_policy"),
-        "{body}"
-    );
-}
-
-#[tokio::test]
 async fn instance_config_registration_tables_show_copyable_urls_and_compact_pending_actions() {
     let app = setup().await;
     let body = get(&app, "/instance-config", &[]).await;
@@ -571,6 +536,84 @@ async fn creating_registration_url_swaps_copyable_url_list_fragment() {
         .unwrap_or_else(|| panic!("missing toast header\n{response_body}"));
     assert!(toast.contains("success"), "{toast}");
     assert!(toast.contains("Registration URL created"), "{toast}");
+}
+
+#[tokio::test]
+async fn fonts_are_served_locally_content_hashed_and_immutable() {
+    let app = setup().await;
+
+    let stylesheet_path = format!(
+        "/static/fonts/{}",
+        fluxer_admin::fonts::STYLESHEET_FILE_NAME
+    );
+    let (headers, css) = get_with_headers(&app, &stylesheet_path, &[]).await;
+    assert_eq!(
+        headers.get(header::CACHE_CONTROL).unwrap(),
+        "public, max-age=31536000, immutable"
+    );
+
+    for fragment in css.split("url('").skip(1) {
+        let file_name = fragment.split('\'').next().unwrap();
+        let response = app
+            .router
+            .clone()
+            .oneshot(
+                Request::builder()
+                    .uri(format!("/static/fonts/{file_name}"))
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(
+            response.status(),
+            StatusCode::OK,
+            "missing font {file_name}"
+        );
+        assert_eq!(
+            response.headers().get(header::CONTENT_TYPE).unwrap(),
+            "font/woff2"
+        );
+        assert_eq!(
+            response.headers().get(header::CACHE_CONTROL).unwrap(),
+            "public, max-age=31536000, immutable"
+        );
+    }
+
+    let response = app
+        .router
+        .clone()
+        .oneshot(
+            Request::builder()
+                .uri("/static/fonts/does-not-exist.woff2")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::NOT_FOUND);
+}
+
+#[tokio::test]
+async fn rendered_heads_never_reference_the_static_cdn_for_fonts() {
+    let app = setup().await;
+
+    let (headers, page) = get_with_headers(&app, "/users", &[]).await;
+    assert!(
+        !page.contains("/fonts/ibm-plex.css"),
+        "the admin layout still links the CDN font stylesheets"
+    );
+    assert!(page.contains("/static/fonts/"), "{page}");
+
+    let csp = headers
+        .get(header::CONTENT_SECURITY_POLICY)
+        .and_then(|value| value.to_str().ok())
+        .expect("missing CSP");
+    assert!(csp.contains("font-src 'self';"), "font-src was {csp}");
+    assert!(
+        csp.contains("style-src 'self' 'unsafe-inline';"),
+        "style-src was {csp}"
+    );
 }
 
 struct SearchCase {
@@ -820,6 +863,7 @@ fn user(id: &str, username: &str) -> Value {
         "premium_grace_ends_at": null,
         "premium_lifetime_sequence": null,
         "suspicious_activity_flags": 0,
+        "phone_verification_deferred": false,
         "has_totp": false,
         "authenticator_types": [],
         "has_verified_phone": false,

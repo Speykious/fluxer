@@ -7,7 +7,7 @@ import {Message} from '@app/features/messaging/models/MessagingMessage';
 import * as MessageSubmitUtils from '@app/features/messaging/utils/MessageSubmitUtils';
 import {formatUploadingAttachmentSummary} from '@app/features/messaging/utils/UploadingAttachmentLabelUtils';
 import Permission from '@app/features/permissions/state/Permission';
-import {ComponentDispatch} from '@app/features/platform/utils/ComponentBus';
+import {ComponentBus} from '@app/features/platform/utils/ComponentBus';
 import * as SlowmodeCommands from '@app/features/slowmode/commands/SlowmodeCommands';
 import {SlowmodeRateLimitedModal} from '@app/features/slowmode/components/alerts/SlowmodeRateLimitedModal';
 import Slowmode from '@app/features/slowmode/state/Slowmode';
@@ -15,6 +15,7 @@ import {TypingUtils} from '@app/features/typing/utils/TypingUtils';
 import {modal, push as pushModal} from '@app/features/ui/commands/ModalCommands';
 import Users from '@app/features/user/state/Users';
 import {MessageStates, MessageTypes, Permissions} from '@fluxer/constants/src/ChannelConstants';
+import {CHANNEL_RATE_LIMIT_PER_USER_MAX} from '@fluxer/constants/src/LimitConstants';
 import type {
 	AllowedMentions,
 	MessageAttachment,
@@ -38,12 +39,20 @@ export type SendMessageFunction = (
 	stickersOrTtsOrPoll?: Array<MessageStickerItem> | MessageCreatePoll | boolean,
 	favoriteMemeIdOrStickers?: string | Array<MessageStickerItem>,
 	maybeFavoriteMemeId?: string,
-) => void;
+) => boolean;
 
 function isBlockedBySlowmode(channel: Channel): boolean {
 	if (!channel.guildId) return false;
-	const rateLimitPerUser = channel.rateLimitPerUser || 0;
-	if (rateLimitPerUser <= 0) return false;
+	const rateLimitPerUser = channel.rateLimitPerUser;
+	if (
+		rateLimitPerUser === undefined ||
+		rateLimitPerUser === null ||
+		!Number.isSafeInteger(rateLimitPerUser) ||
+		rateLimitPerUser <= 0 ||
+		rateLimitPerUser > CHANNEL_RATE_LIMIT_PER_USER_MAX
+	) {
+		return false;
+	}
 	if (Permission.can(Permissions.BYPASS_SLOWMODE, channel)) return false;
 	const remainingMs = Slowmode.getSlowmodeRemaining(channel.id, rateLimitPerUser);
 	if (remainingMs <= 0) return false;
@@ -85,10 +94,10 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 					? favoriteMemeIdOrStickers
 					: undefined;
 			const currentUser = Users.getCurrentUser();
-			if (!channel || !currentUser) return;
-			if (isBlockedBySlowmode(channel)) return;
+			if (!channel || !currentUser) return false;
+			if (isBlockedBySlowmode(channel)) return false;
 			const nonce = SnowflakeUtils.fromTimestamp(Date.now());
-			if (!MessageCommands.reserveSend(channel.id, nonce)) return;
+			if (!MessageCommands.reserveSend(channel.id, nonce)) return false;
 			const messageReference = MessageSubmitUtils.prepareMessageReference(channel.id, referencedMessage);
 			TypingUtils.clear(channel.id);
 			DraftCommands.deleteDraft(channel.id);
@@ -100,7 +109,6 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 					content,
 					messageReference,
 					replyingMessage?.mentioning,
-					favoriteMemeId,
 				),
 				{
 					formatMultipleFileLabel: (count) => formatUploadingAttachmentSummary(i18n, count),
@@ -126,6 +134,7 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 				referenced_message: referencedMessage?.toJSON(),
 			});
 			SlowmodeCommands.prepareMessageSend(channel.id);
+			const pendingSend = SlowmodeCommands.recordPendingMessageSend(channel.id);
 			void MessageCommands.send(channel.id, {
 				content: message.content,
 				nonce,
@@ -137,12 +146,19 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 				poll,
 				favoriteMemeId,
 				tts,
-			}).then((sentMessage) => {
-				if (sentMessage) {
-					SlowmodeCommands.recordMessageSend(channel.id);
-				}
-			});
-			ComponentDispatch.dispatch('MESSAGE_SENT', {channelId: channel.id});
+			})
+				.then((sentMessage) => {
+					if (sentMessage) {
+						SlowmodeCommands.confirmMessageSend(channel.id, sentMessage.timestamp, pendingSend);
+						return;
+					}
+					SlowmodeCommands.discardPendingMessageSend(channel.id, pendingSend);
+				})
+				.catch(() => {
+					SlowmodeCommands.discardPendingMessageSend(channel.id, pendingSend);
+				});
+			ComponentBus.dispatch('MESSAGE_SENT', {channelId: channel.id});
+			return true;
 		},
 		[channel?.id, i18n, referencedMessage, replyingMessage],
 	);
@@ -191,6 +207,7 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 			});
 			SlowmodeCommands.prepareMessageSend(channel.id);
 			const allowedMentions: AllowedMentions = {replied_user: replyingMessage?.mentioning ?? true};
+			const pendingSend = SlowmodeCommands.recordPendingMessageSend(channel.id);
 			void MessageCommands.send(channel.id, {
 				content: messageData.content,
 				nonce,
@@ -202,12 +219,18 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 				flags: 0,
 				stickers: messageData.stickers || [],
 				favoriteMemeId: sendOptions.favoriteMemeId,
-			}).then((sentMessage) => {
-				if (sentMessage) {
-					SlowmodeCommands.recordMessageSend(channel.id);
-				}
-			});
-			ComponentDispatch.dispatch('MESSAGE_SENT', {channelId: channel.id});
+			})
+				.then((sentMessage) => {
+					if (sentMessage) {
+						SlowmodeCommands.confirmMessageSend(channel.id, sentMessage.timestamp, pendingSend);
+						return;
+					}
+					SlowmodeCommands.discardPendingMessageSend(channel.id, pendingSend);
+				})
+				.catch(() => {
+					SlowmodeCommands.discardPendingMessageSend(channel.id, pendingSend);
+				});
+			ComponentBus.dispatch('MESSAGE_SENT', {channelId: channel.id});
 		},
 		[channel?.id, referencedMessage, replyingMessage],
 	);

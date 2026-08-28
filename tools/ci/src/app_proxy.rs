@@ -17,6 +17,7 @@ use std::path::{Path, PathBuf};
 
 const DEFAULT_PUBLIC_ASSET_BASE_URL: &str = "https://fluxerstatic.com";
 const DEFAULT_APP_PROXY_TIME_FREEZE_ENABLED: &str = "true";
+const DEFAULT_APP_PROXY_BUNDLE_LOCAL_ASSETS: &str = "false";
 const DEFAULT_STATIC_BUCKET: &str = "fluxer-static";
 const DEFAULT_S3_ENDPOINT: &str = "https://ewr1.vultrobjects.com";
 const IMMUTABLE_ASSET_CACHE_CONTROL: &str = "public, max-age=31536000, immutable";
@@ -140,14 +141,22 @@ fn build_and_extract_command() -> Result<CommandSpec> {
                 .unwrap_or_else(|_| DEFAULT_APP_PROXY_TIME_FREEZE_ENABLED.to_string()),
         )
         .env(
+            "BUNDLE_LOCAL_ASSETS",
+            env::var("BUNDLE_LOCAL_ASSETS")
+                .unwrap_or_else(|_| DEFAULT_APP_PROXY_BUNDLE_LOCAL_ASSETS.to_string()),
+        )
+        .env(
             "CACHE_FROM",
-            env::var("CACHE_FROM")
-                .unwrap_or_else(|_| "type=gha,scope=fluxer-app-proxy".to_string()),
+            env::var("CACHE_FROM").unwrap_or_else(|_| default_app_proxy_cache_ref()),
         )
         .env(
             "CACHE_TO",
-            env::var("CACHE_TO")
-                .unwrap_or_else(|_| "type=gha,scope=fluxer-app-proxy,mode=max".to_string()),
+            env::var("CACHE_TO").unwrap_or_else(|_| {
+                format!(
+                    "{},mode=max,image-manifest=true,oci-mediatypes=true,ignore-error=true",
+                    default_app_proxy_cache_ref()
+                )
+            }),
         )
         .env(
             "DOCKER_BUILD_SUMMARY",
@@ -157,6 +166,11 @@ fn build_and_extract_command() -> Result<CommandSpec> {
             "DOCKER_BUILD_RECORD_UPLOAD",
             env::var("DOCKER_BUILD_RECORD_UPLOAD").unwrap_or_else(|_| "false".to_string()),
         ))
+}
+
+fn default_app_proxy_cache_ref() -> String {
+    let owner = ghcr_owner().unwrap_or_else(|_| "fluxerapp".to_string());
+    format!("type=registry,ref=ghcr.io/{owner}/fluxer-app-proxy:buildcache-amd64")
 }
 
 fn ghcr_owner() -> Result<String> {
@@ -417,6 +431,28 @@ mod tests {
     }
 
     #[test]
+    fn hosted_bake_trims_the_local_asset_tree_by_default() {
+        assert_eq!(DEFAULT_APP_PROXY_BUNDLE_LOCAL_ASSETS, "false");
+    }
+
+    #[test]
+    fn dockerfile_guards_the_trim_on_an_absolute_asset_base_url() {
+        let dockerfile = include_str!("../../../fluxer_app_proxy/Dockerfile");
+        let trim = dockerfile
+            .split("FROM alpine:3.21 AS app-assets")
+            .nth(1)
+            .expect("app-assets stage");
+        assert!(
+            trim.contains("ARG PUBLIC_ASSET_BASE_URL"),
+            "the app-assets stage must redeclare PUBLIC_ASSET_BASE_URL to be able to check it"
+        );
+        assert!(
+            trim.contains("http://* | https://*"),
+            "the trim must assert an absolute PUBLIC_ASSET_BASE_URL before deleting anything"
+        );
+    }
+
+    #[test]
     fn asset_manifest_entries_are_sorted_and_relative_to_dist() {
         let temp = tempfile::tempdir().unwrap();
         let dist = temp.path().join("dist");
@@ -485,6 +521,14 @@ mod tests {
             Some(IMMUTABLE_ASSET_CACHE_CONTROL)
         );
         assert!(plan[0].repair_existing_metadata);
+    }
+
+    #[test]
+    fn uploaded_assets_carry_the_same_policy_the_app_proxy_serves() {
+        assert_eq!(
+            IMMUTABLE_ASSET_CACHE_CONTROL,
+            "public, max-age=31536000, immutable"
+        );
     }
 
     #[test]

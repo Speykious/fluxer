@@ -91,7 +91,10 @@ function defaultConfig(): MasterConfig {
 		services: {
 			api: {
 				port: 8080,
+				ip_ban_exempt_ips: [],
 				presigned_attachment_uploads_enabled: false,
+				presigned_downloads_enabled: false,
+				presigned_harvest_downloads_enabled: true,
 				unfurl_ignored_hosts: [],
 				embeds: {
 					oembed_html_enabled: false,
@@ -148,6 +151,7 @@ function defaultConfig(): MasterConfig {
 		auth: {
 			sudo_mode_secret: '',
 			connection_initiation_secret: '',
+			sso_allow_private_addresses: false,
 			passkeys: {
 				rp_name: 'Fluxer',
 				rp_id: 'fluxer.app',
@@ -178,6 +182,7 @@ function defaultConfig(): MasterConfig {
 				provider: 'none',
 				from_email: '',
 				from_name: 'Fluxer',
+				app_base_url: '',
 			},
 			sms: {
 				enabled: false,
@@ -191,6 +196,7 @@ function defaultConfig(): MasterConfig {
 				api_key: '',
 				api_secret: '',
 				url: '',
+				internal_url: '',
 				webhook_url: '',
 			},
 			search: {
@@ -230,6 +236,7 @@ function defaultConfig(): MasterConfig {
 				api_key: '',
 				pull_zone_id: 0,
 			},
+			blocklist_feeds: {},
 			risk_integration: {
 				enabled: false,
 				ipinfo_api_key: '',
@@ -290,7 +297,7 @@ function defaultConfig(): MasterConfig {
 			min_member_count: 1,
 		},
 		attachment_decay_enabled: true,
-		deletion_grace_period_hours: 72,
+		deletion_grace_period_hours: 336,
 		inactivity_deletion_threshold_days: 365,
 	};
 }

@@ -37,7 +37,6 @@ import * as AuthMfa from './AuthMfa';
 import * as AuthPassword from './AuthPassword';
 import * as AuthSession from './AuthSession';
 import * as AuthUtility from './AuthUtility';
-import {assertFlutterClientLoginAllowed, type FlutterClientGateMemberRepository} from './FlutterClientGate';
 
 function createRequestCache(): RequestCache {
 	const userPartials = new Map();
@@ -73,7 +72,6 @@ interface LoginMfaWebAuthnParams {
 export interface LoginDependencies {
 	inviteService: InviteService | null;
 	kvDeletionQueue: KVAccountDeletionQueueService;
-	flutterClientGateMemberRepository: FlutterClientGateMemberRepository;
 }
 
 interface LoginTokenResult {
@@ -107,9 +105,7 @@ export interface IpAuthorizationTicketCache {
 	userId: string;
 	email: string;
 	username: string;
-	clientIp: string;
-	userAgent: string;
-	platform: string | null;
+	origin: AuthSession.SessionOrigin;
 	authToken: string;
 	clientLocation: string;
 	inviteCode?: string | null;
@@ -117,8 +113,8 @@ export interface IpAuthorizationTicketCache {
 	createdAt: number;
 }
 
-function getTicketCacheKey(ticket: string): string {
-	return `ip-auth-ticket:${ticket}`;
+export function getTicketCacheKey(ticket: string): string {
+	return `ip-auth-ticket-v2:${ticket}`;
 }
 
 function getTokenCacheKey(token: string): string {
@@ -150,7 +146,7 @@ export async function resendIpAuthorization(
 		payload.email,
 		payload.username,
 		payload.authToken,
-		payload.clientIp,
+		payload.origin.ip,
 		payload.clientLocation,
 		null,
 	);
@@ -174,7 +170,7 @@ export async function completeIpAuthorization(
 	user_id: string;
 	ticket: string;
 }> {
-	const {users, cache, config} = ctx.services;
+	const {users, cache} = ctx.services;
 	const tokenMapping = await cache.get<{
 		ticket: string;
 	}>(getTokenCacheKey(token));
@@ -195,19 +191,8 @@ export async function completeIpAuthorization(
 		throw new UnknownUserError();
 	}
 	AuthUtility.assertNonBotUser(ctx, user);
-	await users.createAuthorizedIp(user.id, payload.clientIp);
-	const headers: Record<string, string> = {
-		[config.proxy.client_ip_header]: payload.clientIp,
-		'user-agent': payload.userAgent,
-	};
-	if (payload.platform) {
-		headers['x-fluxer-platform'] = payload.platform;
-	}
-	const syntheticRequest = new Request('https://api.fluxer.app/auth/ip-authorization', {
-		headers,
-		method: 'POST',
-	});
-	const [sessionToken] = await AuthSession.createAuthSession(ctx, {user, request: syntheticRequest});
+	await users.createAuthorizedIp(user.id, payload.origin.ip);
+	const [sessionToken] = await AuthSession.createAuthSession(ctx, {user, origin: payload.origin});
 	await cache.delete(cacheKey);
 	await cache.delete(getTokenCacheKey(token));
 	return {token: sessionToken, user_id: user.id.toString(), ticket: tokenMapping.ticket};
@@ -219,7 +204,7 @@ export async function login(
 	{data, request}: LoginParams,
 ): Promise<LoginResult> {
 	const {users, cache, rateLimit, email, config} = ctx.services;
-	const {inviteService, kvDeletionQueue, flutterClientGateMemberRepository} = deps;
+	const {inviteService, kvDeletionQueue} = deps;
 	const skipRateLimits = config.dev.testModeEnabled || config.dev.disableRateLimits;
 	const emailRateLimit = await rateLimit.checkLimit({
 		identifier: `login:email:${data.email}`,
@@ -259,7 +244,6 @@ export async function login(
 			{path: 'password', code: ValidationErrorCodes.INVALID_EMAIL_OR_PASSWORD},
 		]);
 	}
-	await assertFlutterClientLoginAllowed(request, user, flutterClientGateMemberRepository);
 	let currentUser = await AuthUtility.handleBanStatus(ctx, user);
 	if ((currentUser.flags & UserFlags.DISABLED) !== 0n && !currentUser.tempBannedUntil) {
 		const updatedFlags = currentUser.flags & ~UserFlags.DISABLED;
@@ -316,15 +300,11 @@ export async function login(
 				const authToken = createIpAuthorizationToken(await AuthUtility.generateSecureToken(ctx));
 				const geoipResult = await lookupGeoip(clientIp);
 				const clientLocation = formatGeoipLocation(geoipResult) ?? UNKNOWN_LOCATION;
-				const userAgent = request.headers.get('user-agent') || '';
-				const platform = request.headers.get('x-fluxer-platform');
 				const cachePayload: IpAuthorizationTicketCache = {
 					userId: currentUser.id.toString(),
 					email: currentUser.email!,
 					username: currentUser.username,
-					clientIp,
-					userAgent,
-					platform: platform ?? null,
+					origin: AuthSession.resolveSessionOrigin(ctx, request),
 					authToken,
 					clientLocation,
 					inviteCode: data.invite_code ?? null,
@@ -332,7 +312,7 @@ export async function login(
 					createdAt: Date.now(),
 				};
 				const ttlSeconds = seconds('15 minutes');
-				await cache.set<IpAuthorizationTicketCache>(`ip-auth-ticket:${ticket}`, cachePayload, ttlSeconds);
+				await cache.set<IpAuthorizationTicketCache>(getTicketCacheKey(ticket), cachePayload, ttlSeconds);
 				await cache.set<{
 					ticket: string;
 				}>(`ip-auth-token:${authToken}`, {ticket}, ttlSeconds);
@@ -367,7 +347,10 @@ export async function login(
 			Logger.warn({inviteCode: data.invite_code, error}, 'Failed to auto-join invite on login');
 		}
 	}
-	const [token] = await AuthSession.createAuthSession(ctx, {user: currentUser, request});
+	const [token] = await AuthSession.createAuthSession(ctx, {
+		user: currentUser,
+		origin: AuthSession.resolveSessionOrigin(ctx, request),
+	});
 	return {
 		user_id: currentUser.id.toString(),
 		token,
@@ -380,7 +363,6 @@ const MFA_USER_ATTEMPTS_WINDOW = seconds('15 minutes');
 
 export async function loginMfaTotp(
 	ctx: ApiContext,
-	deps: Pick<LoginDependencies, 'flutterClientGateMemberRepository'>,
 	{code, ticket, request}: LoginMfaTotpParams,
 ): Promise<LoginTokenResult> {
 	const {users, cache} = ctx.services;
@@ -393,7 +375,6 @@ export async function loginMfaTotp(
 		throw new UnknownUserError();
 	}
 	AuthUtility.assertNonBotUser(ctx, user);
-	await assertFlutterClientLoginAllowed(request, user, deps.flutterClientGateMemberRepository);
 	if (!user.totpSecret || !user.authenticatorTypes?.has(UserAuthenticatorTypes.TOTP)) {
 		throw InputValidationError.fromCode('code', ValidationErrorCodes.TOTP_NOT_ENABLED);
 	}
@@ -423,13 +404,15 @@ export async function loginMfaTotp(
 	await cache.delete(`mfa-ticket:${ticket}`);
 	await cache.delete(attemptsKey);
 	await cache.delete(userAttemptsKey);
-	const [token] = await AuthSession.createAuthSession(ctx, {user, request});
+	const [token] = await AuthSession.createAuthSession(ctx, {
+		user,
+		origin: AuthSession.resolveSessionOrigin(ctx, request),
+	});
 	return {user_id: user.id.toString(), token};
 }
 
 export async function loginMfaWebAuthn(
 	ctx: ApiContext,
-	deps: Pick<LoginDependencies, 'flutterClientGateMemberRepository'>,
 	{response, challenge, ticket, request}: LoginMfaWebAuthnParams,
 ): Promise<LoginTokenResult> {
 	const {users, cache} = ctx.services;
@@ -442,10 +425,12 @@ export async function loginMfaWebAuthn(
 		throw new UnknownUserError();
 	}
 	AuthUtility.assertNonBotUser(ctx, user);
-	await assertFlutterClientLoginAllowed(request, user, deps.flutterClientGateMemberRepository);
 	await AuthMfa.verifyWebAuthnAuthentication(ctx, user.id, response, challenge, 'mfa', ticket);
 	await cache.delete(`mfa-ticket:${ticket}`);
-	const [token] = await AuthSession.createAuthSession(ctx, {user, request});
+	const [token] = await AuthSession.createAuthSession(ctx, {
+		user,
+		origin: AuthSession.resolveSessionOrigin(ctx, request),
+	});
 	return {user_id: user.id.toString(), token};
 }
 

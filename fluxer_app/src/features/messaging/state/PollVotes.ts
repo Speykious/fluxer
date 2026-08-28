@@ -177,7 +177,7 @@ export class MessagePollVotesManager {
 		return entry;
 	}
 
-	handleConnectionOpen(): void {
+	handleGatewayReady(): void {
 		const messageIds = Array.from(this.messageStates.keys());
 		const reactionKeys = Array.from(this.voters.keys());
 		for (const key of reactionKeys) this.retirePollVoteEntry(key);

@@ -19,6 +19,8 @@ interface PageState {
 
 const VALUE_SEPARATOR = '\u001f';
 const ENCODED_TYPE_KEY = '__fluxer_type';
+const POSTGRES_KV_SCHEMA_LOCK_NAMESPACE = 0x46584b56;
+const POSTGRES_KV_SCHEMA_LOCK_TIMEOUT = '120s';
 
 function normalizeCql(cql: string): string {
 	return cql.replace(/\s+/g, ' ').trim();
@@ -354,8 +356,13 @@ function parseEqWhere(whereSql: string, cql: string): ReadonlyArray<EqWhereExpr>
 }
 
 export async function ensurePostgresKvSchema(client: IPostgresClient): Promise<void> {
-	const table = quoteIdentifier(client.kvTable());
-	await client.query(`
+	const kvTable = client.kvTable();
+	const table = quoteIdentifier(kvTable);
+	await client.transaction(async (db) => {
+		await db.query("SELECT set_config('statement_timeout', $1, true)", [POSTGRES_KV_SCHEMA_LOCK_TIMEOUT]);
+		await db.query('SELECT pg_advisory_xact_lock($1, hashtext($2))', [POSTGRES_KV_SCHEMA_LOCK_NAMESPACE, kvTable]);
+		await db.query("SELECT set_config('statement_timeout', '0', true)");
+		await db.query(`
 CREATE TABLE IF NOT EXISTS ${table} (
 	table_name text NOT NULL,
 	partition_key text NOT NULL,
@@ -365,28 +372,29 @@ CREATE TABLE IF NOT EXISTS ${table} (
 	updated_at timestamptz NOT NULL DEFAULT now(),
 	PRIMARY KEY (table_name, row_key)
 )`);
-	await client.query(
-		`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${client.kvTable()}_partition_row_idx`)} ON ${table} (table_name, partition_key, row_key)`,
-	);
-	await client.query(
-		`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${client.kvTable()}_row_key_c_idx`)} ON ${table} (table_name, row_key COLLATE "C")`,
-	);
-	await client.query(
-		`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${client.kvTable()}_expires_idx`)} ON ${table} (expires_at) WHERE expires_at IS NOT NULL`,
-	);
-	await client.query(
-		`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${client.kvTable()}_messages_message_idx`)} ON ${table} (partition_key, ((CASE WHEN row_data -> 'message_id' ->> 'value' ~ '^-?[0-9]+$' THEN (row_data -> 'message_id' ->> 'value')::bigint END))) WHERE table_name = 'messages'`,
-	);
-	await client.query(
-		`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${client.kvTable()}_message_reactions_message_idx`)} ON ${table} (partition_key, ((CASE WHEN row_data -> 'message_id' ->> 'value' ~ '^-?[0-9]+$' THEN (row_data -> 'message_id' ->> 'value')::bigint END))) WHERE table_name = 'message_reactions'`,
-	);
-	await client.query(`
+		await db.query(
+			`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${kvTable}_partition_row_idx`)} ON ${table} (table_name, partition_key, row_key)`,
+		);
+		await db.query(
+			`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${kvTable}_row_key_c_idx`)} ON ${table} (table_name, row_key COLLATE "C")`,
+		);
+		await db.query(
+			`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${kvTable}_expires_idx`)} ON ${table} (expires_at) WHERE expires_at IS NOT NULL`,
+		);
+		await db.query(
+			`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${kvTable}_messages_message_idx`)} ON ${table} (partition_key, ((CASE WHEN row_data -> 'message_id' ->> 'value' ~ '^-?[0-9]+$' THEN (row_data -> 'message_id' ->> 'value')::bigint END))) WHERE table_name = 'messages'`,
+		);
+		await db.query(
+			`CREATE INDEX IF NOT EXISTS ${quoteIdentifier(`${kvTable}_message_reactions_message_idx`)} ON ${table} (partition_key, ((CASE WHEN row_data -> 'message_id' ->> 'value' ~ '^-?[0-9]+$' THEN (row_data -> 'message_id' ->> 'value')::bigint END))) WHERE table_name = 'message_reactions'`,
+		);
+		await db.query(`
 UPDATE ${table}
 SET partition_key = split_part(row_key, chr(31), 1) || chr(31) || split_part(row_key, chr(31), 2)
 WHERE table_name = 'messages'
 	AND partition_key = row_key
 	AND split_part(row_key, chr(31), 3) <> ''`);
-	await client.query(`DROP INDEX IF EXISTS ${quoteIdentifier(`${client.kvTable()}_partition_idx`)}`);
+		await db.query(`DROP INDEX IF EXISTS ${quoteIdentifier(`${kvTable}_partition_idx`)}`);
+	});
 }
 
 export async function pruneExpiredPostgresKvRows(client: IPostgresClient, batchSize = 5000): Promise<number> {
@@ -561,14 +569,14 @@ WHERE NOT $6`,
 
 	private async patch(meta: KvQueryMeta, params: CassandraParams, db: PostgresQueryable): Promise<void> {
 		const key = rowKeyFromParams(meta, params);
-		const existing = await this.getRow(meta, key, db);
-		const base = existing ?? paramsRow(params, (meta.pkColumns ?? meta.table.primaryKey) as ReadonlyArray<string>);
+		const stored = await this.getStoredRow(meta, key, db);
+		const base = stored?.row ?? paramsRow(params, (meta.pkColumns ?? meta.table.primaryKey) as ReadonlyArray<string>);
 		const next = {...base};
 		for (const column of meta.patchKeys ?? []) {
 			next[column] = column in params ? params[column] : null;
 		}
 		const ttl = ttlExpiresAt(meta, params);
-		const expiresAt = ttl === undefined ? await this.getExpiresAt(meta, key, db) : ttl;
+		const expiresAt = ttl === undefined ? (stored?.expiresAt ?? null) : ttl;
 		await db.query(
 			`INSERT INTO ${this.table} (table_name, partition_key, row_key, row_data, expires_at, updated_at)
 VALUES ($1, $2, $3, $4::jsonb, $5, now())
@@ -592,20 +600,20 @@ DO UPDATE SET partition_key = EXCLUDED.partition_key, row_data = EXCLUDED.row_da
 		]);
 	}
 
-	private async getRow(meta: KvQueryMeta, key: string, db: PostgresQueryable): Promise<Row | null> {
-		const result = await db.query<StoredRow>(
-			`SELECT row_key, row_data FROM ${this.table} WHERE table_name = $1 AND row_key = $2 AND (expires_at IS NULL OR expires_at > now()) LIMIT 1`,
+	private async getStoredRow(
+		meta: KvQueryMeta,
+		key: string,
+		db: PostgresQueryable,
+	): Promise<{row: Row; expiresAt: Date | null} | null> {
+		const result = await db.query<StoredRow & {expires_at: Date | null}>(
+			`SELECT row_key, row_data, expires_at FROM ${this.table} WHERE table_name = $1 AND row_key = $2 AND (expires_at IS NULL OR expires_at > now()) LIMIT 1`,
 			[meta.table.name, key],
 		);
 		const row = result.rows[0];
-		return row ? decodeRow(row.row_data) : null;
+		return row ? {row: decodeRow(row.row_data), expiresAt: row.expires_at ?? null} : null;
 	}
 
-	private async getExpiresAt(meta: KvQueryMeta, key: string, db: PostgresQueryable): Promise<Date | null> {
-		const result = await db.query<{expires_at: Date | null}>(
-			`SELECT expires_at FROM ${this.table} WHERE table_name = $1 AND row_key = $2 AND (expires_at IS NULL OR expires_at > now()) LIMIT 1`,
-			[meta.table.name, key],
-		);
-		return result.rows[0]?.expires_at ?? null;
+	private async getRow(meta: KvQueryMeta, key: string, db: PostgresQueryable): Promise<Row | null> {
+		return (await this.getStoredRow(meta, key, db))?.row ?? null;
 	}
 }

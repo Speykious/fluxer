@@ -66,11 +66,22 @@ export class MessageEditService {
 			userId,
 			channelId,
 		});
-		const [canEmbedLinks, canMentionEveryone] = await Promise.all([
+		const hasNewAttachments =
+			data.attachments?.some(
+				(attachment) =>
+					'upload_filename' in attachment &&
+					typeof attachment.upload_filename === 'string' &&
+					attachment.upload_filename.length > 0,
+			) ?? false;
+		const [canEmbedLinks, canMentionEveryone, canAttachFiles] = await Promise.all([
 			hasPermission(Permissions.EMBED_LINKS),
 			hasPermission(Permissions.MENTION_EVERYONE),
+			hasPermission(Permissions.ATTACH_FILES),
 		]);
 		if (data.embeds && data.embeds.length > 0 && !canEmbedLinks) {
+			throw new MissingPermissionsError();
+		}
+		if (hasNewAttachments && !canAttachFiles) {
 			throw new MissingPermissionsError();
 		}
 		if (isOperationDisabled(guild, GuildOperations.SEND_MESSAGE)) {
@@ -82,19 +93,7 @@ export class MessageEditService {
 			assertGuildMemberCanCommunicate(member);
 		}
 		if (data.message_snapshots !== undefined) {
-			const isAuthor = message.authorId === userId;
-			const canManage = isAuthor ? true : await hasPermission(Permissions.MANAGE_MESSAGES);
-			if (!isAuthor && !canManage) {
-				throw new MissingPermissionsError();
-			}
-			const updatedMessage = await this.withMessageLock(channelId, messageId, () =>
-				this.deps.persistenceService.updateSnapshotAttachments({
-					message,
-					snapshotEdits: data.message_snapshots ?? [],
-				}),
-			);
-			await this.deps.dispatchService.dispatchMessageUpdate({channel, message: updatedMessage, requestCache});
-			return updatedMessage;
+			throw new MissingPermissionsError();
 		}
 		const user = await this.deps.userRepository.findUnique(userId);
 		this.deps.validationService.validateMessageEditable(message);
@@ -155,6 +154,7 @@ export class MessageEditService {
 				channel,
 				guild,
 				member,
+				attachmentUploadUserId: userId,
 				allowEmbeds: canEmbedLinks,
 				isBot: user?.isBot,
 				isBugHunterBot,
