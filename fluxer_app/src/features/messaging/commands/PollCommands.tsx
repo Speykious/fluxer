@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import {FeatureTemporarilyDisabledModal} from '@app/features/app/components/alerts/FeatureTemporarilyDisabledModal';
+import {MaxPollVoteCountReachedModal} from '@app/features/app/components/alerts/MaxPollVoteCountReachedModal';
 import {ConfirmModal} from '@app/features/app/components/dialogs/ConfirmModal';
 import {Endpoints} from '@app/features/app/constants/Endpoints';
 import {ERROR_DESCRIPTOR} from '@app/features/channel/components/channel_search_results/ChannelSearchResultsShared';
@@ -68,7 +69,7 @@ function onHttpError(i18n: I18n, error: any) {
 			logger.debug('Feature temporarily disabled, not retrying');
 			ModalCommands.push(
 				modal(() => (
-					<FeatureTemporarilyDisabledModal data-flx="messaging.reaction-commands.check-reaction-response.feature-temporarily-disabled-modal" />
+					<FeatureTemporarilyDisabledModal data-flx="messaging.poll-commands.check-poll-response.feature-temporarily-disabled-modal" />
 				)),
 			);
 		}
@@ -78,6 +79,15 @@ function onHttpError(i18n: I18n, error: any) {
 				type: 'info',
 				children: i18n._(ERROR_DESCRIPTOR),
 			});
+		}
+	} else if (error.status === 400) {
+		if (errorCode === APIErrorCodes.MAX_POLL_VOTES) {
+			logger.debug('Reached max poll vote count');
+			ModalCommands.push(
+				modal(() => (
+					<MaxPollVoteCountReachedModal data-flx="messaging.poll-commands.check-poll-response.max-poll-vote-count-reached-modal" />
+				)),
+			);
 		}
 	}
 }

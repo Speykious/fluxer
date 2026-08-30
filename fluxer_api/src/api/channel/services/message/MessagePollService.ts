@@ -321,38 +321,38 @@ export class MessagePollService {
 			const evaluationContext = guild?.features ? 'guild' : 'user';
 			const configSnapshot = this.deps.limitConfigService.getConfigSnapshot();
 			const maxPollVotesCount = Math.floor(
-				resolveLimitSafe(configSnapshot, ctx, 'max_poll_answer_length', MAX_POLL_VOTES_PER_ANSWER, evaluationContext),
+				resolveLimitSafe(configSnapshot, ctx, 'max_poll_votes_per_answer', MAX_POLL_VOTES_PER_ANSWER, evaluationContext),
 			);
 
 			for (const answerId of answerIds) {
 				if (existingAnswerIds.includes(answerId)) continue;
-				await this.deps.messageReactionService.addReaction({
-					authChannel,
-					messageId,
-					userId: user.id,
-					emoji: `${answerId}:${answerId}`,
-					reactionType: 2,
-				});
 				const answerCount = poll.results.answer_counts.find((ac) => ac.id === answerId);
 				if (answerCount) {
 					if (!answerCount.count) answerCount.count = 0;
 					if (answerCount.count >= maxPollVotesCount) throw new MaxPollVotesPerAnswerError(maxPollVotesCount);
+					await this.deps.messageReactionService.addReaction({
+						authChannel,
+						messageId,
+						userId: user.id,
+						emoji: `${answerId}:${answerId}`,
+						reactionType: 2,
+					});
 					answerCount.count++;
 				}
 			}
 			for (const existingAnswerId of existingAnswerIds) {
 				if (answerIds.includes(existingAnswerId)) continue;
-				await this.deps.messageReactionService.removeReaction({
-					authChannel,
-					messageId,
-					actorId: user.id,
-					targetId: user.id,
-					emoji: `${existingAnswerId}:${existingAnswerId}`,
-					reactionType: 2,
-				});
 				const answerCount = poll.results.answer_counts.find((ac) => ac.id === existingAnswerId);
 				if (answerCount) {
 					if (!answerCount.count) answerCount.count = 0;
+					await this.deps.messageReactionService.removeReaction({
+						authChannel,
+						messageId,
+						actorId: user.id,
+						targetId: user.id,
+						emoji: `${existingAnswerId}:${existingAnswerId}`,
+						reactionType: 2,
+					});
 					answerCount.count--;
 				}
 			}
