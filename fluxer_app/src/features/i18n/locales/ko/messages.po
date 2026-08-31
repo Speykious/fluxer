@@ -19709,6 +19709,11 @@ msgstr "자산 업로드 시 최대 파일 크기를 설명하는 텍스트. 최
 msgid "Max number of uses"
 msgstr "최대 사용 횟수"
 
+#. Short label in the max poll vote count reached modal.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:8
+msgid "Max poll vote count reached"
+msgstr "Max poll vote count reached"
+
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:980
 msgid "Max size: {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
 msgstr "최대 크기: {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
@@ -33244,7 +33249,7 @@ msgid "This will close the current popout and stop screen share picture-in-pictu
 msgstr "현재 팝업을 닫고 화면 공유 그림 속 팝업이 자동으로 열리지 않도록 합니다. {audioVideoSettingsPath}에서 다시 활성화할 수 있습니다."
 
 #. Description of the action of ending a poll in a confirmation modal.
-#: src/features/messaging/commands/PollCommands.tsx:23
+#: src/features/messaging/commands/PollCommands.tsx:24
 msgid "This will close the poll now and show the results."
 msgstr "This will close the poll now and show the results."
 
@@ -38792,6 +38797,11 @@ msgstr "이모티콘 최대 개수에 도달했습니다. 공간을 확보하려
 #: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:65
 msgid "You've reached the maximum number of stickers. Delete some existing stickers to make room."
 msgstr "스티커 최대 개수에 도달했습니다. 공간을 확보하려면 기존 스티커를 일부 삭제하세요."
+
+#. Modal body shown when the maximum vote count per answer has been reached on a poll. Keep plain.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:12
+msgid "You've reached the maximum number of votes per answer."
+msgstr "You've reached the maximum number of votes per answer."
 
 #. Description text in the background image gallery modal. Preserve {maxBackgroundImages}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:106

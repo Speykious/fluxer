@@ -19709,6 +19709,11 @@ msgstr "Max. {maxSize}."
 msgid "Max number of uses"
 msgstr "Max. počet použití"
 
+#. Short label in the max poll vote count reached modal.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:8
+msgid "Max poll vote count reached"
+msgstr "Max poll vote count reached"
+
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:980
 msgid "Max size: {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
 msgstr "Maximální velikost: {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
@@ -33244,7 +33249,7 @@ msgid "This will close the current popout and stop screen share picture-in-pictu
 msgstr "Tím se zavře aktuální vyskakovací okno a zabrání se automatickému otevírání vyskakovacích oken sdílení obrazovky v režimu Picture-in-Picture. Můžete je znovu povolit v nastavení: {audioVideoSettingsPath}."
 
 #. Description of the action of ending a poll in a confirmation modal.
-#: src/features/messaging/commands/PollCommands.tsx:23
+#: src/features/messaging/commands/PollCommands.tsx:24
 msgid "This will close the poll now and show the results."
 msgstr "This will close the poll now and show the results."
 
@@ -38792,6 +38797,11 @@ msgstr "Dosáhli jste maximálního počtu emoji. Chcete-li uvolnit místo, odst
 #: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:65
 msgid "You've reached the maximum number of stickers. Delete some existing stickers to make room."
 msgstr "Dosáhli jste maximálního počtu nálepek. Chcete-li uvolnit místo, odstraňte některé stávající nálepky."
+
+#. Modal body shown when the maximum vote count per answer has been reached on a poll. Keep plain.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:12
+msgid "You've reached the maximum number of votes per answer."
+msgstr "You've reached the maximum number of votes per answer."
 
 #. Description text in the background image gallery modal. Preserve {maxBackgroundImages}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:106

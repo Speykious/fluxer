@@ -19709,6 +19709,11 @@ msgstr "Taille maximale : {maxSize}."
 msgid "Max number of uses"
 msgstr "Nombre max. d'utilisations"
 
+#. Short label in the max poll vote count reached modal.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:8
+msgid "Max poll vote count reached"
+msgstr "Max poll vote count reached"
+
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:980
 msgid "Max size: {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
 msgstr "Taille maximale : {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
@@ -33244,7 +33249,7 @@ msgid "This will close the current popout and stop screen share picture-in-pictu
 msgstr "Cela fermera la fenêtre contextuelle actuelle et empêchera l’ouverture automatique des fenêtres contextuelles d’image dans l’image du partage d’écran. Vous pouvez les réactiver dans {audioVideoSettingsPath}."
 
 #. Description of the action of ending a poll in a confirmation modal.
-#: src/features/messaging/commands/PollCommands.tsx:23
+#: src/features/messaging/commands/PollCommands.tsx:24
 msgid "This will close the poll now and show the results."
 msgstr "This will close the poll now and show the results."
 
@@ -38792,6 +38797,11 @@ msgstr "Vous avez atteint le nombre maximal d'emojis. Supprimez des emojis exist
 #: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:65
 msgid "You've reached the maximum number of stickers. Delete some existing stickers to make room."
 msgstr "Vous avez atteint le nombre maximal de stickers. Supprimez des stickers existants pour faire de la place."
+
+#. Modal body shown when the maximum vote count per answer has been reached on a poll. Keep plain.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:12
+msgid "You've reached the maximum number of votes per answer."
+msgstr "You've reached the maximum number of votes per answer."
 
 #. Description text in the background image gallery modal. Preserve {maxBackgroundImages}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:106

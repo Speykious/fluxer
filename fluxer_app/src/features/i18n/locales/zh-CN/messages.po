@@ -19709,6 +19709,11 @@ msgstr "最大 {maxSize}。"
 msgid "Max number of uses"
 msgstr "最大使用次数"
 
+#. Short label in the max poll vote count reached modal.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:8
+msgid "Max poll vote count reached"
+msgstr "Max poll vote count reached"
+
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:980
 msgid "Max size: {BACKGROUND_MEDIA_MAX_SIZE_LABEL}."
 msgstr "最大尺寸：{BACKGROUND_MEDIA_MAX_SIZE_LABEL}。"
@@ -33244,7 +33249,7 @@ msgid "This will close the current popout and stop screen share picture-in-pictu
 msgstr "这将关闭当前的弹出窗口，并阻止屏幕共享画中画弹出窗口自动打开。您可以在 {audioVideoSettingsPath} 中将其重新启用。"
 
 #. Description of the action of ending a poll in a confirmation modal.
-#: src/features/messaging/commands/PollCommands.tsx:23
+#: src/features/messaging/commands/PollCommands.tsx:24
 msgid "This will close the poll now and show the results."
 msgstr "This will close the poll now and show the results."
 
@@ -38792,6 +38797,11 @@ msgstr "您已达到表情符号数量上限。请删除一些现有表情符号
 #: src/features/guild/components/modals/guild_tabs/GuildStickersTab.tsx:65
 msgid "You've reached the maximum number of stickers. Delete some existing stickers to make room."
 msgstr "您已达到贴纸数量上限。请删除一些现有贴纸以腾出空间。"
+
+#. Modal body shown when the maximum vote count per answer has been reached on a poll. Keep plain.
+#: src/features/app/components/alerts/MaxPollVoteCountReachedModal.tsx:12
+msgid "You've reached the maximum number of votes per answer."
+msgstr "You've reached the maximum number of votes per answer."
 
 #. Description text in the background image gallery modal. Preserve {maxBackgroundImages}; it is inserted by code. Keep the tone plain and specific.
 #: src/features/theme/components/modals/BackgroundImageGalleryModal.tsx:106
