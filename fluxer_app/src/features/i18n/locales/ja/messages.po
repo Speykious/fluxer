@@ -487,7 +487,7 @@ msgstr "{count, plural, one {展開（#行）} other {展開（#行）}}"
 msgid "{count, plural, one {Expand (# row)} other {Expand (# rows)}}"
 msgstr "{count, plural, one {#行を展開} other {#行を展開}}"
 
-#: src/features/voice/components/VoiceParticipantTile.tsx:303
+#: src/features/voice/components/VoiceParticipantTile.tsx:304
 msgid "{count, plural, one {Expand # other device} other {Expand # other devices}}"
 msgstr "{count, plural, one {#件の他のデバイスを展開} other {#件の他のデバイスを展開}}"
 
@@ -495,8 +495,8 @@ msgstr "{count, plural, one {#件の他のデバイスを展開} other {#件の�
 msgid "{count, plural, one {Group DM · # member} other {Group DM · # members}}"
 msgstr "{count, plural, one {グループDM · 1人} other {グループDM · #人}}"
 
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:252
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:273
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:274
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:295
 msgid "{count, plural, one {Hide # device} other {Hide # devices}}"
 msgstr "{count, plural, one {#台のデバイスを非表示} other {#台のデバイスを非表示}}"
 
@@ -508,7 +508,7 @@ msgstr "{count, plural, one {通話中} other {#人が通話中}}"
 msgid "{count, plural, one {Join video call (# participant)} other {Join video call (# participants)}}"
 msgstr "{count, plural, one {ビデオ通話に参加（#人）} other {ビデオ通話に参加（#人）}}"
 
-#: src/features/voice/components/VoiceParticipantTile.tsx:620
+#: src/features/voice/components/VoiceParticipantTile.tsx:621
 msgid "{count, plural, one {Keep watching # stream and add this one} other {Keep watching # streams and add this one}}"
 msgstr "{count, plural, one {#件のストリームを視聴し続け、これを追加} other {#件のストリームを視聴し続け、これを追加}}"
 
@@ -524,8 +524,8 @@ msgstr "{count, plural, one { # アプリを取り消す } other { # アプリ�
 msgid "{count, plural, one {sent # attachment} other {sent # attachments}}"
 msgstr "{count, plural, other {#件の添付ファイルを送信}}"
 
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:259
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:280
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:281
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:302
 msgid "{count, plural, one {Show # device} other {Show # devices}}"
 msgstr "{count, plural, one {#台のデバイスを表示} other {#台のデバイスを表示}}"
 
@@ -808,7 +808,7 @@ msgstr "{fps} FPS"
 msgid "{guildName} channels"
 msgstr "{guildName}のチャンネル"
 
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:675
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:673
 msgid "{hiddenConnectionCount, plural, one {Expand # other device} other {Expand # other devices}}"
 msgstr "{hiddenConnectionCount, plural, one {#件の他のデバイスを展開} other {#件の他のデバイスを展開}}"
 
@@ -921,7 +921,7 @@ msgid "{mbWayPaymentMethod} is a one-time payment method in {paymentProviderName
 msgstr "{mbWayPaymentMethod}は{paymentProviderName}の決済では1回限りの支払い方法であるため、定期購入にはご利用いただけません。"
 
 #. Screen share bitrate option label. Mbps means megabits per second.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:167
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:172
 msgid "{megabits} Mbps"
 msgstr "{megabits} Mbps"
 
@@ -973,6 +973,11 @@ msgstr "{minutes}分"
 #: src/features/channel/components/channel_header_components/developer_tools/DeveloperOptionLabels.ts:37
 msgid "{months, plural, one {# month} other {# months}}"
 msgstr "{months, plural, one {#か月} other {#か月}}"
+
+#. Default name for a role created by duplicating another role in the community roles settings tab. {name} is the source role name; translate the whole label so "copy" can move or inflect as the language needs.
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:52
+msgid "{name} copy"
+msgstr "{name} のコピー"
 
 #. Time window preset label for a single-hour interval. The number is interpolated.
 #: src/features/app/config/TimeWindowPresets.ts:18
@@ -1192,7 +1197,7 @@ msgid "{productName} restarted while you were connected to the call in {directCa
 msgstr "{productName}は{directCallName}での通話中に再起動しました。"
 
 #. Item in the textarea spellcheck submenu that opens the full settings page. Trailing horizontal ellipsis (…) indicates the action opens settings.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:94
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:96
 msgid "{productName} spellcheck settings…"
 msgstr "{productName}のスペルチェック設定…"
 
@@ -1779,7 +1784,7 @@ msgid "2 members (typing)"
 msgstr "2人のメンバーが入力中"
 
 #. Ban duration option in the destructive ban-member modal for a two-week temporary ban.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:50
+#: src/features/moderation/components/modals/BanMemberModal.tsx:51
 msgid "2 weeks"
 msgstr "2週間"
 
@@ -1821,7 +1826,7 @@ msgid "2FA requirement"
 msgstr "2段階認証の必須化"
 
 #. Ban duration option in the destructive ban-member modal for a three-day temporary ban.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:42
+#: src/features/moderation/components/modals/BanMemberModal.tsx:43
 msgid "3 days"
 msgstr "3日間"
 
@@ -1867,7 +1872,7 @@ msgid "480p"
 msgstr "480p"
 
 #. Ban duration option in the destructive ban-member modal for a five-day temporary ban.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:46
+#: src/features/moderation/components/modals/BanMemberModal.tsx:47
 msgid "5 days"
 msgstr "5日間"
 
@@ -2136,7 +2141,7 @@ msgstr "この招待を承認すると、パックが自動的にインストー
 msgid "Access granted"
 msgstr "アクセスを許可しました"
 
-#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:66
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:70
 #: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/MobileOverrideListView.tsx:84
 msgid "Access overrides"
 msgstr "アクセス権限の変更"
@@ -2265,7 +2270,7 @@ msgstr "開いているDM全体のみ"
 msgid "Across every community you're in"
 msgstr "参加しているすべてのコミュニティ"
 
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:95
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:110
 msgid "Action"
 msgstr "アクション"
 
@@ -2511,7 +2516,7 @@ msgid "Add an extra layer of security to your account"
 msgstr "アカウントにセキュリティをさらに追加"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:39
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:40
 msgid "Add another custom shortcut"
 msgstr "カスタムショートカットを追加"
 
@@ -2614,7 +2619,7 @@ msgstr "メッセージに新しいリアクションを追加."
 msgid "Add note"
 msgstr "メモを追加"
 
-#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:88
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:92
 #: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/MobileOverrideListView.tsx:96
 msgid "Add override"
 msgstr "権限を上書き"
@@ -2701,7 +2706,7 @@ msgid "Add the credentials during setup."
 msgstr "セットアップ中に認証情報を追加します。"
 
 #. Textarea right-click context menu item that adds the selected misspelled word to the personal dictionary.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:32
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:34
 msgid "Add to dictionary"
 msgstr "辞書に登録"
 
@@ -2817,7 +2822,7 @@ msgid "Address"
 msgstr "住所"
 
 #. Description for an H.264 backup stream select. Keep H.264, CPU, and GPU literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:119
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:124
 msgid "Adds H.264 for mixed clients. Uses more encode work."
 msgstr "H.264 を追加して、さまざまなクライアントに対応します。エンコード処理が増加します。"
 
@@ -2873,10 +2878,8 @@ msgstr "管理者が招待を一時停止しました。現在参加すること
 #. Collapsed-by-default group at the end of the community overview tab holding less common settings.
 #. Disclosure button label in the voice connection status popout. Reveals technical bandwidth and network stats.
 #. User settings tab for power-user and experimental application preferences.
-#. Voice participant context menu submenu label for IDs and diagnostics.
 #: src/features/channel/components/modals/channel_tabs/ChannelOverviewTab.tsx:337
 #: src/features/guild/components/modals/guild_tabs/guild_overview_tab/index.tsx:28
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:178
 #: src/features/user/components/settings_utils/SettingsConstants.tsx:145
 #: src/features/voice/components/voice_connection_status/VoiceDetailsPopout.tsx:60
 msgid "Advanced"
@@ -2888,7 +2891,7 @@ msgid "Advanced video settings"
 msgstr "高度なビデオ設定"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:100
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:121
 msgid "Advertise a capped decode codec to force publisher migration"
 msgstr "デコードコーデックに上限を設定して、パブリッシャーの移行を強制します"
 
@@ -3111,6 +3114,13 @@ msgstr "プロフィールでこのつながりを誰でも見られるように
 msgid "Allow anyone who can view your full profile to see your profile local time"
 msgstr "プロフィールを閲覧できるすべてのユーザーに、あなたの現地の時刻の表示を許可します"
 
+#. Settings search entry label for the AV1 screen-share opt-in. AV1 is a codec name and should stay literal.
+#. Switch label for the AV1 screen-share opt-in. AV1 is a codec name and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:236
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:88
+msgid "Allow AV1 for screen sharing"
+msgstr ""
+
 #. Toggle label that allows DMs from bots in this community.
 #: src/features/ui/action_menu/items/BulkSettingsMenuItems.tsx:81
 msgid "Allow bot direct messages"
@@ -3157,6 +3167,13 @@ msgstr "テキストチャンネル名を自由に設定"
 #: src/features/user/components/modals/tabs/privacy_safety_tab/ConnectionsTab.tsx:56
 msgid "Allow for all communities"
 msgstr "すべてのコミュニティを許可"
+
+#. Settings search entry label for the H.265/HEVC screen-share opt-in. H.265 and HEVC are codec names and should stay literal.
+#. Switch label for the H.265/HEVC screen-share opt-in. H.265 and HEVC are codec names and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:240
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:92
+msgid "Allow H.265 (HEVC) for screen sharing"
+msgstr ""
 
 #: src/features/connection/components/modals/EditConnectionModal.tsx:95
 msgid "Allow members from communities you're in to see this connection"
@@ -3719,7 +3736,7 @@ msgid "Any uploaded attachment"
 msgstr "添付ファイル"
 
 #. Helper text under the custom ban duration input. Both placeholders are integer numbers of seconds bounding the allowed range.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:72
+#: src/features/moderation/components/modals/BanMemberModal.tsx:73
 msgid "Any value from {minTempBanDurationSeconds} to {maxTempBanDurationSeconds} seconds."
 msgstr "{minTempBanDurationSeconds}秒から{maxTempBanDurationSeconds}秒までの値を入力してください。"
 
@@ -3805,17 +3822,17 @@ msgid "Appearance"
 msgstr "表示設定"
 
 #. Slash-command description for /tableflip. Appends a kaomoji to the user's message.
-#: src/features/devtools/hooks/useCommands.ts:12
+#: src/features/devtools/hooks/useCommands.ts:13
 msgid "Appends (╯°□°)╯︵ ┻━┻ to your message."
 msgstr "メッセージに (╯°□°)╯︵ ┻━┻ を追加します。"
 
 #. Slash-command description for /shrug. Appends a kaomoji to the user's message.
-#: src/features/devtools/hooks/useCommands.ts:8
+#: src/features/devtools/hooks/useCommands.ts:9
 msgid "Appends ¯\\_(ツ)_/¯ to your message."
 msgstr "メッセージに ¯\\_(ツ)_/¯ を追加します。"
 
 #. Slash-command description for /unflip. Appends a kaomoji to the user's message.
-#: src/features/devtools/hooks/useCommands.ts:16
+#: src/features/devtools/hooks/useCommands.ts:17
 msgid "Appends ┬─┬ ノ( ゜-゜ノ) to your message."
 msgstr "メッセージに ┬─┬ ノ( ゜-゜ノ) を追加します。"
 
@@ -3960,7 +3977,7 @@ msgid "Are you sure you want to delete every message in your personal notes? Thi
 msgstr "個人用ノートのメッセージをすべて削除しますか？すべてのメッセージと添付ファイルが完全に削除されます。この操作は元に戻せません。"
 
 #. placeholder {0}: selectedRole.name
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:354
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:425
 msgid "Are you sure you want to delete the <0>{0}</0> role? Any members with this role will no longer have it."
 msgstr "「<0>{0}</0>」のロールを削除してもよろしいですか？このロールを持つメンバーは、ロールを失います。"
 
@@ -4299,7 +4316,7 @@ msgid "Audio settings"
 msgstr "オーディオ設定"
 
 #. Voice control button label for microphone and speaker settings.
-#: src/features/voice/components/VoiceControlBar.tsx:146
+#: src/features/voice/components/VoiceControlBar.tsx:142
 msgctxt "voice-control-button"
 msgid "Audio settings"
 msgstr "オーディオ設定"
@@ -4503,8 +4520,6 @@ msgid "Autocomplete suggestion: {label}, {selectedOptionPosition} of {resultCoun
 msgstr "入力候補: {label}、{resultCount}件中{selectedOptionPosition}番目"
 
 #. Channel overview settings tab label, control, or validation message (name, topic, slowmode, voice region, mature content gate).
-#. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
-#. Label for the auto codec option in the screen-share codec radio group. Keep it concise.
 #. Option label for a WebRTC content hint select.
 #. Option label for an SVC mode select.
 #. Option label for an encoder path select.
@@ -4512,13 +4527,11 @@ msgstr "入力候補: {label}、{resultCount}件中{selectedOptionPosition}番�
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Voice region option label in the voice settings menu meaning let Fluxer pick the best region automatically.
 #. Voice region picker option label meaning 'let Fluxer pick the best region automatically'.
-#: src/features/channel/components/channel_header_components/developer_tools/OptionPresets.ts:199
 #: src/features/channel/components/modals/channel_tabs/channel_overview_tab/RtcRegionSelect.tsx:19
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:59
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:99
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:139
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:176
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:34
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:64
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:104
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:144
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:181
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:263
 #: src/features/voice/components/VoiceRegionSelector.tsx:16
 #: src/features/voice/components/VoiceSettingsMenus.tsx:126
@@ -4530,6 +4543,11 @@ msgstr "自動"
 msgctxt "rtc-region-value"
 msgid "Automatic"
 msgstr "自動"
+
+#. Option label for the screen-share codec select. codec is the automatically selected codec label.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:222
+msgid "Automatic ({codec})"
+msgstr ""
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Voice setting label for automatically evening out microphone volume.
@@ -4557,96 +4575,6 @@ msgstr "メッセージ自動読み上げ"
 #: src/features/user/components/settings_utils/search_index/DesktopSettingsIndex.ts:38
 msgid "Automatic start"
 msgstr "自動起動"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated. Keep Firefox as a product name.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:8
-msgid "Automatic would use {codecName} because Firefox screen sharing works most reliably with it."
-msgstr "自動設定では、Firefoxの画面共有が最も安定して動作するため、{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.265 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:70
-msgid "Automatic would use {codecName} because no hardware encoder is available and this browser exposes H.265."
-msgstr "ハードウェアエンコーダーが利用できないため、自動設定では{codecName}が使用されます。このブラウザはH.265に対応しています。"
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.265 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:75
-msgid "Automatic would use {codecName} because no hardware encoder is available and your computer exposes H.265."
-msgstr "ハードウェアエンコーダーが利用できず、お使いのコンピューターがH.265を公開しているため、自動的に{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:90
-msgid "Automatic would use {codecName} because no higher-quality encoder is available and H.264 is compatible."
-msgstr "自動設定では、これより高品質なエンコーダーが利用できず、H.264に互換性があるため、{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep OpenH264 and Linux literal.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:101
-msgid "Automatic would use {codecName} because no video encoder is exposed. On Linux, OpenH264 may need to be installed."
-msgstr "自動を選択すると、ビデオエンコーダーが公開されていないため、{codecName}が使用されます。Linuxでは、OpenH264のインストールが必要になる場合があります。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as AV1 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:60
-msgid "Automatic would use {codecName} because software encoding is preferred and this browser exposes AV1."
-msgstr "自動設定では、ソフトウェアエンコードが優先され、このブラウザがAV1に対応しているため、{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP9 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:80
-msgid "Automatic would use {codecName} because software encoding is preferred and this browser exposes VP9."
-msgstr "自動設定では、ソフトウェアエンコードが優先され、このブラウザがVP9を公開しているため、{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:95
-msgid "Automatic would use {codecName} because software encoding is preferred and VP8 is the safest software fallback."
-msgstr "自動設定では、ソフトウェアエンコードが優先され、VP8が最も安全なソフトウェアフォールバックであるため、{codecName}が使用されます。"
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as AV1 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:65
-msgid "Automatic would use {codecName} because software encoding is preferred and your computer exposes AV1."
-msgstr "自動設定では、ソフトウェアエンコードが優先され、お使いのコンピューターがAV1に対応しているため、{codecName}が使用されます。"
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP9 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:85
-msgid "Automatic would use {codecName} because software encoding is preferred and your computer exposes VP9."
-msgstr "自動設定では、ソフトウェアエンコードが推奨されており、お使いのコンピューターがVP9に対応しているため、{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated. Keep codec names literal.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:25
-msgid "Automatic would use {codecName} because this browser does not expose H.264, so VP8 is the safest fallback."
-msgstr "このブラウザではH.264が公開されていないため、自動設定では{codecName}が使用されます。VP8は最も安全なフォールバックです。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep Chromium as a product name.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:13
-msgid "Automatic would use {codecName} because this browser supports it and it is the best fallback outside Chromium."
-msgstr "このブラウザは{codecName}に対応しており、Chromium以外の環境では最適な代替であるため、自動的に{codecName}が使用されます。"
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated. Keep codec names literal.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:30
-msgid "Automatic would use {codecName} because your computer does not expose H.264, so VP8 is the safest fallback."
-msgstr "自動設定ではH.264が利用できないため、{codecName}が使用されます。VP8が最も安全な代替手段です。"
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep Chromium as a product name.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:19
-msgid "Automatic would use {codecName} because your computer supports it and it is the best fallback outside Chromium."
-msgstr "自動設定では、お使いのコンピューターが対応しており、Chromium以外で最適なフォールバックであるため、{codecName}が使用されます。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP9 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:54
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware and it gives strong screen-share quality."
-msgstr "自動設定では、お使いのGPUがハードウェアでエンコードできるため{codecName}が使用され、画面共有の品質が向上します。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:42
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware and it is the most compatible screen-share default."
-msgstr "自動設定では、お使いのGPUがハードウェアでエンコードできるため、{codecName}が使用されます。これは最も互換性の高い画面共有のデフォルト設定です。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.265 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:48
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware, with excellent compression and low CPU usage."
-msgstr "自動設定では、お使いのGPUがハードウェアでエンコードできるため、{codecName}が使用されます。これにより、優れた圧縮率と低いCPU使用率が実現します。"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as AV1 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:36
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware, with the best compression for screen sharing."
-msgstr "自動設定では、お使いのGPUがハードウェアでエンコードできるため、画面共有に最適な圧縮率の{codecName}が使用されます。"
 
 #. Short label in the animation tab. Keep it concise.
 #: src/features/user/components/modals/tabs/accessibility_tab/AnimationTab.tsx:52
@@ -4710,6 +4638,16 @@ msgstr "自動既読"
 #: src/features/user/components/settings_utils/section_registry/AccessibilitySections.ts:307
 msgid "Autoscrolling"
 msgstr "自動スクロール"
+
+#. Settings search synonym. Codec name; keep literal. Used to match this term in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:101
+msgid "AV1"
+msgstr ""
+
+#. Option label for the screen-share codec select while the AV1 opt-in is off and the option is disabled. AV1 is a codec name and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:226
+msgid "AV1 (requires opt-in)"
+msgstr ""
 
 #. Label for the available desktop version in the Linux update modal.
 #: src/features/updater/commands/UpdaterModalCommands.tsx:140
@@ -4829,7 +4767,7 @@ msgstr "上書き設定に戻る"
 #. Back-navigation label that returns from an individual role editor to the roles list.
 #: src/features/app/components/dialogs/components/DesktopGuildSettingsView.tsx:50
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleEditor.tsx:149
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:112
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:116
 msgid "Back to roles"
 msgstr "ロールに戻る"
 
@@ -4938,7 +4876,7 @@ msgid "Badge"
 msgstr "バッジ"
 
 #. Option label for a software encoder quality select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:83
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:88
 msgid "Balanced"
 msgstr "バランス"
 
@@ -4950,12 +4888,12 @@ msgid "Ban"
 msgstr "追放"
 
 #. Title of the destructive ban-member modal. {tag} is the target user tag (username#tag). Destructive moderation action; keep tone direct.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:54
+#: src/features/moderation/components/modals/BanMemberModal.tsx:55
 msgid "Ban {tag}"
 msgstr "{tag} をBANする"
 
 #. Slash-command description for /ban. Bans a member from the current community (moderation action).
-#: src/features/devtools/hooks/useCommands.ts:42
+#: src/features/devtools/hooks/useCommands.ts:43
 msgid "Ban a member from this community."
 msgstr "このコミュニティからメンバーをBANする."
 
@@ -4965,7 +4903,7 @@ msgid "Ban details"
 msgstr "利用停止の詳細"
 
 #. Label above the ban duration dropdown in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:59
+#: src/features/moderation/components/modals/BanMemberModal.tsx:60
 msgid "Ban duration"
 msgstr "利用停止期間"
 
@@ -4977,10 +4915,10 @@ msgstr "BANは{0}に期限切れになります。"
 #. Moderation action that bans the selected member from the community.
 #. Moderation action that bans the selected member from the community.
 #. Moderation action that bans the selected member from the community.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:305
+#: src/features/moderation/components/modals/BanMemberModal.tsx:270
 #: src/features/ui/action_menu/GuildMemberContextMenu.tsx:66
 #: src/features/ui/action_menu/items/GuildMemberMenuItems.tsx:51
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:94
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:118
 msgid "Ban member"
 msgstr "メンバーをBANする"
 
@@ -5010,7 +4948,7 @@ msgstr "帯域幅制限"
 msgid "Banned"
 msgstr "BAN済み"
 
-#: src/features/moderation/components/modals/BanMemberModal.tsx:160
+#: src/features/moderation/components/modals/BanMemberModal.tsx:134
 msgid "Banned {targetUserTag} from the community"
 msgstr "{targetUserTag} さんをコミュニティから追放しました"
 
@@ -5162,7 +5100,7 @@ msgid "Biometrics"
 msgstr "生体認証"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:160
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:181
 msgid "Bitrate"
 msgstr "ビットレート"
 
@@ -5824,7 +5762,7 @@ msgid "Cameras and virtual capture devices are selected here in {productName}, n
 msgstr "カメラと仮想キャプチャデバイスは、Waylandシステムピッカーではなく、{productName}で選択されます。ここに何も表示されない場合は、権限を確認するか、デバイスを接続してください。"
 
 #. Tooltip in the voice control bar when cameras are disabled because the participant count exceeds the limit. {voiceChannelCameraUserLimit} is the configured threshold.
-#: src/features/voice/components/VoiceControlBar.tsx:136
+#: src/features/voice/components/VoiceControlBar.tsx:132
 msgid "Cameras are off above {voiceChannelCameraUserLimit} participants"
 msgstr "{voiceChannelCameraUserLimit}人を超えるとカメラはオフになります"
 
@@ -5888,7 +5826,7 @@ msgstr "ここにファイルをアップロードできません"
 #: src/features/messaging/components/modals/ImageCropModal.tsx:925
 #: src/features/messaging/components/modals/MessageHistoryThresholdModal.tsx:107
 #: src/features/messaging/components/popouts/ScheduledMessagesContent.tsx:47
-#: src/features/moderation/components/modals/BanMemberModal.tsx:297
+#: src/features/moderation/components/modals/BanMemberModal.tsx:262
 #: src/features/moderation/components/modals/RemoveTimeoutModal.tsx:70
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:126
 #: src/features/theme/components/modals/ThemeAcceptModal.tsx:173
@@ -6018,15 +5956,15 @@ msgstr "画像認証に失敗しました。もう一度お試しください。
 msgid "Capture"
 msgstr "キャプチャ"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:398
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:420
 msgid "Capture app audio"
 msgstr "アプリの音声をキャプチャ"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:399
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:421
 msgid "Capture desktop audio"
 msgstr "デスクトップ音声をキャプチャ"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:397
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:419
 msgid "Capture device audio"
 msgstr "デバイスの音声をキャプチャ"
 
@@ -6284,12 +6222,12 @@ msgstr "パスワード変更フォーム"
 msgid "Change scheduled"
 msgstr "変更を予約済み"
 
-#. Tooltip / button label in the screen-share status pill. Opens the picker to change what is being shared.
-#. Voice control menu action to choose a different screen-share source.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:48
-#: src/features/voice/components/VoiceControlBar.tsx:108
-msgid "Change source"
-msgstr "音声入力の変更"
+#. Action that opens the source picker for the active screen share.
+#. Voice screen share menu action that changes the shared source.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:24
+#: src/features/voice/components/ActiveScreenShareMenu.tsx:23
+msgid "Change Stream"
+msgstr ""
 
 #. Modal title for the screen-share picker when switching an ongoing stream to a new source.
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:156
@@ -6342,7 +6280,7 @@ msgid "Change your nickname for a community profile"
 msgstr "コミュニティプロフィール用のニックネームを変更"
 
 #. Slash-command description for /nick. Changes the user's nickname in the current community.
-#: src/features/devtools/hooks/useCommands.ts:34
+#: src/features/devtools/hooks/useCommands.ts:35
 msgid "Change your nickname in this community."
 msgstr "このコミュニティでのニックネームを変更します。"
 
@@ -6845,7 +6783,7 @@ msgstr "システムピッカーでウィンドウを選択"
 msgid "Choose an account"
 msgstr "アカウントを選択"
 
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:137
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:152
 msgid "Choose an action."
 msgstr "アクションを選択します。"
 
@@ -7039,7 +6977,7 @@ msgid "Choose your profile accent color"
 msgstr "プロフィールアクセントカラーを選択"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:108
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:129
 msgid "Cisco"
 msgstr "Cisco"
 
@@ -7647,7 +7585,7 @@ msgid "Codec"
 msgstr "コーデック"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:96
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:117
 msgid "Codec negotiation testing"
 msgstr "コーデックネゴシエーションのテスト"
 
@@ -7691,8 +7629,8 @@ msgstr "チャンネルのトピックを折りたたむ"
 
 #. Tooltip / aria label on a voice participant tile button that collapses expanded device tiles for one user.
 #. Voice menu action that collapses expanded device tiles back into a single tile.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:98
-#: src/features/voice/components/VoiceParticipantTile.tsx:165
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:122
+#: src/features/voice/components/VoiceParticipantTile.tsx:166
 msgid "Collapse devices"
 msgstr "デバイスを折りたたむ"
 
@@ -8167,7 +8105,7 @@ msgstr "入力欄のフォーカス"
 #. Button label that opens a dedicated advanced settings modal for configuring screen-share encoder controls.
 #. Button label that opens a dedicated advanced settings modal.
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:161
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:163
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:168
 msgid "Configure"
 msgstr "設定"
 
@@ -8190,7 +8128,7 @@ msgid "Configure now"
 msgstr "今すぐ設定"
 
 #. Tooltip / aria label on the screen-share control while a share is active. Opens the configure / end menu.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:69
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:58
 msgid "Configure or end screen share"
 msgstr "画面共有を設定または終了"
 
@@ -8301,7 +8239,7 @@ msgstr "確認"
 msgid "Confirmation or double-click for community voice joins"
 msgstr "コミュニティボイスへの参加時の確認またはダブルクリック"
 
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:154
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:169
 msgid "Conflicts with {conflictLabel}"
 msgstr "{conflictLabel} と競合しています"
 
@@ -8497,7 +8435,7 @@ msgid "Content filtering"
 msgstr "コンテンツフィルター"
 
 #. Label for an advanced screen-share select. Refers to the WebRTC MediaStreamTrack contentHint value.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:131
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:136
 msgid "Content hint"
 msgstr "コンテンツヒント"
 
@@ -8673,7 +8611,7 @@ msgstr "URLをクリップボードにコピーしました"
 #. Textarea right-click context menu item that copies the selected text.
 #: src/features/app/components/dialogs/shared/CopyLinkSection.tsx:11
 #: src/features/auth/components/modals/BackupCodesModal.tsx:94
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:48
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:50
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:423
 #: src/features/theme_studio/sections/QuickCssSection.tsx:214
 #: src/features/ui/action_menu/MessageContextMenu.tsx:71
@@ -9368,7 +9306,7 @@ msgid "Couldn't rename this emoji"
 msgstr "この絵文字の名前を変更できませんでした"
 
 #. Error modal title shown when resetting the community role hoist order fails.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:55
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:62
 msgid "Couldn't reset hoist order"
 msgstr "表示順をリセットできませんでした"
 
@@ -9762,7 +9700,7 @@ msgid "Create polls"
 msgstr "Create polls"
 
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/MobileRoleList.tsx:48
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:209
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:215
 msgid "Create role"
 msgstr "ロールを作成"
 
@@ -10058,7 +9996,7 @@ msgid "Custom"
 msgstr "カスタム"
 
 #. Label of the numeric input shown after choosing "Custom..." in the ban duration dropdown. The unit is seconds.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:67
+#: src/features/moderation/components/modals/BanMemberModal.tsx:68
 msgid "Custom ban duration (seconds)"
 msgstr "カスタム禁止期間（秒）"
 
@@ -10098,7 +10036,7 @@ msgstr "{premiumProductName}でカスタム入室サウンド"
 msgid "Custom expiry (seconds)"
 msgstr "カスタム有効期限（秒）"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:225
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:231
 msgid "Custom hoist order"
 msgstr "カスタム表示順"
 
@@ -10153,12 +10091,12 @@ msgid "Custom selection"
 msgstr "カスタム選択"
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:41
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:42
 msgid "Custom shortcut action"
 msgstr "カスタムショートカットアクション"
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:37
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:38
 msgid "Custom shortcut options"
 msgstr "カスタムショートカットオプション"
 
@@ -10308,7 +10246,7 @@ msgid "Customizing your avatar, banner, accent color, and bio for individual com
 msgstr "アバター、バナー、アクセントカラー、自己紹介をコミュニティごとにカスタマイズするには、{PREMIUM_PRODUCT_NAME}が必要です。コミュニティでのニックネームと代名詞は、どなたでも無料で利用できます。"
 
 #. Textarea right-click context menu item that cuts the selected text.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:44
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:46
 msgid "Cut"
 msgstr "切り取り"
 
@@ -10845,8 +10783,8 @@ msgid "Delete message"
 msgstr "メッセージを削除"
 
 #. Section heading and accessible label for the message-history-deletion radio group in the destructive ban-member modal. Destructive option group.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:77
-#: src/features/moderation/components/modals/BanMemberModal.tsx:255
+#: src/features/moderation/components/modals/BanMemberModal.tsx:78
+#: src/features/moderation/components/modals/BanMemberModal.tsx:229
 msgid "Delete message history"
 msgstr "メッセージ履歴を削除"
 
@@ -10885,9 +10823,13 @@ msgstr "パスキーを削除"
 msgid "Delete redirect URI"
 msgstr "リダイレクトURIを削除"
 
+#. Danger action in the channel permissions overwrite context menu that removes a role permission override from the channel.
 #. Destructive button in the role editor that removes the selected role. Removes the role from every member; keep tone plain.
+#. Destructive context menu action in the community roles settings tab that immediately removes the right-clicked role from every member. Keep it short.
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/OverwriteContextMenu.tsx:14
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleEditor.tsx:173
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:50
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:57
+#: src/features/ui/action_menu/RoleContextMenu.tsx:17
 msgid "Delete role"
 msgstr "ロールを削除"
 
@@ -10899,7 +10841,7 @@ msgid "Delete saved media"
 msgstr "保存したメディアを削除"
 
 #. Button or menu action label in the keybinds tab. Keep it concise. Keep the tone plain and specific.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:33
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:34
 msgid "Delete shortcut"
 msgstr "ショートカットを削除"
 
@@ -10917,16 +10859,6 @@ msgstr "ステッカー「{stickerName}」を削除"
 #: src/features/ui/action_menu/items/CategoryMenuData.tsx:47
 msgid "Delete the category \"{categoryName}\"? Can't be undone."
 msgstr "カテゴリ「{categoryName}」を削除しますか？この操作は元に戻せません。"
-
-#. Helper text under the "Previous 24 hours" option in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:96
-msgid "Delete their messages from the last 24 hours"
-msgstr "過去24時間以内のメッセージを削除"
-
-#. Helper text under the "Previous 7 days" option in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:105
-msgid "Delete their messages from the last 7 days"
-msgstr "過去7日間のメッセージを削除"
 
 #. Button or menu action label in the theme studio library section. Keep it concise. Keep the tone plain and specific.
 #: src/features/theme_studio/sections/LibrarySection.tsx:59
@@ -10957,6 +10889,11 @@ msgstr "このメッセージを削除しますか？元に戻すことはでき
 #: src/features/user/components/modals/tabs/ExpressionPacksTab.tsx:45
 msgid "Delete this pack? Can't be undone."
 msgstr "このパックを削除しますか？元に戻すことはできません。"
+
+#. Danger action in the channel permissions overwrite context menu that removes a member permission override from the channel.
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/OverwriteContextMenu.tsx:19
+msgid "Delete user"
+msgstr "ユーザーを削除"
 
 #. Danger button label that deletes a webhook.
 #: src/features/webhook/components/WebhookListItem.tsx:360
@@ -11225,7 +11162,7 @@ msgid "Detached banner"
 msgstr "バナーを削除しました"
 
 #. Option label for a WebRTC content hint select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:147
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:152
 msgid "Detail"
 msgstr "詳細"
 
@@ -11240,7 +11177,7 @@ msgstr "詳細"
 
 #. Item in the textarea spellcheck language submenu that detects draft message language and switches dictionaries as the user types.
 #. Spellcheck language mode label in the language tab. The app detects the draft message language and switches dictionaries as the user types.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:81
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:83
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:123
 msgid "Detect while typing"
 msgstr "入力中に検出"
@@ -11304,11 +11241,6 @@ msgstr "デバイス"
 msgid "Device alerts"
 msgstr "デバイスの通知"
 
-#. Voice participant context menu submenu label for actions that affect one or more voice devices.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:182
-msgid "Device controls"
-msgstr "デバイスコントロール"
-
 #: src/features/user/components/modals/tabs/DevicesTab.tsx:131
 msgid "Device details"
 msgstr "デバイスの詳細"
@@ -11318,7 +11250,7 @@ msgstr "デバイスの詳細"
 msgid "Device revoked"
 msgstr "デバイスを削除しました"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:891
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:1024
 msgid "Device selection"
 msgstr "デバイス選択"
 
@@ -11479,7 +11411,7 @@ msgid "Disable backend premium perks"
 msgstr "バックエンドのプレミアム特典を無効にする"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:31
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:32
 msgid "Disable built-in shortcut"
 msgstr "組み込みのショートカットを無効にする"
 
@@ -11523,7 +11455,7 @@ msgid "Disable mobile push notifications"
 msgstr "モバイルプッシュ通知をオフにする"
 
 #. Short label for an advanced screen-share preview preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:43
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:48
 msgid "Disable picture-in-picture popout for screen shares"
 msgstr "画面共有のピクチャーインピクチャーポップアウトを無効にする"
 
@@ -11543,7 +11475,7 @@ msgid "Disable screen share picture-in-picture popouts?"
 msgstr "画面共有のピクチャ・イン・ピクチャ・ポップアップを無効にしますか？"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:25
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:26
 msgid "Disable shortcut"
 msgstr "ショートカットを無効にする"
 
@@ -11564,7 +11496,7 @@ msgstr "2段階認証の無効化フォーム"
 
 #. Voice menu checkbox label. Hides another participant's video only for the current user.
 #. Voice menu checkbox that hides a participant video on the current device only.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:86
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:110
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:77
 msgid "Disable video locally"
 msgstr "自分のビデオをオフにする"
@@ -11840,11 +11772,6 @@ msgstr "表示名"
 msgid "Display name (optional)"
 msgstr "表示名（任意）"
 
-#. Voice participant context menu submenu label for call display and diagnostics preferences.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:186
-msgid "Display options"
-msgstr "表示オプション"
-
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabRenderers.tsx:661
 msgid "Display role members separately."
 msgstr "ロールメンバーを個別に表示."
@@ -12019,12 +11946,10 @@ msgstr "今後表示しない"
 msgid "Don't clear"
 msgstr "クリアしない"
 
-#. Choice label for retaining all messages when banning a member.
-#. Message-history-deletion option in the destructive ban-member modal. Keeps all messages from the banned member. Short standalone label.
-#: src/features/devtools/hooks/useCommands.ts:86
-#: src/features/moderation/components/modals/BanMemberModal.tsx:82
-msgid "Don't delete any"
-msgstr "削除しない"
+#. Message-history-deletion option when banning a member. Keeps all of the member's messages.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:14
+msgid "Don't Delete Any"
+msgstr "すべて削除しない"
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabRenderers.tsx:663
 msgid "Don't display separately."
@@ -12251,7 +12176,7 @@ msgstr "絵文字ファイルをここにドラッグ＆ドロップ"
 msgid "Drag members between channels they can access."
 msgstr "メンバーをアクセス可能なチャンネル間でドラッグする."
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:136
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:140
 msgid "Drag roles to customize the order they appear in the member list."
 msgstr "役割をドラッグして、メンバーリストでの表示順をカスタマイズできます。"
 
@@ -12352,10 +12277,15 @@ msgstr "複製"
 msgid "Duplicate channel"
 msgstr "チャンネルを複製"
 
+#. Context menu action in the community roles settings tab that creates a new role copying the settings of the one right-clicked. Keep it short.
+#: src/features/ui/action_menu/RoleContextMenu.tsx:12
+msgid "Duplicate role"
+msgstr "ロールを複製"
+
 #. Label for the duration input.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:44
 msgid "Duration"
-msgstr "Duration"
+msgstr ""
 
 #. Field label in the voice connection status popout. Shows how long the current voice session has been connected.
 #: src/features/voice/components/voice_connection_status/shared.ts:76
@@ -12970,8 +12900,8 @@ msgstr "お気に入りはありません"
 
 #. Label for an advanced select that caps the best video codec this client advertises it can decode.
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:172
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:92
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:177
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:113
 msgid "Emulate decode codec (testing)"
 msgstr "デコードコーデックのエミュレート（テスト用）"
 
@@ -13178,7 +13108,7 @@ msgid "Enable Shift to expand"
 msgstr "Shiftキーで展開"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:29
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:30
 msgid "Enable shortcut"
 msgstr "ショートカットを有効にする"
 
@@ -13240,7 +13170,7 @@ msgstr "ビデオシークサムネイルを有効にする"
 #. Toggle item in the textarea spellcheck submenu. Master enable for spellcheck.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:359
 #: src/features/channel/components/channel_header_components/developer_tools/DeveloperToolsShared.ts:21
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:64
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:66
 msgid "Enabled"
 msgstr "有効"
 
@@ -13265,18 +13195,18 @@ msgstr "成人向けコンテンツを有効にしました。"
 
 #. Label for an advanced screen-share select. Refers to hardware or software video encoding.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:51
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:144
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:56
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:165
 msgid "Encoder path"
 msgstr "エンコーダーパス"
 
 #. Description for the encoder path select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:55
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:60
 msgid "Encoder preference for new screen shares."
 msgstr "新しい画面共有のエンコーダー設定"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:164
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:185
 msgid "Encoder, SVC, backup stream, and bitrate presets"
 msgstr "エンコーダー、SVC、バックアップストリーム、およびビットレートプリセット"
 
@@ -13315,10 +13245,8 @@ msgstr "猶予期間を今すぐ終了しますか？"
 msgid "End poll now"
 msgstr "End poll now"
 
-#. Button label that stops the current screen share.
 #. Voice control menu action to stop sharing the screen.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:52
-#: src/features/voice/components/VoiceControlBar.tsx:112
+#: src/features/voice/components/VoiceControlBar.tsx:108
 msgid "End screen share"
 msgstr "画面共有を終了"
 
@@ -13409,7 +13337,7 @@ msgid "Enter a product name between 1 and 80 characters."
 msgstr "製品名は1文字から80文字の間で入力してください。"
 
 #. Placeholder in the optional reason input in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:114
+#: src/features/moderation/components/modals/BanMemberModal.tsx:88
 msgid "Enter a reason for the ban"
 msgstr "利用停止理由を入力"
 
@@ -13635,7 +13563,9 @@ msgstr "システム全体の音声"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Subsection title in the voice tab. Keep it concise.
+#. Voice menu submenu label for per-user entrance sound controls.
 #. Voice menu submenu label that contains per-user entrance sound mute and volume controls.
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:179
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:309
 #: src/features/user/components/modals/tabs/UserVoiceTab.tsx:187
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:145
@@ -13663,6 +13593,8 @@ msgid "Entrance sound saved"
 msgstr "入室サウンドを保存しました"
 
 #. Voice menu slider label adjusting playback volume of this user's entrance sound, locally only.
+#. Voice menu slider label for a user's entrance sound playback volume.
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:187
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:318
 msgid "Entrance sound volume"
 msgstr "入室サウンドの音量"
@@ -14144,7 +14076,7 @@ msgstr "メッセージの読み込みに失敗"
 msgid "Fail message sends"
 msgstr "メッセージ送信を失敗させる"
 
-#: src/features/moderation/components/modals/BanMemberModal.tsx:167
+#: src/features/moderation/components/modals/BanMemberModal.tsx:141
 msgid "Failed to ban member. Try again."
 msgstr "メンバーをBANできませんでした。もう一度お試しください。"
 
@@ -14848,14 +14780,14 @@ msgstr "テキスト入力欄にフォーカスする"
 
 #. Voice call layout action that pins one of several active devices of the same participant.
 #. Voice layout menu action that focuses one device/session for a participant.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:37
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:61
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:101
 msgid "Focus this device"
 msgstr "このデバイスに注目"
 
 #. Voice call layout action that pins the selected participant in the focused view.
 #. Voice layout menu action that focuses one participant in the call view.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:41
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:65
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:105
 msgid "Focus this person"
 msgstr "この人にフォーカス"
@@ -14902,7 +14834,7 @@ msgstr "フォルダー設定"
 msgid "Follow us on {blueskyProviderName}"
 msgstr "{blueskyProviderName}でフォローする"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:693
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:826
 msgid "Follow voice input"
 msgstr "音声入力に従う"
 
@@ -15414,11 +15346,6 @@ msgstr "macOS でこの権限を適用するには、{productName} を完全に�
 msgid "Gain control"
 msgstr "コントロールする"
 
-#. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
-#: src/features/channel/components/channel_header_components/developer_tools/DeveloperOptionLabels.ts:281
-msgid "Game capture injection (Windows)"
-msgstr "ゲームキャプチャインジェクション (Windows)"
-
 #. Folder icon option in the community-folder settings modal: a game controller shape.
 #: src/features/guild/components/modals/GuildFolderSettingsModal.tsx:56
 msgid "Game controller"
@@ -15628,7 +15555,7 @@ msgstr "ギフトコードは必須です"
 msgid "Gift code is too long"
 msgstr "ギフトコードが長すぎます"
 
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:143
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:139
 msgid "Gift code:"
 msgstr "ギフトコード:"
 
@@ -15663,7 +15590,7 @@ msgstr "ギフト在庫ナグバー"
 
 #. Form field label for a gift redemption URL.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:38
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:34
 #: src/features/user/components/settings_utils/search_index/GiftInventoryIndex.ts:26
 msgid "Gift link"
 msgstr "ギフトリンク"
@@ -15779,6 +15706,12 @@ msgstr "グローバル名"
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:97
 msgid "Global profile"
 msgstr "グローバルプロフィール"
+
+#. Toggle in the keybinds tab. When on, the shortcut works even when Fluxer is not focused. Keep it concise.
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:81
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:57
+msgid "Global shortcut"
+msgstr "グローバルショートカット"
 
 #. Generic back-navigation label in modals, settings tabs, and nested flows.
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:107
@@ -15930,7 +15863,7 @@ msgstr "{0}を付与しました。"
 msgid "Grants all permissions and bypasses channel restrictions. Highly sensitive."
 msgstr "すべての権限を付与し、チャンネル制限をバイパスします。機密性の高い操作です。"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:878
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:1011
 msgid "Granular selection"
 msgstr "詳細選択"
 
@@ -15966,7 +15899,7 @@ msgstr "ギリシャ語"
 
 #. Toggle label in the mobile video settings bottom sheet. Switches to grid layout.
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:88
-#: src/features/voice/components/VoiceSettingsMenus.tsx:784
+#: src/features/voice/components/VoiceSettingsMenus.tsx:785
 msgid "Grid view"
 msgstr "グリッド表示"
 
@@ -16109,19 +16042,24 @@ msgid "Grouping"
 msgstr "グループ化"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:104
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:125
 msgid "H.264"
 msgstr "H.264"
 
 #. Label for an advanced screen-share select. H.264 is a codec name and should stay literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:115
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:120
 msgid "H.264 backup stream"
 msgstr "H.264 バックアップストリーム"
 
 #. Option label for an H.264 backup stream select. H.264 is a codec name and should stay literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:127
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:132
 msgid "H.264 simulcast backup"
 msgstr "H.264 サイマルキャストバックアップ"
+
+#. Option label for the screen-share codec select while the HEVC opt-in is off and the option is disabled. H.265 is a codec name and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:231
+msgid "H.265 (requires opt-in)"
+msgstr ""
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the connection add connection modal.
@@ -16174,12 +16112,8 @@ msgstr "ハードウェアアクセラレーション"
 msgid "Hardware acceleration can cause rendering glitches with transparent windows. Try --disable-gpu if you see flicker or smearing."
 msgstr "ハードウェアアクセラレーションは、透過ウィンドウでレンダリングの不具合を引き起こす可能性があります。ちらつきやにじみが見られる場合は、「--disable-gpu」をお試しください。"
 
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:132
-msgid "Hardware acceleration is off, so codecs will encode on your CPU. <0>Turn it back on in {advancedSettingsLabel}</0>."
-msgstr "ハードウェア アクセラレーションが無効になっているため、コーデックは CPU でエンコードされます。<0>{advancedSettingsLabel}で再度有効にしてください</0>。"
-
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:152
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:173
 msgid "Hardware encoder"
 msgstr "ハードウェアエンコーダー"
 
@@ -16314,9 +16248,14 @@ msgid "Help translate {PRODUCT_NAME} into your language on <0>{I18N_WEBLATE_DOMA
 msgstr "{PRODUCT_NAME} をあなたの言語に翻訳するお手伝いをしてください。 <0>{I18N_WEBLATE_DOMAIN}</0>"
 
 #. Description for a WebRTC content hint select. Keep Motion, Detail, and text as plain option concepts.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:135
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:140
 msgid "Helps the browser choose motion, detail, or text handling."
 msgstr "ブラウザが動き、詳細、またはテキストの処理方法を選択するのに役立ちます。"
+
+#. Settings search synonym. Codec name; keep literal. Used to match this term in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:105
+msgid "HEVC"
+msgstr ""
 
 #. Codec description in the screen share codec policy menu. HEVC is a codec name; keep WebRTC literal.
 #: src/features/voice/utils/ScreenShareCodecPolicy.ts:28
@@ -16469,7 +16408,7 @@ msgid "Hide muted channels by default?"
 msgstr "ミュート中のチャンネルをデフォルトで非表示にしますか？"
 
 #. Short label for an advanced stream privacy preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:47
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:52
 msgid "Hide my stream preview thumbnail"
 msgstr "ストリームプレビューのサムネイルを非表示にする"
 
@@ -16488,7 +16427,7 @@ msgstr "パスワードを非表示"
 msgid "Hide picture-in-picture popout?"
 msgstr "ピクチャーインピクチャーを非表示にしますか？"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:727
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:860
 msgid "Hide preview thumbnail"
 msgstr "プレビューサムネイルを非表示"
 
@@ -16550,7 +16489,7 @@ msgid "High dynamic range display mode"
 msgstr "HDR表示モード"
 
 #. Description for a software encoder quality select. Keep AV1 and CPU literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:75
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:80
 msgid "Higher quality can cost more CPU and latency."
 msgstr "品質を上げると、CPUと遅延が増加する可能性があります。"
 
@@ -16569,11 +16508,11 @@ msgstr "ヒンディー語"
 msgid "Hints"
 msgstr "ヒント"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:95
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:99
 msgid "Hoist order"
 msgstr "表示順"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:427
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:522
 msgid "Hoist order reset to default"
 msgstr "表示順をデフォルトにリセットしました"
 
@@ -16649,7 +16588,7 @@ msgid "How about:"
 msgstr "次はいかがですか:"
 
 #. Helper text under the ban duration dropdown in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:63
+#: src/features/moderation/components/modals/BanMemberModal.tsx:64
 msgid "How long they stay banned."
 msgstr "利用停止期間を設定します。"
 
@@ -16659,7 +16598,7 @@ msgid "How long they stay timed out."
 msgstr "タイムアウトの期間。"
 
 #. Description for the /ban delete_messages option.
-#: src/features/devtools/hooks/useCommands.ts:82
+#: src/features/devtools/hooks/useCommands.ts:83
 msgid "How much of the member's recent message history to delete."
 msgstr "メンバーの最近のメッセージ履歴をどれだけ削除するか。"
 
@@ -16735,11 +16674,6 @@ msgstr "更新された利用規約に同意します"
 #: src/features/user/components/modals/tabs/component_gallery_tab/OverlaysTab.tsx:19
 msgid "I am a tooltip"
 msgstr "ツールチップです"
-
-#. Gift redemption pre-filled DM message for a sender who already owns lifetime premium.
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:26
-msgid "I can't redeem this because I already have lifetime {premiumProductName}, so this gift is all yours!"
-msgstr "私はすでに{premiumProductName}を永久に所有しているので、これは引き換えできません。このギフトはすべてあなたのものです！"
 
 #: src/features/guild/components/modals/GuildDeleteModal.tsx:56
 msgid "I changed my mind"
@@ -16938,11 +16872,11 @@ msgstr "無視"
 msgid "Ignore friend request"
 msgstr "フレンド申請を無視"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:868
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:1001
 msgid "Ignore hardware devices"
 msgstr "ハードウェアデバイスを無視"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:844
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:977
 msgid "Ignore input media"
 msgstr "入力メディアを無視"
 
@@ -16968,7 +16902,7 @@ msgstr "スパム報告を無視"
 msgid "Ignore the friend request from {displayName}?"
 msgstr "{displayName}からの友達リクエストを無視しますか？"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:855
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:988
 msgid "Ignore virtual"
 msgstr "バーチャル背景を無視"
 
@@ -17262,7 +17196,7 @@ msgstr "ボイスチャットに参加中"
 
 #. Spellcheck engine option in the language tab. Uses the bundled in-app Hunspell dictionaries. Keep it concise.
 #. Spellcheck engine option in the textarea spellcheck submenu. The bundled in-app hunspell engine.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:73
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:75
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:97
 msgid "In-app dictionaries"
 msgstr "アプリ内辞書"
@@ -18321,11 +18255,6 @@ msgstr "参加する（他の接続は維持）"
 msgid "Keep {productName} running when the window is closed"
 msgstr "ウィンドウを閉じても{productName}を実行したままにする"
 
-#. Helper text under the "Don't delete any" message-history option in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:87
-msgid "Keep all messages"
-msgstr "すべてのメッセージを保持"
-
 #. Description text in the motion tab.
 #. Settings search entry description. One-line summary of what the settings search entry controls.
 #: src/features/user/components/modals/tabs/accessibility_tab/MotionTab.tsx:39
@@ -18436,7 +18365,7 @@ msgid "Kick"
 msgstr "強制退出"
 
 #. Slash-command description for /kick. Removes a member from the current community (moderation action).
-#: src/features/devtools/hooks/useCommands.ts:38
+#: src/features/devtools/hooks/useCommands.ts:39
 msgid "Kick a member from this community."
 msgstr "このコミュニティからメンバーをキックする."
 
@@ -18480,7 +18409,7 @@ msgstr "言語設定"
 
 #. Submenu label in the textarea spellcheck submenu listing manual language overrides.
 #. Subsection title for spellcheck language settings. Keep it concise.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:86
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:88
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:119
 msgid "Languages"
 msgstr "言語"
@@ -18554,7 +18483,7 @@ msgid "Launch at login"
 msgstr "ログイン時に起動"
 
 #. Description for an SVC mode select. Keep SVC and AV1 literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:95
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:100
 msgid "Layering for AV1 and VP9 when available."
 msgstr "利用可能な場合に、AV1 と VP9 をレイヤー化します。"
 
@@ -19757,9 +19686,14 @@ msgid "Maximum protection for family-friendly spaces"
 msgstr "ファミリー向けスペースを最大限保護"
 
 #. Label for an advanced screen-share bitrate select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:155
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:160
 msgid "Maximum screen share bitrate"
 msgstr "画面共有の最大ビットレート"
+
+#. Settings search entry description for the AV1 and H.265 screen-share opt-in toggles.
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:97
+msgid "May cause compatibility issues for viewers. We’re working on improving this."
+msgstr ""
 
 #. Short label in the max favorite memes modal.
 #: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:34
@@ -19809,9 +19743,7 @@ msgid "Media buttons"
 msgstr "メディアボタン"
 
 #. Accessible label for the floating media controls toolbar in the media viewer modal.
-#. Voice participant context menu submenu label for camera, stream, and video actions.
 #: src/features/messaging/components/modals/media_modal/shared.ts:69
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:190
 msgid "Media controls"
 msgstr "メディアコントロール"
 
@@ -20017,7 +19949,7 @@ msgstr "メンバー、選択済み"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Voice participant menu action that inserts a mention of the selected user into the message composer.
 #: src/features/ui/action_menu/items/MentionUserMenuItem.tsx:13
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:45
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:69
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:67
 msgid "Mention"
 msgstr "メンション"
@@ -20039,7 +19971,7 @@ msgid "Mention badges"
 msgstr "メンションバッジ"
 
 #. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
-#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:22
+#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:18
 msgid "Mention controls"
 msgstr "メンション設定"
 
@@ -20123,7 +20055,7 @@ msgstr "メッセージ"
 #: src/features/guild/components/modals/guild_tabs/GuildMemberActionsSheet.tsx:88
 #: src/features/ui/action_menu/items/ActionsSubmenu.tsx:41
 #: src/features/ui/action_menu/items/MessageUserMenuItem.tsx:26
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:49
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:73
 #: src/features/user/components/modals/tabs/component_gallery_tab/ComponentGalleryTabInputsTab.tsx:86
 #: src/features/user/components/modals/UserProfileMobileSheet.tsx:712
 #: src/features/user/components/modals/UserProfileModal.tsx:562
@@ -20461,7 +20393,7 @@ msgstr "マイクの許可が必要です"
 msgid "Microphone test"
 msgstr "マイクテスト"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:813
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:946
 msgid "Microphone workaround"
 msgstr "マイクの不具合を修正"
 
@@ -20651,9 +20583,7 @@ msgid "Mod"
 msgstr "モデレーター"
 
 #. Permission category for moderation actions against members or messages.
-#. Voice participant context menu submenu label for member moderation actions.
 #: src/features/permissions/utils/PermissionLabelDescriptors.ts:141
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:194
 msgid "Moderation"
 msgstr "モデレーション"
 
@@ -20755,7 +20685,7 @@ msgid "More options"
 msgstr "その他のオプション"
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:52
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:53
 msgid "More shortcut options"
 msgstr "その他のショートカットオプション"
 
@@ -20786,7 +20716,7 @@ msgstr "関連度が高い順"
 #. Short label in the inline. Keep it concise.
 #: src/features/user/components/modals/tabs/accessibility_tab/AccessibilityTabInline.tsx:31
 #: src/features/user/components/modals/tabs/AccessibilityTab.tsx:98
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:143
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:148
 #: src/features/user/components/settings_utils/search_index/AccessibilityIndex.ts:297
 #: src/features/user/components/settings_utils/section_registry/AccessibilitySections.ts:271
 msgid "Motion"
@@ -20804,7 +20734,7 @@ msgid "Move"
 msgstr "移動"
 
 #. Submenu label that moves every active device into another voice channel.
-#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:22
+#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:37
 msgid "Move all devices to…"
 msgstr "すべてのデバイスを移動…"
 
@@ -20821,7 +20751,7 @@ msgstr "チャンネル履歴を前に戻る"
 #. Submenu label that moves a single device into another voice channel.
 #. Submenu label that moves a single device into another voice channel.
 #: src/features/ui/action_menu/items/MoveToChannelSubmenu.tsx:21
-#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:18
+#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:33
 msgid "Move device to…"
 msgstr "デバイスを移動…"
 
@@ -20858,7 +20788,7 @@ msgstr "移動"
 #. Submenu label that moves the selected participant or content into another channel.
 #. Submenu label that moves the selected participant or content into another channel.
 #: src/features/ui/action_menu/items/MoveToChannelSubmenu.tsx:29
-#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:26
+#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:41
 msgid "Move to…"
 msgstr "移動…"
 
@@ -20923,7 +20853,7 @@ msgstr "音符"
 #: src/features/channel/components/bottomsheets/channel_details_bottom_sheet/ChannelDetailsBottomSheetShared.ts:132
 #: src/features/channel/components/embeds/media/EmbedVideo.tsx:72
 #: src/features/guild/components/modals/GuildNotificationSettingsModal.tsx:141
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:20
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:36
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:65
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:73
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:178
@@ -20937,7 +20867,7 @@ msgid "Mute"
 msgstr "ミュート"
 
 #. Voice control button label to turn the user's microphone off.
-#: src/features/voice/components/VoiceControlBar.tsx:126
+#: src/features/voice/components/VoiceControlBar.tsx:122
 msgctxt "voice-control-action"
 msgid "Mute"
 msgstr "ミュート"
@@ -21003,7 +20933,7 @@ msgid "Mute conversation"
 msgstr "会話をミュート"
 
 #. Voice menu toggle that mutes a single device when the current user is connected on multiple devices.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:53
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:77
 msgid "Mute device"
 msgstr "デバイスをミュート"
 
@@ -21017,7 +20947,9 @@ msgstr "DMをミュート"
 msgid "Mute DMs"
 msgstr "DMをミュート"
 
+#. Voice menu checkbox label that locally silences a user's entrance sound.
 #. Voice menu checkbox label. Locally silences this user's custom entrance sound when they join, only for the current user.
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:183
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:313
 msgid "Mute entrance sound"
 msgstr "入室サウンドをミュート"
@@ -21533,7 +21465,7 @@ msgid "New password"
 msgstr "新しいパスワード"
 
 #. Default name for a newly created role in the community roles settings tab. Short label.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:46
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:48
 msgid "New role"
 msgstr "新しいロール"
 
@@ -21872,7 +21804,7 @@ msgstr "一致するGIFがありません"
 msgid "No gifts yet"
 msgstr "まだギフトがありません"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:169
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:175
 msgid "No hoisted roles. Enable \"Show this role separately\" on a role to see it here."
 msgstr "表示するロールがありません。「ロールを個別に表示」を有効にすると、ここに表示されます。"
 
@@ -22490,7 +22422,7 @@ msgstr "物"
 #: src/features/channel/components/modals/channel_tabs/channel_overview_tab/SlowmodeControl.tsx:24
 #: src/features/guild/components/modals/guild_tabs/GuildModerationTab.tsx:97
 #: src/features/guild/components/modals/guild_tabs/GuildModerationTab.tsx:139
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:123
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:128
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:59
 msgid "Off"
 msgstr "オフ"
@@ -22624,7 +22556,7 @@ msgstr "ワイド画面にのみ適用されます。"
 msgid "Only credit cards are accepted. Debit and prepaid cards cannot be used for the mature content check."
 msgstr "クレジットカードのみご利用いただけます。デビットカードやプリペイドカードは、成人向けコンテンツの確認にはご利用いただけません。"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:833
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:966
 msgid "Only default speakers"
 msgstr "デフォルトスピーカーのみ"
 
@@ -22672,7 +22604,7 @@ msgstr "何をするか正確に理解している場合にのみ、ここにコ
 msgid "Only show message previews for DMs with unread messages"
 msgstr "未読メッセージがあるDMのメッセージプレビューのみ表示"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:823
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:956
 msgid "Only speakers"
 msgstr "発言者のみ"
 
@@ -22944,7 +22876,7 @@ msgstr "ブラウザで絵文字を開く"
 msgid "Open emoji picker"
 msgstr "絵文字を選択"
 
-#: src/features/voice/components/VoiceSettingsMenus.tsx:877
+#: src/features/voice/components/VoiceSettingsMenus.tsx:859
 msgid "Open event sink"
 msgstr "イベントシンクを開く"
 
@@ -23062,13 +22994,13 @@ msgstr "{directMessageName}さんのプロフィールを開く"
 
 #. Accessible label for the avatar button that opens a user profile.
 #. Short label in the app layout voice participant item. Preserve {displayName}; it is inserted by code.
-#: src/features/app/components/layout/VoiceParticipantItem.tsx:47
+#: src/features/app/components/layout/VoiceParticipantItem.tsx:48
 #: src/features/ui/avatars/AvatarStack.tsx:21
 msgid "Open profile for {displayName}"
 msgstr "{displayName}さんのプロフィールを開く"
 
 #. Short label in the app layout grouped voice participant. Preserve {nickname}; it is inserted by code.
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:35
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:36
 msgid "Open profile for {nickname}"
 msgstr "{nickname}さんのプロフィールを開く"
 
@@ -23203,17 +23135,17 @@ msgid "Open your settings"
 msgstr "設定を開く"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:112
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:133
 msgid "OpenH264 software codec on Linux"
 msgstr "OpenH264ソフトウェアコーデック（Linux）"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:88
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:109
 msgid "OpenH264 video codec"
 msgstr "OpenH264 ビデオコーデック"
 
 #. Switch label for the OpenH264 codec toggle. "OpenH264" is a product name and "Cisco Systems, Inc." is a company name; do not translate either.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:34
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:39
 msgid "OpenH264 Video Codec provided by Cisco Systems, Inc."
 msgstr "Cisco Systems, Inc. が提供する OpenH264 ビデオコーデック."
 
@@ -23225,7 +23157,7 @@ msgstr "メンバーページを開きます。スペースキーまたは Enter
 #. Short label in the language tab. Keep it concise.
 #. Spellcheck engine option in the textarea spellcheck submenu. Uses the host operating system spellchecker.
 #: src/features/auth/flow/HandoffApprovalFlow.tsx:184
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:77
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:79
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:107
 msgid "Operating system"
 msgstr "OS"
@@ -23298,7 +23230,7 @@ msgstr "または招待リンクを友達に送信:"
 msgid "or send an invite to a friend:"
 msgstr "または友達を招待:"
 
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:135
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:131
 msgid "or send the gift link to a friend:"
 msgstr "またはギフトリンクを友達に送信:"
 
@@ -23632,7 +23564,7 @@ msgid "Past 7 days"
 msgstr "過去7日間"
 
 #. Textarea right-click context menu item that pastes clipboard contents.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:52
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:54
 msgid "Paste"
 msgstr "貼り付け"
 
@@ -23690,7 +23622,7 @@ msgid "Pause invites? New users won't be able to join through invite links until
 msgstr "招待を一時停止しますか？再開するまで、新しいユーザーは招待リンクから参加できなくなります。既存のメンバーには影響しません。"
 
 #. Short label for an advanced screen-share preview preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:39
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:44
 msgid "Pause my screen share preview in the background"
 msgstr "バックグラウンドで画面共有プレビューを一時停止する"
 
@@ -23698,6 +23630,11 @@ msgstr "バックグラウンドで画面共有プレビューを一時停止す
 #: src/features/user/components/modals/tabs/appearance_tab/StreamerModeTab.tsx:39
 msgid "Pause notifications"
 msgstr "通知を一時停止"
+
+#. Voice screen share menu preference that pauses the local stream preview while the app is unfocused.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:28
+msgid "Pause Preview When Fluxer Isn’t Focused"
+msgstr ""
 
 #. Description shown for the emoji toggle while reduced motion is active.
 #: src/features/user/components/modals/tabs/accessibility_tab/AnimationTab.tsx:81
@@ -23826,7 +23763,7 @@ msgid "Perks paused"
 msgstr "特典は一時停止中"
 
 #. Ban duration option in the destructive ban-member modal meaning the ban never expires. Short standalone label.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:37
+#: src/features/moderation/components/modals/BanMemberModal.tsx:38
 msgid "Permanent"
 msgstr "永久"
 
@@ -24032,7 +23969,7 @@ msgid "Picture"
 msgstr "写真"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:124
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:145
 msgid "Picture in picture"
 msgstr "ピクチャーインピクチャー"
 
@@ -24152,7 +24089,7 @@ msgid "Pins popout"
 msgstr "ピンのポップアウト"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:128
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:149
 msgid "PiP"
 msgstr "ピクチャーインピクチャー"
 
@@ -24301,15 +24238,20 @@ msgstr "元のウィンドウに戻す"
 msgid "Pop out call"
 msgstr "通話を別のウィンドウに表示"
 
-#. Voice menu action on desktop that opens the participant camera feed in a separate window.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:29
-msgid "Pop out camera"
-msgstr "カメラを別のウィンドウに表示"
-
 #. Voice menu action on desktop that opens the participant screen share in a separate window.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:33
-msgid "Pop out stream"
-msgstr "ストリームを別のウィンドウに表示"
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:57
+msgid "Pop Out Stream"
+msgstr ""
+
+#. Voice menu action on desktop that opens the participant placeholder tile in a separate window.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:49
+msgid "Pop Out User"
+msgstr ""
+
+#. Voice menu action on desktop that opens the active participant camera feed in a separate window.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:45
+msgid "Pop Out Video"
+msgstr ""
 
 #. Overlay text shown on a voice participant tile while it lives in a separate popped-out window.
 #: src/features/voice/components/popout/PoppedOutOverlay.tsx:19
@@ -24359,7 +24301,7 @@ msgid "Prefer @mention"
 msgstr "メンション設定"
 
 #. Option label for an encoder path select. Refers to hardware video encoders.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:63
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:68
 msgid "Prefer hardware"
 msgstr "ハードウェアを優先"
 
@@ -24371,7 +24313,7 @@ msgid "Prefer no @mention"
 msgstr "メンションしない"
 
 #. Option label for an encoder path select. Refers to software video encoders.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:67
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:72
 msgid "Prefer software"
 msgstr "ソフトウェアを優先"
 
@@ -24389,6 +24331,11 @@ msgstr "設定"
 #: src/features/platform/utils/DesktopLocaleBridge.ts:20
 msgid "Preferences..."
 msgstr "環境設定..."
+
+#. Accessible label for the advanced screen-share codec preference select.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:218
+msgid "Preferred screen share codec"
+msgstr ""
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
@@ -24525,6 +24472,11 @@ msgstr "プレビューボタン"
 msgid "Preview camera"
 msgstr "カメラをプレビュー"
 
+#. Voice menu action that opens a preview of the current user camera.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:53
+msgid "Preview Camera"
+msgstr ""
+
 #. Status text on the placeholder shown in the voice call view when the user has hidden a remote stream preview.
 #: src/features/voice/components/HiddenStreamPlaceholder.tsx:10
 msgid "Preview hidden"
@@ -24558,7 +24510,7 @@ msgid "Preview sound"
 msgstr "サウンドをプレビュー"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:136
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:157
 msgid "Preview, popout, and stream thumbnail behavior"
 msgstr "プレビュー、ポップアウト、およびストリーミングサムネイルの動作"
 
@@ -24571,43 +24523,29 @@ msgstr "プレビュー"
 msgid "Previous"
 msgstr "前へ"
 
-#. Choice label for deleting two days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:94
-msgid "Previous 2 days"
-msgstr "過去2日間"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 12 hours.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:37
+msgid "Previous 12 Hours"
+msgstr "過去12時間"
 
-#. Choice label for deleting one day of messages when banning a member.
-#. Message-history-deletion option in the destructive ban-member modal. Deletes the banned member's messages from the last 24 hours.
-#: src/features/devtools/hooks/useCommands.ts:90
-#: src/features/moderation/components/modals/BanMemberModal.tsx:91
-msgid "Previous 24 hours"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 24 hours.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:45
+msgid "Previous 24 Hours"
 msgstr "過去24時間"
 
-#. Choice label for deleting three days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:98
-msgid "Previous 3 days"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 3 days.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:53
+msgid "Previous 3 Days"
 msgstr "過去3日間"
 
-#. Choice label for deleting four days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:102
-msgid "Previous 4 days"
-msgstr "過去4日間"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 6 hours.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:29
+msgid "Previous 6 Hours"
+msgstr "過去6時間"
 
-#. Choice label for deleting five days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:106
-msgid "Previous 5 days"
-msgstr "過去5日間"
-
-#. Choice label for deleting six days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:110
-msgid "Previous 6 days"
-msgstr "過去6日間"
-
-#. Choice label for deleting seven days of messages when banning a member.
-#. Message-history-deletion option in the destructive ban-member modal. Deletes the banned member's messages from the last 7 days.
-#: src/features/devtools/hooks/useCommands.ts:114
-#: src/features/moderation/components/modals/BanMemberModal.tsx:100
-msgid "Previous 7 days"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 7 days.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:61
+msgid "Previous 7 Days"
 msgstr "過去7日間"
 
 #. Accessible label for the previous-attachment navigation button in the media viewer.
@@ -24618,6 +24556,11 @@ msgstr "過去7日間"
 #: src/features/messaging/components/modals/media_modal/shared.ts:137
 msgid "Previous attachment"
 msgstr "前の添付ファイル"
+
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last hour.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:21
+msgid "Previous Hour"
+msgstr "過去1時間"
 
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/PlutoniumIndex.ts:47
@@ -24666,7 +24609,7 @@ msgid "Primary navigation"
 msgstr "メインナビゲーション"
 
 #. Voice display preference checkbox that moves active speakers toward the front of the call grid when enabled.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:81
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:105
 msgid "Prioritize speakers"
 msgstr "発言者を優先表示"
 
@@ -25120,7 +25063,7 @@ msgid "Push-to-talk is ignored in direct input. Switch to focused voice or custo
 msgstr "ダイレクト入力ではプッシュトゥトークは無視されます。使用するには、フォーカス音声またはカスタムに切り替えてください。"
 
 #. Tooltip on the mic button in the voice control bar when push-to-talk is enabled. {pushToTalkHint} is the formatted shortcut key combo.
-#: src/features/voice/components/VoiceControlBar.tsx:116
+#: src/features/voice/components/VoiceControlBar.tsx:112
 msgid "Push-to-talk is on. Hold {pushToTalkHint} to speak."
 msgstr "プッシュトゥトークがオンです。{pushToTalkHint}を押している間は話せます。"
 
@@ -25140,7 +25083,7 @@ msgid "Push-to-talk won't unmute your microphone while you're deafened. Undeafen
 msgstr "プッシュ・トゥ・トークは、ミュート状態のときにマイクを解除しません。ミュートを解除して話してください。"
 
 #. Option label for a software encoder quality select. Means slower/higher-quality.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:87
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:92
 msgid "Quality"
 msgstr "品質"
 
@@ -25360,7 +25303,7 @@ msgid "Ready to upgrade?"
 msgstr "アップグレードしますか？"
 
 #. Option label for a software encoder quality select. Means fastest/lower-latency.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:79
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:84
 msgid "Realtime"
 msgstr "リアルタイム"
 
@@ -25371,13 +25314,13 @@ msgstr "理由"
 
 #. Label of the optional reason input in the destructive ban-member modal. Reason is recorded in the activity log.
 #. Label of the optional reason textarea in the timeout-member modal. The reason is recorded in the activity log.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:109
+#: src/features/moderation/components/modals/BanMemberModal.tsx:83
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:36
 msgid "Reason (optional)"
 msgstr "理由（任意）"
 
 #. Description for an optional moderation slash-command reason.
-#: src/features/devtools/hooks/useCommands.ts:66
+#: src/features/devtools/hooks/useCommands.ts:67
 msgid "Reason (optional)."
 msgstr "理由（任意）"
 
@@ -25435,11 +25378,9 @@ msgstr "再確認"
 msgid "Recipients will be taken to {0} <0>{1}</0>"
 msgstr "受信者は{0} <0>{1}</0>に移動します"
 
-#. Badge shown next to the auto codec option in the screen-share codec radio group. Keep it concise.
 #. Spellcheck engine option in the language tab. Lets the app choose the best available spellcheck engine.
 #. Spellcheck engine option in the textarea spellcheck submenu. Lets the app choose the best available engine.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:68
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:38
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:70
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:87
 msgid "Recommended"
 msgstr "おすすめ"
@@ -25567,7 +25508,7 @@ msgid "Redirect URIs"
 msgstr "リダイレクトURI"
 
 #. Textarea right-click context menu item that redoes the last undone edit.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:40
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:42
 msgid "Redo"
 msgstr "やり直す"
 
@@ -25704,11 +25645,6 @@ msgstr "拒否"
 msgid "Rejected"
 msgstr "拒否されました"
 
-#. Voice participant context menu submenu label for friend and block actions.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:198
-msgid "Relationship"
-msgstr "関係"
-
 #. Short label in the markdown tab. Keep it concise.
 #: src/features/user/components/modals/tabs/component_gallery_tab/MarkdownTab.tsx:129
 msgid "Relative"
@@ -25757,7 +25693,7 @@ msgid "Reload now"
 msgstr "今すぐリロード"
 
 #. Hint in the textarea spellcheck submenu shown after switching engines.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:90
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:92
 msgid "Reload to apply engine change"
 msgstr "エンジン変更を適用するには再読み込みしてください"
 
@@ -25920,7 +25856,7 @@ msgid "Remove friend"
 msgstr "友達から削除"
 
 #. Textarea right-click context menu item that removes the selected misspelled word from the personal dictionary.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:27
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:29
 msgid "Remove from dictionary"
 msgstr "辞書から削除"
 
@@ -26606,7 +26542,7 @@ msgid "Reset"
 msgstr "リセット"
 
 #. Button or menu action label in the keybinds tab. Keep it concise. Preserve {label}; it is inserted by code.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:43
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:44
 msgid "Reset \"{label}\" to built-in"
 msgstr "「{label}」を組み込み設定にリセット"
 
@@ -26726,11 +26662,11 @@ msgid "Reset to actual values"
 msgstr "実際の値にリセット"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:35
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:36
 msgid "Reset to built-in"
 msgstr "組み込み設定にリセット"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:122
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:126
 msgid "Reset to default"
 msgstr "デフォルトにリセット"
 
@@ -27268,7 +27204,8 @@ msgstr "ロールの色"
 msgid "Role created"
 msgstr "ロールを作成しました"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:334
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:352
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:402
 msgid "Role created successfully"
 msgstr "ロールを作成しました"
 
@@ -27277,7 +27214,8 @@ msgstr "ロールを作成しました"
 msgid "Role deleted"
 msgstr "ロールを削除しました"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:369
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:440
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:469
 msgid "Role deleted successfully"
 msgstr "ロールを削除しました"
 
@@ -27317,7 +27255,7 @@ msgstr "ロール"
 msgid "Roles and members"
 msgstr "ロールとメンバー"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:278
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:296
 msgid "Roles updated successfully"
 msgstr "ロールを更新しました"
 
@@ -27646,7 +27584,7 @@ msgid "Screen share codec"
 msgstr "画面共有コーデック"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:140
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:161
 msgid "Screen share encoder controls"
 msgstr "画面共有エンコーダー設定"
 
@@ -27667,12 +27605,12 @@ msgid "Screen share is using software encoding ({codec}). Quality may be reduced
 msgstr "画面共有でソフトウェアエンコード（{codec}）を使用しています。画質が低下し、CPU使用率が増加する可能性があります。お使いのGPUは、このコーデックのハードウェアエンコードに対応していない可能性があります。"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:120
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:141
 msgid "Screen share preview"
 msgstr "画面共有プレビュー"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:116
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:137
 msgid "Screen share preview behavior"
 msgstr "画面共有プレビューの動作"
 
@@ -27690,6 +27628,11 @@ msgstr "画面共有のプレビューは無効になっています。"
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:172
 msgid "Screen share previews are enabled."
 msgstr "画面共有のプレビューが有効になっています。"
+
+#. Voice screen share menu action that opens the screen share preview privacy controls.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:32
+msgid "Screen Share Privacy"
+msgstr ""
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the video tab. Keep it concise.
@@ -27717,11 +27660,6 @@ msgstr "画面共有を開始"
 #: src/features/notification/utils/SoundLabels.ts:64
 msgid "Screen share stop"
 msgstr "画面共有を停止"
-
-#. Accessible label for the screen-share codec radio group.
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:42
-msgid "Screen share video codec"
-msgstr "画面共有のビデオコーデック"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
@@ -27911,7 +27849,7 @@ msgid "Search filters"
 msgstr "検索フィルター"
 
 #. Slash-command description for /gif. Searches for and sends a GIF.
-#: src/features/devtools/hooks/useCommands.ts:58
+#: src/features/devtools/hooks/useCommands.ts:59
 msgid "Search for and send a GIF."
 msgstr "GIFを検索して送信."
 
@@ -28299,7 +28237,7 @@ msgid "Select account"
 msgstr "アカウントを選択"
 
 #. Textarea right-click context menu item that selects all text in the textarea.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:56
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:58
 msgid "Select all"
 msgstr "すべて選択"
 
@@ -28477,7 +28415,7 @@ msgid "Send ({selectedCount}/{selectionLimit})"
 msgstr "送信 ({selectedCount}/{selectionLimit})"
 
 #. Slash-command description for /dm. Sends a direct message to a user.
-#: src/features/devtools/hooks/useCommands.ts:46
+#: src/features/devtools/hooks/useCommands.ts:47
 msgid "Send a direct message to a user."
 msgstr "ユーザーにダイレクトメッセージを送信."
 
@@ -28487,27 +28425,27 @@ msgid "Send a friend request to {userName}, or use the staff override to add the
 msgstr "{userName}にフレンドリクエストを送信するか、スタッフオーバーライドを使用してすぐにフレンドに追加します。"
 
 #. Slash-command description for /favorites. Sends a saved / favorited media item.
-#: src/features/devtools/hooks/useCommands.ts:50
+#: src/features/devtools/hooks/useCommands.ts:51
 msgid "Send a saved media item."
 msgstr "保存したメディアを送信."
 
 #. Slash-command description for /spoiler. Wraps the message in spoiler tags so recipients must click to reveal.
-#: src/features/devtools/hooks/useCommands.ts:24
+#: src/features/devtools/hooks/useCommands.ts:25
 msgid "Send a spoiler message (wraps in spoiler tags)."
 msgstr "ネタバレメッセージを送信（ネタバレタグで囲みます）."
 
 #. Slash-command description for /sticker. Sends a sticker.
-#: src/features/devtools/hooks/useCommands.ts:54
+#: src/features/devtools/hooks/useCommands.ts:55
 msgid "Send a sticker."
 msgstr "スタンプを送信."
 
 #. Slash-command description for /tts. Sends a text-to-speech message played aloud for users with TTS enabled.
-#: src/features/devtools/hooks/useCommands.ts:29
+#: src/features/devtools/hooks/useCommands.ts:30
 msgid "Send a text-to-speech message."
 msgstr "テキスト読み上げメッセージを送信."
 
 #. Slash-command description for /me. Sends the message wrapped in italics, IRC-style.
-#: src/features/devtools/hooks/useCommands.ts:20
+#: src/features/devtools/hooks/useCommands.ts:21
 msgid "Send an action message (wraps in italics)."
 msgstr "アクションメッセージを送信（斜体で表示）."
 
@@ -28563,7 +28501,7 @@ msgstr "GIFを送信 {title}"
 #. Action label for sending a gift to a friend.
 #. Plus menu item that opens the gift purchase flow.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:34
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:30
 msgid "Send gift"
 msgstr "ギフトを贈る"
 
@@ -28793,12 +28731,12 @@ msgid "Set accent color to {0} <0/>."
 msgstr "アクセントカラーを {0} <0/> に設定しました."
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:27
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:28
 msgid "Set custom shortcut"
 msgstr "カスタムショートカットを設定"
 
 #. Label in the keybinds tab. Preserve {label}; it is inserted by code.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:48
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:49
 msgid "Set custom shortcut for \"{label}\""
 msgstr "\"{label}\"のカスタムショートカットを設定"
 
@@ -29110,6 +29048,11 @@ msgstr "画面とウィンドウを共有します。"
 msgid "Share source"
 msgstr "共有元"
 
+#. Toggle label for sharing audio with an active stream.
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:156
+msgid "Share Stream Audio"
+msgstr ""
+
 #. Description in the premium gift purchase section. premiumProductName is the short paid product name.
 #: src/features/premium/utils/PremiumMessageDescriptors.ts:40
 msgid "Share the {premiumProductName} experience with your friends by purchasing a gift subscription."
@@ -29236,7 +29179,7 @@ msgstr "ショートコード"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:106
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:121
 #: src/features/user/components/modals/tabs/UserVoiceTab.tsx:377
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:38
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:105
@@ -29560,16 +29503,16 @@ msgstr "ミュート中のチャンネルを表示"
 
 #. Toggle label in the mobile video settings bottom sheet. Controls whether the local camera tile is visible.
 #. Voice display preference checkbox that controls whether the current user sees their own camera tile.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:69
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:93
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:92
-#: src/features/voice/components/VoiceSettingsMenus.tsx:814
+#: src/features/voice/components/VoiceSettingsMenus.tsx:815
 msgid "Show my own camera"
 msgstr "自分のカメラを表示"
 
 #. Voice display preference checkbox that controls whether the current user sees their own screen share tile.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:73
-msgid "Show my screen share"
-msgstr "画面共有を表示"
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:97
+msgid "Show My Screen Share"
+msgstr ""
 
 #. Developer option label for showing the current user as typing.
 #. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
@@ -29596,9 +29539,9 @@ msgstr "新しいデバイスのモーダルを表示"
 
 #. Toggle label in the mobile video settings bottom sheet. Controls whether participants without video are shown in the grid.
 #. Voice display preference checkbox that controls whether participants without video are shown in the grid.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:77
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:101
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:96
-#: src/features/voice/components/VoiceSettingsMenus.tsx:828
+#: src/features/voice/components/VoiceSettingsMenus.tsx:829
 msgid "Show non-video participants"
 msgstr "ビデオオフの参加者を表示"
 
@@ -29654,6 +29597,8 @@ msgstr "表現のオートコンプリートで保存済みメディアを表示
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
+#. Short label in the channel and chat textarea plus menu. Keep it concise.
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:102
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:67
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:125
 msgid "Show send button"
@@ -29941,7 +29886,7 @@ msgid "Single community mode"
 msgstr "単一コミュニティモード"
 
 #. Option label for an SVC mode select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:103
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:108
 msgid "Single layer"
 msgstr "シングルレイヤー"
 
@@ -30245,12 +30190,12 @@ msgid "Social"
 msgstr "ソーシャル"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:148
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:169
 msgid "Software encoder"
 msgstr "ソフトウェアエンコーダー"
 
 #. Label for an advanced screen-share select. Refers to software video encoder quality bias.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:71
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:76
 msgid "Software encoder quality"
 msgstr "ソフトウェアエンコーダーの品質"
 
@@ -30575,7 +30520,7 @@ msgid "Spanish (Spain)"
 msgstr "スペイン語（スペイン）"
 
 #. Option label for an SVC mode select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:111
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:116
 msgid "Spatial and temporal layers"
 msgstr "空間的および時間的レイヤー"
 
@@ -30673,7 +30618,7 @@ msgstr "スペルチェック"
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
 #. Settings section label for spellcheck settings.
 #. Submenu label in the textarea right-click context menu for spellcheck preferences.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:60
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:62
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:414
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:456
 #: src/features/user/components/settings_utils/search_index/LanguageIndex.ts:74
@@ -30878,10 +30823,6 @@ msgstr "開始日"
 #: src/features/user/components/modals/tabs/privacy_safety_tab/data_request_modal/DataRequestModal.tsx:191
 msgid "Start date must be earlier than end date."
 msgstr "開始日は終了日より前に設定してください。"
-
-#: src/features/voice/components/VoiceSettingsMenus.tsx:860
-msgid "Start debug logging session"
-msgstr "デバッグログセッションを開始"
 
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
 #: src/features/input/state/input_keybind/shared.ts:125
@@ -31221,6 +31162,13 @@ msgstr "すべてのフレンドとの音声アクティビティの共有を停
 msgid "Stop speaking"
 msgstr "発言をやめる"
 
+#. Danger action that stops the active screen share.
+#. Voice screen share menu action that stops the current user stream.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:20
+#: src/features/voice/components/ActiveScreenShareMenu.tsx:19
+msgid "Stop Streaming"
+msgstr ""
+
 #. Confirmation prompt in the links tab.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabLinksTab.tsx:31
 msgid "Stop trusting all links?"
@@ -31232,7 +31180,7 @@ msgid "Stop watching"
 msgstr "視聴を停止"
 
 #. Tooltip / button label in the voice control bar that stops watching a remote screen share.
-#: src/features/voice/components/VoiceControlBar.tsx:151
+#: src/features/voice/components/VoiceControlBar.tsx:147
 msgid "Stop watching stream"
 msgstr "ストリームの視聴を停止"
 
@@ -31256,11 +31204,6 @@ msgstr "ストリーム"
 msgid "Stream buffering"
 msgstr "ストリームをバッファリング中"
 
-#. Voice participant context menu submenu label for incoming screen share audio controls.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:202
-msgid "Stream controls"
-msgstr "ストリームコントロール"
-
 #. Status overlay on a voice participant tile when the remote screen share has ended.
 #: src/features/voice/components/voice_participant_tile/shared.ts:26
 msgid "Stream ended"
@@ -31275,10 +31218,15 @@ msgstr "ストリームを非表示にしました"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the user settings voice activity card. Keep it concise.
 #: src/features/user/components/profile/VoiceActivityCard.tsx:90
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:132
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:153
 #: src/features/voice/components/StreamWatchHoverCard.tsx:21
 msgid "Stream preview"
 msgstr "ストリームプレビュー"
+
+#. Compact submenu label for changing the resolution and frame rate of an active stream.
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:152
+msgid "Stream Quality"
+msgstr ""
 
 #. Toolbar / menu button label in the screen-share picker. Opens the stream quality settings popover.
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:164
@@ -31474,7 +31422,7 @@ msgstr "埋め込みを非表示"
 msgid "Suppress role mentions"
 msgstr "ロールメンションを抑制"
 
-#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:103
+#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:90
 msgid "Suppress unprivileged self-mentions"
 msgstr "権限のない自分へのメンションを抑制"
 
@@ -31494,12 +31442,12 @@ msgid "Suspend"
 msgstr "一時停止"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:156
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:177
 msgid "SVC"
 msgstr "SVC"
 
 #. Label for an advanced screen-share select. SVC is a WebRTC acronym and should stay uppercase.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:91
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:96
 msgid "SVC mode"
 msgstr "SVCモード"
 
@@ -31949,7 +31897,7 @@ msgid "Template URL"
 msgstr "テンプレートURL"
 
 #. Option label for an SVC mode select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:107
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:112
 msgid "Temporal layers"
 msgstr "時間的レイヤー"
 
@@ -32010,7 +31958,7 @@ msgstr "URLのアンファールと埋め込みのレンダリングをテスト
 #. Channel type chip label for a text channel.
 #. Option label for a WebRTC content hint select.
 #: src/features/channel/utils/ChannelUtils.tsx:51
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:151
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:156
 msgid "Text"
 msgstr "テキスト"
 
@@ -32281,12 +32229,12 @@ msgid "The mature content check was canceled. You can close this tab and try aga
 msgstr "成人向けコンテンツの確認がキャンセルされました。このタブを閉じて、アプリからもう一度お試しください。"
 
 #. Description for the member option of a moderation slash command.
-#: src/features/devtools/hooks/useCommands.ts:62
+#: src/features/devtools/hooks/useCommands.ts:63
 msgid "The member to target."
 msgstr "対象のメンバー"
 
 #. Description for a required message option in a slash command.
-#: src/features/devtools/hooks/useCommands.ts:70
+#: src/features/devtools/hooks/useCommands.ts:71
 msgid "The message to send."
 msgstr "送信するメッセージ"
 
@@ -34016,7 +33964,7 @@ msgstr "オフにする"
 
 #. Bulk voice action that turns off the camera on every active device of the current user.
 #. Voice menu action that turns off every active device/session's camera.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:90
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:114
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:93
 msgid "Turn off all device cameras"
 msgstr "全員のカメラをオフにする"
@@ -34032,14 +33980,14 @@ msgstr "カメラをオフにする"
 
 #. Voice menu action that turns off the camera on a single device of the current user.
 #. Voice menu action that turns off the camera on one device/session.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:57
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:81
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:81
 msgid "Turn off device camera"
 msgstr "デバイスのカメラをオフにする"
 
 #. Voice menu action that ends the screen share on a single device of the current user.
 #. Voice menu action that stops screen sharing or streaming on one device/session.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:61
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:85
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:85
 msgid "Turn off device stream"
 msgstr "デバイスのストリームをオフにする"
@@ -34051,7 +33999,7 @@ msgstr "インスタンス全体でプライベートメッセージとフレン
 
 #. Voice menu action that ends the current user screen share.
 #. Voice menu action that stops the current user's screen share or stream.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:65
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:89
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:69
 msgid "Turn off stream"
 msgstr "ストリームをオフにする"
@@ -34440,7 +34388,7 @@ msgid "Understood"
 msgstr "了解"
 
 #. Textarea right-click context menu item that undoes the last edit.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:36
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:38
 msgid "Undo"
 msgstr "元に戻す"
 
@@ -34477,7 +34425,7 @@ msgstr "お気に入りから削除"
 
 #. Voice call layout action that removes focus from the currently pinned participant.
 #. Voice layout menu action that removes the focused participant or stream.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:25
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:41
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:97
 msgid "Unfocus"
 msgstr "フォーカスを外す"
@@ -34562,7 +34510,7 @@ msgstr "不明な日付"
 #. Fallback device or operating-system label in the devices tab when session client data is unavailable.
 #. Short label in the app layout voice participant item.
 #. Short label in the notifications. Keep it concise.
-#: src/features/app/components/layout/VoiceParticipantItem.tsx:43
+#: src/features/app/components/layout/VoiceParticipantItem.tsx:44
 #: src/features/user/components/modals/tabs/DevicesTab.tsx:65
 #: src/features/user/components/modals/tabs/notifications_tab/Notifications.tsx:78
 msgid "Unknown device"
@@ -34637,10 +34585,10 @@ msgstr "不明なユーザー"
 #: src/features/channel/components/guild_members_page/MemberTableRow.tsx:60
 #: src/features/channel/components/modals/channel_tabs/ChannelPermissionsTab.tsx:68
 #: src/features/channel/utils/ChannelUtils.tsx:55
-#: src/features/devtools/utils/CommandUtils.ts:23
+#: src/features/devtools/utils/CommandUtils.ts:27
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTab.tsx:114
 #: src/features/voice/components/VoiceParticipantAvatarList.tsx:43
-#: src/features/voice/components/VoiceParticipantTile.tsx:161
+#: src/features/voice/components/VoiceParticipantTile.tsx:162
 #: src/features/webhook/components/WebhookListItem.tsx:30
 msgid "Unknown user"
 msgstr "不明なユーザー"
@@ -34737,7 +34685,7 @@ msgid "Unmute"
 msgstr "ミュート解除"
 
 #. Voice control button label to turn the user's microphone back on.
-#: src/features/voice/components/VoiceControlBar.tsx:121
+#: src/features/voice/components/VoiceControlBar.tsx:117
 msgctxt "voice-control-action"
 msgid "Unmute"
 msgstr "ミュート解除"
@@ -35373,7 +35321,7 @@ msgid "Uploading emojis"
 msgstr "絵文字をアップロード中"
 
 #. Description for the maximum screen share bitrate select. Keep WebRTC literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:159
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:164
 msgid "Upper bitrate cap before WebRTC adapts to the network."
 msgstr "WebRTC がネットワークに合わせて調整される前の最大ビットレート上限"
 
@@ -35432,11 +35380,6 @@ msgstr "{everyoneMention}、{hereMention}、{rolesMention} を使用する"
 #: src/features/app/components/dialogs/components/plutonium/hooks/useCheckoutActions.tsx:44
 msgid "Use {pixPaymentMethod}"
 msgstr "{pixPaymentMethod}を使用"
-
-#. Description for the recommended spellcheck engine option in the language tab. Preserve {productName}; it is inserted by code and must appear verbatim in the translation.
-#: src/features/user/components/modals/tabs/LanguageTab.tsx:91
-msgid "Use {productName}'s in-app dictionaries when available. Otherwise, use your operating system's spellchecker."
-msgstr "{productName}のアプリ内辞書が利用可能な場合はそれを使用し、利用できない場合はOSのスペルチェック機能を使用します。"
 
 #. Description text in the add custom search engine modal. Preserve {query}; it is inserted by code.
 #: src/features/user/components/modals/tabs/chat_settings_tab/AddCustomSearchEngineModal.tsx:50
@@ -35757,6 +35700,11 @@ msgstr "ビデオとカメラのプレビューを使用します。"
 msgid "Use voice activity"
 msgstr "音声認識を使用"
 
+#. Description for the recommended spellcheck engine option in the language tab. Preserve {productName}; it is inserted by code and must appear verbatim in the translation.
+#: src/features/user/components/modals/tabs/LanguageTab.tsx:91
+msgid "Use your operating system's spellchecker when available. Otherwise, use {productName}'s in-app dictionaries."
+msgstr "OSのスペルチェッカーを使用します。利用できない場合は、{productName}のアプリ内辞書を使用します。"
+
 #. placeholder {0}: renderInline(change.newValue, i18n)
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabRenderers.tsx:689
 msgid "Used {0} times."
@@ -35803,11 +35751,6 @@ msgstr "このコミュニティでのみ使用されます。"
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:65
 msgid "User"
 msgstr "ユーザー"
-
-#. Voice participant context menu submenu label for lower-frequency profile and communication actions.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:206
-msgid "User actions"
-msgstr "ユーザー操作"
 
 #. IAR modal: rule description.
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:251
@@ -37079,7 +37022,7 @@ msgid "Wait here"
 msgstr "そのままお待ちください"
 
 #. Tooltip explaining that video / screen share controls are gated while the voice connection is not yet ready.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:56
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:45
 msgid "Waiting for connection..."
 msgstr "接続待機中…"
 
@@ -37267,7 +37210,7 @@ msgstr "ブラウザでサインイン画面が開いたら、{prefillEmail}を�
 msgid "We will send an SMS code when available."
 msgstr "SMSコードが利用可能になり次第、送信します。"
 
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:91
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:87
 msgid "We'd love to give you more than infinity of {PREMIUM_PRODUCT_NAME}, but that breaks the space-time continuum. Send the gift to a friend instead?"
 msgstr "{PREMIUM_PRODUCT_NAME}を無限以上に差し上げたいのですが、時空が歪んでしまいます。代わりに友達にプレゼントを贈りませんか？"
 
@@ -37569,7 +37512,7 @@ msgid "What to include"
 msgstr "含めるもの"
 
 #. Description for a media search slash-command query.
-#: src/features/devtools/hooks/useCommands.ts:74
+#: src/features/devtools/hooks/useCommands.ts:75
 msgid "What to search for."
 msgstr "検索対象。"
 
@@ -37905,7 +37848,7 @@ msgid "You already have a group with these users. Do you really want to create a
 msgstr "これらのユーザーを含むグループがすでに存在します。新しいグループを作成してもよろしいですか？もちろん、それでも問題ありません！"
 
 #. Status label shown to a user who already owns the lifetime premium tier.
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:30
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:26
 msgid "You already have lifetime {premiumProductName}"
 msgstr "すでに永久版の{premiumProductName}をお持ちです"
 
@@ -38170,8 +38113,8 @@ msgstr "このコミュニティではメッセージを送信できません。
 
 #. Tooltip in the voice control bar when the user lacks the Screen Share permission in this channel. Tone stays plain.
 #. Tooltip shown when the user lacks the Screen Share permission in the voice channel. Tone stays plain.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:65
-#: src/features/voice/components/VoiceControlBar.tsx:141
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:54
+#: src/features/voice/components/VoiceControlBar.tsx:137
 msgid "You can't share your screen in this channel"
 msgstr "このチャンネルでは画面共有できません"
 
@@ -38184,8 +38127,8 @@ msgstr "このチャンネルでは発言できません"
 #. Tooltip in the voice control bar when the user lacks the Video permission in this channel. Tone stays plain.
 #. Tooltip shown when the user lacks the Video permission in the voice channel. Tone stays plain.
 #: src/features/voice/components/modals/CameraPreviewModal.tsx:74
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:61
-#: src/features/voice/components/VoiceControlBar.tsx:131
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:50
+#: src/features/voice/components/VoiceControlBar.tsx:127
 msgid "You can't turn on your camera in this channel"
 msgstr "このチャンネルではカメラをオンにできません"
 
@@ -38219,17 +38162,17 @@ msgid "You cannot delete your account while you own communities. Transfer owners
 msgstr "コミュニティを所有している間は、アカウントを削除できません。まず、以下のコミュニティの所有権を譲渡してください:"
 
 #. Tooltip on the disabled permission list in the role editor when role hierarchy blocks editing.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:64
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:71
 msgid "You cannot edit a role at or above your highest role"
 msgstr "自分の最高ロール以上のロールは編集できません"
 
 #. Tooltip on a disabled role row in the community roles settings tab. Explains the role hierarchy rule: you cannot edit roles at or above your own highest role.
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleItem.tsx:32
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleItem.tsx:34
 msgid "You cannot edit this role because it is your highest role or above you"
 msgstr "このロールは、あなたの最高ロールであるか、あなたより上位のロールであるため編集できません"
 
 #. Tooltip on a permission toggle in the role editor that the current user cannot grant because they do not hold that permission themselves.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:68
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:75
 msgid "You cannot grant a permission you don't have"
 msgstr "あなたが持っていない権限を付与することはできません"
 
@@ -38239,12 +38182,12 @@ msgid "You cannot interact with this user right now."
 msgstr "現在、このユーザーとやり取りすることはできません。"
 
 #. Tooltip on a permission toggle in the role editor when revoking that permission would leave the current user without it.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:73
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:80
 msgid "You cannot remove this permission because it would remove it from yourself"
 msgstr "この権限を削除すると、あなた自身から権限が削除されるため、削除できません"
 
 #. Local system message after the user changes their community nickname with a slash command. The bold markdown markers should remain around the two names.
-#: src/features/devtools/utils/CommandUtils.ts:27
+#: src/features/devtools/utils/CommandUtils.ts:31
 msgid "You changed your nickname in this community from **{previousNickname}** to **{newNickname}**."
 msgstr "このコミュニティでのニックネームを**{previousNickname}**から**{newNickname}**に変更しました。"
 
@@ -38424,7 +38367,7 @@ msgid "You need the \"{manageChannelsPermissionLabel}\" permission to edit these
 msgstr "これらの権限を編集するには、「{manageChannelsPermissionLabel}」の権限が必要です。"
 
 #. Tooltip on the disabled permission list in the role editor. {manageRolesPermissionLabel} is the localized name of the Manage Roles permission and should match its label exactly.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:59
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:66
 msgid "You need the \"{manageRolesPermissionLabel}\" permission to edit these permissions"
 msgstr "これらの権限を編集するには、「{manageRolesPermissionLabel}」の権限が必要です"
 
@@ -39044,7 +38987,7 @@ msgid "your new email"
 msgstr "新しいメールアドレス"
 
 #. Description for the /nick nickname option.
-#: src/features/devtools/hooks/useCommands.ts:78
+#: src/features/devtools/hooks/useCommands.ts:79
 msgid "Your new nickname, or leave blank to reset it."
 msgstr "新しいニックネーム。空白のままにするとリセットされます。"
 

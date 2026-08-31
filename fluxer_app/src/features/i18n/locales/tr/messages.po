@@ -489,7 +489,7 @@ msgstr "{count, plural, one {Genişlet (# satır)} other {Genişlet (# satır)}}
 msgid "{count, plural, one {Expand (# row)} other {Expand (# rows)}}"
 msgstr "{count, plural, one {(# satırı göster)} other {(# satırları göster)}}"
 
-#: src/features/voice/components/VoiceParticipantTile.tsx:303
+#: src/features/voice/components/VoiceParticipantTile.tsx:304
 msgid "{count, plural, one {Expand # other device} other {Expand # other devices}}"
 msgstr "{count, plural, one {Diğer cihazı genişlet} other {Diğer {count} cihazı genişlet}}"
 
@@ -497,8 +497,8 @@ msgstr "{count, plural, one {Diğer cihazı genişlet} other {Diğer {count} cih
 msgid "{count, plural, one {Group DM · # member} other {Group DM · # members}}"
 msgstr "{count, plural, one {Grup DM · # üye} other {Grup DM · # üye}}"
 
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:252
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:273
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:274
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:295
 msgid "{count, plural, one {Hide # device} other {Hide # devices}}"
 msgstr "{count, plural, one {# cihazı gizle} other {# cihazı gizle}}"
 
@@ -510,7 +510,7 @@ msgstr "{count, plural, one {Aramada} other {# aramada}}"
 msgid "{count, plural, one {Join video call (# participant)} other {Join video call (# participants)}}"
 msgstr "{count, plural, one {Görüntülü aramaya katıl (1 katılımcı)} other {Görüntülü aramaya katıl (# katılımcı)}}"
 
-#: src/features/voice/components/VoiceParticipantTile.tsx:620
+#: src/features/voice/components/VoiceParticipantTile.tsx:621
 msgid "{count, plural, one {Keep watching # stream and add this one} other {Keep watching # streams and add this one}}"
 msgstr "{count, plural, one {# akışı izlemeye devam et ve bunu ekle} other {# akışı izlemeye devam et ve bunu ekle}}"
 
@@ -526,8 +526,8 @@ msgstr "{count, plural, one {İptal et # uygulama} other {İptal et # uygulama}}
 msgid "{count, plural, one {sent # attachment} other {sent # attachments}}"
 msgstr "{count, plural, one {# ek gönderdi} other {# ek gönderdi}}"
 
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:259
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:280
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:281
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:302
 msgid "{count, plural, one {Show # device} other {Show # devices}}"
 msgstr "{count, plural, one {# cihazı göster} other {# cihazı göster}}"
 
@@ -810,7 +810,7 @@ msgstr "{fps} FPS"
 msgid "{guildName} channels"
 msgstr "{guildName} kanalları"
 
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:675
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:673
 msgid "{hiddenConnectionCount, plural, one {Expand # other device} other {Expand # other devices}}"
 msgstr "{hiddenConnectionCount, plural, one {# diğer cihazı genişlet} other {# diğer cihazı genişlet}}"
 
@@ -923,7 +923,7 @@ msgid "{mbWayPaymentMethod} is a one-time payment method in {paymentProviderName
 msgstr "{mbWayPaymentMethod}, {paymentProviderName} ödeme ekranında tek seferlik bir ödeme yöntemidir, bu nedenle burada yinelenen bir abonelik yolu değildir."
 
 #. Screen share bitrate option label. Mbps means megabits per second.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:167
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:172
 msgid "{megabits} Mbps"
 msgstr "{megabits} Mbps"
 
@@ -975,6 +975,11 @@ msgstr "{minutes} dakika"
 #: src/features/channel/components/channel_header_components/developer_tools/DeveloperOptionLabels.ts:37
 msgid "{months, plural, one {# month} other {# months}}"
 msgstr "{months, plural, one {# ay} other {# ay}}"
+
+#. Default name for a role created by duplicating another role in the community roles settings tab. {name} is the source role name; translate the whole label so "copy" can move or inflect as the language needs.
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:52
+msgid "{name} copy"
+msgstr "{name} kopyası"
 
 #. Time window preset label for a single-hour interval. The number is interpolated.
 #: src/features/app/config/TimeWindowPresets.ts:18
@@ -1194,7 +1199,7 @@ msgid "{productName} restarted while you were connected to the call in {directCa
 msgstr "{productName}, {directCallName} içindeki aramaya bağlıyken yeniden başlatıldı."
 
 #. Item in the textarea spellcheck submenu that opens the full settings page. Trailing horizontal ellipsis (…) indicates the action opens settings.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:94
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:96
 msgid "{productName} spellcheck settings…"
 msgstr "{productName} yazım denetimi ayarları…"
 
@@ -1781,7 +1786,7 @@ msgid "2 members (typing)"
 msgstr "2 üye (yazıyor)"
 
 #. Ban duration option in the destructive ban-member modal for a two-week temporary ban.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:50
+#: src/features/moderation/components/modals/BanMemberModal.tsx:51
 msgid "2 weeks"
 msgstr "2 hafta"
 
@@ -1823,7 +1828,7 @@ msgid "2FA requirement"
 msgstr "2FA gereksinimi"
 
 #. Ban duration option in the destructive ban-member modal for a three-day temporary ban.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:42
+#: src/features/moderation/components/modals/BanMemberModal.tsx:43
 msgid "3 days"
 msgstr "3 gün"
 
@@ -1869,7 +1874,7 @@ msgid "480p"
 msgstr "480p"
 
 #. Ban duration option in the destructive ban-member modal for a five-day temporary ban.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:46
+#: src/features/moderation/components/modals/BanMemberModal.tsx:47
 msgid "5 days"
 msgstr "5 gün"
 
@@ -2138,7 +2143,7 @@ msgstr "Bu daveti kabul etmek paketi otomatik olarak yükler."
 msgid "Access granted"
 msgstr "Erişim izni verildi"
 
-#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:66
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:70
 #: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/MobileOverrideListView.tsx:84
 msgid "Access overrides"
 msgstr "Erişim geçersiz kılmaları"
@@ -2267,7 +2272,7 @@ msgstr "Yalnızca tüm açık DM'lerde"
 msgid "Across every community you're in"
 msgstr "Katıldığınız tüm topluluklarda"
 
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:95
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:110
 msgid "Action"
 msgstr "Eylem"
 
@@ -2513,7 +2518,7 @@ msgid "Add an extra layer of security to your account"
 msgstr "Hesabınıza ek bir güvenlik katmanı ekleyin"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:39
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:40
 msgid "Add another custom shortcut"
 msgstr "Başka bir özel kısayol ekle"
 
@@ -2616,7 +2621,7 @@ msgstr "Mesajlara yeni tepkiler ekle."
 msgid "Add note"
 msgstr "Not ekle"
 
-#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:88
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/ChannelPermissionsSidebar.tsx:92
 #: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/MobileOverrideListView.tsx:96
 msgid "Add override"
 msgstr "Üye ekle"
@@ -2703,7 +2708,7 @@ msgid "Add the credentials during setup."
 msgstr "Kurulum sırasında kimlik bilgilerini ekleyin."
 
 #. Textarea right-click context menu item that adds the selected misspelled word to the personal dictionary.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:32
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:34
 msgid "Add to dictionary"
 msgstr "Sözlüğe ekle"
 
@@ -2819,7 +2824,7 @@ msgid "Address"
 msgstr "Adres"
 
 #. Description for an H.264 backup stream select. Keep H.264, CPU, and GPU literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:119
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:124
 msgid "Adds H.264 for mixed clients. Uses more encode work."
 msgstr "Karışık istemciler için H.264 ekler. Daha fazla işlem gücü kullanır."
 
@@ -2875,10 +2880,8 @@ msgstr "Yöneticiler davetleri duraklattı; şu anda katılamazsınız."
 #. Collapsed-by-default group at the end of the community overview tab holding less common settings.
 #. Disclosure button label in the voice connection status popout. Reveals technical bandwidth and network stats.
 #. User settings tab for power-user and experimental application preferences.
-#. Voice participant context menu submenu label for IDs and diagnostics.
 #: src/features/channel/components/modals/channel_tabs/ChannelOverviewTab.tsx:337
 #: src/features/guild/components/modals/guild_tabs/guild_overview_tab/index.tsx:28
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:178
 #: src/features/user/components/settings_utils/SettingsConstants.tsx:145
 #: src/features/voice/components/voice_connection_status/VoiceDetailsPopout.tsx:60
 msgid "Advanced"
@@ -2890,7 +2893,7 @@ msgid "Advanced video settings"
 msgstr "Gelişmiş video ayarları"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:100
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:121
 msgid "Advertise a capped decode codec to force publisher migration"
 msgstr "Yayıncı geçişini zorlamak için sınırlı bir kod çözme kodeği reklamı yap"
 
@@ -3113,6 +3116,13 @@ msgstr "Bu bağlantıyı profilinizde herkesin görmesine izin ver"
 msgid "Allow anyone who can view your full profile to see your profile local time"
 msgstr "Profilinizin tamamını görüntüleyebilen herkesin yerel saatinizi görmesine izin verin"
 
+#. Settings search entry label for the AV1 screen-share opt-in. AV1 is a codec name and should stay literal.
+#. Switch label for the AV1 screen-share opt-in. AV1 is a codec name and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:236
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:88
+msgid "Allow AV1 for screen sharing"
+msgstr ""
+
 #. Toggle label that allows DMs from bots in this community.
 #: src/features/ui/action_menu/items/BulkSettingsMenuItems.tsx:81
 msgid "Allow bot direct messages"
@@ -3159,6 +3169,13 @@ msgstr "Esnek metin kanalı adlarına izin ver"
 #: src/features/user/components/modals/tabs/privacy_safety_tab/ConnectionsTab.tsx:56
 msgid "Allow for all communities"
 msgstr "Tüm topluluklara izin ver"
+
+#. Settings search entry label for the H.265/HEVC screen-share opt-in. H.265 and HEVC are codec names and should stay literal.
+#. Switch label for the H.265/HEVC screen-share opt-in. H.265 and HEVC are codec names and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:240
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:92
+msgid "Allow H.265 (HEVC) for screen sharing"
+msgstr ""
 
 #: src/features/connection/components/modals/EditConnectionModal.tsx:95
 msgid "Allow members from communities you're in to see this connection"
@@ -3721,7 +3738,7 @@ msgid "Any uploaded attachment"
 msgstr "Yüklenen herhangi bir ek"
 
 #. Helper text under the custom ban duration input. Both placeholders are integer numbers of seconds bounding the allowed range.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:72
+#: src/features/moderation/components/modals/BanMemberModal.tsx:73
 msgid "Any value from {minTempBanDurationSeconds} to {maxTempBanDurationSeconds} seconds."
 msgstr "{minTempBanDurationSeconds} ile {maxTempBanDurationSeconds} saniye arasında herhangi bir değer."
 
@@ -3807,17 +3824,17 @@ msgid "Appearance"
 msgstr "Görünüm"
 
 #. Slash-command description for /tableflip. Appends a kaomoji to the user's message.
-#: src/features/devtools/hooks/useCommands.ts:12
+#: src/features/devtools/hooks/useCommands.ts:13
 msgid "Appends (╯°□°)╯︵ ┻━┻ to your message."
 msgstr "Mesajınıza (╯°□°)╯︵ ┻━┻ ekler."
 
 #. Slash-command description for /shrug. Appends a kaomoji to the user's message.
-#: src/features/devtools/hooks/useCommands.ts:8
+#: src/features/devtools/hooks/useCommands.ts:9
 msgid "Appends ¯\\_(ツ)_/¯ to your message."
 msgstr "Mesajınıza ¯\\_(ツ)_/¯ ekler."
 
 #. Slash-command description for /unflip. Appends a kaomoji to the user's message.
-#: src/features/devtools/hooks/useCommands.ts:16
+#: src/features/devtools/hooks/useCommands.ts:17
 msgid "Appends ┬─┬ ノ( ゜-゜ノ) to your message."
 msgstr "Mesajınıza ┬─┬ ノ( ゜-゜ノ) ekler."
 
@@ -3962,7 +3979,7 @@ msgid "Are you sure you want to delete every message in your personal notes? Thi
 msgstr "Kişisel notlarınızdaki tüm mesajları silmek istediğinizden emin misiniz? Bu işlem, tüm mesajları ve eklerini kalıcı olarak kaldıracaktır. Bu eylem geri alınamaz."
 
 #. placeholder {0}: selectedRole.name
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:354
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:425
 msgid "Are you sure you want to delete the <0>{0}</0> role? Any members with this role will no longer have it."
 msgstr "<0>{0}</0> rolünü silmek istediğinizden emin misiniz? Bu role sahip tüm üyelerin rolü kaldırılacaktır."
 
@@ -4301,7 +4318,7 @@ msgid "Audio settings"
 msgstr "Ses ayarları"
 
 #. Voice control button label for microphone and speaker settings.
-#: src/features/voice/components/VoiceControlBar.tsx:146
+#: src/features/voice/components/VoiceControlBar.tsx:142
 msgctxt "voice-control-button"
 msgid "Audio settings"
 msgstr "Ses ayarları"
@@ -4505,8 +4522,6 @@ msgid "Autocomplete suggestion: {label}, {selectedOptionPosition} of {resultCoun
 msgstr "Otomatik tamamlama önerisi: {label}, {resultCount} sonuç içinde {selectedOptionPosition}. seçenek"
 
 #. Channel overview settings tab label, control, or validation message (name, topic, slowmode, voice region, mature content gate).
-#. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
-#. Label for the auto codec option in the screen-share codec radio group. Keep it concise.
 #. Option label for a WebRTC content hint select.
 #. Option label for an SVC mode select.
 #. Option label for an encoder path select.
@@ -4514,13 +4529,11 @@ msgstr "Otomatik tamamlama önerisi: {label}, {resultCount} sonuç içinde {sele
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Voice region option label in the voice settings menu meaning let Fluxer pick the best region automatically.
 #. Voice region picker option label meaning 'let Fluxer pick the best region automatically'.
-#: src/features/channel/components/channel_header_components/developer_tools/OptionPresets.ts:199
 #: src/features/channel/components/modals/channel_tabs/channel_overview_tab/RtcRegionSelect.tsx:19
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:59
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:99
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:139
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:176
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:34
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:64
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:104
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:144
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:181
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:263
 #: src/features/voice/components/VoiceRegionSelector.tsx:16
 #: src/features/voice/components/VoiceSettingsMenus.tsx:126
@@ -4532,6 +4545,11 @@ msgstr "Otomatik"
 msgctxt "rtc-region-value"
 msgid "Automatic"
 msgstr "Otomatik"
+
+#. Option label for the screen-share codec select. codec is the automatically selected codec label.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:222
+msgid "Automatic ({codec})"
+msgstr ""
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Voice setting label for automatically evening out microphone volume.
@@ -4559,96 +4577,6 @@ msgstr "Otomatik mesaj okuma"
 #: src/features/user/components/settings_utils/search_index/DesktopSettingsIndex.ts:38
 msgid "Automatic start"
 msgstr "Otomatik başlatma"
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated. Keep Firefox as a product name.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:8
-msgid "Automatic would use {codecName} because Firefox screen sharing works most reliably with it."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü Firefox ekran paylaşımı en güvenilir şekilde onunla çalışır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.265 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:70
-msgid "Automatic would use {codecName} because no hardware encoder is available and this browser exposes H.265."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü donanım kodlayıcı mevcut değil ve bu tarayıcı H.265'i destekliyor."
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.265 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:75
-msgid "Automatic would use {codecName} because no hardware encoder is available and your computer exposes H.265."
-msgstr "Otomatik, donanım kodlayıcı bulunmadığı ve bilgisayarınız H.265'i desteklediği için {codecName} kullanır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:90
-msgid "Automatic would use {codecName} because no higher-quality encoder is available and H.264 is compatible."
-msgstr "Otomatik seçeneği, daha yüksek kaliteli bir kodlayıcı bulunmadığı ve H.264 uyumlu olduğu için {codecName} kullanır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep OpenH264 and Linux literal.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:101
-msgid "Automatic would use {codecName} because no video encoder is exposed. On Linux, OpenH264 may need to be installed."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü bir video kodlayıcı kullanılamıyor. Linux'ta OpenH264'ün yüklenmesi gerekebilir."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as AV1 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:60
-msgid "Automatic would use {codecName} because software encoding is preferred and this browser exposes AV1."
-msgstr "Otomatik, yazılım kodlaması tercih edildiği ve bu tarayıcı AV1'i desteklediği için {codecName} kullanır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP9 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:80
-msgid "Automatic would use {codecName} because software encoding is preferred and this browser exposes VP9."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü yazılım kodlaması tercih edilir ve bu tarayıcı VP9'u destekler."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:95
-msgid "Automatic would use {codecName} because software encoding is preferred and VP8 is the safest software fallback."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü yazılım kodlaması tercih edilir ve VP8 en güvenli yazılım yedeklemesidir."
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as AV1 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:65
-msgid "Automatic would use {codecName} because software encoding is preferred and your computer exposes AV1."
-msgstr "Otomatik, yazılım kodlaması tercih edildiği ve bilgisayarınız AV1'i desteklediği için {codecName} kullanır."
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP9 and should not be translated.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:85
-msgid "Automatic would use {codecName} because software encoding is preferred and your computer exposes VP9."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü yazılım kodlaması tercih edilir ve bilgisayarınız VP9'u destekler."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated. Keep codec names literal.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:25
-msgid "Automatic would use {codecName} because this browser does not expose H.264, so VP8 is the safest fallback."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü bu tarayıcı H.264'ü desteklemiyor, bu nedenle VP8 en güvenli yedeklemedir."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep Chromium as a product name.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:13
-msgid "Automatic would use {codecName} because this browser supports it and it is the best fallback outside Chromium."
-msgstr "Otomatik seçeneği, tarayıcınız desteklediği ve Chromium dışındaki en iyi yedek olduğu için {codecName} kullanır."
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP8 and should not be translated. Keep codec names literal.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:30
-msgid "Automatic would use {codecName} because your computer does not expose H.264, so VP8 is the safest fallback."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü bilgisayarınız H.264'ü desteklemiyor, bu nedenle VP8 en güvenli yedeklemedir."
-
-#. Desktop-client description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep Chromium as a product name.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:19
-msgid "Automatic would use {codecName} because your computer supports it and it is the best fallback outside Chromium."
-msgstr "Otomatik seçeneği {codecName} kullanır çünkü bilgisayarınız bunu destekler ve Chromium dışındaki en iyi yedek çözümdür."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as VP9 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:54
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware and it gives strong screen-share quality."
-msgstr "Otomatik seçeneği, GPU'nuz donanımında kodlayabildiği ve ekran paylaşımında yüksek kalite sunduğu için {codecName} kullanır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.264 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:42
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware and it is the most compatible screen-share default."
-msgstr "Otomatik seçeneği, GPU'nuz donanımında kodlayabildiği ve ekran paylaşımı için en uyumlu varsayılan olduğu için {codecName} kullanır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as H.265 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:48
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware, with excellent compression and low CPU usage."
-msgstr "Otomatik seçeneği, GPU'nuz {codecName} kodlamayı donanım üzerinden, mükemmel sıkıştırma ve düşük CPU kullanımıyla yapabildiği için {codecName} kullanır."
-
-#. Description shown under the Automatic option in the screen-share codec radio group. {codecName} is a codec label such as AV1 and should not be translated. Keep GPU as an acronym.
-#: src/features/user/components/modals/tabs/components/CodecSelectorDescription.ts:36
-msgid "Automatic would use {codecName} because your GPU can encode it in hardware, with the best compression for screen sharing."
-msgstr "Otomatik seçeneği, GPU'nuz donanımında kodlayabildiği ve ekran paylaşımı için en iyi sıkıştırmayı sağladığı için {codecName} kullanır."
 
 #. Short label in the animation tab. Keep it concise.
 #: src/features/user/components/modals/tabs/accessibility_tab/AnimationTab.tsx:52
@@ -4712,6 +4640,16 @@ msgstr "Otomatik okuma"
 #: src/features/user/components/settings_utils/section_registry/AccessibilitySections.ts:307
 msgid "Autoscrolling"
 msgstr "Otomatik kaydırma"
+
+#. Settings search synonym. Codec name; keep literal. Used to match this term in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:101
+msgid "AV1"
+msgstr ""
+
+#. Option label for the screen-share codec select while the AV1 opt-in is off and the option is disabled. AV1 is a codec name and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:226
+msgid "AV1 (requires opt-in)"
+msgstr ""
 
 #. Label for the available desktop version in the Linux update modal.
 #: src/features/updater/commands/UpdaterModalCommands.tsx:140
@@ -4831,7 +4769,7 @@ msgstr "Geçersiz kılmalara geri dön"
 #. Back-navigation label that returns from an individual role editor to the roles list.
 #: src/features/app/components/dialogs/components/DesktopGuildSettingsView.tsx:50
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleEditor.tsx:149
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:112
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:116
 msgid "Back to roles"
 msgstr "Rollere geri dön"
 
@@ -4940,7 +4878,7 @@ msgid "Badge"
 msgstr "Rozet"
 
 #. Option label for a software encoder quality select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:83
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:88
 msgid "Balanced"
 msgstr "Dengeli"
 
@@ -4952,12 +4890,12 @@ msgid "Ban"
 msgstr "Yasakla"
 
 #. Title of the destructive ban-member modal. {tag} is the target user tag (username#tag). Destructive moderation action; keep tone direct.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:54
+#: src/features/moderation/components/modals/BanMemberModal.tsx:55
 msgid "Ban {tag}"
 msgstr "{tag} kullanıcısını yasakla"
 
 #. Slash-command description for /ban. Bans a member from the current community (moderation action).
-#: src/features/devtools/hooks/useCommands.ts:42
+#: src/features/devtools/hooks/useCommands.ts:43
 msgid "Ban a member from this community."
 msgstr "Bu topluluktan bir üyeyi yasakla."
 
@@ -4967,7 +4905,7 @@ msgid "Ban details"
 msgstr "Engelleme ayrıntıları"
 
 #. Label above the ban duration dropdown in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:59
+#: src/features/moderation/components/modals/BanMemberModal.tsx:60
 msgid "Ban duration"
 msgstr "Yasaklama süresi"
 
@@ -4979,10 +4917,10 @@ msgstr "Yasaklama süresi {0} tarihinde sona eriyor."
 #. Moderation action that bans the selected member from the community.
 #. Moderation action that bans the selected member from the community.
 #. Moderation action that bans the selected member from the community.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:305
+#: src/features/moderation/components/modals/BanMemberModal.tsx:270
 #: src/features/ui/action_menu/GuildMemberContextMenu.tsx:66
 #: src/features/ui/action_menu/items/GuildMemberMenuItems.tsx:51
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:94
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:118
 msgid "Ban member"
 msgstr "Üyeyi yasakla"
 
@@ -5012,7 +4950,7 @@ msgstr "bant genişliği sınırlı"
 msgid "Banned"
 msgstr "Yasaklandı"
 
-#: src/features/moderation/components/modals/BanMemberModal.tsx:160
+#: src/features/moderation/components/modals/BanMemberModal.tsx:134
 msgid "Banned {targetUserTag} from the community"
 msgstr "{targetUserTag} topluluktan yasaklandı"
 
@@ -5164,7 +5102,7 @@ msgid "Biometrics"
 msgstr "Biyometrik veriler"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:160
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:181
 msgid "Bitrate"
 msgstr "Bit hızı"
 
@@ -5826,7 +5764,7 @@ msgid "Cameras and virtual capture devices are selected here in {productName}, n
 msgstr "Kameralar ve sanal yakalama cihazları Wayland sistem seçicisinde değil, {productName} uygulamasında seçilir. Burada hiçbir şey görünmüyorsa izinleri kontrol edin veya bir cihaz bağlayın."
 
 #. Tooltip in the voice control bar when cameras are disabled because the participant count exceeds the limit. {voiceChannelCameraUserLimit} is the configured threshold.
-#: src/features/voice/components/VoiceControlBar.tsx:136
+#: src/features/voice/components/VoiceControlBar.tsx:132
 msgid "Cameras are off above {voiceChannelCameraUserLimit} participants"
 msgstr "{voiceChannelCameraUserLimit} katılımcının üzerinde kameralar kapalı"
 
@@ -5890,7 +5828,7 @@ msgstr "Buraya dosya yüklenemiyor"
 #: src/features/messaging/components/modals/ImageCropModal.tsx:925
 #: src/features/messaging/components/modals/MessageHistoryThresholdModal.tsx:107
 #: src/features/messaging/components/popouts/ScheduledMessagesContent.tsx:47
-#: src/features/moderation/components/modals/BanMemberModal.tsx:297
+#: src/features/moderation/components/modals/BanMemberModal.tsx:262
 #: src/features/moderation/components/modals/RemoveTimeoutModal.tsx:70
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:126
 #: src/features/theme/components/modals/ThemeAcceptModal.tsx:173
@@ -6020,15 +5958,15 @@ msgstr "Captcha doğrulaması başarısız oldu. Tekrar deneyin."
 msgid "Capture"
 msgstr "Yakala"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:398
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:420
 msgid "Capture app audio"
 msgstr "Uygulama sesini yakala"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:399
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:421
 msgid "Capture desktop audio"
 msgstr "Masaüstü sesini yakala"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:397
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:419
 msgid "Capture device audio"
 msgstr "Cihaz sesini yakala"
 
@@ -6286,12 +6224,12 @@ msgstr "Şifre değiştirme formu"
 msgid "Change scheduled"
 msgstr "Değişiklik planlandı"
 
-#. Tooltip / button label in the screen-share status pill. Opens the picker to change what is being shared.
-#. Voice control menu action to choose a different screen-share source.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:48
-#: src/features/voice/components/VoiceControlBar.tsx:108
-msgid "Change source"
-msgstr "Kaynağı değiştir"
+#. Action that opens the source picker for the active screen share.
+#. Voice screen share menu action that changes the shared source.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:24
+#: src/features/voice/components/ActiveScreenShareMenu.tsx:23
+msgid "Change Stream"
+msgstr ""
 
 #. Modal title for the screen-share picker when switching an ongoing stream to a new source.
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:156
@@ -6344,7 +6282,7 @@ msgid "Change your nickname for a community profile"
 msgstr "Bir topluluk profili için takma adınızı değiştirin"
 
 #. Slash-command description for /nick. Changes the user's nickname in the current community.
-#: src/features/devtools/hooks/useCommands.ts:34
+#: src/features/devtools/hooks/useCommands.ts:35
 msgid "Change your nickname in this community."
 msgstr "Bu toplulukta takma adınızı değiştirin."
 
@@ -6847,7 +6785,7 @@ msgstr "Sistem seçicinizden bir pencere seçin"
 msgid "Choose an account"
 msgstr "Bir hesap seçin"
 
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:137
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:152
 msgid "Choose an action."
 msgstr "Bir eylem seçin."
 
@@ -7041,7 +6979,7 @@ msgid "Choose your profile accent color"
 msgstr "Profil vurgu renginizi seçin"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:108
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:129
 msgid "Cisco"
 msgstr "Cisco"
 
@@ -7649,7 +7587,7 @@ msgid "Codec"
 msgstr "Kodek"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:96
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:117
 msgid "Codec negotiation testing"
 msgstr "Kodek anlaşması testi"
 
@@ -7693,8 +7631,8 @@ msgstr "Kanal konusunu daralt"
 
 #. Tooltip / aria label on a voice participant tile button that collapses expanded device tiles for one user.
 #. Voice menu action that collapses expanded device tiles back into a single tile.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:98
-#: src/features/voice/components/VoiceParticipantTile.tsx:165
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:122
+#: src/features/voice/components/VoiceParticipantTile.tsx:166
 msgid "Collapse devices"
 msgstr "Cihazları daralt"
 
@@ -8169,7 +8107,7 @@ msgstr "Yazma alanı odağı"
 #. Button label that opens a dedicated advanced settings modal for configuring screen-share encoder controls.
 #. Button label that opens a dedicated advanced settings modal.
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:161
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:163
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:168
 msgid "Configure"
 msgstr "Yapılandır"
 
@@ -8192,7 +8130,7 @@ msgid "Configure now"
 msgstr "Şimdi yapılandır"
 
 #. Tooltip / aria label on the screen-share control while a share is active. Opens the configure / end menu.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:69
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:58
 msgid "Configure or end screen share"
 msgstr "Ekran paylaşımını yapılandır veya bitir"
 
@@ -8303,7 +8241,7 @@ msgstr "Onay"
 msgid "Confirmation or double-click for community voice joins"
 msgstr "Topluluk sesli sohbetlerine katılmak için onay veya çift tıklama"
 
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:154
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:169
 msgid "Conflicts with {conflictLabel}"
 msgstr "{conflictLabel} ile çakışıyor"
 
@@ -8499,7 +8437,7 @@ msgid "Content filtering"
 msgstr "İçerik filtreleme"
 
 #. Label for an advanced screen-share select. Refers to the WebRTC MediaStreamTrack contentHint value.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:131
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:136
 msgid "Content hint"
 msgstr "İçerik ipucu"
 
@@ -8675,7 +8613,7 @@ msgstr "URL panoya kopyalandı"
 #. Textarea right-click context menu item that copies the selected text.
 #: src/features/app/components/dialogs/shared/CopyLinkSection.tsx:11
 #: src/features/auth/components/modals/BackupCodesModal.tsx:94
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:48
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:50
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:423
 #: src/features/theme_studio/sections/QuickCssSection.tsx:214
 #: src/features/ui/action_menu/MessageContextMenu.tsx:71
@@ -9370,7 +9308,7 @@ msgid "Couldn't rename this emoji"
 msgstr "Bu emojinin adı değiştirilemedi"
 
 #. Error modal title shown when resetting the community role hoist order fails.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:55
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:62
 msgid "Couldn't reset hoist order"
 msgstr "Sıralama düzeni sıfırlanamadı"
 
@@ -9764,7 +9702,7 @@ msgid "Create polls"
 msgstr "Create polls"
 
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/MobileRoleList.tsx:48
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:209
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:215
 msgid "Create role"
 msgstr "Rol oluştur"
 
@@ -10060,7 +9998,7 @@ msgid "Custom"
 msgstr "Özel"
 
 #. Label of the numeric input shown after choosing "Custom..." in the ban duration dropdown. The unit is seconds.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:67
+#: src/features/moderation/components/modals/BanMemberModal.tsx:68
 msgid "Custom ban duration (seconds)"
 msgstr "Özel yasaklama süresi (saniye)"
 
@@ -10100,7 +10038,7 @@ msgstr "{premiumProductName} ile özel giriş sesleri"
 msgid "Custom expiry (seconds)"
 msgstr "Özel süre sonu (saniye)"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:225
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:231
 msgid "Custom hoist order"
 msgstr "Özel sıralama"
 
@@ -10155,12 +10093,12 @@ msgid "Custom selection"
 msgstr "Özel seçim"
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:41
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:42
 msgid "Custom shortcut action"
 msgstr "Özel kısayol eylemi"
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:37
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:38
 msgid "Custom shortcut options"
 msgstr "Özel kısayol seçenekleri"
 
@@ -10310,7 +10248,7 @@ msgid "Customizing your avatar, banner, accent color, and bio for individual com
 msgstr "Avatarınızı, başlığınızı, vurgu renginizi ve biyografinizi ayrı ayrı topluluklar için özelleştirmek {PREMIUM_PRODUCT_NAME} gerektirir. Topluluk takma adı ve zamirler herkes için ücretsizdir."
 
 #. Textarea right-click context menu item that cuts the selected text.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:44
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:46
 msgid "Cut"
 msgstr "Kes"
 
@@ -10847,8 +10785,8 @@ msgid "Delete message"
 msgstr "Mesajı sil"
 
 #. Section heading and accessible label for the message-history-deletion radio group in the destructive ban-member modal. Destructive option group.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:77
-#: src/features/moderation/components/modals/BanMemberModal.tsx:255
+#: src/features/moderation/components/modals/BanMemberModal.tsx:78
+#: src/features/moderation/components/modals/BanMemberModal.tsx:229
 msgid "Delete message history"
 msgstr "Mesaj geçmişini sil"
 
@@ -10887,9 +10825,13 @@ msgstr "Parola anahtarını sil"
 msgid "Delete redirect URI"
 msgstr "Yönlendirme URI'sini sil"
 
+#. Danger action in the channel permissions overwrite context menu that removes a role permission override from the channel.
 #. Destructive button in the role editor that removes the selected role. Removes the role from every member; keep tone plain.
+#. Destructive context menu action in the community roles settings tab that immediately removes the right-clicked role from every member. Keep it short.
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/OverwriteContextMenu.tsx:14
 #: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleEditor.tsx:173
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:50
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:57
+#: src/features/ui/action_menu/RoleContextMenu.tsx:17
 msgid "Delete role"
 msgstr "Rolü sil"
 
@@ -10901,7 +10843,7 @@ msgid "Delete saved media"
 msgstr "Kaydedilen medyayı sil"
 
 #. Button or menu action label in the keybinds tab. Keep it concise. Keep the tone plain and specific.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:33
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:34
 msgid "Delete shortcut"
 msgstr "Kısayolu sil"
 
@@ -10919,16 +10861,6 @@ msgstr "{stickerName} çıkartmasını sil"
 #: src/features/ui/action_menu/items/CategoryMenuData.tsx:47
 msgid "Delete the category \"{categoryName}\"? Can't be undone."
 msgstr "\"{categoryName}\" kategorisi silinsin mi? Bu işlem geri alınamaz."
-
-#. Helper text under the "Previous 24 hours" option in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:96
-msgid "Delete their messages from the last 24 hours"
-msgstr "Son 24 saatteki mesajlarını sil"
-
-#. Helper text under the "Previous 7 days" option in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:105
-msgid "Delete their messages from the last 7 days"
-msgstr "Son 7 gündeki mesajlarını sil"
 
 #. Button or menu action label in the theme studio library section. Keep it concise. Keep the tone plain and specific.
 #: src/features/theme_studio/sections/LibrarySection.tsx:59
@@ -10959,6 +10891,11 @@ msgstr "Bu mesajı silmek istiyor musunuz? Geri alınamaz."
 #: src/features/user/components/modals/tabs/ExpressionPacksTab.tsx:45
 msgid "Delete this pack? Can't be undone."
 msgstr "Bu paketi silmek istiyor musunuz? Geri alınamaz."
+
+#. Danger action in the channel permissions overwrite context menu that removes a member permission override from the channel.
+#: src/features/channel/components/modals/channel_tabs/channel_permissions_tab/OverwriteContextMenu.tsx:19
+msgid "Delete user"
+msgstr "Kullanıcıyı sil"
 
 #. Danger button label that deletes a webhook.
 #: src/features/webhook/components/WebhookListItem.tsx:360
@@ -11227,7 +11164,7 @@ msgid "Detached banner"
 msgstr "Ayrılmış başlık"
 
 #. Option label for a WebRTC content hint select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:147
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:152
 msgid "Detail"
 msgstr "Ayrıntı"
 
@@ -11242,7 +11179,7 @@ msgstr "Ayrıntılar"
 
 #. Item in the textarea spellcheck language submenu that detects draft message language and switches dictionaries as the user types.
 #. Spellcheck language mode label in the language tab. The app detects the draft message language and switches dictionaries as the user types.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:81
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:83
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:123
 msgid "Detect while typing"
 msgstr "Yazarken algıla"
@@ -11306,11 +11243,6 @@ msgstr "Cihaz"
 msgid "Device alerts"
 msgstr "Cihaz uyarıları"
 
-#. Voice participant context menu submenu label for actions that affect one or more voice devices.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:182
-msgid "Device controls"
-msgstr "Cihaz Kontrolleri"
-
 #: src/features/user/components/modals/tabs/DevicesTab.tsx:131
 msgid "Device details"
 msgstr "Cihaz ayrıntıları"
@@ -11320,7 +11252,7 @@ msgstr "Cihaz ayrıntıları"
 msgid "Device revoked"
 msgstr "Cihazın erişimi iptal edildi"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:891
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:1024
 msgid "Device selection"
 msgstr "Cihaz seçimi"
 
@@ -11481,7 +11413,7 @@ msgid "Disable backend premium perks"
 msgstr "Arka uç premium ayrıcalıklarını devre dışı bırak"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:31
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:32
 msgid "Disable built-in shortcut"
 msgstr "Yerleşik kısayolu devre dışı bırak"
 
@@ -11525,7 +11457,7 @@ msgid "Disable mobile push notifications"
 msgstr "Mobil anlık bildirimleri kapat"
 
 #. Short label for an advanced screen-share preview preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:43
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:48
 msgid "Disable picture-in-picture popout for screen shares"
 msgstr "Ekran paylaşımları için resim içinde resim açılır penceresini devre dışı bırak"
 
@@ -11545,7 +11477,7 @@ msgid "Disable screen share picture-in-picture popouts?"
 msgstr "Ekran paylaşımı için pop-up'ların devre dışı bırakılmasını onaylayan doğrulama iletişim kutusu başlığı.?"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:25
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:26
 msgid "Disable shortcut"
 msgstr "Kısayolu devre dışı bırak"
 
@@ -11566,7 +11498,7 @@ msgstr "İki faktörlü kimlik doğrulama formunu devre dışı bırak"
 
 #. Voice menu checkbox label. Hides another participant's video only for the current user.
 #. Voice menu checkbox that hides a participant video on the current device only.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:86
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:110
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:77
 msgid "Disable video locally"
 msgstr "Videoyu yerel olarak devre dışı bırak"
@@ -11842,11 +11774,6 @@ msgstr "Görünen ad"
 msgid "Display name (optional)"
 msgstr "Görünen ad (isteğe bağlı)"
 
-#. Voice participant context menu submenu label for call display and diagnostics preferences.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:186
-msgid "Display options"
-msgstr "Görüntüleme seçenekleri"
-
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabRenderers.tsx:661
 msgid "Display role members separately."
 msgstr "Rol üyelerini ayrı ayrı göster."
@@ -12021,12 +11948,10 @@ msgstr "Bana bir daha sorma"
 msgid "Don't clear"
 msgstr "Temizleme"
 
-#. Choice label for retaining all messages when banning a member.
-#. Message-history-deletion option in the destructive ban-member modal. Keeps all messages from the banned member. Short standalone label.
-#: src/features/devtools/hooks/useCommands.ts:86
-#: src/features/moderation/components/modals/BanMemberModal.tsx:82
-msgid "Don't delete any"
-msgstr "Hiçbirini silme"
+#. Message-history-deletion option when banning a member. Keeps all of the member's messages.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:14
+msgid "Don't Delete Any"
+msgstr "Hiçbirini Silme"
 
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabRenderers.tsx:663
 msgid "Don't display separately."
@@ -12253,7 +12178,7 @@ msgstr "Emoji dosyalarını buraya sürükleyip bırakın"
 msgid "Drag members between channels they can access."
 msgstr "Üyeleri erişebildikleri kanallar arasında sürükleyin."
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:136
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:140
 msgid "Drag roles to customize the order they appear in the member list."
 msgstr "Üye listesinde görünme sıralarını özelleştirmek için rolleri sürükleyin."
 
@@ -12354,10 +12279,15 @@ msgstr "Kopyala"
 msgid "Duplicate channel"
 msgstr "Kanalı çoğalt"
 
+#. Context menu action in the community roles settings tab that creates a new role copying the settings of the one right-clicked. Keep it short.
+#: src/features/ui/action_menu/RoleContextMenu.tsx:12
+msgid "Duplicate role"
+msgstr "Rolü kopyala"
+
 #. Label for the duration input.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:44
 msgid "Duration"
-msgstr "Duration"
+msgstr ""
 
 #. Field label in the voice connection status popout. Shows how long the current voice session has been connected.
 #: src/features/voice/components/voice_connection_status/shared.ts:76
@@ -12972,8 +12902,8 @@ msgstr "Favoriler boş"
 
 #. Label for an advanced select that caps the best video codec this client advertises it can decode.
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:172
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:92
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:177
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:113
 msgid "Emulate decode codec (testing)"
 msgstr "Kod çözme kodeğini öykün (test)"
 
@@ -13180,7 +13110,7 @@ msgid "Enable Shift to expand"
 msgstr "Genişletmek için Shift'e basın"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:29
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:30
 msgid "Enable shortcut"
 msgstr "Kısayolu etkinleştir"
 
@@ -13242,7 +13172,7 @@ msgstr "Video önizleme küçük resimlerini etkinleştir"
 #. Toggle item in the textarea spellcheck submenu. Master enable for spellcheck.
 #: src/features/app/components/setup/SetupWizardSteps.tsx:359
 #: src/features/channel/components/channel_header_components/developer_tools/DeveloperToolsShared.ts:21
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:64
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:66
 msgid "Enabled"
 msgstr "Etkin"
 
@@ -13267,18 +13197,18 @@ msgstr "Yetişkinlere uygun içerik etkinleştirildi."
 
 #. Label for an advanced screen-share select. Refers to hardware or software video encoding.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:51
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:144
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:56
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:165
 msgid "Encoder path"
 msgstr "Kodlayıcı yolu"
 
 #. Description for the encoder path select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:55
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:60
 msgid "Encoder preference for new screen shares."
 msgstr "Yeni ekran paylaşımları için kodlayıcı tercihi."
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:164
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:185
 msgid "Encoder, SVC, backup stream, and bitrate presets"
 msgstr "Kodlayıcı, SVC, yedek akış ve bit hızı ön ayarları"
 
@@ -13317,10 +13247,8 @@ msgstr "Ödemesiz dönemi şimdi bitirilsin mi?"
 msgid "End poll now"
 msgstr "End poll now"
 
-#. Button label that stops the current screen share.
 #. Voice control menu action to stop sharing the screen.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:52
-#: src/features/voice/components/VoiceControlBar.tsx:112
+#: src/features/voice/components/VoiceControlBar.tsx:108
 msgid "End screen share"
 msgstr "Ekran paylaşımını bitir"
 
@@ -13411,7 +13339,7 @@ msgid "Enter a product name between 1 and 80 characters."
 msgstr "1 ila 80 karakter arasında bir ürün adı girin."
 
 #. Placeholder in the optional reason input in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:114
+#: src/features/moderation/components/modals/BanMemberModal.tsx:88
 msgid "Enter a reason for the ban"
 msgstr "Yasaklama nedenini girin"
 
@@ -13637,7 +13565,9 @@ msgstr "Tüm sistem sesi"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Subsection title in the voice tab. Keep it concise.
+#. Voice menu submenu label for per-user entrance sound controls.
 #. Voice menu submenu label that contains per-user entrance sound mute and volume controls.
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:179
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:309
 #: src/features/user/components/modals/tabs/UserVoiceTab.tsx:187
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:145
@@ -13665,6 +13595,8 @@ msgid "Entrance sound saved"
 msgstr "Giriş sesi kaydedildi"
 
 #. Voice menu slider label adjusting playback volume of this user's entrance sound, locally only.
+#. Voice menu slider label for a user's entrance sound playback volume.
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:187
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:318
 msgid "Entrance sound volume"
 msgstr "Giriş sesi düzeyi"
@@ -14146,7 +14078,7 @@ msgstr "Mesaj yüklemeleri başarısız olsun"
 msgid "Fail message sends"
 msgstr "Mesaj göndermeyi başarısız yap"
 
-#: src/features/moderation/components/modals/BanMemberModal.tsx:167
+#: src/features/moderation/components/modals/BanMemberModal.tsx:141
 msgid "Failed to ban member. Try again."
 msgstr "Üye yasaklanamadı. Tekrar deneyin."
 
@@ -14850,14 +14782,14 @@ msgstr "Metin alanına odaklan"
 
 #. Voice call layout action that pins one of several active devices of the same participant.
 #. Voice layout menu action that focuses one device/session for a participant.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:37
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:61
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:101
 msgid "Focus this device"
 msgstr "Bu cihaza odaklan"
 
 #. Voice call layout action that pins the selected participant in the focused view.
 #. Voice layout menu action that focuses one participant in the call view.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:41
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:65
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:105
 msgid "Focus this person"
 msgstr "Bu kişiye odaklan"
@@ -14904,7 +14836,7 @@ msgstr "Klasör ayarları"
 msgid "Follow us on {blueskyProviderName}"
 msgstr "Bizi {blueskyProviderName} adresinden takip edin"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:693
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:826
 msgid "Follow voice input"
 msgstr "Ses girişini takip et"
 
@@ -15416,11 +15348,6 @@ msgstr "Bu iznin macOS tarafından uygulanması için {productName} uygulamasın
 msgid "Gain control"
 msgstr "Kontrolü ele alın"
 
-#. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
-#: src/features/channel/components/channel_header_components/developer_tools/DeveloperOptionLabels.ts:281
-msgid "Game capture injection (Windows)"
-msgstr "Oyun yakalama enjeksiyonu (Windows)"
-
 #. Folder icon option in the community-folder settings modal: a game controller shape.
 #: src/features/guild/components/modals/GuildFolderSettingsModal.tsx:56
 msgid "Game controller"
@@ -15630,7 +15557,7 @@ msgstr "Hediye kodu gerekli"
 msgid "Gift code is too long"
 msgstr "Hediye kodu çok uzun"
 
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:143
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:139
 msgid "Gift code:"
 msgstr "Hediye kodu:"
 
@@ -15665,7 +15592,7 @@ msgstr "Hediye envanteri bildirim çubuğu"
 
 #. Form field label for a gift redemption URL.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:38
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:34
 #: src/features/user/components/settings_utils/search_index/GiftInventoryIndex.ts:26
 msgid "Gift link"
 msgstr "Hediye bağlantısı"
@@ -15781,6 +15708,12 @@ msgstr "Genel ad"
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:97
 msgid "Global profile"
 msgstr "Genel profil"
+
+#. Toggle in the keybinds tab. When on, the shortcut works even when Fluxer is not focused. Keep it concise.
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:81
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:57
+msgid "Global shortcut"
+msgstr "Uygulama Odak Dışı Kısayol"
 
 #. Generic back-navigation label in modals, settings tabs, and nested flows.
 #: src/features/i18n/utils/CommonMessageDescriptors.ts:107
@@ -15932,7 +15865,7 @@ msgstr "{0} verildi."
 msgid "Grants all permissions and bypasses channel restrictions. Highly sensitive."
 msgstr "Tüm izinleri verir ve kanal kısıtlamalarını atlar. Çok hassastır."
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:878
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:1011
 msgid "Granular selection"
 msgstr "Ayrıntılı seçim"
 
@@ -15968,7 +15901,7 @@ msgstr "Yunanca"
 
 #. Toggle label in the mobile video settings bottom sheet. Switches to grid layout.
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:88
-#: src/features/voice/components/VoiceSettingsMenus.tsx:784
+#: src/features/voice/components/VoiceSettingsMenus.tsx:785
 msgid "Grid view"
 msgstr "Izgara görünümü"
 
@@ -16111,19 +16044,24 @@ msgid "Grouping"
 msgstr "Gruplama"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:104
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:125
 msgid "H.264"
 msgstr "H.264"
 
 #. Label for an advanced screen-share select. H.264 is a codec name and should stay literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:115
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:120
 msgid "H.264 backup stream"
 msgstr "H.264 yedek akışı"
 
 #. Option label for an H.264 backup stream select. H.264 is a codec name and should stay literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:127
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:132
 msgid "H.264 simulcast backup"
 msgstr "H.264 simulcast yedeklemesi"
+
+#. Option label for the screen-share codec select while the HEVC opt-in is off and the option is disabled. H.265 is a codec name and should stay literal.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:231
+msgid "H.265 (requires opt-in)"
+msgstr ""
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the connection add connection modal.
@@ -16176,12 +16114,8 @@ msgstr "Donanım hızlandırma"
 msgid "Hardware acceleration can cause rendering glitches with transparent windows. Try --disable-gpu if you see flicker or smearing."
 msgstr "Donanım hızlandırma, şeffaf pencerelerde görüntüleme sorunlarına neden olabilir. Titreme veya bulanıklık görüyorsanız --disable-gpu komutunu deneyin."
 
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:132
-msgid "Hardware acceleration is off, so codecs will encode on your CPU. <0>Turn it back on in {advancedSettingsLabel}</0>."
-msgstr "Donanım hızlandırma kapalı, bu nedenle kodekler işlemcinizde kodlama yapacak. <0>Bunu {advancedSettingsLabel} bölümünde tekrar açın.</0>."
-
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:152
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:173
 msgid "Hardware encoder"
 msgstr "Donanım kodlayıcı"
 
@@ -16316,9 +16250,14 @@ msgid "Help translate {PRODUCT_NAME} into your language on <0>{I18N_WEBLATE_DOMA
 msgstr "{PRODUCT_NAME}'i <0>{I18N_WEBLATE_DOMAIN}</0> üzerinde dilinize çevirmemize yardım edin."
 
 #. Description for a WebRTC content hint select. Keep Motion, Detail, and text as plain option concepts.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:135
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:140
 msgid "Helps the browser choose motion, detail, or text handling."
 msgstr "Tarayıcının hareket, ayrıntı veya metin işleme için en uygun seçeneği belirlemesine yardımcı olur."
+
+#. Settings search synonym. Codec name; keep literal. Used to match this term in the settings search bar.
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:105
+msgid "HEVC"
+msgstr ""
 
 #. Codec description in the screen share codec policy menu. HEVC is a codec name; keep WebRTC literal.
 #: src/features/voice/utils/ScreenShareCodecPolicy.ts:28
@@ -16471,7 +16410,7 @@ msgid "Hide muted channels by default?"
 msgstr "Sessize alınan kanalları varsayılan olarak gizle?"
 
 #. Short label for an advanced stream privacy preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:47
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:52
 msgid "Hide my stream preview thumbnail"
 msgstr "Yayın önizleme küçük resmimi gizle"
 
@@ -16490,7 +16429,7 @@ msgstr "Şifreyi gizle"
 msgid "Hide picture-in-picture popout?"
 msgstr "Resim içinde resim penceresini gizle?"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:727
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:860
 msgid "Hide preview thumbnail"
 msgstr "Önizleme küçük resmini gizle"
 
@@ -16552,7 +16491,7 @@ msgid "High dynamic range display mode"
 msgstr "Yüksek dinamik aralıklı ekran modu"
 
 #. Description for a software encoder quality select. Keep AV1 and CPU literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:75
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:80
 msgid "Higher quality can cost more CPU and latency."
 msgstr "Daha yüksek kalite daha fazla CPU ve gecikmeye neden olabilir."
 
@@ -16571,11 +16510,11 @@ msgstr "Hintçe"
 msgid "Hints"
 msgstr "İpuçları"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:95
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:99
 msgid "Hoist order"
 msgstr "Sıralamayı yükselt"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:427
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:522
 msgid "Hoist order reset to default"
 msgstr "Yükseltme sırası varsayılana sıfırlandı"
 
@@ -16651,7 +16590,7 @@ msgid "How about:"
 msgstr "Şuna ne dersin:"
 
 #. Helper text under the ban duration dropdown in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:63
+#: src/features/moderation/components/modals/BanMemberModal.tsx:64
 msgid "How long they stay banned."
 msgstr "Ne kadar süreyle yasaklı kalacaklar."
 
@@ -16661,7 +16600,7 @@ msgid "How long they stay timed out."
 msgstr "Ne kadar süreyle zaman aşımına uğrayacakları."
 
 #. Description for the /ban delete_messages option.
-#: src/features/devtools/hooks/useCommands.ts:82
+#: src/features/devtools/hooks/useCommands.ts:83
 msgid "How much of the member's recent message history to delete."
 msgstr "Üyenin son mesaj geçmişinden ne kadarının silineceği."
 
@@ -16737,11 +16676,6 @@ msgstr "Güncellenen şartları kabul ediyorum"
 #: src/features/user/components/modals/tabs/component_gallery_tab/OverlaysTab.tsx:19
 msgid "I am a tooltip"
 msgstr "Ben bir araç ipucuyum"
-
-#. Gift redemption pre-filled DM message for a sender who already owns lifetime premium.
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:26
-msgid "I can't redeem this because I already have lifetime {premiumProductName}, so this gift is all yours!"
-msgstr "Ömür boyu {premiumProductName} üyeliğim olduğu için bunu kullanamıyorum, bu hediye senin!"
 
 #: src/features/guild/components/modals/GuildDeleteModal.tsx:56
 msgid "I changed my mind"
@@ -16940,11 +16874,11 @@ msgstr "Yoksay"
 msgid "Ignore friend request"
 msgstr "Arkadaşlık isteğini yoksay"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:868
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:1001
 msgid "Ignore hardware devices"
 msgstr "Donanım aygıtlarını yoksay"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:844
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:977
 msgid "Ignore input media"
 msgstr "Giriş medyasını yok say"
 
@@ -16970,7 +16904,7 @@ msgstr "Spam işaretini yoksay"
 msgid "Ignore the friend request from {displayName}?"
 msgstr "{displayName} adlı kişiden gelen arkadaşlık isteğini yok say?"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:855
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:988
 msgid "Ignore virtual"
 msgstr "Sanalı yok say"
 
@@ -17264,7 +17198,7 @@ msgstr "Sesli sohbette"
 
 #. Spellcheck engine option in the language tab. Uses the bundled in-app Hunspell dictionaries. Keep it concise.
 #. Spellcheck engine option in the textarea spellcheck submenu. The bundled in-app hunspell engine.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:73
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:75
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:97
 msgid "In-app dictionaries"
 msgstr "Uygulama içi sözlükler"
@@ -18323,11 +18257,6 @@ msgstr "Sadece katıl (diğer bağlantıları koru)"
 msgid "Keep {productName} running when the window is closed"
 msgstr "Pencere kapandığında {productName} uygulamasını çalışır durumda tut"
 
-#. Helper text under the "Don't delete any" message-history option in the destructive ban-member modal.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:87
-msgid "Keep all messages"
-msgstr "Tüm mesajları tut"
-
 #. Description text in the motion tab.
 #. Settings search entry description. One-line summary of what the settings search entry controls.
 #: src/features/user/components/modals/tabs/accessibility_tab/MotionTab.tsx:39
@@ -18438,7 +18367,7 @@ msgid "Kick"
 msgstr "At"
 
 #. Slash-command description for /kick. Removes a member from the current community (moderation action).
-#: src/features/devtools/hooks/useCommands.ts:38
+#: src/features/devtools/hooks/useCommands.ts:39
 msgid "Kick a member from this community."
 msgstr "Bu topluluktan bir üyeyi at."
 
@@ -18482,7 +18411,7 @@ msgstr "Dil ayarları"
 
 #. Submenu label in the textarea spellcheck submenu listing manual language overrides.
 #. Subsection title for spellcheck language settings. Keep it concise.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:86
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:88
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:119
 msgid "Languages"
 msgstr "Diller"
@@ -18556,7 +18485,7 @@ msgid "Launch at login"
 msgstr "Giriş yapıldığında başlat"
 
 #. Description for an SVC mode select. Keep SVC and AV1 literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:95
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:100
 msgid "Layering for AV1 and VP9 when available."
 msgstr "SVC ve AV1 kullanıldığında katmanlama."
 
@@ -19759,9 +19688,14 @@ msgid "Maximum protection for family-friendly spaces"
 msgstr "Aile dostu alanlar için maksimum koruma"
 
 #. Label for an advanced screen-share bitrate select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:155
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:160
 msgid "Maximum screen share bitrate"
 msgstr "Ekran paylaşımı maksimum bit hızı"
+
+#. Settings search entry description for the AV1 and H.265 screen-share opt-in toggles.
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:97
+msgid "May cause compatibility issues for viewers. We’re working on improving this."
+msgstr ""
 
 #. Short label in the max favorite memes modal.
 #: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:34
@@ -19811,9 +19745,7 @@ msgid "Media buttons"
 msgstr "Medya düğmeleri"
 
 #. Accessible label for the floating media controls toolbar in the media viewer modal.
-#. Voice participant context menu submenu label for camera, stream, and video actions.
 #: src/features/messaging/components/modals/media_modal/shared.ts:69
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:190
 msgid "Media controls"
 msgstr "Medya kontrolleri"
 
@@ -20019,7 +19951,7 @@ msgstr "Üyeler, seçildi"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Voice participant menu action that inserts a mention of the selected user into the message composer.
 #: src/features/ui/action_menu/items/MentionUserMenuItem.tsx:13
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:45
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:69
 #: src/features/user/components/settings_utils/section_registry/NotificationsSections.ts:67
 msgid "Mention"
 msgstr "Bahset"
@@ -20041,7 +19973,7 @@ msgid "Mention badges"
 msgstr "Bahsetme rozetleri"
 
 #. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
-#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:22
+#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:18
 msgid "Mention controls"
 msgstr "Bahsetme kontrolleri"
 
@@ -20125,7 +20057,7 @@ msgstr "mesaj"
 #: src/features/guild/components/modals/guild_tabs/GuildMemberActionsSheet.tsx:88
 #: src/features/ui/action_menu/items/ActionsSubmenu.tsx:41
 #: src/features/ui/action_menu/items/MessageUserMenuItem.tsx:26
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:49
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:73
 #: src/features/user/components/modals/tabs/component_gallery_tab/ComponentGalleryTabInputsTab.tsx:86
 #: src/features/user/components/modals/UserProfileMobileSheet.tsx:712
 #: src/features/user/components/modals/UserProfileModal.tsx:562
@@ -20463,7 +20395,7 @@ msgstr "Mikrofon izni gerekli"
 msgid "Microphone test"
 msgstr "Mikrofon testi"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:813
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:946
 msgid "Microphone workaround"
 msgstr "Mikrofon geçici çözümü"
 
@@ -20653,9 +20585,7 @@ msgid "Mod"
 msgstr "Mod"
 
 #. Permission category for moderation actions against members or messages.
-#. Voice participant context menu submenu label for member moderation actions.
 #: src/features/permissions/utils/PermissionLabelDescriptors.ts:141
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:194
 msgid "Moderation"
 msgstr "Denetleme"
 
@@ -20757,7 +20687,7 @@ msgid "More options"
 msgstr "Diğer seçenekler"
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:52
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:53
 msgid "More shortcut options"
 msgstr "Daha fazla kısayol seçeneği"
 
@@ -20788,7 +20718,7 @@ msgstr "En alakalı"
 #. Short label in the inline. Keep it concise.
 #: src/features/user/components/modals/tabs/accessibility_tab/AccessibilityTabInline.tsx:31
 #: src/features/user/components/modals/tabs/AccessibilityTab.tsx:98
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:143
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:148
 #: src/features/user/components/settings_utils/search_index/AccessibilityIndex.ts:297
 #: src/features/user/components/settings_utils/section_registry/AccessibilitySections.ts:271
 msgid "Motion"
@@ -20806,7 +20736,7 @@ msgid "Move"
 msgstr "Taşı"
 
 #. Submenu label that moves every active device into another voice channel.
-#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:22
+#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:37
 msgid "Move all devices to…"
 msgstr "Tüm cihazları şuraya taşı:…"
 
@@ -20823,7 +20753,7 @@ msgstr "Görüntülenen kanal geçmişinde geriye git"
 #. Submenu label that moves a single device into another voice channel.
 #. Submenu label that moves a single device into another voice channel.
 #: src/features/ui/action_menu/items/MoveToChannelSubmenu.tsx:21
-#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:18
+#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:33
 msgid "Move device to…"
 msgstr "Cihazı şuraya taşı:…"
 
@@ -20860,7 +20790,7 @@ msgstr "Taşı"
 #. Submenu label that moves the selected participant or content into another channel.
 #. Submenu label that moves the selected participant or content into another channel.
 #: src/features/ui/action_menu/items/MoveToChannelSubmenu.tsx:29
-#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:26
+#: src/features/ui/action_menu/VoiceParticipantContextMenu.tsx:41
 msgid "Move to…"
 msgstr "Taşı…"
 
@@ -20925,7 +20855,7 @@ msgstr "Müzik notu"
 #: src/features/channel/components/bottomsheets/channel_details_bottom_sheet/ChannelDetailsBottomSheetShared.ts:132
 #: src/features/channel/components/embeds/media/EmbedVideo.tsx:72
 #: src/features/guild/components/modals/GuildNotificationSettingsModal.tsx:141
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:20
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:36
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:65
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:73
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:178
@@ -20939,7 +20869,7 @@ msgid "Mute"
 msgstr "Sessize al"
 
 #. Voice control button label to turn the user's microphone off.
-#: src/features/voice/components/VoiceControlBar.tsx:126
+#: src/features/voice/components/VoiceControlBar.tsx:122
 msgctxt "voice-control-action"
 msgid "Mute"
 msgstr "Sesi kapat"
@@ -21005,7 +20935,7 @@ msgid "Mute conversation"
 msgstr "Sohbeti sessize al"
 
 #. Voice menu toggle that mutes a single device when the current user is connected on multiple devices.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:53
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:77
 msgid "Mute device"
 msgstr "Cihazın sesini kapat"
 
@@ -21019,7 +20949,9 @@ msgstr "DM'i sessize al"
 msgid "Mute DMs"
 msgstr "DM'leri sessize al"
 
+#. Voice menu checkbox label that locally silences a user's entrance sound.
 #. Voice menu checkbox label. Locally silences this user's custom entrance sound when they join, only for the current user.
+#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:183
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:313
 msgid "Mute entrance sound"
 msgstr "Giriş sesini kapat"
@@ -21535,7 +21467,7 @@ msgid "New password"
 msgstr "Yeni şifre"
 
 #. Default name for a newly created role in the community roles settings tab. Short label.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:46
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:48
 msgid "New role"
 msgstr "Yeni rol"
 
@@ -21874,7 +21806,7 @@ msgstr "GIF bulunamadı"
 msgid "No gifts yet"
 msgstr "Henüz hediye yok"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:169
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:175
 msgid "No hoisted roles. Enable \"Show this role separately\" on a role to see it here."
 msgstr "Yükseltilmiş rol yok. Bir rolü burada görmek için \"Bu rolü ayrı göster\" seçeneğini etkinleştirin."
 
@@ -22492,7 +22424,7 @@ msgstr "Nesneler"
 #: src/features/channel/components/modals/channel_tabs/channel_overview_tab/SlowmodeControl.tsx:24
 #: src/features/guild/components/modals/guild_tabs/GuildModerationTab.tsx:97
 #: src/features/guild/components/modals/guild_tabs/GuildModerationTab.tsx:139
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:123
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:128
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:59
 msgid "Off"
 msgstr "Kapalı"
@@ -22626,7 +22558,7 @@ msgstr "Yalnızca geniş ekranlarda geçerlidir."
 msgid "Only credit cards are accepted. Debit and prepaid cards cannot be used for the mature content check."
 msgstr "Yalnızca kredi kartları kabul edilir. Banka ve ön ödemeli kartlar yetişkin içeriği kontrolü için kullanılamaz."
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:833
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:966
 msgid "Only default speakers"
 msgstr "Yalnızca varsayılan hoparlörler"
 
@@ -22674,7 +22606,7 @@ msgstr "Burada yalnızca ne yaptığını tam olarak anladığınız kodları ç
 msgid "Only show message previews for DMs with unread messages"
 msgstr "Yalnızca okunmamış mesajları olan DM'ler için mesaj önizlemelerini göster"
 
-#: src/features/voice/components/StreamSettingsMenuContent.tsx:823
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:956
 msgid "Only speakers"
 msgstr "Sadece konuşmacılar"
 
@@ -22946,7 +22878,7 @@ msgstr "Tarayıcıda emojiyi aç"
 msgid "Open emoji picker"
 msgstr "Emoji seçiciyi aç"
 
-#: src/features/voice/components/VoiceSettingsMenus.tsx:877
+#: src/features/voice/components/VoiceSettingsMenus.tsx:859
 msgid "Open event sink"
 msgstr "Olay sink'ini aç"
 
@@ -23064,13 +22996,13 @@ msgstr "{directMessageName} profili aç"
 
 #. Accessible label for the avatar button that opens a user profile.
 #. Short label in the app layout voice participant item. Preserve {displayName}; it is inserted by code.
-#: src/features/app/components/layout/VoiceParticipantItem.tsx:47
+#: src/features/app/components/layout/VoiceParticipantItem.tsx:48
 #: src/features/ui/avatars/AvatarStack.tsx:21
 msgid "Open profile for {displayName}"
 msgstr "{displayName} adlı kişinin profilini aç"
 
 #. Short label in the app layout grouped voice participant. Preserve {nickname}; it is inserted by code.
-#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:35
+#: src/features/app/components/layout/GroupedVoiceParticipant.tsx:36
 msgid "Open profile for {nickname}"
 msgstr "{nickname} için profili aç"
 
@@ -23205,17 +23137,17 @@ msgid "Open your settings"
 msgstr "Ayarlarınızı açın"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:112
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:133
 msgid "OpenH264 software codec on Linux"
 msgstr "Linux'ta OpenH264 yazılım kodeki için ayarlar arama girişi açıklaması. Bu ayar arama girişinin neyi kontrol ettiğinin tek satırlık özeti."
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:88
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:109
 msgid "OpenH264 video codec"
 msgstr "OpenH264 video kodeki"
 
 #. Switch label for the OpenH264 codec toggle. "OpenH264" is a product name and "Cisco Systems, Inc." is a company name; do not translate either.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:34
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:39
 msgid "OpenH264 Video Codec provided by Cisco Systems, Inc."
 msgstr "Cisco Systems, Inc. tarafından sağlanan OpenH264 video kodeği."
 
@@ -23227,7 +23159,7 @@ msgstr "Üyeler sayfasını açar. Açmak için Boşluk veya Enter tuşuna bası
 #. Short label in the language tab. Keep it concise.
 #. Spellcheck engine option in the textarea spellcheck submenu. Uses the host operating system spellchecker.
 #: src/features/auth/flow/HandoffApprovalFlow.tsx:184
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:77
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:79
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:107
 msgid "Operating system"
 msgstr "İşletim sistemi"
@@ -23300,7 +23232,7 @@ msgstr "Veya bir arkadaşına davet bağlantısı gönder:"
 msgid "or send an invite to a friend:"
 msgstr "veya bir arkadaşına davet gönder:"
 
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:135
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:131
 msgid "or send the gift link to a friend:"
 msgstr "veya hediye bağlantısını bir arkadaşına gönder:"
 
@@ -23634,7 +23566,7 @@ msgid "Past 7 days"
 msgstr "Son 7 gün"
 
 #. Textarea right-click context menu item that pastes clipboard contents.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:52
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:54
 msgid "Paste"
 msgstr "Yapıştır"
 
@@ -23692,7 +23624,7 @@ msgid "Pause invites? New users won't be able to join through invite links until
 msgstr "Davetleri duraklatılsın mı? Yeniden etkinleştirene kadar yeni kullanıcılar davet bağlantıları aracılığıyla katılamaz. Mevcut üyeler etkilenmez."
 
 #. Short label for an advanced screen-share preview preference.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:39
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:44
 msgid "Pause my screen share preview in the background"
 msgstr "Arka planda ekran paylaşımı önizlememi duraklat"
 
@@ -23700,6 +23632,11 @@ msgstr "Arka planda ekran paylaşımı önizlememi duraklat"
 #: src/features/user/components/modals/tabs/appearance_tab/StreamerModeTab.tsx:39
 msgid "Pause notifications"
 msgstr "Bildirimleri duraklat"
+
+#. Voice screen share menu preference that pauses the local stream preview while the app is unfocused.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:28
+msgid "Pause Preview When Fluxer Isn’t Focused"
+msgstr ""
 
 #. Description shown for the emoji toggle while reduced motion is active.
 #: src/features/user/components/modals/tabs/accessibility_tab/AnimationTab.tsx:81
@@ -23828,7 +23765,7 @@ msgid "Perks paused"
 msgstr "Ayrıcalıklar duraklatıldı"
 
 #. Ban duration option in the destructive ban-member modal meaning the ban never expires. Short standalone label.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:37
+#: src/features/moderation/components/modals/BanMemberModal.tsx:38
 msgid "Permanent"
 msgstr "Kalıcı"
 
@@ -24034,7 +23971,7 @@ msgid "Picture"
 msgstr "Resim"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:124
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:145
 msgid "Picture in picture"
 msgstr "Resim içinde resim"
 
@@ -24154,7 +24091,7 @@ msgid "Pins popout"
 msgstr "Sabitlenmişler açılır penceresi"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:128
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:149
 msgid "PiP"
 msgstr "Resim içinde resim"
 
@@ -24303,15 +24240,20 @@ msgstr "Tekrar ana pencereye al"
 msgid "Pop out call"
 msgstr "Aramayı ayrı bir pencerede aç"
 
-#. Voice menu action on desktop that opens the participant camera feed in a separate window.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:29
-msgid "Pop out camera"
-msgstr "Katılımcının kamerasını ayrı bir pencerede aç"
-
 #. Voice menu action on desktop that opens the participant screen share in a separate window.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:33
-msgid "Pop out stream"
-msgstr "Katılımcının ekran paylaşımını ayrı bir pencerede aç"
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:57
+msgid "Pop Out Stream"
+msgstr ""
+
+#. Voice menu action on desktop that opens the participant placeholder tile in a separate window.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:49
+msgid "Pop Out User"
+msgstr ""
+
+#. Voice menu action on desktop that opens the active participant camera feed in a separate window.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:45
+msgid "Pop Out Video"
+msgstr ""
 
 #. Overlay text shown on a voice participant tile while it lives in a separate popped-out window.
 #: src/features/voice/components/popout/PoppedOutOverlay.tsx:19
@@ -24361,7 +24303,7 @@ msgid "Prefer @mention"
 msgstr "@bahsetmeyi tercih et"
 
 #. Option label for an encoder path select. Refers to hardware video encoders.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:63
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:68
 msgid "Prefer hardware"
 msgstr "Donanımı tercih et"
 
@@ -24373,7 +24315,7 @@ msgid "Prefer no @mention"
 msgstr "@bahsedilmemeyi tercih et"
 
 #. Option label for an encoder path select. Refers to software video encoders.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:67
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:72
 msgid "Prefer software"
 msgstr "Yazılımı tercih et"
 
@@ -24391,6 +24333,11 @@ msgstr "Tercihler"
 #: src/features/platform/utils/DesktopLocaleBridge.ts:20
 msgid "Preferences..."
 msgstr "Tercihler..."
+
+#. Accessible label for the advanced screen-share codec preference select.
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:218
+msgid "Preferred screen share codec"
+msgstr ""
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
@@ -24527,6 +24474,11 @@ msgstr "Önizleme düğmesi"
 msgid "Preview camera"
 msgstr "Kamerayı önizle"
 
+#. Voice menu action that opens a preview of the current user camera.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:53
+msgid "Preview Camera"
+msgstr ""
+
 #. Status text on the placeholder shown in the voice call view when the user has hidden a remote stream preview.
 #: src/features/voice/components/HiddenStreamPlaceholder.tsx:10
 msgid "Preview hidden"
@@ -24560,7 +24512,7 @@ msgid "Preview sound"
 msgstr "Sesi önizle"
 
 #. Settings search entry description. One-line summary of what the settings search entry controls.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:136
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:157
 msgid "Preview, popout, and stream thumbnail behavior"
 msgstr "Önizleme, açılır pencere ve akış küçük resim davranışı"
 
@@ -24573,44 +24525,30 @@ msgstr "Önizlemeler"
 msgid "Previous"
 msgstr "Önceki"
 
-#. Choice label for deleting two days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:94
-msgid "Previous 2 days"
-msgstr "Son 2 gün"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 12 hours.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:37
+msgid "Previous 12 Hours"
+msgstr "Son 12 Saat"
 
-#. Choice label for deleting one day of messages when banning a member.
-#. Message-history-deletion option in the destructive ban-member modal. Deletes the banned member's messages from the last 24 hours.
-#: src/features/devtools/hooks/useCommands.ts:90
-#: src/features/moderation/components/modals/BanMemberModal.tsx:91
-msgid "Previous 24 hours"
-msgstr "Son 24 saat"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 24 hours.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:45
+msgid "Previous 24 Hours"
+msgstr "Son 24 Saat"
 
-#. Choice label for deleting three days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:98
-msgid "Previous 3 days"
-msgstr "Son 3 gün"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 3 days.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:53
+msgid "Previous 3 Days"
+msgstr "Son 3 Gün"
 
-#. Choice label for deleting four days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:102
-msgid "Previous 4 days"
-msgstr "Son 4 gün"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 6 hours.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:29
+msgid "Previous 6 Hours"
+msgstr "Son 6 Saat"
 
-#. Choice label for deleting five days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:106
-msgid "Previous 5 days"
-msgstr "Son 5 gün"
-
-#. Choice label for deleting six days of messages when banning a member.
-#: src/features/devtools/hooks/useCommands.ts:110
-msgid "Previous 6 days"
-msgstr "Son 6 gün"
-
-#. Choice label for deleting seven days of messages when banning a member.
-#. Message-history-deletion option in the destructive ban-member modal. Deletes the banned member's messages from the last 7 days.
-#: src/features/devtools/hooks/useCommands.ts:114
-#: src/features/moderation/components/modals/BanMemberModal.tsx:100
-msgid "Previous 7 days"
-msgstr "Son 7 gün"
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last 7 days.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:61
+msgid "Previous 7 Days"
+msgstr "Son 7 Gün"
 
 #. Accessible label for the previous-attachment navigation button in the media viewer.
 #. Media viewer navigation button label for the previous attachment.
@@ -24620,6 +24558,11 @@ msgstr "Son 7 gün"
 #: src/features/messaging/components/modals/media_modal/shared.ts:137
 msgid "Previous attachment"
 msgstr "Önceki ek"
+
+#. Message-history-deletion option when banning a member. Deletes the member's messages from the last hour.
+#: src/features/moderation/constants/BanDeleteMessageOptions.ts:21
+msgid "Previous Hour"
+msgstr "Son Bir Saat"
 
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/PlutoniumIndex.ts:47
@@ -24668,7 +24611,7 @@ msgid "Primary navigation"
 msgstr "Ana gezinme"
 
 #. Voice display preference checkbox that moves active speakers toward the front of the call grid when enabled.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:81
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:105
 msgid "Prioritize speakers"
 msgstr "Konuşmacılara öncelik ver"
 
@@ -25122,7 +25065,7 @@ msgid "Push-to-talk is ignored in direct input. Switch to focused voice or custo
 msgstr "Bas konuş özelliği doğrudan girişte yok sayılır. Kullanmak için odaklanmış sese veya özel seçeneğine geçin."
 
 #. Tooltip on the mic button in the voice control bar when push-to-talk is enabled. {pushToTalkHint} is the formatted shortcut key combo.
-#: src/features/voice/components/VoiceControlBar.tsx:116
+#: src/features/voice/components/VoiceControlBar.tsx:112
 msgid "Push-to-talk is on. Hold {pushToTalkHint} to speak."
 msgstr "Bas konuş açık. Konuşmak için {pushToTalkHint} tuşunu basılı tutun."
 
@@ -25142,7 +25085,7 @@ msgid "Push-to-talk won't unmute your microphone while you're deafened. Undeafen
 msgstr "Konuşma tuşu, kendinizi susturmuşken mikrofonunuzun sesini açmaz. Konuşmak için kendinizi susturmayı kaldırın."
 
 #. Option label for a software encoder quality select. Means slower/higher-quality.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:87
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:92
 msgid "Quality"
 msgstr "Kalite"
 
@@ -25362,7 +25305,7 @@ msgid "Ready to upgrade?"
 msgstr "Yükseltmeye hazır mısın?"
 
 #. Option label for a software encoder quality select. Means fastest/lower-latency.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:79
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:84
 msgid "Realtime"
 msgstr "Gerçek zamanlı"
 
@@ -25373,13 +25316,13 @@ msgstr "Neden"
 
 #. Label of the optional reason input in the destructive ban-member modal. Reason is recorded in the activity log.
 #. Label of the optional reason textarea in the timeout-member modal. The reason is recorded in the activity log.
-#: src/features/moderation/components/modals/BanMemberModal.tsx:109
+#: src/features/moderation/components/modals/BanMemberModal.tsx:83
 #: src/features/moderation/components/modals/TimeoutMemberModal.tsx:36
 msgid "Reason (optional)"
 msgstr "Neden (isteğe bağlı)"
 
 #. Description for an optional moderation slash-command reason.
-#: src/features/devtools/hooks/useCommands.ts:66
+#: src/features/devtools/hooks/useCommands.ts:67
 msgid "Reason (optional)."
 msgstr "Gerekçe (isteğe bağlı)."
 
@@ -25437,11 +25380,9 @@ msgstr "Tekrar kontrol et"
 msgid "Recipients will be taken to {0} <0>{1}</0>"
 msgstr "Alıcılar şuraya yönlendirilecek: {0} <0>{1}</0>"
 
-#. Badge shown next to the auto codec option in the screen-share codec radio group. Keep it concise.
 #. Spellcheck engine option in the language tab. Lets the app choose the best available spellcheck engine.
 #. Spellcheck engine option in the textarea spellcheck submenu. Lets the app choose the best available engine.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:68
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:38
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:70
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:87
 msgid "Recommended"
 msgstr "Önerilen"
@@ -25569,7 +25510,7 @@ msgid "Redirect URIs"
 msgstr "Yönlendirme URI'ları"
 
 #. Textarea right-click context menu item that redoes the last undone edit.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:40
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:42
 msgid "Redo"
 msgstr "Yinele"
 
@@ -25706,11 +25647,6 @@ msgstr "Reddet"
 msgid "Rejected"
 msgstr "Reddedildi"
 
-#. Voice participant context menu submenu label for friend and block actions.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:198
-msgid "Relationship"
-msgstr "İlişki"
-
 #. Short label in the markdown tab. Keep it concise.
 #: src/features/user/components/modals/tabs/component_gallery_tab/MarkdownTab.tsx:129
 msgid "Relative"
@@ -25759,7 +25695,7 @@ msgid "Reload now"
 msgstr "Şimdi yeniden yükle"
 
 #. Hint in the textarea spellcheck submenu shown after switching engines.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:90
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:92
 msgid "Reload to apply engine change"
 msgstr "Motor değişikliğini uygulamak için yeniden yükle"
 
@@ -25922,7 +25858,7 @@ msgid "Remove friend"
 msgstr "Arkadaşlıktan çıkar"
 
 #. Textarea right-click context menu item that removes the selected misspelled word from the personal dictionary.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:27
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:29
 msgid "Remove from dictionary"
 msgstr "Sözlükten kaldır"
 
@@ -26608,7 +26544,7 @@ msgid "Reset"
 msgstr "Sıfırla"
 
 #. Button or menu action label in the keybinds tab. Keep it concise. Preserve {label}; it is inserted by code.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:43
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:44
 msgid "Reset \"{label}\" to built-in"
 msgstr "\"{label}\" varsayılan ayarlara sıfırla"
 
@@ -26728,11 +26664,11 @@ msgid "Reset to actual values"
 msgstr "Gerçek değerlere sıfırla"
 
 #. Button or menu action label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:35
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:36
 msgid "Reset to built-in"
 msgstr "Yerleşik ayarlara sıfırla"
 
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:122
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleSidebar.tsx:126
 msgid "Reset to default"
 msgstr "Varsayılana sıfırla"
 
@@ -27270,7 +27206,8 @@ msgstr "Rol rengi"
 msgid "Role created"
 msgstr "Rol oluşturuldu"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:334
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:352
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:402
 msgid "Role created successfully"
 msgstr "Rol başarıyla oluşturuldu"
 
@@ -27279,7 +27216,8 @@ msgstr "Rol başarıyla oluşturuldu"
 msgid "Role deleted"
 msgstr "Rol silindi"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:369
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:440
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:469
 msgid "Role deleted successfully"
 msgstr "Rol başarıyla silindi"
 
@@ -27319,7 +27257,7 @@ msgstr "Roller"
 msgid "Roles and members"
 msgstr "Roller ve üyeler"
 
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:278
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:296
 msgid "Roles updated successfully"
 msgstr "Roller başarıyla güncellendi"
 
@@ -27648,7 +27586,7 @@ msgid "Screen share codec"
 msgstr "Ekran paylaşımı kodeği"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:140
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:161
 msgid "Screen share encoder controls"
 msgstr "Ekran paylaşımı kodlayıcı ayarları"
 
@@ -27669,12 +27607,12 @@ msgid "Screen share is using software encoding ({codec}). Quality may be reduced
 msgstr "Ekran paylaşımı yazılım kodlaması kullanıyor ({codec}). Kalite düşebilir ve CPU kullanımı artabilir. GPU'nuz bu kodek için donanım kodlamayı desteklemeyebilir."
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:120
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:141
 msgid "Screen share preview"
 msgstr "Ekran paylaşımı önizlemesi"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:116
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:137
 msgid "Screen share preview behavior"
 msgstr "Ekran paylaşımı önizleme davranışı"
 
@@ -27692,6 +27630,11 @@ msgstr "Ekran paylaşımı önizlemeleri devre dışı bırakıldı."
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:172
 msgid "Screen share previews are enabled."
 msgstr "Ekran paylaşımı önizlemeleri etkinleştirildi."
+
+#. Voice screen share menu action that opens the screen share preview privacy controls.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:32
+msgid "Screen Share Privacy"
+msgstr ""
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the video tab. Keep it concise.
@@ -27719,11 +27662,6 @@ msgstr "Ekran paylaşımı başlatıldı"
 #: src/features/notification/utils/SoundLabels.ts:64
 msgid "Screen share stop"
 msgstr "Ekran paylaşımı durduruldu"
-
-#. Accessible label for the screen-share codec radio group.
-#: src/features/user/components/modals/tabs/components/CodecSelectorSection.tsx:42
-msgid "Screen share video codec"
-msgstr "Ekran paylaşımı video kodeği"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
@@ -27913,7 +27851,7 @@ msgid "Search filters"
 msgstr "Arama filtreleri"
 
 #. Slash-command description for /gif. Searches for and sends a GIF.
-#: src/features/devtools/hooks/useCommands.ts:58
+#: src/features/devtools/hooks/useCommands.ts:59
 msgid "Search for and send a GIF."
 msgstr "GIF ara ve gönder."
 
@@ -28301,7 +28239,7 @@ msgid "Select account"
 msgstr "Hesap seçin"
 
 #. Textarea right-click context menu item that selects all text in the textarea.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:56
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:58
 msgid "Select all"
 msgstr "Tümünü seç"
 
@@ -28479,7 +28417,7 @@ msgid "Send ({selectedCount}/{selectionLimit})"
 msgstr "Gönder ({selectedCount}/{selectionLimit})"
 
 #. Slash-command description for /dm. Sends a direct message to a user.
-#: src/features/devtools/hooks/useCommands.ts:46
+#: src/features/devtools/hooks/useCommands.ts:47
 msgid "Send a direct message to a user."
 msgstr "Bir kullanıcıya doğrudan mesaj gönder."
 
@@ -28489,27 +28427,27 @@ msgid "Send a friend request to {userName}, or use the staff override to add the
 msgstr "{userName} adlı kullanıcıya arkadaşlık isteği gönder veya hemen eklemek için yönetici geçersiz kılmayı kullan."
 
 #. Slash-command description for /favorites. Sends a saved / favorited media item.
-#: src/features/devtools/hooks/useCommands.ts:50
+#: src/features/devtools/hooks/useCommands.ts:51
 msgid "Send a saved media item."
 msgstr "Kaydedilmiş bir medya öğesi gönder."
 
 #. Slash-command description for /spoiler. Wraps the message in spoiler tags so recipients must click to reveal.
-#: src/features/devtools/hooks/useCommands.ts:24
+#: src/features/devtools/hooks/useCommands.ts:25
 msgid "Send a spoiler message (wraps in spoiler tags)."
 msgstr "Spoiler mesajı gönder (spoiler etiketleriyle sarar)."
 
 #. Slash-command description for /sticker. Sends a sticker.
-#: src/features/devtools/hooks/useCommands.ts:54
+#: src/features/devtools/hooks/useCommands.ts:55
 msgid "Send a sticker."
 msgstr "Çıkartma gönder."
 
 #. Slash-command description for /tts. Sends a text-to-speech message played aloud for users with TTS enabled.
-#: src/features/devtools/hooks/useCommands.ts:29
+#: src/features/devtools/hooks/useCommands.ts:30
 msgid "Send a text-to-speech message."
 msgstr "Metin okuma mesajı gönder."
 
 #. Slash-command description for /me. Sends the message wrapped in italics, IRC-style.
-#: src/features/devtools/hooks/useCommands.ts:20
+#: src/features/devtools/hooks/useCommands.ts:21
 msgid "Send an action message (wraps in italics)."
 msgstr "Bir eylem mesajı gönder (italik olarak gösterilir)."
 
@@ -28565,7 +28503,7 @@ msgstr "GIF gönder: {title}"
 #. Action label for sending a gift to a friend.
 #. Plus menu item that opens the gift purchase flow.
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:39
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:34
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:30
 msgid "Send gift"
 msgstr "Hediye gönder"
 
@@ -28795,12 +28733,12 @@ msgid "Set accent color to {0} <0/>."
 msgstr "Vurgu rengini {0} olarak ayarla <0/>."
 
 #. Short label in the keybinds tab. Keep it concise.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:27
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:28
 msgid "Set custom shortcut"
 msgstr "Özel kısayol ayarla"
 
 #. Label in the keybinds tab. Preserve {label}; it is inserted by code.
-#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:48
+#: src/features/user/components/modals/tabs/keybinds_tab/DefaultShortcutRow.tsx:49
 msgid "Set custom shortcut for \"{label}\""
 msgstr "\"{label}\" için özel kısayol ayarla"
 
@@ -29112,6 +29050,11 @@ msgstr "Ekranları ve pencereleri paylaşın."
 msgid "Share source"
 msgstr "Kaynak paylaş"
 
+#. Toggle label for sharing audio with an active stream.
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:156
+msgid "Share Stream Audio"
+msgstr ""
+
 #. Description in the premium gift purchase section. premiumProductName is the short paid product name.
 #: src/features/premium/utils/PremiumMessageDescriptors.ts:40
 msgid "Share the {premiumProductName} experience with your friends by purchasing a gift subscription."
@@ -29238,7 +29181,7 @@ msgstr "Kısa kodlar"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:106
+#: src/features/user/components/modals/tabs/keybinds_tab/CustomKeybindRow.tsx:121
 #: src/features/user/components/modals/tabs/UserVoiceTab.tsx:377
 #: src/features/user/components/settings_utils/search_index/KeybindsIndex.ts:38
 #: src/features/user/components/settings_utils/section_registry/VoiceVideoSections.ts:105
@@ -29562,16 +29505,16 @@ msgstr "Sessize alınmış kanalları göster"
 
 #. Toggle label in the mobile video settings bottom sheet. Controls whether the local camera tile is visible.
 #. Voice display preference checkbox that controls whether the current user sees their own camera tile.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:69
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:93
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:92
-#: src/features/voice/components/VoiceSettingsMenus.tsx:814
+#: src/features/voice/components/VoiceSettingsMenus.tsx:815
 msgid "Show my own camera"
 msgstr "Kendi kameramı göster"
 
 #. Voice display preference checkbox that controls whether the current user sees their own screen share tile.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:73
-msgid "Show my screen share"
-msgstr "Ekran paylaşımımı göster"
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:97
+msgid "Show My Screen Share"
+msgstr ""
 
 #. Developer option label for showing the current user as typing.
 #. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
@@ -29598,9 +29541,9 @@ msgstr "Yeni cihaz kalıcı penceresini göster"
 
 #. Toggle label in the mobile video settings bottom sheet. Controls whether participants without video are shown in the grid.
 #. Voice display preference checkbox that controls whether participants without video are shown in the grid.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:77
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:101
 #: src/features/voice/components/bottomsheets/VoiceSettingsBottomSheets.tsx:96
-#: src/features/voice/components/VoiceSettingsMenus.tsx:828
+#: src/features/voice/components/VoiceSettingsMenus.tsx:829
 msgid "Show non-video participants"
 msgstr "Görüntülü aramada olmayan katılımcıları göster"
 
@@ -29656,6 +29599,8 @@ msgstr "Kaydedilen medyayı ifade otomatik tamamlamada göster"
 
 #. Short label for an advanced message input preference.
 #. Short label in the channel and chat textarea plus menu. Keep it concise.
+#. Short label in the channel and chat textarea plus menu. Keep it concise.
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:102
 #: src/features/channel/components/textarea/TextareaPlusMenu.tsx:67
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedChatControls.tsx:125
 msgid "Show send button"
@@ -29943,7 +29888,7 @@ msgid "Single community mode"
 msgstr "Tek topluluk modu"
 
 #. Option label for an SVC mode select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:103
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:108
 msgid "Single layer"
 msgstr "Tek katmanlı"
 
@@ -30247,12 +30192,12 @@ msgid "Social"
 msgstr "Sosyal"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:148
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:169
 msgid "Software encoder"
 msgstr "Yazılım kodlayıcı"
 
 #. Label for an advanced screen-share select. Refers to software video encoder quality bias.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:71
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:76
 msgid "Software encoder quality"
 msgstr "Yazılım kodlayıcı kalitesi"
 
@@ -30577,7 +30522,7 @@ msgid "Spanish (Spain)"
 msgstr "İspanyolca (İspanya)"
 
 #. Option label for an SVC mode select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:111
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:116
 msgid "Spatial and temporal layers"
 msgstr "Uzamsal ve zamansal katmanlar"
 
@@ -30675,7 +30620,7 @@ msgstr "Yazım denetimi"
 #. Settings search entry label. Also used as a search synonym in the settings search bar.
 #. Settings section label for spellcheck settings.
 #. Submenu label in the textarea right-click context menu for spellcheck preferences.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:60
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:62
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:414
 #: src/features/user/components/modals/tabs/LanguageTab.tsx:456
 #: src/features/user/components/settings_utils/search_index/LanguageIndex.ts:74
@@ -30880,10 +30825,6 @@ msgstr "Başlangıç tarihi"
 #: src/features/user/components/modals/tabs/privacy_safety_tab/data_request_modal/DataRequestModal.tsx:191
 msgid "Start date must be earlier than end date."
 msgstr "Başlangıç tarihi bitiş tarihinden önce olmalı."
-
-#: src/features/voice/components/VoiceSettingsMenus.tsx:860
-msgid "Start debug logging session"
-msgstr "Hata ayıklama günlüğü oturumunu başlat"
 
 #. Keyboard shortcut action label shown in the shortcuts list and keybind editor. Keep short, sentence case.
 #: src/features/input/state/input_keybind/shared.ts:125
@@ -31223,6 +31164,13 @@ msgstr "Sesli sohbet etkinliğini tüm arkadaşlarınla paylaşmayı durdurmak i
 msgid "Stop speaking"
 msgstr "Konuşmayı durdur"
 
+#. Danger action that stops the active screen share.
+#. Voice screen share menu action that stops the current user stream.
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:20
+#: src/features/voice/components/ActiveScreenShareMenu.tsx:19
+msgid "Stop Streaming"
+msgstr ""
+
 #. Confirmation prompt in the links tab.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabLinksTab.tsx:31
 msgid "Stop trusting all links?"
@@ -31234,7 +31182,7 @@ msgid "Stop watching"
 msgstr "İzlemeyi durdur"
 
 #. Tooltip / button label in the voice control bar that stops watching a remote screen share.
-#: src/features/voice/components/VoiceControlBar.tsx:151
+#: src/features/voice/components/VoiceControlBar.tsx:147
 msgid "Stop watching stream"
 msgstr "Yayını izlemeyi durdur"
 
@@ -31258,11 +31206,6 @@ msgstr "Yayın"
 msgid "Stream buffering"
 msgstr "Akış arabelleğe alınıyor"
 
-#. Voice participant context menu submenu label for incoming screen share audio controls.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:202
-msgid "Stream controls"
-msgstr "Akış Kontrolleri"
-
 #. Status overlay on a voice participant tile when the remote screen share has ended.
 #: src/features/voice/components/voice_participant_tile/shared.ts:26
 msgid "Stream ended"
@@ -31277,10 +31220,15 @@ msgstr "Yayın gizlendi"
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the user settings voice activity card. Keep it concise.
 #: src/features/user/components/profile/VoiceActivityCard.tsx:90
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:132
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:153
 #: src/features/voice/components/StreamWatchHoverCard.tsx:21
 msgid "Stream preview"
 msgstr "Yayın önizlemesi"
+
+#. Compact submenu label for changing the resolution and frame rate of an active stream.
+#: src/features/voice/components/StreamSettingsMenuContent.tsx:152
+msgid "Stream Quality"
+msgstr ""
 
 #. Toolbar / menu button label in the screen-share picker. Opens the stream quality settings popover.
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:164
@@ -31476,7 +31424,7 @@ msgstr "Ekleri gizle"
 msgid "Suppress role mentions"
 msgstr "Rol bahsetmelerini gizle"
 
-#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:103
+#: src/features/channel/components/channel_header_components/developer_tools/GeneralOptionsMenu.tsx:90
 msgid "Suppress unprivileged self-mentions"
 msgstr "Ayrıcalıksız kendi bahsetmelerini gizle"
 
@@ -31496,12 +31444,12 @@ msgid "Suspend"
 msgstr "Askıya al"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
-#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:156
+#: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:177
 msgid "SVC"
 msgstr "SVC"
 
 #. Label for an advanced screen-share select. SVC is a WebRTC acronym and should stay uppercase.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:91
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:96
 msgid "SVC mode"
 msgstr "SVC modu"
 
@@ -31951,7 +31899,7 @@ msgid "Template URL"
 msgstr "Şablon URL'si"
 
 #. Option label for an SVC mode select.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:107
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:112
 msgid "Temporal layers"
 msgstr "Zamansal katmanlar"
 
@@ -32012,7 +31960,7 @@ msgstr "URL açılımlarını ve oluşturulan eklemeleri test edin"
 #. Channel type chip label for a text channel.
 #. Option label for a WebRTC content hint select.
 #: src/features/channel/utils/ChannelUtils.tsx:51
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:151
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:156
 msgid "Text"
 msgstr "Metin"
 
@@ -32283,12 +32231,12 @@ msgid "The mature content check was canceled. You can close this tab and try aga
 msgstr "Yetişkin içeriği kontrolü iptal edildi. Bu sekmeyi kapatıp uygulamadan tekrar deneyebilirsiniz."
 
 #. Description for the member option of a moderation slash command.
-#: src/features/devtools/hooks/useCommands.ts:62
+#: src/features/devtools/hooks/useCommands.ts:63
 msgid "The member to target."
 msgstr "Hedef üye."
 
 #. Description for a required message option in a slash command.
-#: src/features/devtools/hooks/useCommands.ts:70
+#: src/features/devtools/hooks/useCommands.ts:71
 msgid "The message to send."
 msgstr "Gönderilecek ileti."
 
@@ -34018,7 +33966,7 @@ msgstr "Kapat"
 
 #. Bulk voice action that turns off the camera on every active device of the current user.
 #. Voice menu action that turns off every active device/session's camera.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:90
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:114
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:93
 msgid "Turn off all device cameras"
 msgstr "Tüm cihaz kameralarını kapat"
@@ -34034,14 +33982,14 @@ msgstr "Kamerayı kapat"
 
 #. Voice menu action that turns off the camera on a single device of the current user.
 #. Voice menu action that turns off the camera on one device/session.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:57
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:81
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:81
 msgid "Turn off device camera"
 msgstr "Cihaz kamerasını kapat"
 
 #. Voice menu action that ends the screen share on a single device of the current user.
 #. Voice menu action that stops screen sharing or streaming on one device/session.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:61
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:85
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:85
 msgid "Turn off device stream"
 msgstr "Cihaz akışını kapat"
@@ -34053,7 +34001,7 @@ msgstr "Sunuc"
 
 #. Voice menu action that ends the current user screen share.
 #. Voice menu action that stops the current user's screen share or stream.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:65
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:89
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:69
 msgid "Turn off stream"
 msgstr "Yayını kapat"
@@ -34442,7 +34390,7 @@ msgid "Understood"
 msgstr "Anladım"
 
 #. Textarea right-click context menu item that undoes the last edit.
-#: src/features/channel/components/textarea/TextareaContextMenu.tsx:36
+#: src/features/channel/components/textarea/TextareaContextMenu.tsx:38
 msgid "Undo"
 msgstr "Geri al"
 
@@ -34479,7 +34427,7 @@ msgstr "Çıkartmayı favorilerden kaldır"
 
 #. Voice call layout action that removes focus from the currently pinned participant.
 #. Voice layout menu action that removes the focused participant or stream.
-#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:25
+#: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:41
 #: src/features/ui/action_menu/items/VoiceParticipantMenuItems.tsx:97
 msgid "Unfocus"
 msgstr "Odaklanmayı kaldır"
@@ -34564,7 +34512,7 @@ msgstr "Bilinmeyen tarih"
 #. Fallback device or operating-system label in the devices tab when session client data is unavailable.
 #. Short label in the app layout voice participant item.
 #. Short label in the notifications. Keep it concise.
-#: src/features/app/components/layout/VoiceParticipantItem.tsx:43
+#: src/features/app/components/layout/VoiceParticipantItem.tsx:44
 #: src/features/user/components/modals/tabs/DevicesTab.tsx:65
 #: src/features/user/components/modals/tabs/notifications_tab/Notifications.tsx:78
 msgid "Unknown device"
@@ -34639,10 +34587,10 @@ msgstr "Bilinmeyen kullanıcı"
 #: src/features/channel/components/guild_members_page/MemberTableRow.tsx:60
 #: src/features/channel/components/modals/channel_tabs/ChannelPermissionsTab.tsx:68
 #: src/features/channel/utils/ChannelUtils.tsx:55
-#: src/features/devtools/utils/CommandUtils.ts:23
+#: src/features/devtools/utils/CommandUtils.ts:27
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTab.tsx:114
 #: src/features/voice/components/VoiceParticipantAvatarList.tsx:43
-#: src/features/voice/components/VoiceParticipantTile.tsx:161
+#: src/features/voice/components/VoiceParticipantTile.tsx:162
 #: src/features/webhook/components/WebhookListItem.tsx:30
 msgid "Unknown user"
 msgstr "Bilinmeyen kullanıcı"
@@ -34739,7 +34687,7 @@ msgid "Unmute"
 msgstr "Sesi aç"
 
 #. Voice control button label to turn the user's microphone back on.
-#: src/features/voice/components/VoiceControlBar.tsx:121
+#: src/features/voice/components/VoiceControlBar.tsx:117
 msgctxt "voice-control-action"
 msgid "Unmute"
 msgstr "Sesi aç"
@@ -35375,7 +35323,7 @@ msgid "Uploading emojis"
 msgstr "Emojiler yükleniyor"
 
 #. Description for the maximum screen share bitrate select. Keep WebRTC literal.
-#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:159
+#: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:164
 msgid "Upper bitrate cap before WebRTC adapts to the network."
 msgstr "WebRTC'nin ağa uyum sağlamadan önce üst bit hızı sınırı."
 
@@ -35434,11 +35382,6 @@ msgstr "{everyoneMention}/{hereMention} ve {rolesMention} kullanma"
 #: src/features/app/components/dialogs/components/plutonium/hooks/useCheckoutActions.tsx:44
 msgid "Use {pixPaymentMethod}"
 msgstr "{pixPaymentMethod} kullan"
-
-#. Description for the recommended spellcheck engine option in the language tab. Preserve {productName}; it is inserted by code and must appear verbatim in the translation.
-#: src/features/user/components/modals/tabs/LanguageTab.tsx:91
-msgid "Use {productName}'s in-app dictionaries when available. Otherwise, use your operating system's spellchecker."
-msgstr "{productName} uygulamasının kendi sözlüklerini kullanın (varsa). Aksi takdirde, işletim sisteminizin yazım denetleyicisini kullanın."
 
 #. Description text in the add custom search engine modal. Preserve {query}; it is inserted by code.
 #: src/features/user/components/modals/tabs/chat_settings_tab/AddCustomSearchEngineModal.tsx:50
@@ -35759,6 +35702,11 @@ msgstr "Video ve kamera önizlemelerini kullan."
 msgid "Use voice activity"
 msgstr "Ses etkinliğini kullan"
 
+#. Description for the recommended spellcheck engine option in the language tab. Preserve {productName}; it is inserted by code and must appear verbatim in the translation.
+#: src/features/user/components/modals/tabs/LanguageTab.tsx:91
+msgid "Use your operating system's spellchecker when available. Otherwise, use {productName}'s in-app dictionaries."
+msgstr "İşletim sisteminizin denetleyicisini kullanın. Yoksa, {productName}'nin uygulama içi sözlüklerini kullanın."
+
 #. placeholder {0}: renderInline(change.newValue, i18n)
 #: src/features/guild/components/modals/guild_tabs/GuildAuditLogTabRenderers.tsx:689
 msgid "Used {0} times."
@@ -35805,11 +35753,6 @@ msgstr "Yalnızca bu toplulukta kullanılır."
 #: src/features/user/components/settings_utils/search_index/MyProfileIndex.ts:65
 msgid "User"
 msgstr "Kullanıcı"
-
-#. Voice participant context menu submenu label for lower-frequency profile and communication actions.
-#: src/features/ui/action_menu/items/VoiceParticipantMenuData.tsx:206
-msgid "User actions"
-msgstr "Kullanıcı işlemleri"
 
 #. IAR modal: rule description.
 #: src/features/moderation/components/report_modal/IARModalCopy.ts:251
@@ -37081,7 +37024,7 @@ msgid "Wait here"
 msgstr "Burada bekleyin"
 
 #. Tooltip explaining that video / screen share controls are gated while the voice connection is not yet ready.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:56
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:45
 msgid "Waiting for connection..."
 msgstr "Bağlantı bekleniyor..."
 
@@ -37269,7 +37212,7 @@ msgstr "Tarayıcıda oturum açma ekranı açıldığında {prefillEmail} adresi
 msgid "We will send an SMS code when available."
 msgstr "Müsait olduğunda bir SMS kodu göndereceğiz."
 
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:91
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:87
 msgid "We'd love to give you more than infinity of {PREMIUM_PRODUCT_NAME}, but that breaks the space-time continuum. Send the gift to a friend instead?"
 msgstr "{PREMIUM_PRODUCT_NAME} ürününden size sonsuzdan daha fazlasını vermek isterdik ama bu uzay-zaman sürekliliğini bozar. Bunun yerine hediyeyi bir arkadaşınıza mı gönderelim?"
 
@@ -37571,7 +37514,7 @@ msgid "What to include"
 msgstr "Neler dahil edilsin"
 
 #. Description for a media search slash-command query.
-#: src/features/devtools/hooks/useCommands.ts:74
+#: src/features/devtools/hooks/useCommands.ts:75
 msgid "What to search for."
 msgstr "Ne arayacağınız."
 
@@ -37907,7 +37850,7 @@ msgid "You already have a group with these users. Do you really want to create a
 msgstr "Bu kullanıcılarla zaten bir grubunuz var. Yeni bir tane oluşturmak istediğinizden emin misiniz? Bu da sorun değil!"
 
 #. Status label shown to a user who already owns the lifetime premium tier.
-#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:30
+#: src/features/expressions/components/modals/GiftSendToFriendModal.tsx:26
 msgid "You already have lifetime {premiumProductName}"
 msgstr "Zaten ömür boyu {premiumProductName} sahibisiniz"
 
@@ -38172,8 +38115,8 @@ msgstr "Bu toplulukta mesaj gönderemezsiniz."
 
 #. Tooltip in the voice control bar when the user lacks the Screen Share permission in this channel. Tone stays plain.
 #. Tooltip shown when the user lacks the Screen Share permission in the voice channel. Tone stays plain.
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:65
-#: src/features/voice/components/VoiceControlBar.tsx:141
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:54
+#: src/features/voice/components/VoiceControlBar.tsx:137
 msgid "You can't share your screen in this channel"
 msgstr "Bu kanalda ekranınızı paylaşamazsınız"
 
@@ -38186,8 +38129,8 @@ msgstr "Bu kanalda konuşamazsınız"
 #. Tooltip in the voice control bar when the user lacks the Video permission in this channel. Tone stays plain.
 #. Tooltip shown when the user lacks the Video permission in the voice channel. Tone stays plain.
 #: src/features/voice/components/modals/CameraPreviewModal.tsx:74
-#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:61
-#: src/features/voice/components/VoiceControlBar.tsx:131
+#: src/features/voice/components/voice_connection_status/LocalParticipantControls.tsx:50
+#: src/features/voice/components/VoiceControlBar.tsx:127
 msgid "You can't turn on your camera in this channel"
 msgstr "Bu kanalda kameranızı açamazsınız"
 
@@ -38221,17 +38164,17 @@ msgid "You cannot delete your account while you own communities. Transfer owners
 msgstr "Sahibi olduğunuz topluluklar varken hesabınızı silemezsiniz. Önce aşağıdaki toplulukların sahipliğini devredin:"
 
 #. Tooltip on the disabled permission list in the role editor when role hierarchy blocks editing.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:64
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:71
 msgid "You cannot edit a role at or above your highest role"
 msgstr "En yüksek rolünüzle aynı veya daha üst bir rolü düzenleyemezsiniz"
 
 #. Tooltip on a disabled role row in the community roles settings tab. Explains the role hierarchy rule: you cannot edit roles at or above your own highest role.
-#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleItem.tsx:32
+#: src/features/guild/components/modals/guild_tabs/guild_roles_tab/RoleItem.tsx:34
 msgid "You cannot edit this role because it is your highest role or above you"
 msgstr "Bu rolü düzenleyemezsiniz çünkü bu, sizin en yüksek rolünüz veya sizin üstünüzde bir roldür"
 
 #. Tooltip on a permission toggle in the role editor that the current user cannot grant because they do not hold that permission themselves.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:68
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:75
 msgid "You cannot grant a permission you don't have"
 msgstr "Sahip olmadığınız bir izni veremezsiniz"
 
@@ -38241,12 +38184,12 @@ msgid "You cannot interact with this user right now."
 msgstr "Şu anda bu kullanıcıyla etkileşim kuramazsınız."
 
 #. Tooltip on a permission toggle in the role editor when revoking that permission would leave the current user without it.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:73
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:80
 msgid "You cannot remove this permission because it would remove it from yourself"
 msgstr "Bu izni kaldıramazsınız çünkü kendinizden de kaldırmış olursunuz"
 
 #. Local system message after the user changes their community nickname with a slash command. The bold markdown markers should remain around the two names.
-#: src/features/devtools/utils/CommandUtils.ts:27
+#: src/features/devtools/utils/CommandUtils.ts:31
 msgid "You changed your nickname in this community from **{previousNickname}** to **{newNickname}**."
 msgstr "Bu toplulukta görünen adınızı **{previousNickname}** olarak değiştirdiniz. Yeni adınız: **{newNickname}**."
 
@@ -38426,7 +38369,7 @@ msgid "You need the \"{manageChannelsPermissionLabel}\" permission to edit these
 msgstr "Bu izinleri düzenlemek için \"{manageChannelsPermissionLabel}\" iznine sahip olmanız gerekir."
 
 #. Tooltip on the disabled permission list in the role editor. {manageRolesPermissionLabel} is the localized name of the Manage Roles permission and should match its label exactly.
-#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:59
+#: src/features/guild/components/modals/guild_tabs/GuildRolesTab.tsx:66
 msgid "You need the \"{manageRolesPermissionLabel}\" permission to edit these permissions"
 msgstr "Bu izinleri düzenlemek için \"{manageRolesPermissionLabel}\" iznine sahip olmanız gerekir"
 
@@ -39046,7 +38989,7 @@ msgid "your new email"
 msgstr "yeni e-postanız"
 
 #. Description for the /nick nickname option.
-#: src/features/devtools/hooks/useCommands.ts:78
+#: src/features/devtools/hooks/useCommands.ts:79
 msgid "Your new nickname, or leave blank to reset it."
 msgstr "Yeni takma adınız veya sıfırlamak için boş bırakın."
 

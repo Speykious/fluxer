@@ -34,7 +34,9 @@ export type APIGeoipConfig = APIGeoipFilesystemConfig | APIGeoipS3Config;
 export interface APIConfig {
 	nodeEnv: 'development' | 'production';
 	port: number;
+	maxInflightRequests: number;
 	ipBanExemptIps: Array<string>;
+	desktopGitHubRedirectCountries: ReadonlySet<string>;
 	cassandra: {
 		hosts: string;
 		port: number;
@@ -329,6 +331,7 @@ export interface APIConfig {
 		disableRateLimits: boolean;
 		testModeEnabled: boolean;
 		testHarnessToken?: string;
+		validateResponses: boolean;
 	};
 	presignedAttachmentUploadsEnabled: boolean;
 	presignedDownloadsEnabled: boolean;

@@ -285,6 +285,7 @@ export class MessageReactionService extends MessageInteractionBase {
 				parsedEmoji.name,
 				emojiId,
 				parsedEmoji.animated ?? false,
+			message.hasReaction,
 			);
 		}
 		await this.dispatchMessageReactionAdd({
