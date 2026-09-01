@@ -296,7 +296,7 @@ export class MessageInteractionRepository extends IMessageInteractionRepository 
 		if (!pageRows.length) return {userIds: [], hasMore: false, nextAfter: null};
 		const nextAfter = hasMore ? pageRows[pageRows.length - 1].user_id.toString() : null;
 		return {
-			userIds: rows?.map((row) => row.user_id) ?? [],
+			userIds: pageRows?.map((row) => row.user_id) ?? [],
 			hasMore,
 			nextAfter,
 		};
