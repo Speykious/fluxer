@@ -46,7 +46,7 @@ export class PollMessageExpiryRepository {
 	async fetchByIds(messageIds: Array<MessageID>): Promise<Map<MessageID, PollMessageExpiryRow>> {
 		if (messageIds.length === 0) return new Map();
 		const rows = await fetchManyInChunks<PollMessageExpiryRow, MessageID>(FETCH_BY_IDS_CQL, messageIds, (chunk) => ({
-			attachment_ids: new Set(chunk),
+			message_ids: new Set(chunk),
 		}));
 		const map = new Map<MessageID, PollMessageExpiryRow>();
 		for (const row of rows) {
