@@ -8,6 +8,7 @@ import Messages from '@app/features/messaging/state/MessagingMessages';
 import SavedMessages from '@app/features/messaging/state/SavedMessages';
 import type {ReactionEmoji} from '@app/features/messaging/utils/ReactionUtils';
 import MentionFeed from '@app/features/notification/state/MentionFeed';
+import {ReactionType} from '@fluxer/constants/src/EmojiConstants';
 import type {GuildMemberData} from '@fluxer/schema/src/domains/guild/GuildMemberSchemas';
 import PollVotes from '../state/PollVotes';
 
@@ -23,7 +24,7 @@ interface MessageReactionAddPayload {
 	emoji: ReactionEmojiPayload;
 	guild_id?: string;
 	member?: GuildMemberData;
-	reaction_type?: number;
+	reaction_type?: ReactionType;
 }
 
 export function handleMessageReactionAdd(data: MessageReactionAddPayload, _context: GatewayHandlerContext): void {
@@ -34,7 +35,8 @@ export function handleMessageReactionAdd(data: MessageReactionAddPayload, _conte
 	SavedMessages.handleMessageReactionAdd(data.message_id);
 	ChannelPins.handleMessageReactionAdd(data.channel_id, data.message_id);
 	MentionFeed.handleMessageReactionAdd(data.message_id);
-	if ((data.reaction_type ?? 0) === 2) PollVotes.handlePollVoteAdd(data.message_id, data.user_id, Number(emoji.id));
+	if ((data.reaction_type ?? ReactionType.Emoji) === ReactionType.PollVote)
+		PollVotes.handlePollVoteAdd(data.message_id, data.user_id, Number(emoji.id));
 	else MessageReactions.handleReactionAdd(data.message_id, data.user_id, emoji);
 	Messages.handleReaction({
 		type: 'MESSAGE_REACTION_ADD',
@@ -43,6 +45,6 @@ export function handleMessageReactionAdd(data: MessageReactionAddPayload, _conte
 		userId: data.user_id,
 		emoji,
 		skipReactionStore: true,
-		reactionType: data.reaction_type ?? 0,
+		reactionType: data.reaction_type ?? ReactionType.Emoji,
 	});
 }

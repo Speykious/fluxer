@@ -16,6 +16,7 @@ import Dimension from '@app/features/ui/state/Dimension';
 import Users from '@app/features/user/state/Users';
 import {FAVORITES_GUILD_ID, ME} from '@fluxer/constants/src/AppConstants';
 import {MessageStates} from '@fluxer/constants/src/ChannelConstants';
+import { ReactionType } from '@fluxer/constants/src/EmojiConstants';
 import {type JumpType, JumpTypes} from '@fluxer/constants/src/JumpConstants';
 import {MAX_MESSAGES_PER_CHANNEL} from '@fluxer/constants/src/LimitConstants';
 import type {ChannelId} from '@fluxer/schema/src/branded/WireIds';
@@ -736,7 +737,7 @@ class Messages {
 		emoji: ReactionEmoji;
 		optimistic?: boolean;
 		skipReactionStore?: boolean;
-		reactionType?: number;
+		reactionType?: ReactionType;
 	}): boolean {
 		const existing = ChannelMessages.get(action.channelId);
 		if (!existing) return false;
@@ -745,7 +746,7 @@ class Messages {
 		if (action.optimistic && !isCurrentUser) return false;
 		const updated = existing.update(action.messageId, (message) => {
 			const add = action.type === 'MESSAGE_REACTION_ADD';
-			if (action.reactionType === 2) {
+			if (action.reactionType === ReactionType.PollVote) {
 				return message.withPollVote(Number(action.emoji.id), add, isCurrentUser);
 			} else {
 				if (action.skipReactionStore) {

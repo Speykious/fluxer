@@ -30,6 +30,7 @@ import type {MessageChannelAuthService} from './MessageChannelAuthService';
 import type {MessageDispatchService} from './MessageDispatchService';
 import type {MessageSendService} from './MessageSendService';
 import {MissingPermissionsError} from '@fluxer/errors/src/domains/core/MissingPermissionsError';
+import { ReactionType } from '@fluxer/constants/src/EmojiConstants';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -308,7 +309,7 @@ export class MessagePollService {
 					actorId: user.id,
 					targetId: user.id,
 					emoji: `${answerId}:${answerId}`,
-					reactionType: 2,
+					reactionType: ReactionType.PollVote,
 				});
 				const answerCount = poll.results.answer_counts.find((ac) => ac.id === answerId);
 				if (answerCount) {
@@ -335,7 +336,7 @@ export class MessagePollService {
 						messageId,
 						userId: user.id,
 						emoji: `${answerId}:${answerId}`,
-						reactionType: 2,
+						reactionType: ReactionType.PollVote,
 					});
 					answerCount.count++;
 				}
@@ -351,7 +352,7 @@ export class MessagePollService {
 						actorId: user.id,
 						targetId: user.id,
 						emoji: `${existingAnswerId}:${existingAnswerId}`,
-						reactionType: 2,
+						reactionType: ReactionType.PollVote,
 					});
 					answerCount.count--;
 				}

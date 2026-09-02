@@ -2,6 +2,7 @@
 
 import {dispatchChannelEvent} from '@app/api/channel/services/ChannelGatewayDispatch';
 import {ChannelTypes, GUILD_TEXT_BASED_CHANNEL_TYPES, Permissions} from '@fluxer/constants/src/ChannelConstants';
+import {ReactionType} from '@fluxer/constants/src/EmojiConstants';
 import {
 	GuildExplicitContentFilterTypes,
 	GuildFeatures,
@@ -15,6 +16,7 @@ import {
 	MAX_USERS_PER_MESSAGE_REACTION,
 } from '@fluxer/constants/src/LimitConstants';
 import {ValidationErrorCodes} from '@fluxer/constants/src/ValidationErrorCodes';
+import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 import {CannotVoteOnNonPollError} from '@fluxer/errors/src/domains/channel/CannotVoteOnNonPollError';
 import {MaxReactionsPerMessageError} from '@fluxer/errors/src/domains/channel/MaxReactionsPerMessageError';
 import {MaxUsersPerMessageReactionError} from '@fluxer/errors/src/domains/channel/MaxUsersPerMessageReactionError';
@@ -47,7 +49,6 @@ import {assertGuildMemberCanCommunicate} from '../../../utils/GuildCommunication
 import type {IChannelRepositoryAggregate} from '../../repositories/IChannelRepositoryAggregate';
 import type {AuthenticatedChannel} from '../AuthenticatedChannel';
 import {MessageInteractionBase, type ParsedEmoji} from './MessageInteractionBase';
-import {CannotEditOtherUserMessageError} from '@fluxer/errors/src/domains/channel/CannotEditOtherUserMessageError';
 
 const REACTION_CUSTOM_EMOJI_REGEX = /^(.+):(\d+)$/;
 
@@ -174,7 +175,7 @@ export class MessageReactionService extends MessageInteractionBase {
 		emoji: string;
 		userId: UserID;
 		sessionId?: string;
-		reactionType?: number;
+		reactionType?: ReactionType;
 	}): Promise<void> {
 		const channel = authChannel.channel;
 		const {guild, hasPermission, checkPermission} = authChannel;
@@ -187,11 +188,11 @@ export class MessageReactionService extends MessageInteractionBase {
 		const message = await this.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) throw new UnknownMessageError();
 		const requestingUser = await this.userRepository.findUnique(userId);
-		if (requestingUser) requireEmailVerified(requestingUser, reactionType === 2 ? 'vote' : 'reaction');
+		if (requestingUser) requireEmailVerified(requestingUser, reactionType === ReactionType.PollVote ? 'vote' : 'reaction');
 
 		const parsedEmojiBasic = this.parseEmojiWithoutValidation(emoji);
 		const guildFeatures = guild?.features ?? null;
-		if (reactionType === 2) {
+		if (reactionType === ReactionType.PollVote) {
 			if (!message.poll) throw new CannotVoteOnNonPollError();
 			const answerId = Number(parsedEmojiBasic.id);
 			if (message.poll.answers.find((answer) => Number(answer.answer_id) === answerId) === undefined)
@@ -285,7 +286,7 @@ export class MessageReactionService extends MessageInteractionBase {
 				parsedEmoji.name,
 				emojiId,
 				parsedEmoji.animated ?? false,
-			message.hasReaction,
+				message.hasReaction,
 			);
 		}
 		await this.dispatchMessageReactionAdd({
@@ -313,7 +314,7 @@ export class MessageReactionService extends MessageInteractionBase {
 		targetId: UserID;
 		sessionId?: string;
 		actorId: UserID;
-		reactionType?: number;
+		reactionType?: ReactionType;
 	}): Promise<void> {
 		const channel = authChannel.channel;
 		const {guild, hasPermission} = authChannel;
@@ -326,7 +327,7 @@ export class MessageReactionService extends MessageInteractionBase {
 		const message = await this.channelRepository.messages.getMessage(channel.id, messageId);
 		if (!message) return;
 		const isRemovingOwnReaction = targetId === actorId;
-		if (reactionType === 2) {
+		if (reactionType === ReactionType.PollVote) {
 			if (!message.poll) throw new CannotVoteOnNonPollError();
 			if (!isRemovingOwnReaction) throw new CannotEditOtherUserMessageError();
 			const answerId = Number(parsedEmoji.id);
@@ -525,7 +526,7 @@ export class MessageReactionService extends MessageInteractionBase {
 		emoji: ParsedEmoji;
 		userId: UserID;
 		sessionId?: string;
-		reactionType?: number;
+		reactionType?: ReactionType;
 	}): Promise<void> {
 		await dispatchChannelEvent({
 			gatewayService: this.gatewayService,
@@ -537,7 +538,7 @@ export class MessageReactionService extends MessageInteractionBase {
 				emoji: params.emoji,
 				user_id: params.userId.toString(),
 				session_id: params.sessionId,
-				reaction_type: params.reactionType ?? 0,
+				reaction_type: params.reactionType ?? ReactionType.Emoji,
 			},
 		});
 	}
@@ -548,7 +549,7 @@ export class MessageReactionService extends MessageInteractionBase {
 		emoji: ParsedEmoji;
 		userId: UserID;
 		sessionId?: string;
-		reactionType?: number;
+		reactionType?: ReactionType;
 	}): Promise<void> {
 		await dispatchChannelEvent({
 			gatewayService: this.gatewayService,
@@ -560,7 +561,7 @@ export class MessageReactionService extends MessageInteractionBase {
 				emoji: params.emoji,
 				user_id: params.userId.toString(),
 				session_id: params.sessionId,
-				reaction_type: params.reactionType ?? 0,
+				reaction_type: params.reactionType ?? ReactionType.Emoji,
 			},
 		});
 	}
