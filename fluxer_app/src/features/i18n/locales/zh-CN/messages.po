@@ -3121,7 +3121,7 @@ msgstr "允许任何能查看您完整个人资料的用户看到您的个人资
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:236
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:88
 msgid "Allow AV1 for screen sharing"
-msgstr ""
+msgstr "Allow AV1 for screen sharing"
 
 #. Toggle label that allows DMs from bots in this community.
 #: src/features/ui/action_menu/items/BulkSettingsMenuItems.tsx:81
@@ -3175,7 +3175,7 @@ msgstr "允许所有社群"
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:240
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:92
 msgid "Allow H.265 (HEVC) for screen sharing"
-msgstr ""
+msgstr "Allow H.265 (HEVC) for screen sharing"
 
 #: src/features/connection/components/modals/EditConnectionModal.tsx:95
 msgid "Allow members from communities you're in to see this connection"
@@ -4549,7 +4549,7 @@ msgstr "自动"
 #. Option label for the screen-share codec select. codec is the automatically selected codec label.
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:222
 msgid "Automatic ({codec})"
-msgstr ""
+msgstr "Automatic ({codec})"
 
 #. Settings search entry label. Names the settings search entry in the settings UI.
 #. Voice setting label for automatically evening out microphone volume.
@@ -4644,12 +4644,12 @@ msgstr "自动滚动"
 #. Settings search synonym. Codec name; keep literal. Used to match this term in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:101
 msgid "AV1"
-msgstr ""
+msgstr "AV1"
 
 #. Option label for the screen-share codec select while the AV1 opt-in is off and the option is disabled. AV1 is a codec name and should stay literal.
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:226
 msgid "AV1 (requires opt-in)"
-msgstr ""
+msgstr "AV1 (requires opt-in)"
 
 #. Label for the available desktop version in the Linux update modal.
 #: src/features/updater/commands/UpdaterModalCommands.tsx:140
@@ -6229,7 +6229,7 @@ msgstr "已安排更改"
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:24
 #: src/features/voice/components/ActiveScreenShareMenu.tsx:23
 msgid "Change Stream"
-msgstr ""
+msgstr "Change Stream"
 
 #. Modal title for the screen-share picker when switching an ongoing stream to a new source.
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:156
@@ -12287,7 +12287,7 @@ msgstr "复制角色"
 #. Label for the duration input.
 #: src/features/messaging/components/modals/poll_modal/CreatePollModal.tsx:44
 msgid "Duration"
-msgstr ""
+msgstr "Duration"
 
 #. Field label in the voice connection status popout. Shows how long the current voice session has been connected.
 #: src/features/voice/components/voice_connection_status/shared.ts:76
@@ -16061,7 +16061,7 @@ msgstr "H.264 同播备份"
 #. Option label for the screen-share codec select while the HEVC opt-in is off and the option is disabled. H.265 is a codec name and should stay literal.
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:231
 msgid "H.265 (requires opt-in)"
-msgstr ""
+msgstr "H.265 (requires opt-in)"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the connection add connection modal.
@@ -16257,7 +16257,7 @@ msgstr "帮助浏览器选择运动、细节或文本处理方式。"
 #. Settings search synonym. Codec name; keep literal. Used to match this term in the settings search bar.
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:105
 msgid "HEVC"
-msgstr ""
+msgstr "HEVC"
 
 #. Codec description in the screen share codec policy menu. HEVC is a codec name; keep WebRTC literal.
 #: src/features/voice/utils/ScreenShareCodecPolicy.ts:28
@@ -19695,7 +19695,7 @@ msgstr "屏幕共享最大比特率"
 #. Settings search entry description for the AV1 and H.265 screen-share opt-in toggles.
 #: src/features/user/components/settings_utils/search_index/VoiceVideoIndex.ts:97
 msgid "May cause compatibility issues for viewers. We’re working on improving this."
-msgstr ""
+msgstr "May cause compatibility issues for viewers. We’re working on improving this."
 
 #. Short label in the max favorite memes modal.
 #: src/features/app/components/alerts/MaxFavoriteMemesModal.tsx:34
@@ -23636,7 +23636,7 @@ msgstr "暂停通知"
 #. Voice screen share menu preference that pauses the local stream preview while the app is unfocused.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:28
 msgid "Pause Preview When Fluxer Isn’t Focused"
-msgstr ""
+msgstr "Pause Preview When Fluxer Isn’t Focused"
 
 #. Description shown for the emoji toggle while reduced motion is active.
 #: src/features/user/components/modals/tabs/accessibility_tab/AnimationTab.tsx:81
@@ -24243,17 +24243,17 @@ msgstr "弹出通话窗口"
 #. Voice menu action on desktop that opens the participant screen share in a separate window.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:57
 msgid "Pop Out Stream"
-msgstr ""
+msgstr "Pop Out Stream"
 
 #. Voice menu action on desktop that opens the participant placeholder tile in a separate window.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:49
 msgid "Pop Out User"
-msgstr ""
+msgstr "Pop Out User"
 
 #. Voice menu action on desktop that opens the active participant camera feed in a separate window.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:45
 msgid "Pop Out Video"
-msgstr ""
+msgstr "Pop Out Video"
 
 #. Overlay text shown on a voice participant tile while it lives in a separate popped-out window.
 #: src/features/voice/components/popout/PoppedOutOverlay.tsx:19
@@ -24337,7 +24337,7 @@ msgstr "偏好设置..."
 #. Accessible label for the advanced screen-share codec preference select.
 #: src/features/user/components/modals/tabs/advanced_settings_tab/AdvancedVideoControls.tsx:218
 msgid "Preferred screen share codec"
-msgstr ""
+msgstr "Preferred screen share codec"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
@@ -24477,7 +24477,7 @@ msgstr "预览摄像头"
 #. Voice menu action that opens a preview of the current user camera.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:53
 msgid "Preview Camera"
-msgstr ""
+msgstr "Preview Camera"
 
 #. Status text on the placeholder shown in the voice call view when the user has hidden a remote stream preview.
 #: src/features/voice/components/HiddenStreamPlaceholder.tsx:10
@@ -27634,7 +27634,7 @@ msgstr "已启用屏幕共享预览。"
 #. Voice screen share menu action that opens the screen share preview privacy controls.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:32
 msgid "Screen Share Privacy"
-msgstr ""
+msgstr "Screen Share Privacy"
 
 #. Settings search synonym. Used to match this term when the user types it in the settings search bar.
 #. Short label in the video tab. Keep it concise.
@@ -29053,7 +29053,7 @@ msgstr "分享来源"
 #. Toggle label for sharing audio with an active stream.
 #: src/features/voice/components/StreamSettingsMenuContent.tsx:156
 msgid "Share Stream Audio"
-msgstr ""
+msgstr "Share Stream Audio"
 
 #. Description in the premium gift purchase section. premiumProductName is the short paid product name.
 #: src/features/premium/utils/PremiumMessageDescriptors.ts:40
@@ -29514,7 +29514,7 @@ msgstr "显示我的摄像头"
 #. Voice display preference checkbox that controls whether the current user sees their own screen share tile.
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:97
 msgid "Show My Screen Share"
-msgstr ""
+msgstr "Show My Screen Share"
 
 #. Developer option label for showing the current user as typing.
 #. Developer tools debug menu label. Internal-only surface for developers; translators may keep this terse.
@@ -31169,7 +31169,7 @@ msgstr "停止发言"
 #: src/features/ui/action_menu/items/voice_participant_menu_data/shared.ts:20
 #: src/features/voice/components/ActiveScreenShareMenu.tsx:19
 msgid "Stop Streaming"
-msgstr ""
+msgstr "Stop Streaming"
 
 #. Confirmation prompt in the links tab.
 #: src/features/user/components/modals/tabs/chat_settings_tab/ChatSettingsTabLinksTab.tsx:31
@@ -31228,7 +31228,7 @@ msgstr "直播预览"
 #. Compact submenu label for changing the resolution and frame rate of an active stream.
 #: src/features/voice/components/StreamSettingsMenuContent.tsx:152
 msgid "Stream Quality"
-msgstr ""
+msgstr "Stream Quality"
 
 #. Toolbar / menu button label in the screen-share picker. Opens the stream quality settings popover.
 #: src/features/voice/components/modals/ScreenSharePickerModal.tsx:164
