@@ -186,7 +186,7 @@ export const CreatePollModal = observer(
 			} finally {
 				setSubmitting(false);
 			}
-		}, [onSubmit, disableAutoDismiss, question, answers, duration, allowMultipleAnswers]);
+		}, [onSubmit, disableAutoDismiss, question, answers, duration, anonymousVoting, allowMultipleAnswers]);
 
 		return (
 			<Modal.Root
