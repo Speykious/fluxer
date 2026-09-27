@@ -49,6 +49,7 @@ export const MAX_POLL_QUESTION_LENGTH = 500;
 export const MAX_POLL_ANSWERS = 10;
 export const MAX_POLL_ANSWER_LENGTH = 60;
 export const MAX_POLL_VOTES_PER_ANSWER = 1_000_000;
+export const MAX_POLL_DURATION_HOURS = 24 * 14;
 export const MAX_ATTACHMENTS_PER_MESSAGE = 10;
 export const MAX_EMBEDS_PER_MESSAGE = 10;
 export const MAX_REACTIONS_PER_MESSAGE = 30;

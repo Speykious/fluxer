@@ -107,8 +107,8 @@ interface CreatePollModalProps {
 }
 
 function durationToLabel(i18n: I18n, hours: number): string {
-	if (hours >= 168) {
-		const count = Math.floor(hours / 168);
+	if (hours >= 24 * 7) {
+		const count = Math.floor(hours / (24 * 7));
 		return i18n._(N_WEEKS_DESCRIPTOR, {count});
 	}
 	if (hours > 24) {
@@ -118,8 +118,29 @@ function durationToLabel(i18n: I18n, hours: number): string {
 	return i18n._(N_HOURS_DESCRIPTOR, {count: hours});
 }
 
-export function generateDurationOptions(i18n: I18n): ReadonlyArray<ComboboxOption<number>> {
-	return [1, 2, 4, 8, 12, 24, 48, 72, 120, 168, 336].map((hours) => ({
+export function generateDurationOptions(
+	i18n: I18n,
+	maxPollDurationHours: number,
+): ReadonlyArray<ComboboxOption<number>> {
+	const durationHours = [
+		1,
+		2,
+		4,
+		8,
+		12,
+		24,
+		24 * 2,
+		24 * 3,
+		24 * 5,
+		24 * 7,
+		24 * 7 * 2,
+		24 * 7 * 3,
+		24 * 7 * 4,
+		24 * 7 * 6,
+		24 * 7 * 8,
+		24 * 7 * 10,
+	].filter((dh) => dh <= maxPollDurationHours);
+	return durationHours.map((hours) => ({
 		value: hours,
 		label: durationToLabel(i18n, hours),
 	}));
@@ -138,6 +159,7 @@ export const CreatePollModal = observer(
 		const maxAnswerCount = Limits.getMaxPollAnswers();
 		const maxAnswerLength = Limits.getMaxPollAnswerLength();
 		const maxQuestionActualLength = Limits.getMaxPollQuestionLength();
+		const maxPollDurationHours = Limits.getMaxPollDurationHours();
 		const questionDisplayMaxLength = Math.max(0, question.length + (maxQuestionActualLength - actualQuestion.length));
 
 		const [duration, setDuration] = useState<number>(24);
@@ -153,7 +175,7 @@ export const CreatePollModal = observer(
 			},
 		]);
 
-		const durationOptions = useMemo(() => generateDurationOptions(i18n), [i18n]);
+		const durationOptions = useMemo(() => generateDurationOptions(i18n, maxPollDurationHours), [i18n]);
 
 		const handleSubmit = useCallback(async () => {
 			const selfKey = ModalCommands.getTopModalKey();

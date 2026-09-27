@@ -55,6 +55,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 	const maxAnswerCount = Limits.getMaxPollAnswers();
 	const maxAnswerLength = Limits.getMaxPollAnswerLength();
 	const maxQuestionActualLength = Limits.getMaxPollQuestionLength();
+	const maxPollDurationHours = Limits.getMaxPollDurationHours();
 	const questionDisplayMaxLength = Math.max(0, question.length + (maxQuestionActualLength - actualQuestion.length));
 
 	const defaultAnswerState = [
@@ -66,7 +67,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 		},
 	];
 	const defaultDuration = 24;
-	const durationOptions = useMemo(() => generateDurationOptions(i18n), [i18n]);
+	const durationOptions = useMemo(() => generateDurationOptions(i18n, maxPollDurationHours), [i18n]);
 
 	const [duration, setDuration] = useState<number>(defaultDuration);
 	const [forgotToEnterAnswer, setForgotToEnterAnswer] = useState(false);
@@ -106,7 +107,7 @@ export const CreatePollBottomSheet = observer(({isOpen, onClose, onSubmit, chann
 		} finally {
 			setSubmitting(false);
 		}
-	}, [onSubmit, question, answers, duration, allowMultipleAnswers]);
+	}, [onSubmit, question, answers, duration, anonymousVoting, allowMultipleAnswers]);
 	const handleEmojiSelect = useCallback((answerIndex: number, emoji?: FlatEmoji) => {
 		setAnswers((prevAnswers) =>
 			prevAnswers.map((prevAnswer, prevIndex) => (prevIndex === answerIndex ? {...prevAnswer, emoji} : prevAnswer)),

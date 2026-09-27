@@ -30,6 +30,7 @@ import {
 	MAX_MESSAGE_LENGTH_PREMIUM,
 	MAX_POLL_ANSWER_LENGTH,
 	MAX_POLL_ANSWERS,
+	MAX_POLL_DURATION_HOURS,
 	MAX_POLL_QUESTION_LENGTH,
 	MAX_VOICE_MESSAGE_DURATION,
 } from '@fluxer/constants/src/LimitConstants';
@@ -197,6 +198,9 @@ export class MessageValidationService {
 		const maxPollAnswerLength = Math.floor(
 			resolveLimitSafe(configSnapshot, ctx, 'max_poll_answer_length', MAX_POLL_ANSWER_LENGTH, evaluationContext),
 		);
+		const maxPollDurationHours = Math.floor(
+			resolveLimitSafe(configSnapshot, ctx, 'max_poll_duration_hours', MAX_POLL_DURATION_HOURS, evaluationContext),
+		);
 
 		const questionLength = poll.question?.text?.length ?? 0;
 		if (questionLength === 0) throw new CannotSendEmptyMessageError();
@@ -226,6 +230,14 @@ export class MessageValidationService {
 					},
 				);
 			}
+		}
+
+		const duration = poll.duration ?? 0;
+		if (duration < 1) throw InputValidationError.fromCode(`poll.duration`, ValidationErrorCodes.POLL_DURATION_TOO_LOW);
+		if (duration > maxPollDurationHours) {
+			throw InputValidationError.fromCode(`poll.duration`, ValidationErrorCodes.POLL_DURATION_TOO_HIGH, {
+				maxPollDurationHours,
+			});
 		}
 	}
 

@@ -383,6 +383,8 @@ export const ErrorCodeToI18nKey = {
 	[ValidationErrorCodes.NO_VALID_MEDIA_IN_MESSAGE]: 'attachments_and_uploads.no_valid_media_in_message',
 	[ValidationErrorCodes.SIZE_BYTES_MUST_BE_VALID_INTEGER]: 'attachments_and_uploads.size_bytes_must_be_valid_integer',
 	[ValidationErrorCodes.TOO_MANY_POLL_ANSWERS]: 'polls.too_many_poll_answers',
+	[ValidationErrorCodes.POLL_DURATION_TOO_LOW]: 'polls.poll_duration_too_low',
+	[ValidationErrorCodes.POLL_DURATION_TOO_HIGH]: 'polls.poll_duration_too_high',
 	[ValidationErrorCodes.TOO_MANY_FILES]: 'attachments_and_uploads.too_many_files',
 	[ValidationErrorCodes.UNRESOLVED_ATTACHMENT_URL]: 'attachments_and_uploads.unresolved_attachment_url',
 	[ValidationErrorCodes.UPLOADED_ATTACHMENT_NOT_FOUND]: 'attachments_and_uploads.uploaded_attachment_not_found',

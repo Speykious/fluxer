@@ -574,6 +574,10 @@ export class User {
 		return this.resolveRuntimeLimit('max_poll_answer_length', DEFAULT_STOCK_LIMITS.max_poll_answer_length);
 	}
 
+	get maxPollDurationHours(): number {
+		return this.resolveRuntimeLimit('max_poll_duration_hours', DEFAULT_STOCK_LIMITS.max_poll_duration_hours);
+	}
+
 	get maxAttachmentFileSize(): number {
 		return this.resolveRuntimeLimit('max_attachment_file_size', DEFAULT_STOCK_LIMITS.max_attachment_file_size);
 	}

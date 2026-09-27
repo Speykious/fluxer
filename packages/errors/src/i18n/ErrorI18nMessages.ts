@@ -469,6 +469,8 @@ export const ERROR_I18N_MESSAGES = {
 		"We couldn't verify this number automatically. Email support@fluxer.app and a person will review your account.",
 	'phone.verification_required': 'Phone verification is required.',
 	'polls.too_many_poll_answers': 'Too many poll answers. Maximum {maxPollAnswers, plural, one {# answer} other {# answers}} allowed.',
+	'polls.poll_duration_too_low': 'Poll duration too low. Minimum 1 hour allowed.',
+	'polls.poll_duration_too_high': 'Poll duration too high. Maximum {maxPollDurationHours, plural, one {# hour} other {# hours}} allowed.',
 	'premium_and_plans.animated_avatars_require_premium': 'Animated avatars require Premium.',
 	'premium_and_plans.banners_require_premium': 'Banners require Premium.',
 	'premium_and_plans.bio_requires_premium_for_length': 'A bio longer than {maxLength} characters requires Premium.',

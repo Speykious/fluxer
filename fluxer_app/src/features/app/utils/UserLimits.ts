@@ -12,6 +12,7 @@ const FALLBACKS = {
 	max_poll_question_length: DEFAULT_STOCK_LIMITS.max_poll_question_length,
 	max_poll_answers: DEFAULT_STOCK_LIMITS.max_poll_answers,
 	max_poll_answer_length: DEFAULT_STOCK_LIMITS.max_poll_answer_length,
+	max_poll_duration_hours: DEFAULT_STOCK_LIMITS.max_poll_duration_hours,
 	max_attachments_per_message: DEFAULT_STOCK_LIMITS.max_attachments_per_message,
 	max_bio_length: DEFAULT_STOCK_LIMITS.max_bio_length,
 	max_bookmarks: DEFAULT_STOCK_LIMITS.max_bookmarks,
@@ -56,6 +57,12 @@ class LimitsClass {
 		const user = this.getCurrentUser();
 		if (user?.maxPollAnswerLength) return user.maxPollAnswerLength;
 		return LimitResolver.resolve({key: 'max_poll_answer_length', fallback: FALLBACKS.max_poll_answer_length});
+	}
+
+	getMaxPollDurationHours(): number {
+		const user = this.getCurrentUser();
+		if (user?.maxPollDurationHours) return user.maxPollDurationHours;
+		return LimitResolver.resolve({key: 'max_poll_duration_hours', fallback: FALLBACKS.max_poll_duration_hours});
 	}
 
 	getMaxAttachmentsPerMessage(): number {
