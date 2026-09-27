@@ -101,6 +101,7 @@ export const useMessageSubmission = ({channel, referencedMessage, replyingMessag
 				hasAttachments ||
 				stickers.length > 0 ||
 				favoriteMemeId !== undefined ||
+				poll !== undefined ||
 				CloudUpload.getTextareaAttachments(channel.id).length > 0;
 			if (!canSubmitMessage(content, hasNonTextContent)) return false;
 			if (isBlockedBySlowmode(channel)) return false;
