@@ -368,8 +368,8 @@ export const Poll = observer(({guild, channelId, messageId, isMobile, poll, mess
 							? i18n._(POLL_CLOSED_DESCRIPTOR)
 							: poll.expiry
 								? timeLeft(secondsLeft)
-								: i18n._(POLL_NOT_SENT_DESCRIPTOR)}{' '}
-						·{' '}
+								: i18n._(POLL_NOT_SENT_DESCRIPTOR)}
+						{' · '}
 						<button
 							type="button"
 							onClick={() => openPollAnswerVotersModal(1)}
