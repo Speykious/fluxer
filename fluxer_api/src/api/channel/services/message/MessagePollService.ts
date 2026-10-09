@@ -31,6 +31,7 @@ import type {MessageDispatchService} from './MessageDispatchService';
 import type {MessageSendService} from './MessageSendService';
 import {MissingPermissionsError} from '@fluxer/errors/src/domains/core/MissingPermissionsError';
 import { ReactionType } from '@fluxer/constants/src/EmojiConstants';
+import type { ThreadViewer } from '@app/api/experiment/ChannelThreadsGate';
 
 interface MessagePollServiceDeps {
 	channelAuthService: MessageChannelAuthService;
@@ -72,12 +73,14 @@ export class MessagePollService {
 
 	async endPoll({
 		userId,
+		viewer,
 		channelId,
 		messageId,
 		expiryRow,
 		requestCache,
 	}: {
 		userId: UserID;
+		viewer: ThreadViewer;
 		channelId: ChannelID;
 		messageId: MessageID;
 		requestCache: RequestCache;
@@ -86,22 +89,25 @@ export class MessagePollService {
 		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
 			userId,
 			channelId,
+			viewer,
 		});
 		await this.assertMessageHistoryAccess({authChannel, messageId});
 		const {channel} = authChannel;
 		const message = await this.deps.channelRepository.messages.getMessage(channel.id, messageId);
 		if (message?.authorId !== userId) throw new CannotEditOtherUserMessageError();
 
-		return await this.endPollBypassAuth({channel, message, requestCache, expiryRow});
+		return await this.endPollBypassAuth({channel, viewer, message, requestCache, expiryRow});
 	}
 
 	async endPollBypassAuth({
 		channel,
+		viewer,
 		message,
 		requestCache,
 		expiryRow,
 	}: {
 		channel: Channel;
+		viewer: ThreadViewer;
 		message: Message | null;
 		requestCache: RequestCache;
 		expiryRow?: PollMessageExpiryRow;
@@ -148,6 +154,7 @@ export class MessagePollService {
 				await this.deps.messageSendService.sendSimpleMessageBypassAuth({
 					channelId: channel.id,
 					user,
+					viewer,
 					data: {
 						content: '',
 						allowed_mentions: {
@@ -207,6 +214,7 @@ export class MessagePollService {
 
 	async getVotesForAnswer({
 		userId,
+		viewer,
 		channelId,
 		messageId,
 		answerId,
@@ -214,6 +222,7 @@ export class MessagePollService {
 		after,
 	}: {
 		userId: UserID;
+		viewer: ThreadViewer;
 		channelId: ChannelID;
 		messageId: MessageID;
 		answerId: number;
@@ -223,6 +232,7 @@ export class MessagePollService {
 		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
 			userId,
 			channelId,
+			viewer,
 		});
 		await this.assertMessageHistoryAccess({authChannel, messageId});
 		const {channel, hasPermission} = authChannel;
@@ -255,11 +265,13 @@ export class MessagePollService {
 
 	async vote({
 		user,
+		viewer,
 		channelId,
 		messageId,
 		answerIds,
 	}: {
 		user: User;
+		viewer: ThreadViewer;
 		channelId: ChannelID;
 		messageId: MessageID;
 		answerIds: Array<number>;
@@ -267,6 +279,7 @@ export class MessagePollService {
 		const authChannel = await this.deps.channelAuthService.getChannelAuthenticated({
 			userId: user.id,
 			channelId,
+			viewer,
 		});
 		await this.assertMessageHistoryAccess({authChannel, messageId});
 		const {channel, guild} = authChannel;

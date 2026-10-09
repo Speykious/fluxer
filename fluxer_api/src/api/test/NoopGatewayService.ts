@@ -9,6 +9,7 @@ import {
 	type UserID,
 } from '@app/api/BrandedTypes';
 import type {GatewayDispatchEvent} from '@app/api/constants/Gateway';
+import {guildActive} from '@app/api/experiment/ChannelThreadsGate';
 import {
 	mapGuildEmojiToResponse,
 	mapGuildRoleToResponse,
@@ -34,9 +35,14 @@ import {
 import {UserRepository} from '@app/api/user/repositories/UserRepository';
 import {mapUserToPartialResponse} from '@app/api/user/UserMappers';
 import {ALL_PERMISSIONS, Permissions} from '@fluxer/constants/src/ChannelConstants';
+import {THREAD_AWARE_ALL_PERMISSIONS} from '@fluxer/constants/src/ThreadPermissionUtils';
 import {UnknownGuildError} from '@fluxer/errors/src/domains/guild/UnknownGuildError';
 import type {GuildMemberResponse} from '@fluxer/schema/src/domains/guild/GuildMemberSchemas';
 import type {GuildResponse} from '@fluxer/schema/src/domains/guild/GuildResponseSchemas';
+
+function allPermissionsFor(guildId: GuildID): bigint {
+	return guildActive(guildId) ? THREAD_AWARE_ALL_PERMISSIONS : ALL_PERMISSIONS;
+}
 
 const guildOwners = new Map<string, UserID>();
 const guildMembers = new Map<string, Set<UserID>>();
@@ -124,6 +130,15 @@ export class NoopGatewayService extends IGatewayService {
 	}
 
 	async dispatchGuild(_params: {guildId: GuildID; event: GatewayDispatchEvent; data: unknown}): Promise<void> {}
+
+	async dispatchGuildMany(params: {
+		guildId: GuildID;
+		events: Array<{event: GatewayDispatchEvent; data: unknown}>;
+	}): Promise<void> {
+		for (const {event, data} of params.events) {
+			await this.dispatchGuild({guildId: params.guildId, event, data});
+		}
+	}
 
 	async getGuildCounts(guildId: GuildID): Promise<{
 		memberCount: number;
@@ -250,7 +265,7 @@ export class NoopGatewayService extends IGatewayService {
 		const basePermissions = this.calculateGuildPermissions(new Set(), roles, params.guildId);
 		const {ChannelDataRepository} = await import('@app/api/channel/repositories/ChannelDataRepository');
 		const channelRepo = new ChannelDataRepository();
-		const channels = await channelRepo.listGuildChannels(params.guildId);
+		const channels = await channelRepo.listGuildChannels(params.guildId, 'enrolled');
 		const channelsById = new Map(channels.map((channel) => [channel.id, channel]));
 		const result: Array<GatewayChannelMention> = [];
 		const seen = new Set<ChannelID>();
@@ -273,12 +288,13 @@ export class NoopGatewayService extends IGatewayService {
 
 	async getUserPermissions(params: {guildId: GuildID; userId: UserID; channelId?: ChannelID}): Promise<bigint> {
 		const {guildId, userId, channelId} = params;
+		await this.assertNotThreadChannel(channelId);
 		const guild = await guildRepository.findUnique(guildId);
 		if (!guild) {
 			return 0n;
 		}
 		if (guild.ownerId === userId) {
-			return ALL_PERMISSIONS;
+			return allPermissionsFor(guildId);
 		}
 		const member = await guildMemberRepository.getMember(guildId, userId);
 		if (!member) {
@@ -298,12 +314,22 @@ export class NoopGatewayService extends IGatewayService {
 		return this.applyChannelOverwrites(guildPermissions, member.roleIds, channel, userId, guildId);
 	}
 
-	async getUserPermissionsBatch(_params: {
+	async getUserPermissionsBatch(params: {
 		guildIds: Array<GuildID>;
 		userId: UserID;
 		channelId?: ChannelID;
 	}): Promise<Map<GuildID, bigint>> {
+		await this.assertNotThreadChannel(params.channelId);
 		return new Map();
+	}
+
+	private async assertNotThreadChannel(channelId: ChannelID | undefined): Promise<void> {
+		if (!channelId) return;
+		const {ChannelDataRepository} = await import('@app/api/channel/repositories/ChannelDataRepository');
+		const channel = await new ChannelDataRepository().findUnique(channelId);
+		if (channel?.isThread()) {
+			throw new Error(`Thread channel ${channelId} reached a gateway permission call`);
+		}
 	}
 
 	async canManageRoles(params: {
@@ -460,7 +486,7 @@ export class NoopGatewayService extends IGatewayService {
 		const guild = await guildRepository.findUnique(guildId);
 		const {ChannelDataRepository} = await import('@app/api/channel/repositories/ChannelDataRepository');
 		const channelRepo = new ChannelDataRepository();
-		const channels = await channelRepo.listGuildChannels(guildId);
+		const channels = await channelRepo.listGuildChannels(guildId, 'enrolled');
 		if (guild?.ownerId === userId) {
 			return channels.map((ch) => ch.id);
 		}
@@ -523,7 +549,7 @@ export class NoopGatewayService extends IGatewayService {
 			]);
 			const {ChannelDataRepository} = await import('@app/api/channel/repositories/ChannelDataRepository');
 			const channelRepo = new ChannelDataRepository();
-			const allChannels = await channelRepo.listGuildChannels(params.guildId);
+			const allChannels = await channelRepo.listGuildChannels(params.guildId, 'enrolled');
 			const viewableChannelIdSet = new Set(
 				params.skipMembershipCheck ? allChannels.map((channel) => channel.id) : viewableChannelIds,
 			);
@@ -630,18 +656,38 @@ export class NoopGatewayService extends IGatewayService {
 		return members?.has(params.userId) ?? false;
 	}
 
-	async listGuildMembers(_params: {guildId: GuildID; limit: number; offset: number}): Promise<{
+	async listGuildMembers(params: {guildId: GuildID; limit: number; offset: number}): Promise<{
 		members: Array<GuildMemberResponse>;
 		total: number;
 	}> {
-		return {members: [], total: 0};
+		const userIds = await this.sortedMemberIds(params.guildId);
+		const page = params.limit > 0 ? userIds.slice(params.offset, params.offset + params.limit) : [];
+		return {members: await this.memberResponses(params.guildId, page), total: userIds.length};
 	}
 
-	async listGuildMembersCursor(_params: {guildId: GuildID; limit: number; after?: UserID}): Promise<{
+	async listGuildMembersCursor(params: {guildId: GuildID; limit: number; after?: UserID}): Promise<{
 		members: Array<GuildMemberResponse>;
 		total: number;
 	}> {
-		return {members: [], total: 0};
+		const userIds = await this.sortedMemberIds(params.guildId);
+		const after = params.after;
+		const remaining = after === undefined ? userIds : userIds.filter((userId) => userId > after);
+		const page = params.limit > 0 ? remaining.slice(0, params.limit) : [];
+		return {members: await this.memberResponses(params.guildId, page), total: userIds.length};
+	}
+
+	private async sortedMemberIds(guildId: GuildID): Promise<Array<UserID>> {
+		const members = await guildMemberRepository.listMembers(guildId);
+		return members.map((member) => member.userId).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+	}
+
+	private async memberResponses(guildId: GuildID, userIds: Array<UserID>): Promise<Array<GuildMemberResponse>> {
+		const members: Array<GuildMemberResponse> = [];
+		for (const userId of userIds) {
+			const {memberData} = await this.getGuildMember({guildId, userId});
+			if (memberData) members.push(memberData);
+		}
+		return members;
 	}
 
 	async checkPermission(params: {
@@ -651,6 +697,7 @@ export class NoopGatewayService extends IGatewayService {
 		channelId?: ChannelID;
 	}): Promise<boolean> {
 		const {guildId, userId, permission, channelId} = params;
+		await this.assertNotThreadChannel(channelId);
 		const guild = await guildRepository.findUnique(guildId);
 		if (!guild) {
 			return false;
@@ -698,7 +745,7 @@ export class NoopGatewayService extends IGatewayService {
 			if (role) {
 				permissions |= role.permissions;
 				if ((permissions & Permissions.ADMINISTRATOR) !== 0n) {
-					return ALL_PERMISSIONS;
+					return allPermissionsFor(guildId);
 				}
 			}
 		}
@@ -721,7 +768,7 @@ export class NoopGatewayService extends IGatewayService {
 		guildId: GuildID,
 	): bigint {
 		if ((basePermissions & Permissions.ADMINISTRATOR) !== 0n) {
-			return ALL_PERMISSIONS;
+			return allPermissionsFor(guildId);
 		}
 		if (!channel.permissionOverwrites) {
 			return basePermissions;
@@ -794,12 +841,6 @@ export class NoopGatewayService extends IGatewayService {
 	}
 
 	async dispatchPresence(_params: {userId: UserID; event: GatewayDispatchEvent; data: unknown}): Promise<void> {}
-
-	async invalidatePushBadgeCount(_params: {userId: UserID}): Promise<void> {}
-
-	async invalidatePushBadgeCounts(_params: {userIds: Array<UserID>}): Promise<void> {}
-
-	async invalidatePushSubscriptions(_params: {userId: UserID}): Promise<void> {}
 
 	async clearPushChannelNotifications(_params: {
 		userId: UserID;
@@ -974,6 +1015,9 @@ export class NoopGatewayService extends IGatewayService {
 		return {
 			status: 'ok',
 			sessions: 0,
+			session_resumes_total: 0,
+			websocket_dispatches_total: 0,
+			websocket_dispatch_drops_total: 0,
 			guilds: 0,
 			presences: 0,
 			calls: 0,

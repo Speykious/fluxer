@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import {type ChannelID, createMessageID, type MessageID, type UserID} from '@app/api/BrandedTypes';
+import {type ChannelID, createMessageID, type UserID} from '@app/api/BrandedTypes';
 import {mapChannelToResponse} from '@app/api/channel/ChannelMappers';
 import type {IChannelRepository} from '@app/api/channel/IChannelRepository';
 import {DMPermissionValidator} from '@app/api/channel/services/DMPermissionValidator';
@@ -15,6 +15,7 @@ import type {RequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 import type {Channel} from '@app/api/models/Channel';
 import type {ReadStateService} from '@app/api/read_state/ReadStateService';
 import type {IUserRepository} from '@app/api/user/IUserRepository';
+import {assertMayStartConversation} from '@app/api/user/NewConversationLimit';
 import type {VoiceAccessContext, VoiceAvailabilityService} from '@app/api/voice/VoiceAvailabilityService';
 import {AUTOMATIC_VOICE_REGION_ID, ChannelTypes, MessageTypes} from '@fluxer/constants/src/ChannelConstants';
 import {IncomingCallFlags, RelationshipTypes} from '@fluxer/constants/src/UserConstants';
@@ -168,6 +169,16 @@ export class CallService {
 			const dmRecipientIds = recipientIds.filter((id) => id !== userId);
 			if (dmRecipientIds.length === 1) {
 				await this.dmPermissionValidator.validate({senderId: userId, recipientId: dmRecipientIds[0]});
+				const caller = await this.userRepository.findUnique(userId);
+				if (caller) {
+					await assertMayStartConversation({
+						user: caller,
+						targetId: dmRecipientIds[0]!,
+						users: this.userRepository,
+						messages: this.channelRepository,
+						channel,
+					});
+				}
 			}
 		}
 		const existingCall = await this.gatewayService.getCall(channelId);
@@ -244,7 +255,7 @@ export class CallService {
 				channelId,
 				messageId,
 				mentionCount: 0,
-				silent: true,
+				implicit: {unreadThrough: channel.lastMessageId},
 				emitGateway: false,
 			});
 		}
@@ -337,6 +348,16 @@ export class CallService {
 			const dmRecipientIds = Array.from(channel.recipientIds).filter((id) => id !== userId);
 			if (dmRecipientIds.length === 1) {
 				await this.dmPermissionValidator.validate({senderId: userId, recipientId: dmRecipientIds[0]});
+				const caller = await this.userRepository.findUnique(userId);
+				if (caller) {
+					await assertMayStartConversation({
+						user: caller,
+						targetId: dmRecipientIds[0]!,
+						users: this.userRepository,
+						messages: this.channelRepository,
+						channel,
+					});
+				}
 			}
 		}
 		const callerRequestedNoRing = recipients !== undefined && recipients.length === 0;
@@ -523,33 +544,5 @@ export class CallService {
 				throw InputValidationError.fromCode('recipients', ValidationErrorCodes.USER_NOT_IN_CHANNEL);
 			}
 		}
-	}
-
-	async updateCallMessageEnded({
-		channelId,
-		messageId,
-		participants,
-		endedTimestamp,
-	}: {
-		channelId: ChannelID;
-		messageId: MessageID;
-		participants: Array<UserID>;
-		endedTimestamp: Date;
-	}): Promise<void> {
-		const message = await this.channelRepository.getMessage(channelId, messageId);
-		if (!message) {
-			return;
-		}
-		if (message.type !== MessageTypes.CALL) {
-			return;
-		}
-		const messageRow = message.toRow();
-		await this.channelRepository.upsertMessage({
-			...messageRow,
-			call: {
-				participant_ids: new Set(participants),
-				ended_timestamp: endedTimestamp,
-			},
-		});
 	}
 }

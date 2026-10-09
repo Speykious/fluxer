@@ -39,7 +39,7 @@ export class AdminGuildLookupService {
 			return {guild: null};
 		}
 		const [channels, roles, ownerUser] = await Promise.all([
-			channelRepository.listGuildChannels(guildId),
+			channelRepository.listGuildChannels(guildId, 'maintenance'),
 			guildRepository.listRoles(guildId),
 			userRepository.findUnique(guild.ownerId),
 		]);
@@ -60,6 +60,9 @@ export class AdminGuildLookupService {
 				verification_level: guild.verificationLevel,
 				mfa_level: guild.mfaLevel,
 				nsfw_level: guild.nsfwLevel,
+				nsfw: guild.nsfw,
+				content_warning_level: guild.contentWarningLevel as 0 | 1,
+				content_warning_text: guild.contentWarningText,
 				explicit_content_filter: guild.explicitContentFilter,
 				default_message_notifications: guild.defaultMessageNotifications,
 				afk_channel_id: guild.afkChannelId?.toString() ?? null,
@@ -76,6 +79,9 @@ export class AdminGuildLookupService {
 					position: c.position,
 					parent_id: c.parentId?.toString() ?? null,
 					nsfw: c.isNsfw,
+					nsfw_override: c.nsfwOverride,
+					content_warning_level: c.contentWarningLevel as 0 | 1,
+					content_warning_text: c.contentWarningText,
 					url: c.url,
 				})),
 				roles: roles.map((r) => ({

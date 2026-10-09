@@ -37,7 +37,7 @@ export function callCallerRpcParams(caller: CallCaller | undefined): Record<stri
 	return {caller_id: caller.id, caller_name: caller.name, caller_avatar: caller.avatar};
 }
 
-export interface GatewayGuildMemoryStatsEntry {
+interface GatewayGuildMemoryStatsEntry {
 	node_id: string;
 	guild_id: string | null;
 	guild_name: string;
@@ -52,16 +52,19 @@ export interface GatewayGuildMemoryStats {
 	guilds: Array<GatewayGuildMemoryStatsEntry>;
 }
 
-export interface GatewayNodeMemoryStats {
+interface GatewayNodeMemoryStats {
 	total: string;
 	processes: string;
 	system: string;
 }
 
-export interface GatewayNodeStatsEntry {
+interface GatewayNodeStatsEntry {
 	node_id: string;
 	status: string;
 	sessions: number;
+	session_resumes_total: number | null;
+	websocket_dispatches_total: number | null;
+	websocket_dispatch_drops_total: number | null;
 	guilds: number;
 	presences: number;
 	calls: number;
@@ -74,6 +77,9 @@ export interface GatewayNodeStatsEntry {
 export interface GatewayNodeStats {
 	status: string;
 	sessions: number;
+	session_resumes_total: number;
+	websocket_dispatches_total: number;
+	websocket_dispatch_drops_total: number;
 	guilds: number;
 	presences: number;
 	calls: number;
@@ -85,12 +91,12 @@ export interface GatewayNodeStats {
 	nodes: Array<GatewayNodeStatsEntry>;
 }
 
-export interface GatewayVoiceStateRegionCount {
+interface GatewayVoiceStateRegionCount {
 	region_id: string;
 	voice_state_count: number;
 }
 
-export interface GatewayVoiceStateServerCount {
+interface GatewayVoiceStateServerCount {
 	server_id: string;
 	voice_state_count: number;
 }
@@ -140,6 +146,11 @@ export interface GatewayMentionSourcesPage {
 
 export abstract class IGatewayService {
 	abstract dispatchGuild(params: {guildId: GuildID; event: GatewayDispatchEvent; data: unknown}): Promise<void>;
+
+	abstract dispatchGuildMany(params: {
+		guildId: GuildID;
+		events: Array<{event: GatewayDispatchEvent; data: unknown}>;
+	}): Promise<void>;
 
 	abstract getGuildCounts(guildId: GuildID): Promise<{
 		memberCount: number;
@@ -291,12 +302,6 @@ export abstract class IGatewayService {
 	abstract getFirstViewableTextChannel(guildId: GuildID): Promise<ChannelID | null>;
 
 	abstract dispatchPresence(params: {userId: UserID; event: GatewayDispatchEvent; data: unknown}): Promise<void>;
-
-	abstract invalidatePushBadgeCount(params: {userId: UserID}): Promise<void>;
-
-	abstract invalidatePushBadgeCounts(params: {userIds: Array<UserID>}): Promise<void>;
-
-	abstract invalidatePushSubscriptions(params: {userId: UserID}): Promise<void>;
 
 	abstract clearPushChannelNotifications(params: {
 		userId: UserID;

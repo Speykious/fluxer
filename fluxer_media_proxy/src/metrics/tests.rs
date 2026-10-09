@@ -41,14 +41,6 @@ const FROZEN_SERIES: &[(&str, &str)] = &[
     ("fluxer_media_proxy_decode_failures_total", "counter"),
     ("fluxer_media_proxy_fetch_failures_total", "counter"),
     ("fluxer_media_proxy_blocked_url_attempts_total", "counter"),
-    (
-        "fluxer_media_proxy_framebuffer_pool_borrows_total",
-        "counter",
-    ),
-    (
-        "fluxer_media_proxy_framebuffer_pool_grow_events_total",
-        "counter",
-    ),
     ("fluxer_media_proxy_relay_upstream_success_total", "counter"),
     ("fluxer_media_proxy_relay_upstream_retries_total", "counter"),
     ("fluxer_media_proxy_http_retries_total", "counter"),
@@ -220,7 +212,7 @@ fn render_keeps_every_frozen_series_name_and_shape() {
 }
 
 #[test]
-fn render_carries_a_zero_series_for_every_signature_verdict() {
+fn render_includes_a_zero_series_for_every_signature_verdict() {
     let text = Metrics::new().render();
     for label in FROZEN_SIGNATURE_VERDICT_LABELS {
         assert!(

@@ -57,9 +57,6 @@ catalogs:
     '@floating-ui/react-dom':
       specifier: 2.1.9
       version: 2.1.9
-    '@hcaptcha/react-hcaptcha':
-      specifier: 2.2.0
-      version: 2.2.0
     '@hono/node-server':
       specifier: 2.1.1
       version: 2.1.1
@@ -87,9 +84,6 @@ catalogs:
     '@livekit/components-react':
       specifier: 2.9.24
       version: 2.9.24
-    '@marsidev/react-turnstile':
-      specifier: 1.6.1
-      version: 1.6.1
     '@mdx-js/mdx':
       specifier: 3.1.1
       version: 3.1.1
@@ -186,6 +180,9 @@ catalogs:
     '@webgpu/types':
       specifier: 0.1.72
       version: 0.1.72
+    altcha-lib:
+      specifier: 2.5.0
+      version: 2.5.0
     archiver:
       specifier: 8.0.0
       version: 8.0.0
@@ -207,15 +204,9 @@ catalogs:
     clsx:
       specifier: 2.1.1
       version: 2.1.1
-    colorjs.io:
-      specifier: 0.7.1
-      version: 0.7.1
     combokeys:
       specifier: 3.0.1
       version: 3.0.1
-    deepfilternet3-noise-filter:
-      specifier: 1.3.0
-      version: 1.3.0
     emoji-regex:
       specifier: 11.0.0
       version: 11.0.0
@@ -231,9 +222,9 @@ catalogs:
     eventemitter3:
       specifier: 5.0.4
       version: 5.0.4
-    fast-xml-parser:
-      specifier: 5.11.1
-      version: 5.11.1
+    fake-indexeddb:
+      specifier: 6.2.5
+      version: 6.2.5
     favico.js:
       specifier: 0.3.10
       version: 0.3.10
@@ -270,9 +261,6 @@ catalogs:
     lexical:
       specifier: 0.50.0
       version: 0.50.0
-    libphonenumber-js:
-      specifier: 1.13.13
-      version: 1.13.13
     livekit-server-sdk:
       specifier: 2.19.0
       version: 2.19.0
@@ -321,6 +309,9 @@ catalogs:
     onnxruntime-web:
       specifier: 1.30.0
       version: 1.30.0
+    pdf-lib:
+      specifier: 1.17.1
+      version: 1.17.1
     pg:
       specifier: 8.23.0
       version: 8.23.0
@@ -402,6 +393,9 @@ catalogs:
     tiny-invariant:
       specifier: 1.3.3
       version: 1.3.3
+    tldts:
+      specifier: 7.4.13
+      version: 7.4.13
     transliteration:
       specifier: 2.6.1
       version: 2.6.1
@@ -632,9 +626,6 @@ importers:
       '@pkgs/rate_limit':
         specifier: workspace:*
         version: link:pkgs/rate_limit
-      '@pkgs/sms':
-        specifier: workspace:*
-        version: link:pkgs/sms
       '@pkgs/virus_scan':
         specifier: workspace:*
         version: link:pkgs/virus_scan
@@ -650,6 +641,9 @@ importers:
       '@vvo/tzdb':
         specifier: 'catalog:'
         version: 6.198.0
+      altcha-lib:
+        specifier: 'catalog:'
+        version: 2.5.0(hono@4.13.8)
       archiver:
         specifier: 'catalog:'
         version: 8.0.0
@@ -665,9 +659,6 @@ importers:
       emoji-regex:
         specifier: 'catalog:'
         version: 11.0.0
-      fast-xml-parser:
-        specifier: 'catalog:'
-        version: 5.11.1
       hi-base32:
         specifier: 'catalog:'
         version: 0.5.1
@@ -719,6 +710,9 @@ importers:
       tempy:
         specifier: 'catalog:'
         version: 3.2.0
+      tldts:
+        specifier: 'catalog:'
+        version: 7.4.13
       transliteration:
         specifier: 'catalog:'
         version: 2.6.1
@@ -778,9 +772,15 @@ importers:
       '@fluxer/logger':
         specifier: workspace:*
         version: link:../../../packages/logger
+      altcha-lib:
+        specifier: 'catalog:'
+        version: 2.5.0(hono@4.13.8)
       itty-time:
         specifier: 'catalog:'
         version: 2.0.2
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.5
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -857,18 +857,9 @@ importers:
       '@fluxer/ip_utils':
         specifier: workspace:*
         version: link:../../../packages/ip_utils
-      '@pkgs/cassandra':
-        specifier: workspace:*
-        version: link:../cassandra
-      '@pkgs/postgres':
-        specifier: workspace:*
-        version: link:../postgres
       maxmind:
         specifier: 'catalog:'
         version: 5.0.7
-      zod:
-        specifier: 'catalog:'
-        version: 4.6.5
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -1004,25 +995,6 @@ importers:
       typescript:
         specifier: catalog:ts7
         version: 7.0.2
-
-  fluxer_api/pkgs/sms:
-    dependencies:
-      '@fluxer/constants':
-        specifier: workspace:*
-        version: link:../../../packages/constants
-      '@fluxer/errors':
-        specifier: workspace:*
-        version: link:../../../packages/errors
-      '@fluxer/logger':
-        specifier: workspace:*
-        version: link:../../../packages/logger
-    devDependencies:
-      '@types/node':
-        specifier: 'catalog:'
-        version: 26.6.1
-      typescript:
-        specifier: catalog:ts7
-        version: 7.0.2
       vitest:
         specifier: 'catalog:'
         version: 5.0.1(@opentelemetry/api@1.9.1)(@types/node@26.6.1)(@vitest/coverage-v8@5.0.1)(happy-dom@20.14.5)(msw@2.15.0(@types/node@26.6.1)(typescript@7.0.2))(vite@8.3.0(@types/node@26.6.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))
@@ -1045,15 +1017,9 @@ importers:
 
   fluxer_api/pkgs/worker:
     dependencies:
-      '@fluxer/constants':
-        specifier: workspace:*
-        version: link:../../../packages/constants
       '@fluxer/logger':
         specifier: workspace:*
         version: link:../../../packages/logger
-      itty-time:
-        specifier: 'catalog:'
-        version: 2.0.2
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -1412,6 +1378,9 @@ importers:
       '@fluxer/date_utils':
         specifier: workspace:*
         version: link:../packages/date_utils
+      '@fluxer/desktop_ipc':
+        specifier: workspace:*
+        version: link:../packages/desktop_ipc
       '@fluxer/geo_utils':
         specifier: workspace:*
         version: link:../packages/geo_utils
@@ -1430,9 +1399,6 @@ importers:
       '@fluxer/voice_engine_v2':
         specifier: workspace:*
         version: link:../packages/voice_engine_v2
-      '@hcaptcha/react-hcaptcha':
-        specifier: 'catalog:'
-        version: 2.2.0
       '@lexical/history':
         specifier: 'catalog:'
         version: 0.50.0(typescript@7.0.2)
@@ -1454,9 +1420,6 @@ importers:
       '@livekit/components-react':
         specifier: 'catalog:'
         version: 2.9.24(livekit-client@fluxer_app+pkgs+livekit-client)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(tslib@2.8.1)
-      '@marsidev/react-turnstile':
-        specifier: 'catalog:'
-        version: 1.6.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@phosphor-icons/react':
         specifier: 'catalog:'
         version: 2.1.10(patch_hash=9b0b481de857aa7a7525f023baea9da72be4574ff72825e39d959e6979d78eea)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -1484,6 +1447,9 @@ importers:
       '@tanstack/react-virtual':
         specifier: ^3.14.13
         version: 3.14.13(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      altcha-lib:
+        specifier: 'catalog:'
+        version: 2.5.0(hono@4.13.8)
       animejs:
         specifier: 4.5.0
         version: 4.5.0
@@ -1496,15 +1462,9 @@ importers:
       codemirror:
         specifier: ^6.0.2
         version: 6.0.2
-      colorjs.io:
-        specifier: 'catalog:'
-        version: 0.7.1
       combokeys:
         specifier: 'catalog:'
         version: 3.0.1
-      deepfilternet3-noise-filter:
-        specifier: 'catalog:'
-        version: 1.3.0(livekit-client@fluxer_app+pkgs+livekit-client)
       eventemitter3:
         specifier: 'catalog:'
         version: 5.0.4
@@ -1538,9 +1498,6 @@ importers:
       lexical:
         specifier: 'catalog:'
         version: 0.50.0(typescript@7.0.2)
-      libphonenumber-js:
-        specifier: 'catalog:'
-        version: 1.13.13
       livekit-client:
         specifier: workspace:*
         version: link:pkgs/livekit-client
@@ -1574,6 +1531,9 @@ importers:
       onnxruntime-web:
         specifier: 'catalog:'
         version: 1.30.0
+      pdf-lib:
+        specifier: 'catalog:'
+        version: 1.17.1
       qrcode:
         specifier: 'catalog:'
         version: 1.5.4
@@ -1689,6 +1649,9 @@ importers:
       esbuild:
         specifier: 'catalog:'
         version: 0.28.2
+      fake-indexeddb:
+        specifier: 'catalog:'
+        version: 6.2.5
       happy-dom:
         specifier: 20.14.5
         version: 20.14.5
@@ -1774,6 +1737,18 @@ importers:
 
   fluxer_desktop:
     dependencies:
+      '@fluxer/constants':
+        specifier: workspace:*
+        version: link:../packages/constants
+      '@fluxer/desktop_ipc':
+        specifier: workspace:*
+        version: link:../packages/desktop_ipc
+      '@fluxer/instance_bootstrap':
+        specifier: workspace:*
+        version: link:../packages/instance_bootstrap
+      '@fluxer/ip_utils':
+        specifier: workspace:*
+        version: link:../packages/ip_utils
       '@fluxer/voice_engine_v2':
         specifier: workspace:*
         version: link:../packages/voice_engine_v2
@@ -1786,9 +1761,6 @@ importers:
       hunspell-asm:
         specifier: 4.0.2
         version: 4.0.2(patch_hash=594ff55f398ab3a575ba1b4d090c4838a26e4251a2f1d65ba0f02d5b098d02ae)
-      update-electron-app:
-        specifier: 3.3.0
-        version: 3.3.0
       velopack:
         specifier: 1.2.0
         version: 1.2.0
@@ -1802,9 +1774,6 @@ importers:
       electron-builder:
         specifier: 27.0.0-alpha.8
         version: 27.0.0-alpha.8(electron-builder-squirrel-windows@27.0.0-alpha.8)(supports-color@7.2.0)
-      electron-builder-squirrel-windows:
-        specifier: 27.0.0-alpha.8
-        version: 27.0.0-alpha.8(dmg-builder@27.0.0-alpha.8)(supports-color@7.2.0)
       esbuild:
         specifier: 'catalog:'
         version: 0.28.2
@@ -1812,6 +1781,12 @@ importers:
         specifier: catalog:ts7
         version: 7.0.2
     optionalDependencies:
+      '@fluxer/app-store':
+        specifier: file:./native/app-store
+        version: file:fluxer_desktop/native/app-store
+      '@fluxer/gateway-socket':
+        specifier: file:./native/gateway-socket
+        version: file:fluxer_desktop/native/gateway-socket
       '@fluxer/hardware-encoder':
         specifier: file:./native/hardware-encoder
         version: file:fluxer_desktop/native/hardware-encoder
@@ -1872,9 +1847,6 @@ importers:
       '@fluxer/win-shell':
         specifier: file:./native/win-shell
         version: file:fluxer_desktop/native/win-shell
-      '@fluxer/win-toast':
-        specifier: file:./native/win-toast
-        version: file:fluxer_desktop/native/win-toast
       '@fluxer/windows-input-hook':
         specifier: file:./native/windows-input-hook
         version: file:fluxer_desktop/native/windows-input-hook
@@ -1989,11 +1961,17 @@ importers:
         specifier: catalog:ts7
         version: 7.0.2
 
+  packages/desktop_ipc:
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.1
+      typescript:
+        specifier: catalog:ts7
+        version: 7.0.2
+
   packages/errors:
     dependencies:
-      '@fluxer/config':
-        specifier: workspace:*
-        version: link:../config
       '@fluxer/constants':
         specifier: workspace:*
         version: link:../constants
@@ -2081,9 +2059,6 @@ importers:
       '@messageformat/parser':
         specifier: 'catalog:'
         version: 5.1.1
-      yaml:
-        specifier: 'catalog:'
-        version: 2.9.1
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -2185,6 +2160,9 @@ importers:
       '@biomejs/biome':
         specifier: 'catalog:'
         version: 2.5.14
+      '@fluxer/constants':
+        specifier: workspace:*
+        version: link:../constants
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.1
@@ -4499,6 +4477,14 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
+  '@fluxer/app-store@file:fluxer_desktop/native/app-store':
+    resolution: {directory: fluxer_desktop/native/app-store, type: directory}
+    cpu: [x64, arm64]
+
+  '@fluxer/gateway-socket@file:fluxer_desktop/native/gateway-socket':
+    resolution: {directory: fluxer_desktop/native/gateway-socket, type: directory}
+    cpu: [x64, arm64]
+
   '@fluxer/hardware-encoder@file:fluxer_desktop/native/hardware-encoder':
     resolution: {directory: fluxer_desktop/native/hardware-encoder, type: directory}
     cpu: [x64, arm64]
@@ -4596,18 +4582,10 @@ packages:
     cpu: [x64, arm64]
     os: [win32]
 
-  '@fluxer/win-toast@file:fluxer_desktop/native/win-toast':
-    resolution: {directory: fluxer_desktop/native/win-toast, type: directory}
-    cpu: [x64, arm64]
-    os: [win32]
-
   '@fluxer/windows-input-hook@file:fluxer_desktop/native/windows-input-hook':
     resolution: {directory: fluxer_desktop/native/windows-input-hook, type: directory}
     cpu: [x64, arm64]
     os: [win32]
-
-  '@hcaptcha/react-hcaptcha@2.2.0':
-    resolution: {integrity: sha512-/HrPgNLRrJziLrh2s+qFRO33ubBSuHn9sdNsQcP0wQElpORxlpR6wnq3X9j/bZGd+uQtYIvPl4QSU2la+Jl9Hg==}
 
   '@hexagon/base64@1.1.28':
     resolution: {integrity: sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw==}
@@ -5200,12 +5178,6 @@ packages:
   '@marijn/find-cluster-break@1.0.4':
     resolution: {integrity: sha512-Wy0V7+SGUjnF9/TkiM1hKVDPj7jKXduPNboMVtHTA8dySMURWqfg/JZ9E2Sq8JgSJmkl7k7Qe9FLeMSrSraWmQ==}
 
-  '@marsidev/react-turnstile@1.6.1':
-    resolution: {integrity: sha512-ojI9NLYv821IRKi7KraTkxTto6KC/m58hNNyKxvYxm/cQBu5MI5eMkaiJs2JSQBFiXE3LPQI3seJVjv/2lgALA==}
-    peerDependencies:
-      react: ^17.0.2 || ^18.0.0 || ^19.0
-      react-dom: ^17.0.2 || ^18.0.0 || ^19.0
-
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
 
@@ -5269,9 +5241,6 @@ packages:
   '@noble/hashes@2.4.0':
     resolution: {integrity: sha512-X5XaVWZIBCT7HHZGm5I7ZQXDwLG+bGXuSrMQAW+7Zvl87h1kmc1ZB1VSRJcpUfoUrGQp4Fkoxm5kZ+Ms+aW+eA==}
     engines: {node: '>= 20.19.0'}
-
-  '@nodable/entities@3.0.0':
-    resolution: {integrity: sha512-8L9xFeTYKhm49xfIypoe2W5wV1m/3Z58kT+7kR9A8OyFxcPduI4VmxaUMQyKYrRjUoLLSXv6EKKID5Tvj9cUVw==}
 
   '@open-draft/deferred-promise@2.2.0':
     resolution: {integrity: sha512-CecwLWx3rhxVQF6V4bAgPS5t+So2sTbPgAzafKkVizyi7tlwpcFpdFqq+wqF2OwNBmqFuu6tOyouTuxgpMfzmA==}
@@ -5658,6 +5627,12 @@ packages:
   '@parcel/watcher@2.5.1':
     resolution: {integrity: sha512-dfUnCxiN9H4ap84DvD2ubjw+3vUNpstxa0TneY/Paat8a3R4uQZDLSvWjmznAY/DoahqTHl9V46HF/Zs3F29pg==}
     engines: {node: '>= 10.0.0'}
+
+  '@pdf-lib/standard-fonts@1.0.0':
+    resolution: {integrity: sha512-hU30BK9IUN/su0Mn9VdlVKsWBS6GyhVfqjwl1FjZN4TxP6cCw0jP2w7V3Hf5uX7M0AZJ16vey9yE0ny7Sa59ZA==}
+
+  '@pdf-lib/upng@1.0.1':
+    resolution: {integrity: sha512-dQK2FUMQtowVP00mtIksrlZhdFXQZPC+taih1q4CvPZ5vqdxR/LKBaFg0oAfzd1GlHZXXSPdQfzQnt+ViGvEIQ==}
 
   '@peculiar/asn1-android@2.9.4':
     resolution: {integrity: sha512-SYHm4SoWSI0nRCoos6jpGusIqhPH9bbGBqv7ohlZ+H6BunrDzzQPk2ePgDuEUzV82OdvbLgtW4twUDwhU9P3YQ==}
@@ -6923,6 +6898,54 @@ packages:
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
 
+  altcha-lib@2.5.0:
+    resolution: {integrity: sha512-MiqlwnImoooVTmFzZ8odhpqtCsSl7M/6cmgaX42Tkuvd41e5IVveg6hiw/e9rXSb6dm1RvniPmeURwO64wWTuQ==}
+    hasBin: true
+    peerDependencies:
+      '@fastify/cookie': ^11.0.0
+      '@fastify/cors': ^11.0.0
+      '@fastify/formbody': ^8.0.0 || ^9.0.0
+      '@nestjs/common': ^10.0.0 || ^11.0.0 || ^12.0.0
+      '@nestjs/core': ^10.0.0 || ^11.0.0 || ^12.0.0
+      '@nestjs/platform-express': ^10.0.0 || ^11.0.0 || ^12.0.0
+      '@nestjs/platform-fastify': ^10.0.0 || ^11.0.0 || ^12.0.0
+      '@sveltejs/kit': ^2.0.0
+      cookie-parser: ^1.0.0
+      cors: ^2.0.0
+      express: ^4.0.0 || ^5.0.0
+      fastify: ^5.0.0
+      h3: ^2.0.0
+      hono: ^4.0.0
+    peerDependenciesMeta:
+      '@fastify/cookie':
+        optional: true
+      '@fastify/cors':
+        optional: true
+      '@fastify/formbody':
+        optional: true
+      '@nestjs/common':
+        optional: true
+      '@nestjs/core':
+        optional: true
+      '@nestjs/platform-express':
+        optional: true
+      '@nestjs/platform-fastify':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      cookie-parser:
+        optional: true
+      cors:
+        optional: true
+      express:
+        optional: true
+      fastify:
+        optional: true
+      h3:
+        optional: true
+      hono:
+        optional: true
+
   am-i-vibing@0.4.0:
     resolution: {integrity: sha512-MxT4XZL7pzLHpuvhDKdMaQHMGGkJDLluKBLsbstn+8wv9sWcFT6h+0ve9qkml95amVTZtZV83gQe2hY+ojgHLg==}
     hasBin: true
@@ -6961,9 +6984,6 @@ packages:
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
-
-  anynum@1.0.1:
-    resolution: {integrity: sha512-N6//FLET/tXYNM/F6ABca1oH6fWB+KlTt909Le28WMDBk8oaT4vY17DCrwg2MvmuqUKt3Ni4N5dGJ/EoBgcO6A==}
 
   app-builder-lib@27.0.0-alpha.8:
     resolution: {integrity: sha512-EnGEDEYPSxyIC3L0AlJNBZ9uymoqJlAwwYRX65XEeIvmjedeMeKDv0GKYJv4H2NKWG4pvTN50v5cb8ZROPUaVg==}
@@ -7343,9 +7363,6 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
-  colorjs.io@0.7.1:
-    resolution: {integrity: sha512-LY7OHnJZxHwT5UlzNa9bbhHHDbzB6yE5+3MIPwJEQKRvSCt/T4G7epsj+9j2BExUIIfXFIJGsIXUKdfrK9Q5tA==}
-
   combined-stream@1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
@@ -7554,12 +7571,6 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
-
-  deepfilternet3-noise-filter@1.3.0:
-    resolution: {integrity: sha512-yYFUlPuvPguqcd/R6/OSsr0noGqlqOE50JkCWYHogk+PjLj9qrNgwTt5zKraVkKnw0l4+eXJagkz2SUWtUl4sQ==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      livekit-client: ^2.0.0
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -7895,6 +7906,10 @@ packages:
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
+  fake-indexeddb@6.2.5:
+    resolution: {integrity: sha512-CGnyrvbhPlWYMngksqrSSUT1BAVP49dZocrHuK0SvtR0D5TMs5wP0o3j7jexDJW01KSadjBp1M/71o/KR3nD1w==}
+    engines: {node: '>=18'}
+
   fast-copy@4.1.1:
     resolution: {integrity: sha512-A4QTJmuiztpGtr6AMeJts9R4hbj2ZBUwtOaKrG6rw2y7t6+IaJKjz5M3XDs8BUznxDH43FVc6A0y/gWlMl4UtA==}
 
@@ -7927,13 +7942,6 @@ packages:
 
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
-
-  fast-xml-builder@1.3.1:
-    resolution: {integrity: sha512-pIM/1n3ntFXKYrUZwW7QCK0gAW7XY+wzj1YMIV3tLDvPj/V+zTGJK5e3/4WJfwj0qWw2ElNXiTixda/R+3YSug==}
-
-  fast-xml-parser@5.11.1:
-    resolution: {integrity: sha512-TBw6K/fxoQGGjCmZDw9w/ZwP3uDcnTM4YH/g+PFRWr8sbe5idXtxNN6vITh4+1ruCZaho6uBFurElsA7F0zzgw==}
-    hasBin: true
 
   favico.js@0.3.10:
     resolution: {integrity: sha512-S5KvqAOczRjlyjQPPZPSlUEybBkfBgKosY/pzTIxkvKgigB+DkITvIEI70dxQarbv4PZ+UD77QzquCAcU/6LHQ==}
@@ -8095,9 +8103,6 @@ packages:
 
   github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
-
-  github-url-to-object@4.0.6:
-    resolution: {integrity: sha512-NaqbYHMUAlPcmWFdrAB7bcxrNIiiJWJe8s/2+iOc9vlcHlwHqSGrPk+Yi3nu6ebTwgsZEa7igz+NH2vEq3gYwQ==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -8297,6 +8302,7 @@ packages:
   idna-uts46-hx@6.2.1:
     resolution: {integrity: sha512-ywCsEJObClsvgOeiUaV70O4sGZvwX+w2Svr1I+KECCtPelsuANcLK4Y1n+TZ3KNAlnQYMF6Te8rTZ2xbIuK8WQ==}
     engines: {node: ^24.15.0 || ^26.0.0, npm: '>=12.0.0'}
+    deprecated: contains no types file, upgrade to 6.2.2
     hasBin: true
 
   ieee754@1.2.1:
@@ -8411,12 +8417,6 @@ packages:
   is-unicode-supported@2.1.0:
     resolution: {integrity: sha512-mE00Gnza5EEB3Ds0HfMyllZzbBrmLOX3vfWoj9A9PEnTfratQ/BcaJOuMhnkhjXvb2+FkY3VuHqtAGpTPmglFQ==}
     engines: {node: '>=18'}
-
-  is-unsafe@2.0.2:
-    resolution: {integrity: sha512-HgbIHPBH0KHHCcjLfGsCvhtPTVxjaAZlXjwdz7/GQC40SjSe4sfQsar8J5VFo8JOSbarkpV0OLG95bbaNd9aAQ==}
-
-  is-url@1.2.4:
-    resolution: {integrity: sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==}
 
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -8588,9 +8588,6 @@ packages:
     resolution: {integrity: sha512-DeXj9X5xDCjgKLU/7RR+/HQEVzuuEUiwldwOGsHK/sfAfELGWEyTcf0x+uOvCvK3O2zPmZePXWL85vtia6GyZw==}
     engines: {node: '>=16'}
     hasBin: true
-
-  libphonenumber-js@1.13.13:
-    resolution: {integrity: sha512-hV6SmWnyQ8U1QXhhqbqYBHIStNnscG7A5XbGodgdHhf/8N5PwhYpJA5U/yHDjYwPYTd8uNGXqq416XctuvK2PA==}
 
   lightningcss-android-arm64@1.32.0:
     resolution: {integrity: sha512-YK7/ClTt4kAK0vo6w3X+Pnm0D2cf2vPHbhOXdoNti1Ga0al1P4TBZhwjATvjNwLEBCnKvjJc2jQgHXH0NEwlAg==}
@@ -9347,10 +9344,6 @@ packages:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
 
-  path-expression-matcher@1.6.2:
-    resolution: {integrity: sha512-enSlaiat05iasnzmgNxRj8reFdj3puY2QpNgP1aPIaVfT6nn9ICuPoFlKHk8EN22HcwewshO+mN2DGbkCEOtqQ==}
-    engines: {node: '>=14.0.0'}
-
   path-is-absolute@1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
@@ -9372,6 +9365,9 @@ packages:
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
+
+  pdf-lib@1.17.1:
+    resolution: {integrity: sha512-V/mpyJAoTsN4cnP31vc0wfNA1+p20evqqnap0KLoRUN0Yk/p3wN52DOEsL4oBFcLdb76hlpKPtzJIgo67j/XLw==}
 
   pe-library@0.4.1:
     resolution: {integrity: sha512-eRWB5LBz7PpDu4PUlwT0PhnQfTQJlDDdPa35urV4Osrm0t0AqQFGn+UIkU3klZvwJ8KPO3VbBFsXquA6p6kqZw==}
@@ -10285,9 +10281,6 @@ packages:
       '@types/node':
         optional: true
 
-  strnum@2.4.2:
-    resolution: {integrity: sha512-rDG3Ah4TV0k1hWvLSzkZtMmLN9+eS+h3knq4MP6A42Y3Yh5qGNnOUs1jJkoSr8FG5dsL28c7KgkIBzSEykqtuw==}
-
   style-mod@4.1.3:
     resolution: {integrity: sha512-i/n8VsZydrugj3Iuzll8+x/00GH2vnYsk1eomD8QiRrSAeW6ItbCQDtfXCeJHd0iwiNagqjQkvpvREEPtW3IoQ==}
 
@@ -10733,9 +10726,6 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  update-electron-app@3.3.0:
-    resolution: {integrity: sha512-5s73OcyNhAvogjxzAy8pbephY+bP6aXpXFv68OT1dNiEbcUpIUCv/ZZPalqGclnXUgx3oyn+yVdAIIVUpn/C1g==}
-
   upng-js@2.1.0:
     resolution: {integrity: sha512-d3xzZzpMP64YkjP5pr8gNyvBt7dLk/uGI67EctzDuVp4lCZyVMo0aJO6l/VDlgbInJYDY6cnClLoBp29eKWI6g==}
 
@@ -11065,10 +11055,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-
-  xml-naming@0.3.0:
-    resolution: {integrity: sha512-ghig2TBE/H11aOVgmahA3MhimvkBr6JIYknH/Dhdk10nXwdbIqBJsbfMxpvFPG8bAw77gN29aQWvKpmVoPlvPQ==}
-    engines: {node: '>=16.0.0'}
 
   xmlbuilder@15.1.1:
     resolution: {integrity: sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==}
@@ -13582,6 +13568,12 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
+  '@fluxer/app-store@file:fluxer_desktop/native/app-store':
+    optional: true
+
+  '@fluxer/gateway-socket@file:fluxer_desktop/native/gateway-socket':
+    optional: true
+
   '@fluxer/hardware-encoder@file:fluxer_desktop/native/hardware-encoder':
     optional: true
 
@@ -13642,13 +13634,8 @@ snapshots:
   '@fluxer/win-shell@file:fluxer_desktop/native/win-shell':
     optional: true
 
-  '@fluxer/win-toast@file:fluxer_desktop/native/win-toast':
-    optional: true
-
   '@fluxer/windows-input-hook@file:fluxer_desktop/native/windows-input-hook':
     optional: true
-
-  '@hcaptcha/react-hcaptcha@2.2.0': {}
 
   '@hexagon/base64@1.1.28': {}
 
@@ -14238,11 +14225,6 @@ snapshots:
 
   '@marijn/find-cluster-break@1.0.4': {}
 
-  '@marsidev/react-turnstile@1.6.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
-    dependencies:
-      react: 19.3.0
-      react-dom: 19.3.0(react@19.3.0)
-
   '@mdx-js/mdx@3.1.1(supports-color@7.2.0)':
     dependencies:
       '@types/estree': 1.0.9
@@ -14357,8 +14339,6 @@ snapshots:
   '@noble/hashes@1.4.0': {}
 
   '@noble/hashes@2.4.0': {}
-
-  '@nodable/entities@3.0.0': {}
 
   '@open-draft/deferred-promise@2.2.0': {}
 
@@ -14586,6 +14566,14 @@ snapshots:
       '@parcel/watcher-win32-arm64': 2.5.1
       '@parcel/watcher-win32-ia32': 2.5.1
       '@parcel/watcher-win32-x64': 2.5.1
+
+  '@pdf-lib/standard-fonts@1.0.0':
+    dependencies:
+      pako: 1.0.11
+
+  '@pdf-lib/upng@1.0.1':
+    dependencies:
+      pako: 1.0.11
 
   '@peculiar/asn1-android@2.9.4':
     dependencies:
@@ -15480,7 +15468,7 @@ snapshots:
 
   '@types/set-cookie-parser@2.4.10':
     dependencies:
-      '@types/node': 26.6.1
+      '@types/node': 24.13.5
 
   '@types/statuses@2.0.6': {}
 
@@ -15674,7 +15662,7 @@ snapshots:
       obug: 2.2.1
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 5.0.1(@opentelemetry/api@1.9.1)(@types/node@26.6.1)(@vitest/coverage-v8@5.0.1)(happy-dom@20.14.5)(msw@2.15.0(@types/node@26.6.1)(typescript@6.0.3))(vite@8.3.0(@types/node@26.6.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))
+      vitest: 5.0.1(@opentelemetry/api@1.9.1)(@types/node@26.6.1)(@vitest/coverage-v8@5.0.1)(happy-dom@20.14.5)(msw@2.15.0(@types/node@26.6.1)(typescript@7.0.2))(vite@8.3.0(@types/node@26.6.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))
 
   '@vitest/istanbul-lib-coverage@1.0.1': {}
 
@@ -15808,6 +15796,10 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
+  altcha-lib@2.5.0(hono@4.13.8):
+    optionalDependencies:
+      hono: 4.13.8
+
   am-i-vibing@0.4.0:
     dependencies:
       process-ancestry: 0.1.0
@@ -15830,8 +15822,6 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.2
-
-  anynum@1.0.1: {}
 
   app-builder-lib@27.0.0-alpha.8(dmg-builder@27.0.0-alpha.8)(electron-builder-squirrel-windows@27.0.0-alpha.8)(supports-color@7.2.0):
     dependencies:
@@ -16339,8 +16329,6 @@ snapshots:
 
   colorette@2.0.20: {}
 
-  colorjs.io@0.7.1: {}
-
   combined-stream@1.0.8:
     dependencies:
       delayed-stream: 1.0.0
@@ -16521,10 +16509,6 @@ snapshots:
       character-entities: 2.0.2
 
   deep-is@0.1.4: {}
-
-  deepfilternet3-noise-filter@1.3.0(livekit-client@fluxer_app+pkgs+livekit-client):
-    dependencies:
-      livekit-client: link:fluxer_app/pkgs/livekit-client
 
   deepmerge@4.3.1: {}
 
@@ -16934,6 +16918,8 @@ snapshots:
 
   extend@3.0.2: {}
 
+  fake-indexeddb@6.2.5: {}
+
   fast-copy@4.1.1: {}
 
   fast-deep-equal@3.1.3: {}
@@ -16962,20 +16948,6 @@ snapshots:
   fast-wrap-ansi@0.2.2:
     dependencies:
       fast-string-width: 3.0.2
-
-  fast-xml-builder@1.3.1:
-    dependencies:
-      path-expression-matcher: 1.6.2
-      xml-naming: 0.3.0
-
-  fast-xml-parser@5.11.1:
-    dependencies:
-      '@nodable/entities': 3.0.0
-      fast-xml-builder: 1.3.1
-      is-unsafe: 2.0.2
-      path-expression-matcher: 1.6.2
-      strnum: 2.4.2
-      xml-naming: 0.3.0
 
   favico.js@0.3.10: {}
 
@@ -17144,10 +17116,6 @@ snapshots:
       js-binary-schema-parser: 2.0.3
 
   github-slugger@2.0.0: {}
-
-  github-url-to-object@4.0.6:
-    dependencies:
-      is-url: 1.2.4
 
   glob-parent@5.1.2:
     dependencies:
@@ -17572,10 +17540,6 @@ snapshots:
 
   is-unicode-supported@2.1.0: {}
 
-  is-unsafe@2.0.2: {}
-
-  is-url@1.2.4: {}
-
   isarray@1.0.0: {}
 
   isbinaryfile@4.0.10: {}
@@ -17721,8 +17685,6 @@ snapshots:
   lib0@0.2.117:
     dependencies:
       isomorphic.js: 0.2.5
-
-  libphonenumber-js@1.13.13: {}
 
   lightningcss-android-arm64@1.32.0:
     optional: true
@@ -18777,8 +18739,6 @@ snapshots:
 
   path-exists@4.0.0: {}
 
-  path-expression-matcher@1.6.2: {}
-
   path-is-absolute@1.0.1: {}
 
   path-key@3.1.1: {}
@@ -18793,6 +18753,13 @@ snapshots:
   path-to-regexp@6.3.0: {}
 
   path-type@4.0.0: {}
+
+  pdf-lib@1.17.1:
+    dependencies:
+      '@pdf-lib/standard-fonts': 1.0.0
+      '@pdf-lib/upng': 1.0.1
+      pako: 1.0.11
+      tslib: 1.14.1
 
   pe-library@0.4.1: {}
 
@@ -19904,10 +19871,6 @@ snapshots:
     optionalDependencies:
       '@types/node': 26.6.1
 
-  strnum@2.4.2:
-    dependencies:
-      anynum: 1.0.1
-
   style-mod@4.1.3: {}
 
   style-to-js@1.1.21:
@@ -20328,11 +20291,6 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  update-electron-app@3.3.0:
-    dependencies:
-      github-url-to-object: 4.0.6
-      ms: 2.1.3
-
   upng-js@2.1.0(patch_hash=34ef83d86b7cdf910a393193e3321a239470e7c5e5c7755fd14c30e30db4ea8e):
     dependencies:
       pako: 1.0.11
@@ -20620,8 +20578,6 @@ snapshots:
   wrappy@1.0.2: {}
 
   ws@8.21.3: {}
-
-  xml-naming@0.3.0: {}
 
   xmlbuilder@15.1.1: {}
 

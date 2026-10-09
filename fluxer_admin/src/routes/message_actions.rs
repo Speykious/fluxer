@@ -105,45 +105,6 @@ pub(crate) async fn messages_post(
                 Err(e) => json_error(StatusCode::BAD_REQUEST, &format!("{e}")),
             }
         }
-        "report-to-ncmec" => {
-            let attachment_id = form.clean("attachment_id");
-            let filename = form.clean("filename");
-            let reporter_full_name = form.clean("reporter_full_name");
-            let source_report_id = form.clean("source_report_id");
-            let confirmed_viewed = form.bool_value("confirmed_viewed");
-            let (Some(cid), Some(mid), Some(aid), Some(name), Some(reporter)) = (
-                &channel_id,
-                &message_id,
-                &attachment_id,
-                &filename,
-                &reporter_full_name,
-            ) else {
-                return json_error(
-                    StatusCode::BAD_REQUEST,
-                    "Missing required NCMEC report fields",
-                );
-            };
-            if !confirmed_viewed {
-                return json_error(
-                    StatusCode::BAD_REQUEST,
-                    "Missing required NCMEC report fields",
-                );
-            }
-            match client
-                .report_attachment_to_ncmec(
-                    cid,
-                    mid,
-                    aid,
-                    name,
-                    reporter,
-                    source_report_id.as_deref(),
-                )
-                .await
-            {
-                Ok(resp) => Json(resp.data).into_response(),
-                Err(e) => json_error(StatusCode::BAD_REQUEST, &format!("{e}")),
-            }
-        }
         _ => Redirect::to(&format!("{base}/messages")).into_response(),
     }
 }
@@ -171,7 +132,8 @@ pub(crate) async fn system_dms_post(
     let flash = if let Some(content) = content.as_deref()
         && !user_ids.is_empty()
     {
-        match client.send_system_dm(&user_ids, content).await {
+        let recipients = (user_ids != ["*"]).then_some(user_ids.as_slice());
+        match client.send_system_dm(recipients, content).await {
             Ok(_) => FlashData::success("System DM sent"),
             Err(error) => {
                 tracing::warn!(%error, "admin API request failed: send system DM");
@@ -218,19 +180,6 @@ pub(crate) async fn bulk_actions_post(
                 .bulk_update_user_flags(&user_ids, &add, &remove, audit_log_reason.as_deref())
                 .await
         }
-        "bulk-update-suspicious-activity-flags" => {
-            let user_ids = form.list_values_any(&["user_ids[]", "user_ids"]);
-            let add = form.list_values_any(&["add_flags[]", "add_flags"]);
-            let remove = form.list_values_any(&["remove_flags[]", "remove_flags"]);
-            client
-                .bulk_update_suspicious_activity_flags(
-                    &user_ids,
-                    &add,
-                    &remove,
-                    audit_log_reason.as_deref(),
-                )
-                .await
-        }
         "bulk-update-guild-features" => {
             let guild_ids = form.list_values_any(&["guild_ids[]", "guild_ids"]);
             let mut add = form.list_values_any(&["add_features[]", "add_features"]);
@@ -261,12 +210,14 @@ pub(crate) async fn bulk_actions_post(
                 );
             };
             let public_reason = form.clean("public_reason");
+            let notify_user = form.opt_out_value("notify_user");
             client
                 .bulk_schedule_user_deletion(
                     &user_ids,
                     reason_code.unwrap_or(2),
                     days.unwrap_or(14),
                     public_reason.as_deref(),
+                    notify_user,
                     audit_log_reason.as_deref(),
                 )
                 .await

@@ -340,16 +340,6 @@ export class BatchBuilder {
 		return this;
 	}
 
-	addIf(condition: boolean, query: string, params: object, meta?: KvQueryMeta): this {
-		if (condition) this.queries.push({query, params, meta});
-		return this;
-	}
-
-	addPreparedIf(condition: boolean, q: PreparedQuery): this {
-		if (condition) this.queries.push({query: q.cql, params: q.params, meta: q.kvMeta});
-		return this;
-	}
-
 	async execute(atomic = true): Promise<void> {
 		if (this.queries.length === 0) return;
 		await executeBatch(this.queries, atomic);
@@ -365,4 +355,24 @@ export class BatchBuilder {
 	getQueries(): Array<BatchQuery> {
 		return this.queries;
 	}
+}
+
+const MAX_BATCH_STATEMENTS = 60;
+
+export async function executeGroupedBatches(
+	groups: ReadonlyArray<ReadonlyArray<PreparedQuery>>,
+	maxStatements = MAX_BATCH_STATEMENTS,
+): Promise<void> {
+	let batch = new BatchBuilder();
+	let size = 0;
+	for (const group of groups) {
+		if (size > 0 && size + group.length > maxStatements) {
+			await batch.execute();
+			batch = new BatchBuilder();
+			size = 0;
+		}
+		for (const query of group) batch.addPrepared(query);
+		size += group.length;
+	}
+	await batch.execute();
 }

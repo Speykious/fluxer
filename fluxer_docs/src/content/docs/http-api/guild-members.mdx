@@ -271,6 +271,7 @@ The body is a [guild member update object](#guild-member-update-object) without 
 | 403 | [error response](/http-api/#error-response) | Guild is unavailable, the caller is not a member, or the email address is unverified |
 | 403 | [error response](/http-api/#error-response) | Blocked content was supplied, the caller is timed out, or a required voice permission is absent |
 | 403 | [error response](/http-api/#error-response) | `communication_disabled_until` was supplied |
+| 403 | [error response](/http-api/#error-response) | The account is [limited](/http-api/users/#account-limitation) and the body changes a profile field, and the request returns `ACCOUNT_LIMITED` |
 | 404 | [error response](/http-api/#error-response) | Guild does not exist, or the membership record or account is absent |
 
 ### Side effects
@@ -391,6 +392,8 @@ The caller and the guild owner cannot be removed through this operation, and bot
 Rejoining within one year resumes any communication timeout that has not expired.
 
 The member loses their guild profile and roles. Read states, guild settings and guild folders are unchanged.
+
+Removal from the guild removes every membership in its threads. Fluxer emits a [Thread Members Update](/gateway/threads/#thread-members-update) for each of them, as [Thread member flags](/http-api/thread-members/#thread-member-flags) states.
 
 Fluxer records a [`MEMBER_KICK`](/http-api/guild-audit-logs/#audit-actions) audit entry with no change list and emits [Guild Audit Log Entry Create](/gateway/events/#guild-audit-log-entry-create). Remaining guild sessions receive [Guild Member Remove](/gateway/events/#guild-member-remove), subject to [event filtering](/gateway/event-filtering/). The removed account's sessions receive [Guild Delete](/gateway/events/#guild-delete).
 

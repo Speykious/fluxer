@@ -14,7 +14,7 @@ Read resource limits from [instance discovery](/http-api/instance/#limit-keys). 
 
 ## Request format
 
-Send JSON bodies with `Content-Type: application/json`. Responses are UTF-8 JSON unless an operation states otherwise. Message operations and webhook execution also accept multipart bodies, and OAuth2 token operations accept form bodies.
+Send JSON bodies with `Content-Type: application/json`. Responses are UTF-8 JSON unless an operation states otherwise. Message operations, [Start thread](/http-api/threads/#start-thread), and webhook execution also accept multipart bodies, and OAuth2 token operations accept form bodies.
 
 An overloaded instance returns 503 `SERVICE_UNAVAILABLE` with `Retry-After: 1`. Wait before retrying.
 
@@ -40,6 +40,8 @@ Use `application/json` for JSON and `application/x-www-form-urlencoded` for OAut
 <sup>2</sup> `n` is a run of decimal digits, at most 10000 and below the deployment's [`max_attachments_per_message`](/http-api/instance/#limit-keys) limit, which defaults to 10
 
 The legacy names `file` and `file` followed by an index are accepted as file fields as well, and a bare `file` takes the next free legacy index.
+
+[Start thread](/http-api/threads/#start-thread) reads `payload_json` from a multipart body, and reads `files[n]` for a forum or media post.
 
 Field-name failures are rejected with their own code:
 
@@ -72,7 +74,7 @@ This normalisation applies to JSON and form bodies, query strings, path paramete
 A nested object containing only `null` values also becomes `null`. The root object never becomes `null`, even when it is empty or has only `null` values. An empty body is treated as `{}` and validated for required fields. Malformed JSON returns 400 `INVALID_FORM_BODY` with a validation error at path `body` and code `INVALID_FORMAT`.
 
 :::caution[Message operations preserve empty values]
-[Create message](/http-api/messages/#create-message), [Modify message](/http-api/messages/#modify-message), and [Execute webhook](/http-api/webhooks/#execute-webhook) do not apply this normalisation.
+[Create message](/http-api/messages/#create-message), [Modify message](/http-api/messages/#modify-message), [Execute webhook](/http-api/webhooks/#execute-webhook), and [Start thread](/http-api/threads/#start-thread) do not apply this normalisation.
 :::
 
 Those operations document their own JSON validation errors.
@@ -81,7 +83,7 @@ Those operations document their own JSON validation errors.
 
 [Authentication](/authentication/) defines the accepted `Authorization` schemes and links to the OAuth2 scope registry. Each operation states which credentials it accepts. The [sudo verification object](/http-api/users/mfa/#sudo-verification-object) defines the proof required for sensitive account operations.
 
-An OAuth2 bearer access token is accepted only where a route opts in, and the resource page says so. Everywhere else a bearer credential is refused with 403 `ACCESS_DENIED`. An account with a suspicious activity flag is refused with 403 `ACCOUNT_SUSPICIOUS_ACTIVITY`.
+An OAuth2 bearer access token is accepted only where a route opts in, and the resource page says so. Everywhere else a bearer credential is refused with 403 `ACCESS_DENIED`. The routes with a route header on [Threads](/http-api/threads/), [Thread members](/http-api/thread-members/), and [Forums](/http-api/forums/) return 404 `NOT_FOUND` to a bearer credential, as [Client capability](/http-api/threads/#client-capability) describes.
 
 ## Standard request headers
 
@@ -95,8 +97,7 @@ These headers are accepted across resources. An operation-specific header is doc
 | X-Audit-Log-Reason?<sup>3</sup> | string | Free-text reason recorded on the resulting audit log entry |
 | X-Fluxer-Client-Properties?<sup>4</sup> | string | Base64-encoded JSON with the native client's `os`, read when an authentication session is created |
 | X-Fluxer-Sudo-Mode-JWT?<sup>5</sup> | string | A sudo mode proof previously issued to the authenticated user |
-| X-Captcha-Token?<sup>6</sup> | string | The CAPTCHA solution issued by the selected provider |
-| X-Captcha-Type?<sup>6</sup> | string | Either `hcaptcha` or `turnstile`, selecting the provider that issued the token |
+| X-Captcha-Token?<sup>6</sup> | string | The solved ALTCHA challenge, see [CAPTCHA handling](/topics/captcha/) |
 | X-Request-ID?<sup>7</sup> | string | A correlation identifier the client chooses, echoed unchanged in the response |
 | User-Agent? | string | The originating client description recorded on a new authentication session and on an Admin audit entry |
 | Origin?<sup>8</sup> | string | The browser origin used for cross-origin negotiation and for the mutating same-host origin check |
@@ -111,7 +112,7 @@ These headers are accepted across resources. An operation-specific header is doc
 
 <sup>5</sup> A valid token replaces the sudo proof fields in the operation body and is echoed in the response header without extending its lifetime.
 
-<sup>6</sup> Read only while the instance has a provider configured and the operation is gated. The handshake is defined in [CAPTCHA handling](/topics/captcha/)
+<sup>6</sup> Read only on a gated operation while the instance CAPTCHA check is on
 
 <sup>7</sup> A supplied value is echoed back unchanged and unvalidated
 
@@ -170,9 +171,9 @@ A 429 `RESOURCE_LOCKED` response has `Retry-After: 1`, and a 429 `IP_AUTHORIZATI
 
 A global denial has `Retry-After`, `X-RateLimit-Scope`, and `X-RateLimit-Global` alone.
 
-## Hosted-only routes
+## Conditional routes
 
-A small set of routes exists only on the hosted Fluxer deployment. A self-hosted deployment answers one of them with 404 `NOT_FOUND`. [Deployment availability](/http-api/deployment-availability/) lists every hosted-only route and states how a client resolves the deployment kind before authenticating.
+A small set of routes depends on the deployment. A self-hosted deployment serves some of them only while its operator runs a premium tier or sells it, never serves the rest, and answers an unserved one with 404 `NOT_FOUND`. [Deployment availability](/http-api/deployment-availability/) lists every such route and states how a client reads which ones a deployment serves before authenticating.
 
 ## Cross-origin requests
 
@@ -275,7 +276,6 @@ Fluxer produces at most one entry for each distinct pair of `path` and `code`, s
 | [User settings Protobuf](/http-api/users/settings-protobuf/) | Every structured client preference message and enumeration |
 | [Email and password changes](/http-api/users/email-and-password/) | The ticketed credential replacement flows |
 | [Multi-factor authentication](/http-api/users/mfa/) | TOTP, backup codes, WebAuthn credentials, sudo verification |
-| [Phone verification](/http-api/users/phone-verification/) | Outbound and inbound phone verification |
 | [Relationships](/http-api/users/relationships/) | Friend requests, friendships, blocks, relationship nicknames |
 | [User notes](/http-api/users/notes/) | Private notes attached to user IDs |
 | [Private channels](/http-api/users/private-channels/) | Direct message and group DM discovery, creation, preload, pin state |
@@ -286,6 +286,9 @@ Fluxer produces at most one entry for each distinct pair of `path` and `code`, s
 | [Memes](/http-api/memes/) | The saved image, video, and audio collection and batch GIF URL resolution |
 | [Themes](/http-api/themes/) | Shareable custom CSS theme creation |
 | [Channels](/http-api/channels/) | Channel objects, private recipients, permission overwrites, slowmode, RTC regions |
+| [Threads](/http-api/threads/) | Thread objects, starting and archiving threads, archived thread lists, thread search, thread permissions |
+| [Thread members](/http-api/thread-members/) | Joining and leaving threads, member lists, thread notification settings |
+| [Forums](/http-api/forums/) | Forum and media channels, forum tags, post data, webhooks that post into a forum |
 | [Calls](/http-api/calls/) | Call eligibility, region selection, ringing, and termination |
 | [Streams](/http-api/streams/) | Go Live stream keys, stream regions, preview image lifecycle |
 | [Entrance sounds](/http-api/entrance-sounds/) | The entrance sound collection, its per-scope selections, and playback |
@@ -305,7 +308,7 @@ Fluxer produces at most one entry for each distinct pair of `path` and `code`, s
 | [Webhooks](/http-api/webhooks/) | Webhook management, message execution, GitHub, Slack, and Instatus callbacks |
 | [Search](/http-api/search/) | Authenticated global message search |
 | [Unfurl](/http-api/unfurl/) | Authenticated external URL metadata resolution |
-| [Billing](/http-api/billing/) | Stripe checkout, card preapproval, gift purchase, age verification, refunds, the Stripe webhook |
+| [Billing](/http-api/billing/) | Stripe checkout, gift purchase, age verification, refunds, the Stripe webhook |
 | [Premium](/http-api/premium/) | Premium pricing, entitlement state, subscription self-service, billing portal handoff |
 | [Gifts](/http-api/gifts/) | Public gift code lookup and authenticated redemption |
 | [Donations](/http-api/donations/) | Donation currencies and intervals, checkout sessions, the donor management link |

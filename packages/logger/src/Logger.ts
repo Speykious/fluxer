@@ -20,7 +20,7 @@ function isPinoLevel(value: string): value is pino.Level {
 }
 
 function resolveEnvironment(options: LoggerOptions): string {
-	return options.environment ?? process.env.FLUXER_ENV ?? 'production';
+	return options.environment ?? (process.env.FLUXER_ENV?.trim() || 'production');
 }
 
 function resolveLevel(options: LoggerOptions, isDev: boolean): pino.Level {
@@ -97,14 +97,6 @@ export class Logger {
 			typeof serviceNameOrPinoLogger === 'string'
 				? createPinoLogger(serviceNameOrPinoLogger, options)
 				: serviceNameOrPinoLogger;
-	}
-
-	getPinoLogger(): PinoLogger {
-		return this.logger;
-	}
-
-	setPinoLogger(logger: PinoLogger): void {
-		this.logger = logger;
 	}
 
 	static createWithLogger(logger: PinoLogger): Logger {

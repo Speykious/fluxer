@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import Authentication from '@app/features/auth/state/Authentication';
 import ChannelPins from '@app/features/channel/state/ChannelPins';
+import ForumPosts from '@app/features/forum/state/ForumPosts';
 import type {GatewayHandlerContext} from '@app/features/gateway/events/EventRouter';
 import GuildMembers from '@app/features/member/state/GuildMembers';
 import MessageReactions from '@app/features/messaging/state/MessageReactions';
@@ -37,6 +39,13 @@ export function handleMessageReactionRemove(data: MessageReactionRemovePayload, 
 		PollVotes.handlePollVoteRemove(data.message_id, data.user_id, Number(emoji.id));
 	else MessageReactions.handleReactionRemove(data.message_id, data.user_id, emoji);
 	ChannelPins.handleMessageReactionRemove(data.channel_id, data.message_id);
+	ForumPosts.handleReaction(
+		data.channel_id,
+		data.message_id,
+		emoji,
+		false,
+		data.user_id === Authentication.currentUserId,
+	);
 	MentionFeed.handleMessageReactionRemove(data.message_id);
 	Messages.handleReaction({
 		type: 'MESSAGE_REACTION_REMOVE',

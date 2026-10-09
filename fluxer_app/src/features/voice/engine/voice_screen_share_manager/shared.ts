@@ -37,6 +37,7 @@ import {
 	type LocalTrackPublication,
 	type LocalVideoTrack,
 	type ScreenShareCaptureOptions,
+	supportsScalabilityMode,
 	Track,
 	type TrackPublishOptions,
 	type VideoCodec,
@@ -85,7 +86,7 @@ export interface ScreenSharePublishOptionsResolutionOptions {
 	onCodecReadiness?: (status: ScreenShareCodecReadinessStatus) => void;
 }
 
-export interface ScreenShareSenderCleanupTarget {
+interface ScreenShareSenderCleanupTarget {
 	sender: RTCRtpSender;
 	expectedTrack: MediaStreamTrack | null;
 }
@@ -102,7 +103,7 @@ interface ScreenShareTrackLike {
 	simulcastCodecs?: Map<unknown, SimulcastTrackInfoLike>;
 }
 
-export function getPreferredScreenShareCodec(): VideoCodec {
+function getPreferredScreenShareCodec(): VideoCodec {
 	return ScreenShareCodecNegotiation.selectScreenShareCodec(VoiceSettings.getPreferredScreenShareCodec());
 }
 
@@ -204,7 +205,7 @@ function clampScreenShareEncoding(encoding: VideoEncoding): VideoEncoding {
 	};
 }
 
-export function resolveActiveScreenShareContext(): ScreenShareContext {
+function resolveActiveScreenShareContext(): ScreenShareContext {
 	return ActiveScreenShareSource.getShareContext() ?? 'display';
 }
 
@@ -247,7 +248,7 @@ export function ensureCommittedScreenShareTarget(): ScreenShareTarget {
 	return target;
 }
 
-export function getStatsKind(
+function getStatsKind(
 	report: {kind?: string; mediaType?: string; codecId?: string},
 	reportsById: ReadonlyMap<string, {mimeType?: string}>,
 ): string | undefined {
@@ -265,6 +266,7 @@ function resolveScreenShareEncoding(target: ScreenShareTarget, publishOptions?: 
 }
 
 function getScreenShareLayeringForCodec(codec: VideoCodec | undefined): ScreenShareLayering {
+	if (!supportsScalabilityMode()) return {simulcast: false, scalabilityMode: undefined};
 	return resolveScreenShareLayering({
 		codec,
 		svcSetting: VoiceSettings.getScreenShareScalabilityModeOverride(),
@@ -517,12 +519,12 @@ interface VideoSourceStatsEntry {
 	framesPerSecond?: number;
 }
 
-export interface SoftwareVideoEncoderInfo {
+interface SoftwareVideoEncoderInfo {
 	implementation: string;
 	powerEfficientEncoder: boolean | null;
 }
 
-export interface StalledVideoEncoderInfo {
+interface StalledVideoEncoderInfo {
 	codec: VideoCodec;
 	framesEncoded: number;
 	framesSent: number | null;
@@ -530,14 +532,14 @@ export interface StalledVideoEncoderInfo {
 	sourceFramesPerSecond: number | null;
 }
 
-export interface MissingExpectedVideoEncoderInfo {
+interface MissingExpectedVideoEncoderInfo {
 	reason: 'codec-mismatch';
 	codec: VideoCodec;
 	activeCodecs: Array<VideoCodec>;
 	outboundVideoReports: number;
 }
 
-export type ScreenShareEncoderVerificationFailure =
+type ScreenShareEncoderVerificationFailure =
 	| (StalledVideoEncoderInfo & {reason: 'stalled'})
 	| MissingExpectedVideoEncoderInfo;
 
@@ -566,7 +568,7 @@ function finiteNumber(value: unknown): number | null {
 	return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
-export function findSoftwareVideoEncoder(stats: RTCStatsReport, codec?: VideoCodec): SoftwareVideoEncoderInfo | null {
+function findSoftwareVideoEncoder(stats: RTCStatsReport, codec?: VideoCodec): SoftwareVideoEncoderInfo | null {
 	const codecs = new Map<string, CodecStatsEntry>();
 	const reports: Array<OutboundVideoStatsEntry> = [];
 	for (const raw of stats.values()) {
@@ -600,14 +602,14 @@ export function findSoftwareVideoEncoder(stats: RTCStatsReport, codec?: VideoCod
 	return softwareEncoder;
 }
 
-export function shouldTriggerSoftwareEncoderWarning(codec: VideoCodec): boolean {
+function shouldTriggerSoftwareEncoderWarning(codec: VideoCodec): boolean {
 	const encoderMode = VoiceSettings.getScreenShareEncoderMode();
 	if (encoderMode === 'software') return false;
 	if (encoderMode === 'hardware') return true;
 	return getCodecCapabilityReport()[codec].hardwareAccelerated === 'hardware';
 }
 
-export function findStalledVideoEncoder(stats: RTCStatsReport, codec?: VideoCodec): StalledVideoEncoderInfo | null {
+function findStalledVideoEncoder(stats: RTCStatsReport, codec?: VideoCodec): StalledVideoEncoderInfo | null {
 	const reportsById = new Map<string, CodecStatsEntry & VideoSourceStatsEntry>();
 	const reports: Array<OutboundVideoStatsEntry> = [];
 	for (const raw of stats.values()) {
@@ -644,7 +646,7 @@ export function findStalledVideoEncoder(stats: RTCStatsReport, codec?: VideoCode
 	return null;
 }
 
-export function findMissingExpectedVideoEncoder(
+function findMissingExpectedVideoEncoder(
 	stats: RTCStatsReport,
 	codec: VideoCodec,
 ): MissingExpectedVideoEncoderInfo | null {

@@ -48,7 +48,7 @@ impl Resolver for KlipyResolver {
         ctx: &'a ResolveContext<'_>,
     ) -> Pin<Box<dyn Future<Output = anyhow::Result<ResolverResult>> + Send + 'a>> {
         Box::pin(async move {
-            let Some(api_key) = ctx.klipy_api_key.clone().or_else(klipy_api_key) else {
+            let Some(api_key) = ctx.klipy_api_key.clone() else {
                 return Ok(ResolverResult { embeds: vec![] });
             };
             let formats = match resolve_media_via_api(ctx, &api_key).await {
@@ -66,7 +66,7 @@ impl Resolver for KlipyResolver {
             let mut embed = MessageEmbed::new("gifv");
             embed.url = Some(ctx.original_url.to_string());
             embed.provider = Some(EmbedProvider {
-                name: Some("KLIPY".to_owned()),
+                name: "KLIPY".to_owned(),
                 url: Some("https://klipy.com".to_owned()),
             });
             if let Some(ref thumbnail) = formats.thumbnail {
@@ -133,17 +133,6 @@ fn klipy_resource(kind: &str) -> &'static str {
     } else {
         "gifs"
     }
-}
-
-fn klipy_api_key() -> Option<String> {
-    std::env::var("FLUXER_KLIPY_API_KEY")
-        .ok()
-        .filter(|key| !key.is_empty())
-        .or_else(|| {
-            std::env::var("KLIPY_API_KEY")
-                .ok()
-                .filter(|key| !key.is_empty())
-        })
 }
 
 async fn resolve_media_via_api(
@@ -311,17 +300,14 @@ mod tests {
     #[test]
     fn build_embed_media_payload_prefers_format_dimensions() {
         let meta = MediaMetadata {
-            format: "webp".to_owned(),
             content_type: "image/webp".to_owned(),
             content_hash: "hash".to_owned(),
-            size: 123,
             width: Some(640),
             height: Some(360),
             duration: Some(2.9),
             placeholder: Some("placeholder".to_owned()),
             animated: Some(true),
             nsfw: false,
-            nsfw_probability: None,
         };
         let media = build_embed_media_payload("https://img.example/a.webp", &meta, Some(320), None);
         assert_eq!(media.width, Some(320));

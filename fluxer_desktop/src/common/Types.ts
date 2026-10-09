@@ -1,5 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+import type {BuildChannel} from '@electron/common/BuildChannel';
+import type {DesktopAccountStorageAPI} from '@fluxer/desktop_ipc/src/AccountContract';
+import type {DesktopHandoffAPI} from '@fluxer/desktop_ipc/src/BrowserHandoffContract';
+import type {DesktopCapabilityManifest} from '@fluxer/desktop_ipc/src/CapabilityManifest';
+import type {NativeGatewayTransportAPI} from '@fluxer/desktop_ipc/src/GatewayTransportContract';
+import type {DesktopKnownInstanceStorageAPI} from '@fluxer/desktop_ipc/src/KnownInstanceContract';
+import type {DesktopModuleAPI, DesktopUpdateAPI} from '@fluxer/desktop_ipc/src/ModuleContract';
+import type {DesktopStorageAPI} from '@fluxer/desktop_ipc/src/StorageContract';
 import type {VoiceEngineV2BridgeHardwareEncoderApi} from '@fluxer/voice_engine_v2/bridge';
 import type {
 	AuthenticationResponseJSON,
@@ -16,7 +24,7 @@ export interface LinuxAppearanceSnapshot {
 
 export interface DesktopInfo {
 	version: string;
-	channel: 'stable' | 'canary';
+	channel: BuildChannel;
 	arch: string;
 	hardwareArch: string;
 	runningUnderRosetta: boolean;
@@ -103,6 +111,7 @@ export interface DesktopWindowBehaviorSettings {
 	showTrayIcon: boolean;
 	minimizeToTray: boolean;
 	closeToTray: boolean;
+	startMinimized: boolean;
 	useNativeTitleBar: boolean;
 	activeUseNativeTitleBar: boolean;
 	rememberWindowState: boolean;
@@ -132,6 +141,14 @@ export interface ThemeDirectoryCssFile {
 	fileName: string;
 	path: string;
 	css: string;
+}
+
+export type ThemeLinkedFileError = 'not_allowed' | 'missing' | 'not_file' | 'too_large' | 'too_many' | 'read_failed';
+
+export interface ThemeLinkedFileChange {
+	path: string;
+	css?: string;
+	error?: ThemeLinkedFileError;
 }
 
 export type VoiceBackgroundMediaKind = 'static' | 'animated' | 'video';
@@ -200,8 +217,6 @@ export type UpdaterEvent =
 			type: 'available';
 			context: UpdaterContext;
 			version: string | null;
-			downloadSize?: number | null;
-			downloadStarted: boolean;
 			downloadUrl?: string;
 			downloadOptions?: Array<UpdaterDownloadOption>;
 	  }
@@ -210,23 +225,9 @@ export type UpdaterEvent =
 			context: UpdaterContext;
 	  }
 	| {
-			type: 'downloaded';
-			context: UpdaterContext;
-			version: string | null;
-	  }
-	| {
-			type: 'progress';
-			context: UpdaterContext;
-			percent: number;
-			transferred: number;
-			total: number;
-			bytesPerSecond: number;
-	  }
-	| {
 			type: 'error';
 			context: UpdaterContext;
 			message: string;
-			phase?: 'check' | 'download' | 'install';
 	  }
 	| {
 			type: 'unsupported';
@@ -320,11 +321,6 @@ export interface VirtmicLinkOptions {
 	workaround?: boolean;
 }
 
-export interface VirtmicSystemLinkOptions extends VirtmicLinkOptions {
-	onlySpeakers?: boolean;
-	onlyDefaultSpeakers?: boolean;
-}
-
 export interface VirtmicApi {
 	getAvailability: () => Promise<VirtmicAvailability>;
 	listTargets: (options?: {granular?: boolean}) => Promise<{
@@ -333,9 +329,6 @@ export interface VirtmicApi {
 		availability: VirtmicAvailability;
 	}>;
 	getRoutingGraph: () => Promise<VirtmicRoutingGraphResult>;
-	startInclude: (include: Array<VirtmicNode>, options?: VirtmicLinkOptions) => Promise<boolean>;
-	startSystem: (exclude: Array<VirtmicNode>, options?: VirtmicSystemLinkOptions) => Promise<boolean>;
-	resolveWindowPid: (sourceId: string) => Promise<number | null>;
 	stop: () => Promise<void>;
 }
 
@@ -627,14 +620,11 @@ export type TrayActionPayload =
 			action: 'check-for-updates';
 	  };
 
-export interface DomainMigrationApi {
-	version: 1;
-	setAppOrigin: (origin: string) => Promise<void>;
-}
-
 export interface ElectronAPI {
 	platform: NodeJS.Platform;
-	buildChannel: 'stable' | 'canary';
+	buildChannel: BuildChannel;
+	localDevelopmentInstanceUrl: string | null;
+	offlineBuild?: boolean;
 	getDesktopInfo: () => Promise<DesktopInfo>;
 	getGpuInfo: () => Promise<GpuInfo>;
 	getDesktopWindowBehaviorSettings: () => Promise<DesktopWindowBehaviorSettings>;
@@ -647,6 +637,9 @@ export interface ElectronAPI {
 	readThemeLocalFiles: (paths: Array<string>) => Promise<Array<ThemeLocalFileReadResult>>;
 	clearThemeLocalFiles: () => Promise<void>;
 	importThemeDirectory: () => Promise<Array<ThemeDirectoryCssFile>>;
+	pickThemeLinkedFiles: (options?: {multiple?: boolean}) => Promise<Array<ThemeDirectoryCssFile>>;
+	watchThemeLinkedFiles: (paths: Array<string>) => Promise<void>;
+	onThemeLinkedFileChange: (callback: (change: ThemeLinkedFileChange) => void) => () => void;
 	cacheVoiceBackgroundMedia: (options: VoiceBackgroundMediaCacheRequest) => Promise<VoiceBackgroundMediaCacheResult>;
 	readVoiceBackgroundMedia: (id: string) => Promise<VoiceBackgroundMediaReadResult | null>;
 	deleteVoiceBackgroundMedia: (id: string) => Promise<void>;
@@ -654,13 +647,8 @@ export interface ElectronAPI {
 	setDesktopDisableHardwareAcceleration: (
 		options: SetDesktopTroubleshootingDisableHardwareAccelerationOptions,
 	) => Promise<DesktopTroubleshootingSettings>;
-	desktopTroubleshootingReload: () => Promise<void>;
-	desktopTroubleshootingResetAppData: (options?: {confirm?: boolean}) => Promise<void>;
-	popupHelpMenu: () => Promise<void>;
 	onUpdaterEvent: (callback: (event: UpdaterEvent) => void) => () => void;
 	updaterCheck: (context: UpdaterContext) => Promise<void>;
-	updaterDownload: (context: UpdaterContext) => Promise<void>;
-	updaterInstall: () => Promise<void>;
 	windowMinimize: () => void;
 	windowMaximize: () => void;
 	windowClose: () => void;
@@ -672,6 +660,7 @@ export interface ElectronAPI {
 	openVoiceDebugEventSinkPopout: (entries: Array<DesktopVoiceDebugEventSinkEntry>) => Promise<void>;
 	appendVoiceDebugEventSinkEntries: (entries: Array<DesktopVoiceDebugEventSinkEntry>) => void;
 	setVoiceDebugEventSinkStatsHtml: (html: string) => void;
+	onWindowLiveResizeChange: (callback: (resizing: boolean) => void) => () => void;
 	onWindowMaximizeChange: (callback: (maximized: boolean) => void) => () => void;
 	openExternal: (url: string) => Promise<void>;
 	clipboardWriteText: (text: string) => Promise<void>;
@@ -694,7 +683,6 @@ export interface ElectronAPI {
 	getScreenRecordingPermissionStatus: () => Promise<InputMonitoringPermissionStatus>;
 	requestScreenRecordingPermission: () => Promise<InputMonitoringPermissionStatus>;
 	downloadFile: (url: string, defaultPath: string, sha256?: string | null) => Promise<DownloadFileResult>;
-	toggleDevTools: () => void;
 	showNotification: (options: NotificationOptions) => Promise<NotificationResult>;
 	shouldPlayNotificationSound: () => Promise<boolean>;
 	getStreamerModeCaptureAppStatus: () => Promise<StreamerModeCaptureAppStatus>;
@@ -702,16 +690,12 @@ export interface ElectronAPI {
 	closeNotifications: (ids: Array<string>) => void;
 	onNotificationClick: (callback: (id: string, url?: string) => void) => () => void;
 	setBadgeCount: (count: number) => void;
-	getBadgeCount: () => Promise<number>;
-	bounceDock: (type?: 'critical' | 'informational') => number;
-	cancelBounceDock: (id: number) => void;
 	setNativeLocale: (locale: string, strings: Record<string, string>) => void;
 	flashFrame: (persistent?: boolean) => void;
 	stopFlashFrame: () => void;
 	setTaskbarProgress: (fraction: number, mode?: 'normal' | 'indeterminate' | 'error' | 'paused' | 'none') => void;
 	onJumpListNewDm: (callback: () => void) => () => void;
 	setZoomFactor: (factor: number) => void;
-	getZoomFactor: () => Promise<number>;
 	getAccessibilitySupportEnabled: () => Promise<boolean>;
 	onAccessibilitySupportChanged: (callback: (enabled: boolean) => void) => () => void;
 	getLinuxAppearance: () => Promise<LinuxAppearanceSnapshot>;
@@ -723,12 +707,10 @@ export interface ElectronAPI {
 	setTrayRuntimeState: (state: Partial<TrayRuntimeStatePayload>) => void;
 	acquireStreamingPriority: () => void;
 	releaseStreamingPriority: () => void;
-	resetStreamingPriority: () => void;
 	getStreamingPriorityDiagnostics: () => Promise<StreamingPriorityDiagnostics>;
 	onTrayAction: (callback: (action: TrayActionPayload) => void) => () => void;
 	globalKeyHookStart: () => Promise<boolean>;
 	globalKeyHookStop: () => Promise<void>;
-	globalKeyHookIsRunning: () => Promise<boolean>;
 	checkInputMonitoringAccess: () => Promise<boolean>;
 	globalKeyHookRegister: (options: GlobalKeyHookRegisterOptions) => Promise<void>;
 	globalKeyHookUnregister: (id: string) => Promise<void>;
@@ -751,21 +733,24 @@ export interface ElectronAPI {
 	onGlobalKeyEvent: (callback: (event: GlobalKeyEvent) => void) => () => void;
 	onGlobalMouseEvent: (callback: (event: GlobalMouseEvent) => void) => () => void;
 	onGlobalKeybindTriggered: (callback: (event: GlobalKeybindTriggeredEvent) => void) => () => void;
-	spellcheckGetState: () => Promise<SpellcheckState>;
+	globalShortcuts: GlobalShortcutsApi;
 	spellcheckSetState: (state: Partial<SpellcheckState>) => Promise<SpellcheckState>;
 	spellcheckGetAvailableLanguages: () => Promise<Array<string>>;
 	spellcheckGetBundledDictionaries: () => Promise<Array<SpellcheckBundledDictionary>>;
-	spellcheckSuggest: (word: string) => Promise<Array<string>>;
 	onSpellcheckStateChanged: (callback: (state: SpellcheckState) => void) => () => void;
 	onSpellcheckEngineResolved: (callback: (info: SpellcheckResolvedEngineInfo) => void) => () => void;
 	onTextareaContextMenu: (callback: (params: TextareaContextMenuParams) => void) => () => void;
 	spellcheckReplaceMisspelling: (replacement: string) => Promise<void>;
 	spellcheckAddWordToDictionary: (word: string) => Promise<void>;
 	passkeyIsSupported: () => Promise<boolean>;
-	passkeyAuthenticate: (options: PublicKeyCredentialRequestOptionsJSON) => Promise<AuthenticationResponseJSON>;
-	passkeyRegister: (options: PublicKeyCredentialCreationOptionsJSON) => Promise<RegistrationResponseJSON>;
-	passkeyRpIds: ReadonlyArray<string>;
-	domainMigration: DomainMigrationApi;
+	passkeyAuthenticate: (
+		options: PublicKeyCredentialRequestOptionsJSON,
+		requestContext?: {pin?: string; instanceKey?: string},
+	) => Promise<AuthenticationResponseJSON>;
+	passkeyRegister: (
+		options: PublicKeyCredentialCreationOptionsJSON,
+		requestContext?: {pin?: string; instanceKey?: string},
+	) => Promise<RegistrationResponseJSON>;
 	virtmic: VirtmicApi;
 	nativeAudio: NativeAudioApi;
 	nativeScreenCapture: NativeScreenCaptureApi;
@@ -781,6 +766,127 @@ export interface ElectronAPI {
 	selectDisplayMediaSource: (requestId: string, sourceId: string | null, withAudio: boolean) => void;
 	setDisplayMediaPortalPreference: (preference: DisplayMediaPortalSurfacePreference) => Promise<void>;
 	getAppMetrics?: () => Promise<AppMetricsSnapshot>;
+	capabilities: DesktopCapabilityManifest;
+	desktopModules: DesktopModuleAPI;
+	desktopUpdate: DesktopUpdateAPI;
+	reportLastRoute: (routePath: string) => void;
+	notifyFirstContentPainted: () => void;
+	desktopAccounts: DesktopAccountStorageAPI;
+	desktopStorage: DesktopStorageAPI;
+	desktopKnownInstances: DesktopKnownInstanceStorageAPI;
+	desktopHandoff: DesktopHandoffAPI;
+	nativeGatewayTransport: NativeGatewayTransportAPI;
+}
+
+export type GlobalShortcutsBackend = 'portal' | 'x11' | 'evdev' | 'windows' | 'macos' | 'none';
+
+export type GlobalShortcutsPortalState =
+	| 'unknown'
+	| 'probing'
+	| 'unsupported'
+	| 'not-set-up'
+	| 'binding'
+	| 'bound'
+	| 'declined'
+	| 'error';
+
+export interface GlobalShortcutsPortalShortcut {
+	action: string;
+	triggerDescription: string | null;
+}
+
+export interface GlobalShortcutsPortalStatus {
+	state: GlobalShortcutsPortalState;
+	version: number | null;
+	canConfigure: boolean;
+	recovering: boolean;
+	canRecheck: boolean;
+	portalAppId: string | null;
+	shortcuts: Array<GlobalShortcutsPortalShortcut>;
+	error: string | null;
+}
+
+export type LinuxSessionType = 'wayland' | 'x11' | 'unknown';
+
+export type LinuxDesktopKind = 'kde' | 'gnome' | 'hyprland' | 'other';
+
+export interface GlobalShortcutsLinuxStatus {
+	session: LinuxSessionType;
+	sandbox: 'flatpak' | 'none';
+	desktop: LinuxDesktopKind;
+	portal: GlobalShortcutsPortalStatus | null;
+	directInput: {available: boolean; enabled: boolean; locked: boolean};
+}
+
+export interface GlobalShortcutsStatus {
+	backend: GlobalShortcutsBackend;
+	platform: 'linux' | 'windows' | 'macos';
+	linux: GlobalShortcutsLinuxStatus | null;
+	hooksActive: boolean;
+	hookError: 'permission' | 'start-failed' | null;
+	supportsMouseButtons: boolean;
+	supportsModifierOnly: boolean;
+}
+
+export interface GlobalShortcutCombo {
+	code?: string;
+	key: string;
+	ctrl: boolean;
+	alt: boolean;
+	shift: boolean;
+	meta: boolean;
+	mouseButton?: number;
+	modifierOnly?: boolean;
+	bothSides?: boolean;
+}
+
+export interface GlobalShortcutBinding {
+	sourceId: string;
+	action: string;
+	combo: GlobalShortcutCombo;
+}
+
+export interface GlobalShortcutActionDefinition {
+	action: string;
+	description: string;
+	preferredCombo: GlobalShortcutCombo | null;
+}
+
+export interface GlobalShortcutsSyncPayload {
+	bindings: Array<GlobalShortcutBinding>;
+	actions: Array<GlobalShortcutActionDefinition>;
+}
+
+export interface GlobalShortcutEvent {
+	action: string;
+	sourceId: string;
+	phase: 'press' | 'release';
+}
+
+export interface GlobalShortcutCaptureEvent {
+	type: 'keydown' | 'keyup' | 'mousedown' | 'mouseup';
+	code: string | null;
+	key: string | null;
+	button: number | null;
+	ctrl: boolean;
+	alt: boolean;
+	shift: boolean;
+	meta: boolean;
+}
+
+export interface GlobalShortcutsApi {
+	sync: (payload: GlobalShortcutsSyncPayload) => Promise<void>;
+	setPaused: (paused: boolean) => Promise<void>;
+	getStatus: () => Promise<GlobalShortcutsStatus>;
+	onStatus: (callback: (status: GlobalShortcutsStatus) => void) => () => void;
+	onEvent: (callback: (event: GlobalShortcutEvent) => void) => () => void;
+	setUp: () => Promise<GlobalShortcutsStatus>;
+	recheck: () => Promise<GlobalShortcutsStatus>;
+	configure: () => Promise<void>;
+	setDirectInputEnabled: (enabled: boolean) => Promise<GlobalShortcutsStatus>;
+	startCapture: () => Promise<number | null>;
+	stopCapture: (captureId: number) => Promise<void>;
+	onCapture: (callback: (event: GlobalShortcutCaptureEvent) => void) => () => void;
 }
 
 export interface GlobalKeyHookRegisterOptions {

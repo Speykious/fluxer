@@ -6,11 +6,10 @@
 -behaviour(gen_server).
 
 -export([
-    start_link/2, start_link/3,
+    start_link/3,
     is_voice_server_pid/1,
     resolve/2,
     resolve_result/2,
-    stop/1,
     lookup/1,
     lookup_registered/1
 ]).
@@ -26,9 +25,7 @@
 -define(MAX_PENDING_CONNECTIONS, 1000).
 -define(MAX_RECENT_DISCONNECTS, 500).
 -define(MAX_E2EE_KEYS, 1000).
--define(PENDING_TTL_MS, 300000).
 -define(RECENT_DISCONNECT_TTL_MS, 120000).
--define(E2EE_KEY_TTL_MS, 300000).
 -define(SEEDED_SESSION_CHECK_DELAY_MS, 60000).
 -define(SESSION_LOOKUP_TIMEOUT_MS, 5000).
 
@@ -42,9 +39,6 @@
     e2ee_room_keys := map()
 }.
 
--spec start_link(integer(), pid()) -> gen_server:start_ret().
-start_link(GuildId, GuildPid) -> start_link(GuildId, GuildPid, #{}).
-
 -spec start_link(integer(), pid(), voice_state_map()) -> gen_server:start_ret().
 start_link(GuildId, GuildPid, InitialVoiceStates) ->
     gen_server:start_link(
@@ -56,9 +50,6 @@ start_link(GuildId, GuildPid, InitialVoiceStates) ->
         },
         []
     ).
-
--spec stop(pid()) -> ok.
-stop(Pid) -> gen_server:stop(Pid, normal, 5000).
 
 -spec lookup(integer()) -> {ok, pid()} | {error, not_found}.
 lookup(GuildId) ->
@@ -237,6 +228,11 @@ handle_cast({store_pending_connection, ConnId, Meta}, State) ->
     {noreply, State#{pending_voice_connections => NewPending}};
 handle_cast({disconnect_voice_user, Request}, State) when is_map(Request) ->
     {noreply, delegate_voice_cast(fun guild_voice:disconnect_voice_user/2, Request, State)};
+handle_cast({disconnect_all_voice_users_in_channel, Request}, State) when is_map(Request) ->
+    {noreply,
+        delegate_voice_cast(
+            fun guild_voice:disconnect_all_voice_users_in_channel/2, Request, State
+        )};
 handle_cast({cleanup_virtual_access_for_user, UserId}, State) when is_integer(UserId) ->
     GS = guild_voice_server_state:build_guild_state(State),
     NewGS = guild_voice_disconnect:cleanup_virtual_channel_access_for_user(UserId, GS),

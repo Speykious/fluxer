@@ -52,6 +52,12 @@ async function processFinalizedPolls(now = new Date()): Promise<void> {
 
 				await pollService.endPollBypassAuth({
 					channel,
+					viewer: {
+						kind: 'user',
+						userId: message.authorId!,
+						bot: false,
+						capable: true,
+					},
 					message,
 					requestCache,
 					expiryRow: row,

@@ -105,7 +105,7 @@ async fn resolve_html(ctx: &ResolveContext<'_>) -> anyhow::Result<ResolverResult
         http_client: ctx.http_client.clone(),
         nsfw_mode: ctx.nsfw_mode,
         media_proxy: ctx.media_proxy,
-        static_cdn_endpoint: ctx.static_cdn_endpoint,
+        self_hosted: ctx.self_hosted,
         youtube_api_key: ctx.youtube_api_key.clone(),
         klipy_api_key: ctx.klipy_api_key.clone(),
     };
@@ -321,7 +321,7 @@ fn build_embeds(content: ResolvedPageContent<'_>) -> Vec<MessageEmbed> {
         video_media,
         audio_media,
     );
-    if !carries_content(&embed) {
+    if !embed_has_content(&embed) {
         return Vec::new();
     }
     let mut embeds = vec![embed];
@@ -329,7 +329,7 @@ fn build_embeds(content: ResolvedPageContent<'_>) -> Vec<MessageEmbed> {
     embeds
 }
 
-fn carries_content(embed: &MessageEmbed) -> bool {
+fn embed_has_content(embed: &MessageEmbed) -> bool {
     embed.title.is_some()
         || embed.description.is_some()
         || embed.author.is_some()
@@ -359,7 +359,7 @@ fn set_author_and_provider(
     }
     if let Some(name) = site_name {
         embed.provider = Some(EmbedProvider {
-            name: Some(text_limits::truncate(name, text_limits::PROVIDER_NAME_MAX)),
+            name: text_limits::truncate(name, text_limits::PROVIDER_NAME_MAX),
             url: Some(provider_url.to_owned()),
         });
     }
@@ -964,7 +964,7 @@ mod tests {
     }
 
     #[test]
-    fn drops_a_classified_embed_that_carries_no_content() {
+    fn drops_a_classified_embed_that_has_no_content() {
         for embed_type in ["article", "image", "link"] {
             assert!(
                 build(embed_type, &OgMetadata::default()).is_empty(),

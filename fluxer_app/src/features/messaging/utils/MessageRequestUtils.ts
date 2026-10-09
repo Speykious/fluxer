@@ -30,7 +30,7 @@ export interface ApiAttachmentMetadata {
 	waveform?: string;
 }
 
-export interface ApiAttachmentReferenceMetadata {
+interface ApiAttachmentReferenceMetadata {
 	id: string;
 	filename?: string;
 	title?: string | null;
@@ -126,7 +126,7 @@ export function getComposerMessageContent(content: string, isEditingMessageOnMob
 	return silentPrefix == null ? content : content.slice(silentPrefix.end);
 }
 
-export function normalizeMessageEditContent(content: string): string {
+function normalizeMessageEditContent(content: string): string {
 	return applyOutgoingEmoticonConversion(content);
 }
 

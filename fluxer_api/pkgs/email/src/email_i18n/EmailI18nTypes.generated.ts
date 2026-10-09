@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 export type EmailTemplateKey =
-	| 'account_disabled_suspicious'
+	| 'account_deletion_cancelled'
+	| 'account_deletion_scheduled_inactivity'
+	| 'account_deletion_scheduled_requested'
 	| 'account_scheduled_deletion'
 	| 'account_temp_banned'
 	| 'donation_confirmation'
 	| 'donation_magic_link'
+	| 'dsa_report_resolved'
 	| 'dsa_report_verification'
 	| 'email_change_new'
 	| 'email_change_original'
@@ -18,7 +21,7 @@ export type EmailTemplateKey =
 	| 'mfa_backup_codes_view'
 	| 'password_change_verification'
 	| 'password_reset'
-	| 'registration_approved'
+	| 'report_received'
 	| 'report_resolved'
 	| 'scheduled_deletion_notification'
 	| 'self_deletion_scheduled'

@@ -16,6 +16,7 @@ import {AdminSearchService} from '@app/api/admin/services/AdminSearchService';
 import {AdminUserRelationshipService} from '@app/api/admin/services/AdminUserRelationshipService';
 import {AdminUserService} from '@app/api/admin/services/AdminUserService';
 import {AdminVoiceService} from '@app/api/admin/services/AdminVoiceService';
+import {ReporterResolutionNotifier} from '@app/api/admin/services/ReporterResolutionNotifier';
 import type {UserID} from '@app/api/BrandedTypes';
 import type {IChannelRepository} from '@app/api/channel/IChannelRepository';
 import type {ChannelService} from '@app/api/channel/services/ChannelService';
@@ -30,19 +31,13 @@ import type {UserCacheService} from '@app/api/infrastructure/UserCacheService';
 import type {InviteRepository} from '@app/api/invite/InviteRepository';
 import type {IJobLedgerRepository} from '@app/api/jobs/IJobLedgerRepository';
 import {JobAdminService} from '@app/api/jobs/JobAdminService';
-import {
-	getGuildDiscoveryRepository,
-	getKVAccountDeletionQueue,
-	getNcmecSubmissionService,
-} from '@app/api/middleware/ServiceSingletons';
+import {getGuildDiscoveryRepository, getKVAccountDeletionQueue} from '@app/api/middleware/ServiceSingletons';
 import type {IApplicationRepository} from '@app/api/oauth/repositories/IApplicationRepository';
 import type {ReportService} from '@app/api/report/ReportService';
-import type {IRiskHistoryRepository} from '@app/api/risk/HistoricalOutcomeRepository';
-import type {ISuspiciousIpRepository} from '@app/api/risk/SuspiciousIpRepository';
+import type {StoreEntitlementService} from '@app/api/store_billing/StoreEntitlementService';
 import type {UserService} from '@app/api/user/services/UserService';
 import type {VoiceRepository} from '@app/api/voice/VoiceRepository';
 import type {SendSystemDmResponse} from '@fluxer/schema/src/domains/admin/AdminSchemas';
-import type {IpInfoService} from '@pkgs/geoip/src/IpInfoService';
 import type Stripe from 'stripe';
 
 export class AdminService {
@@ -81,10 +76,8 @@ export class AdminService {
 		private readonly bulkMessageDeletionQueue: KVBulkMessageDeletionQueueService,
 		private readonly applicationRepository: IApplicationRepository,
 		private readonly stripe: Stripe | null = null,
-		private readonly riskHistoryRepository: Pick<IRiskHistoryRepository, 'recordOutcomeForUser'>,
 		private readonly jobLedger: IJobLedgerRepository,
-		private readonly ipInfoService: IpInfoService,
-		private readonly suspiciousIpRepository: ISuspiciousIpRepository,
+		private readonly storeEntitlementService: StoreEntitlementService,
 	) {
 		const {users, gateway, worker, snowflake} = this.apiContext.services;
 		this.auditService = new AdminAuditService(this.adminRepository, snowflake, {
@@ -96,8 +89,14 @@ export class AdminService {
 			apiContext: this.apiContext,
 			adminRepository: this.adminRepository,
 			auditService: this.auditService,
-			ipInfoService: this.ipInfoService,
-			suspiciousIpRepository: this.suspiciousIpRepository,
+		});
+		const reporterResolutionNotifier = new ReporterResolutionNotifier({
+			apiContext: this.apiContext,
+			systemDm: {
+				channelService: this.channelService,
+				userChannelService: this.runtimeUserService.channelService,
+				userCacheService: this.userCacheService,
+			},
 		});
 		this.userService = new AdminUserService({
 			apiContext: this.apiContext,
@@ -111,8 +110,9 @@ export class AdminService {
 			kvDeletionQueue: getKVAccountDeletionQueue(),
 			bulkMessageDeletionQueue: this.bulkMessageDeletionQueue,
 			stripe: this.stripe,
-			riskHistoryRepository: this.riskHistoryRepository,
 			reportService: this.reportService,
+			storeEntitlementService: this.storeEntitlementService,
+			reporterResolutionNotifier,
 		});
 		this.guildServiceAggregate = new AdminGuildService({
 			guildRepository: this.guildRepository,
@@ -136,7 +136,6 @@ export class AdminService {
 			channelRepository: this.channelRepository,
 			guildRepository: this.guildRepository,
 			auditService: this.auditService,
-			ncmecSubmissionService: getNcmecSubmissionService(),
 		});
 		this.messageShredService = new AdminMessageShredService({
 			apiContext: this.apiContext,
@@ -152,12 +151,10 @@ export class AdminService {
 			reportService: this.reportService,
 			guildRepository: this.guildRepository,
 			channelRepository: this.channelRepository,
-			channelService: this.channelService,
 			storageService: this.storageService,
 			auditService: this.auditService,
 			userCacheService: this.userCacheService,
-			userChannelService: this.runtimeUserService.channelService,
-			ncmecSubmissionService: getNcmecSubmissionService(),
+			reporterResolutionNotifier,
 		});
 		this.voiceService = new AdminVoiceService({
 			apiContext: this.apiContext,
@@ -184,20 +181,20 @@ export class AdminService {
 	}
 
 	async sendSystemDm(
-		data: {content: string; userIds: Array<string>},
+		data: {content: string; recipients: {kind: 'all'} | {kind: 'list'; userIds: Array<string>}},
 		adminUserId: UserID,
 		auditLogReason: string | null,
 	): Promise<SendSystemDmResponse> {
+		const recipientCount = data.recipients.kind === 'all' ? null : data.recipients.userIds.length;
 		await this.apiContext.services.worker.addJob(
 			'sendSystemDm',
-			{
-				content: data.content,
-				user_ids: data.userIds,
-			},
+			data.recipients.kind === 'all'
+				? {content: data.content, all_users: true}
+				: {content: data.content, user_ids: data.recipients.userIds},
 			{requireLedger: true},
 		);
 		const metadata = new Map<string, string>([
-			['recipient_count', data.userIds.length.toString()],
+			['recipient_count', recipientCount === null ? 'all' : recipientCount.toString()],
 			['content_length', data.content.length.toString()],
 		]);
 		await this.auditService.createAuditLog({
@@ -208,6 +205,6 @@ export class AdminService {
 			auditLogReason,
 			metadata,
 		});
-		return {recipient_count: data.userIds.length};
+		return {recipient_count: recipientCount};
 	}
 }
